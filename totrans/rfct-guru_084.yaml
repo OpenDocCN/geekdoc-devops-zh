@@ -1,116 +1,168 @@
 - en: Add Parameter
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 添加参数
 - en: 原文：[https://refactoringguru.cn/add-parameter](https://refactoringguru.cn/add-parameter)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/add-parameter](https://refactoringguru.cn/add-parameter)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A method doesn't have enough data to perform certain actions.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法没有足够的数据来执行某些操作。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a new parameter to pass the necessary data.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个新参数以传递必要的数据。
 - en: Before![Add Parameter - Before](../Images/85673ed91b234f275908bb20779e2f0b.png)After![Add
     Parameter - After](../Images/30e823c4959ae379ad1ef0828b32ef8d.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[添加参数 - 之前](../Images/85673ed91b234f275908bb20779e2f0b.png)之后！[添加参数 - 之后](../Images/30e823c4959ae379ad1ef0828b32ef8d.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: You need to make changes to a method and these changes require adding information
     or data that was previously not available to the method.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 您需要对方法进行更改，而这些更改需要添加以前未提供给该方法的信息或数据。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: The choice here is between adding a new parameter and adding a new private field
     that contains the data needed by the method. A parameter is preferable when you
     need some occasional or frequently changing data for which there's no point in
     holding it in an object all of the time. In this case, the refactoring will pay
     off. Otherwise, add a private field and fill it with the necessary data before
     calling the method.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在这里的选择是添加一个新参数还是添加一个包含方法所需数据的新私有字段。当您需要一些偶尔或频繁变化的数据，而不必一直将其保留在对象中时，使用参数更为合适。在这种情况下，重构会带来收益。否则，添加一个私有字段，并在调用方法之前用必要的数据填充它。
 - en: Drawbacks
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: Adding a new parameter is always easier than removing it, which is why parameter
     lists frequently balloon to grotesque sizes. This smell is known as the [Long
     Parameter List](/smells/long-parameter-list).
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加一个新参数总是比删除它容易，这就是为什么参数列表经常膨胀到离谱的大小。这种现象被称为[长参数列表](/smells/long-parameter-list)。
 - en: If you need to add a new parameter, sometimes this means that your class doesn't
     contain the necessary data or the existing parameters don't contain the necessary
     related data. In both cases, the best solution is to consider moving data to the
     main class or to other classes whose objects are already accessible from inside
     the method.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果您需要添加一个新参数，这有时意味着您的类不包含必要的数据，或者现有参数不包含必要的相关数据。在这两种情况下，最佳解决方案是考虑将数据移动到主类或其他可以在方法内部访问的类中。
 - en: How to Refactor
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: See whether the method is defined in a superclass or subclass. If the method
     is present in them, you will need to repeat all the steps in these classes as
     well.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查看该方法是否在超类或子类中定义。如果该方法存在于它们中，您需要在这些类中重复所有步骤。
 - en: The following step is critical for keeping your program functional during the
     refactoring process. Create a new method by copying the old one and add the necessary
     parameter to it. Replace the code for the old method with a call to the new method.
     You can plug in any value to the new parameter (such as `null` for objects or
     a zero for numbers).
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 接下来的步骤对保持程序在重构过程中的功能至关重要。通过复制旧方法创建一个新方法，并为其添加必要的参数。用对新方法的调用替换旧方法的代码。您可以将任何值插入到新参数中（例如，对于对象使用`null`，对于数字使用零）。
 - en: Find all references to the old method and replace them with references to the
     new method.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查找所有对旧方法的引用，并将其替换为对新方法的引用。
 - en: Delete the old method. Deletion isn't possible if the old method is part of
     the public interface. If that's the case, mark the old method as deprecated.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除旧方法。如果旧方法是公共接口的一部分，则无法删除。在这种情况下，将旧方法标记为已弃用。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 试试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

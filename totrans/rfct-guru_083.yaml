@@ -1,96 +1,145 @@
 - en: Rename Method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 重命名方法
 - en: 原文：[https://refactoringguru.cn/rename-method](https://refactoringguru.cn/rename-method)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/rename-method](https://refactoringguru.cn/rename-method)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: The name of a method doesn't explain what the method does.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法的名称并没有解释该方法的功能。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Rename the method.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 重命名方法。
 - en: Before![Rename Method - Before](../Images/70ae2e1f15a4fb52fb5072d225174e50.png)After![Rename
     Method - After](../Images/dd39c41b3b9c03af7ee9efdcfd357ce5.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此之前！[重命名方法 - 之前](../Images/70ae2e1f15a4fb52fb5072d225174e50.png)之后！[重命名方法 -
+    之后](../Images/dd39c41b3b9c03af7ee9efdcfd357ce5.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Perhaps a method was poorly named from the very beginning—for example, someone
     created the method in a rush and didn't give proper care to naming it well.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 也许这个方法从一开始就命名不当——例如，有人匆忙创建了该方法，并没有认真对待命名。
 - en: Or perhaps the method was well named at first but as its functionality grew,
     the method name stopped being a good descriptor.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者，也许该方法起初命名得当，但随着其功能的增加，方法名称就不再是一个好的描述符。
 - en: Benefits
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 益处
 - en: Code readability. Try to give the new method a name that reflects what it does.
     Something like `createOrder()`, `renderCustomerInfo()`, etc.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 代码可读性。尝试给新方法起一个反映其功能的名称。类似于`createOrder()`、`renderCustomerInfo()`等。
 - en: How to Refactor
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: See whether the method is defined in a superclass or subclass. If so, you must
     repeat all steps in these classes too.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查看该方法是否在超类或子类中定义。如果是，你也必须在这些类中重复所有步骤。
 - en: The next method is important for maintaining the functionality of the program
     during the refactoring process. Create a new method with a new name. Copy the
     code of the old method to it. Delete all the code in the old method and, instead
     of it, insert a call for the new method.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 下一个方法在重构过程中对保持程序的功能至关重要。创建一个新名称的新方法。将旧方法的代码复制到其中。删除旧方法中的所有代码，并在其位置插入对新方法的调用。
 - en: Find all references to the old method and replace them with references to the
     new one.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 找到所有对旧方法的引用，并用对新方法的引用替换它们。
 - en: Delete the old method. If the old method is part of a public interface, don't
     perform this step. Instead, mark the old method as deprecated.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除旧方法。如果旧方法是公共接口的一部分，则不要执行此步骤。相反，将旧方法标记为不推荐使用。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

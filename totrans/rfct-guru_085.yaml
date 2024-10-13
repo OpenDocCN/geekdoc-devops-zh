@@ -1,110 +1,165 @@
 - en: Remove Parameter
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 移除参数
 - en: 原文：[https://refactoringguru.cn/remove-parameter](https://refactoringguru.cn/remove-parameter)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/remove-parameter](https://refactoringguru.cn/remove-parameter)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A parameter isn't used in the body of a method.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数在方法体中未被使用。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Remove the unused parameter.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 移除未使用的参数。
 - en: Before![Remove Parameter - Before](../Images/a0e29cd0565449ab615e942c7979ed8a.png)After![Remove
     Parameter - After](../Images/954f86863272616075c29480018a53a1.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![Remove Parameter - Before](../Images/a0e29cd0565449ab615e942c7979ed8a.png)之后![Remove
+    Parameter - After](../Images/954f86863272616075c29480018a53a1.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Every parameter in a method call forces the programmer reading it to figure
     out what information is found in this parameter. And if a parameter is entirely
     unused in the method body, this "noggin scratching" is for naught.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法调用中的每个参数都迫使程序员理解该参数中包含的信息。如果一个参数在方法体中完全未使用，这种“思考”就毫无意义。
 - en: And in any case, additional parameters are extra code that has to be run.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 而且，在任何情况下，额外的参数都是必须执行的额外代码。
 - en: Sometimes we add parameters with an eye to the future, anticipating changes
     to the method for which the parameter might be needed. All the same, experience
     shows that it's better to add a parameter only when it's genuinely needed. After
     all, anticipated changes often remain just that—anticipated.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时我们会添加一些参数，以便将来可能需要这些参数来应对方法的变化。然而，经验表明，只有在真正需要时才添加参数更为妥当。毕竟，预期的变化往往只是预期而已。
 - en: Benefits
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: A method contains only the parameters that it truly requires.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 方法只包含真正需要的参数。
 - en: When Not to Use
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么时候不使用
 - en: If the method is implemented in different ways in subclasses or in a superclass,
     and your parameter is used in those implementations, leave the parameter as-is.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果该方法在子类或超类中以不同方式实现，并且你的参数在这些实现中被使用，请保持参数不变。
 - en: How to Refactor
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: See whether the method is defined in a superclass or subclass. If so, is the
     parameter used there? If the parameter is used in one of these implementations,
     hold off on this refactoring technique.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查看该方法是否在超类或子类中定义。如果是，参数在那里是否被使用？如果参数在这些实现中被使用，则应暂缓使用此重构技术。
 - en: The next step is important for keeping the program functional during the refactoring
     process. Create a new method by copying the old one and delete the relevant parameter
     from it. Replace the code of the old method with a call to the new one.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 下一步对于在重构过程中保持程序功能至关重要。通过复制旧方法创建一个新方法，并从中删除相关参数。用对新方法的调用替换旧方法的代码。
 - en: Find all references to the old method and replace them with references to the
     new method.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 找到所有对旧方法的引用，并用对新方法的引用替换它们。
 - en: Delete the old method. Don't perform this step if the old method is part of
     a public interface. In this case, mark the old method as deprecated.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除旧方法。如果旧方法是公共接口的一部分，则不要执行此步骤。在这种情况下，将旧方法标记为弃用。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看看…*](/refactoring/course)'

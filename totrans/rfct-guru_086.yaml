@@ -1,38 +1,47 @@
 - en: Separate Query from Modifier
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://refactoringguru.cn/separate-query-from-modifier](https://refactoringguru.cn/separate-query-from-modifier)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Do you have a method that returns a value but also changes something inside
     an object?
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Split the method into two separate methods. As you would expect, one of them
     should return the value and the other one modifies the object.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Before![Separate Query from Modifier - Before](../Images/b677d404e57bd619bcb7e6c70e82c178.png)After![Separate
     Query from Modifier - After](../Images/e57843da4ccd7e78aea0a90c2a1b9bbd.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: This factoring technique implements *Command and Query Responsibility Segregation*.
     This principle tells us to separate code responsible for getting data from code
     that changes something inside an object.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: Code for getting data is named a *query*. Code for changing things in the *visible
@@ -41,6 +50,7 @@
     words, you ask a question and can change the answer even as it's being received.
     This problem becomes even more severe when the person calling the query may not
     know about the method's "side effects", which often leads to runtime errors.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: But remember that side effects are dangerous only in the case of *modifiers*
@@ -48,37 +58,45 @@
     accessible from an object's public interface, entry in a database, in files, etc.
     If a *modifier* only caches a complex operation and saves it within the private
     field of a class, it can hardly cause any side effects.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Benefits
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: If you have a *query* that doesn't change the state of your program, you can
     call it as many times as you like without having to worry about unintended changes
     in the result caused by the mere fact of you calling the method.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Drawbacks
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: In some cases it's convenient to get data after performing a command. For example,
     when deleting something from a database you want to know how many rows were deleted.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: How to Refactor
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Create a new *query method* to return what the original method did.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Change the original method so that it returns only the result of calling the
     new *query method*.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
@@ -86,34 +104,45 @@
     Immediately before this line, place a call to the *modifier method*. This will
     save you from side effects in case if the original method was used in a condition
     of a conditional operator or loop.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Get rid of the value-returning code in the original method, which now has become
     a proper *modifier method*.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: Tired of reading?
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 试试我们的互动重构课程。它提供了一种不那么枯燥的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看一下…*](/refactoring/course)'
