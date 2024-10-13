@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Collapse Hierarchy</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Collapse Hierarchy</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/collapse-hierarchy">https://refactoringguru.cn/collapse-hierarchy</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>You have a class hierarchy in which a subclass is practically the same as its superclass.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Merge the subclass and superclass.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container ">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <div class="ba-container"><img src="../Images/17ee75b3ee6b56cc0277bcaa1a8adca0.png" alt="Collapse Hierarchy - Before" width="152" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Collapse Hierarchy - Before.png?id=e95d97b3a9d564fbdba5ec0b76748f88"/></div>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <div class="ba-container"><img src="../Images/339856baf0d53a6c3a53cc7adfa6915e.png" alt="Collapse Hierarchy - After" width="152" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Collapse Hierarchy - After.png?id=db86997e7b68eaac829168048cd02a8b"/></div>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>Your program has grown over time and a subclass and superclass have become practically the same. A feature was removed from a subclass, a method was moved to the superclass... and now you have two look-alike classes.</p>
+<h3>Benefits</h3>
+<ul>
+<li>
+<p>Program complexity is reduced. Fewer classes mean fewer things to keep straight in your head and fewer breakable moving parts to worry about during future code changes.</p>
+</li>
+<li>
+<p>Navigating through your code is easier when methods are defined in one class early. You don't need to comb through the entire hierarchy to find a particular method.</p>
+</li>
+</ul>
+<h3>When Not to Use</h3>
+<ul>
+<li>
+<p>Does the class hierarchy that you're refactoring have more than one subclass? If so, after refactoring is complete, the remaining subclasses should become the inheritors of the class in which the hierarchy was collapsed.</p>
+</li>
+<li>
+<p>But keep in mind that this can lead to violations of the <em>Liskov substitution principle</em>. For example, if your program emulates city transport networks and you accidentally collapse the <code>Transport</code> superclass into the <code>Car</code> subclass, then the <code>Plane</code> class may become the inheritor of <code>Car</code>. Oops!</p>
+</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Select which class is easier to remove: the superclass or its subclass.</p>
+</li>
+<li>
+<p>Use <a href="/pull-up-field">Pull Up Field</a> and <a href="/pull-up-method">Pull Up Method</a> if you decide to get rid of the subclass. If you choose to eliminate the superclass, go for <a href="/push-down-field">Push Down Field</a> and <a href="/push-down-method">Push Down Method</a>.</p>
+</li>
+<li>
+<p>Replace all uses of the class that you're deleting with the class to which the fields and methods are to be migrated. Often this will be code for creating classes, variable and parameter typing, and documentation in code comments.</p>
+</li>
+<li>
+<p>Delete the empty class.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

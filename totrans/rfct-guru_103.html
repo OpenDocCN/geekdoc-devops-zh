@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Extract Subclass</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Extract Subclass</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/extract-subclass">https://refactoringguru.cn/extract-subclass</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>A class has features that are used only in certain cases.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Create a subclass and use it in these cases.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container ">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <div class="ba-container"><img src="../Images/6d4043f9523f0c7acfa34e35c6aadf8d.png" alt="Extract Subclass - Before" width="209" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Extract Subclass - Before.png?id=ea6e8c170ae321116dbf645e0db5b0f0"/></div>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <div class="ba-container"><img src="../Images/af9253c8fa0d89b591e1dea3229872e2.png" alt="Extract Subclass - After" width="209" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Extract Subclass - After.png?id=caff9775084405e0e46aec91bb2d4feb"/></div>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>Your main class has methods and fields for implementing a certain rare use case for the class. While the case is rare, the class is responsible for it and it would be wrong to move all the associated fields and methods to an entirely separate class. But they could be moved to a subclass, which is just what we'll do with the help of this refactoring technique.</p>
+<h3>Benefits</h3>
+<ul>
+<li>
+<p>Creates a subclass quickly and easily.</p>
+</li>
+<li>
+<p>You can create several separate subclasses if your main class is currently implementing more than one such special case.</p>
+</li>
+</ul>
+<h3>Drawbacks</h3>
+<ul>
+<li>
+<p>Despite its seeming simplicity, <em>Inheritance</em> can lead to a dead end if you have to separate several different class hierarchies. If, for example, you had the class <code>Dogs</code> with different behavior depending on the size and fur of dogs, you could tease out two hierarchies:</p>
+<ul>
+<li>
+<p>by size: <code>Large</code>, <code>Medium</code> and <code>Small</code></p>
+</li>
+<li>
+<p>by fur: <code>Smooth</code> and <code>Shaggy</code></p>
+</li>
+</ul>
+<p>And everything would seem well, except that problems will crop up as soon as you need to create a dog that's both <code>Large</code> and <code>Smooth</code>, since you can create an object from one class only. That said, you can avoid this problem by using <em>Compose</em> instead of <em>Inherit</em> (see the <a href="/design-patterns/strategy">Strategy</a> pattern). In other words, the <code>Dog</code> class will have two component fields, size and fur. You will plug in component objects from the necessary classes into these fields. So you can create a <code>Dog</code> that has <code>LargeSize</code> and <code>ShaggyFur</code>.</p>
+</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Create a new subclass from the class of interest.</p>
+</li>
+<li>
+<p>If you need additional data to create objects from a subclass, create a constructor and add the necessary parameters to it. Don't forget to call the constructor's parent implementation.</p>
+</li>
+<li>
+<p>Find all calls to the constructor of the parent class. When the functionality of a subclass is necessary, replace the parent constructor with the subclass constructor.</p>
+</li>
+<li>
+<p>Move the necessary methods and fields from the parent class to the subclass. Do this via <a href="/push-down-method">Push Down Method</a> and <a href="/push-down-field">Push Down Field</a>. It's simpler to start by moving the methods first. This way, the fields remain accessible throughout the whole process: from the parent class prior to the move, and from the subclass itself after the move is complete.</p>
+</li>
+<li>
+<p>After the subclass is ready, find all the old fields that controlled the choice of functionality. Delete these fields by using polymorphism to replace all the operators in which the fields had been used. A simple example: in the Car class, you had the field <code>isElectricCar</code> and, depending on it, in the <code>refuel()</code> method the car is either fueled up with gas or charged with electricity. Post-refactoring, the <code>isElectricCar</code> field is removed and the <code>Car</code> and <code>ElectricCar</code> classes will have their own implementations of the <code>refuel()</code> method.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

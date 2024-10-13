@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Change Preventers</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Change Preventers</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/refactoring/smells/change-preventers">https://refactoringguru.cn/refactoring/smells/change-preventers</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <p>These smells mean that if you need to change something in one place in your code, you have to make many changes in other places too. Program development becomes much more complicated and expensive as a result.</p>
+<div class="relations link-list">
+  <div class="dl"><div class="dt"><a href="/smells/divergent-change">Divergent Change</a></div><div class="dd">
+<p>You find yourself having to change many unrelated methods when you make changes to a class. For example, when adding a new product type you have to change the methods for finding, displaying, and ordering products.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/smells/shotgun-surgery">Shotgun Surgery</a></div><div class="dd">
+<p>Making any modifications requires that you make many small changes to many different classes.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/smells/parallel-inheritance-hierarchies">Parallel Inheritance Hierarchies</a></div><div class="dd">
+<p>Whenever you create a subclass for a class, you find yourself needing to create a subclass for another class.</p>
+</div></div>
+</div>
+
+        
+</body>
+</html>

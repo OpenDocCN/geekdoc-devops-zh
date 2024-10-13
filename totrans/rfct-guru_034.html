@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Middle Man</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Middle Man</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/smells/middle-man">https://refactoringguru.cn/smells/middle-man</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <h3>Signs and Symptoms</h3>
+<p>If a class performs only one action, delegating work to another class, why does it exist at all?</p>
+<figure class="image"><img width="500" height="300" src="../Images/10c52abdb49ddd95dfb73e53130ba991.png" srcset="/images/refactoring/content/smells/middle-man-01-2x.png?id=a1a99f8b475b719d9f894aa613515761 2x" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/middle-man-01.png?id=14c65845c4e0cf03e7e9e48108090c98"/></figure>
+<h3>Reasons for the Problem</h3>
+<p>This smell can be the result of overzealous elimination of <a href="/smells/message-chains">Message Chains</a>.</p>
+<p>In other cases, it can be the result of the useful work of a class being gradually moved to other classes. The class remains as an empty shell that doesn't do anything other than delegate.</p>
+<h3>Treatment</h3>
+<ul>
+<li>If most of a method's classes delegate to another class, <a href="/remove-middle-man">Remove Middle Man</a> is in order.</li>
+</ul>
+<h3>Payoff</h3>
+<ul>
+<li>Less bulky code.</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/4054a8e74184d7250656eaaaf78864c3.png" srcset="/images/refactoring/content/smells/middle-man-02-2x.png?id=41869f090e8263d46e708778fe64059c 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/middle-man-02.png?id=f507c0fd9a7bde8df8c22b9027d0a404"/></figure>
+<h3>When to Ignore</h3>
+<p>Don't delete middle man that have been created for a reason:</p>
+<ul>
+<li>
+<p>A middle man may have been added to avoid interclass dependencies.</p>
+</li>
+<li>
+<p>Some design patterns create middle man on purpose (such as <a href="/design-patterns/proxy">Proxy</a> or <a href="/design-patterns/decorator">Decorator</a>).</p>
+</li>
+</ul>
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+    
+</body>
+</html>

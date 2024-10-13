@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Data Class</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Data Class</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/smells/data-class">https://refactoringguru.cn/smells/data-class</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <h3>Signs and Symptoms</h3>
+<p>A data class refers to a class that contains only fields and crude methods for accessing them (getters and setters). These are simply containers for data used by other classes. These classes don't contain any additional functionality and can't independently operate on the data that they own.</p>
+<figure class="image"><img width="500" height="300" src="../Images/07c3dcfab17957da245115c94df0830a.png" srcset="/images/refactoring/content/smells/data-class-01-2x.png?id=2beb8150d4ba31ca37d6515495ceff2d 2x" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/data-class-01.png?id=2ea1583b05a194a056d27ac559545318"/></figure>
+<h3>Reasons for the Problem</h3>
+<p>It's a normal thing when a newly created class contains only a few public fields (and maybe even a handful of getters/setters). But the true power of objects is that they can contain behavior types or operations on their data.</p>
+<h3>Treatment</h3>
+<ul>
+<li>
+<p>If a class contains public fields, use <a href="/encapsulate-field">Encapsulate Field</a> to hide them from direct access and require that access be performed via getters and setters only.</p>
+</li>
+<li>
+<p>Use <a href="/encapsulate-collection">Encapsulate Collection</a> for data stored in collections (such as arrays).</p>
+</li>
+<li>
+<p>Review the client code that uses the class. In it, you may find functionality that would be better located in the data class itself. If this is the case, use <a href="/move-method">Move Method</a> and <a href="/extract-method">Extract Method</a> to migrate this functionality to the data class.</p>
+</li>
+<li>
+<p>After the class has been filled with well thought-out methods, you may want to get rid of old methods for data access that give overly broad access to the class data. For this, <a href="/remove-setting-method">Remove Setting Method</a> and <a href="/hide-method">Hide Method</a> may be helpful.</p>
+</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/caaf0e519c3f3c1df05e8fa0a750d28e.png" srcset="/images/refactoring/content/smells/data-class-02-2x.png?id=fb9b6d670232d6effe790980e6b388ec 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/data-class-02.png?id=db0eb15f9f229bafd8423b2cfd09f910"/></figure>
+<h3>Payoff</h3>
+<ul>
+<li>
+<p>Improves understanding and organization of code. Operations on particular data are now gathered in a single place, instead of haphazardly throughout the code.</p>
+</li>
+<li>
+<p>Helps you to spot duplication of client code.</p>
+</li>
+</ul>
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+    
+</body>
+</html>

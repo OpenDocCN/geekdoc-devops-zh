@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Shotgun Surgery</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Shotgun Surgery</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/smells/shotgun-surgery">https://refactoringguru.cn/smells/shotgun-surgery</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <blockquote>
+<p><em>Shotgun Surgery</em> resembles <a href="/smells/divergent-change">Divergent Change</a> but is actually the opposite smell. <em>Divergent Change</em> is when many changes are made to a single class. <em>Shotgun Surgery</em> refers to when a single change is made to multiple classes simultaneously.</p>
+</blockquote>
+<h3>Signs and Symptoms</h3>
+<p>Making any modifications requires that you make many small changes to many different classes.</p>
+<figure class="image"><img width="500" height="300" src="../Images/76597095dd95d260d99e19667f101329.png" srcset="/images/refactoring/content/smells/shotgun-surgery-01-2x.png?id=01431b43fcaee83fade53530a3dd91ab 2x" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/shotgun-surgery-01.png?id=9cc1117a6d787364788e152a3adb6a53"/></figure>
+<h3>Reasons for the Problem</h3>
+<p>A single responsibility has been split up among a large number of classes. This can happen after overzealous application of <a href="/smells/divergent-change">Divergent Change</a>.</p>
+<figure class="image"><img width="500" height="300" src="../Images/7be4a998db3cca78b590a00a84006e5c.png" srcset="/images/refactoring/content/smells/shotgun-surgery-02-2x.png?id=a35426ca3f6e64857e66b2fdeb395870 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/shotgun-surgery-02.png?id=48f8a4a0f17d112e02ae73bacaed43fa"/></figure>
+<h3>Treatment</h3>
+<ul>
+<li>
+<p>Use <a href="/move-method">Move Method</a> and <a href="/move-field">Move Field</a> to move existing class behaviors into a single class. If there's no class appropriate for this, create a new one.</p>
+</li>
+<li>
+<p>If moving code to the same class leaves the original classes almost empty, try to get rid of these now-redundant classes via <a href="/inline-class">Inline Class</a>.</p>
+</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/84dde9e26aca8d0cef799e07d896c239.png" srcset="/images/refactoring/content/smells/shotgun-surgery-03-2x.png?id=259b00413f0f8be143ead703c74b7e38 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/shotgun-surgery-03.png?id=cf013f14eb5cde98bd48595a1c9836a9"/></figure>
+<h3>Payoff</h3>
+<ul>
+<li>
+<p>Better organization.</p>
+</li>
+<li>
+<p>Less code duplication.</p>
+</li>
+<li>
+<p>Easier maintenance.</p>
+</li>
+</ul>
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+    
+</body>
+</html>

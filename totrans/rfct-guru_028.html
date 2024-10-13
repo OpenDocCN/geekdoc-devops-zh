@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Dead Code</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Dead Code</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/smells/dead-code">https://refactoringguru.cn/smells/dead-code</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <h3>Signs and Symptoms</h3>
+<p>A variable, parameter, field, method or class is no longer used (usually because it's obsolete).</p>
+<figure class="image"><img width="500" height="300" src="../Images/a76ed4d5ace9b3fde7f4075026f778f0.png" srcset="/images/refactoring/content/smells/dead-code-01-2x.png?id=d9981d853e7e855cf0454fc32aab85a6 2x" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/dead-code-01.png?id=418685bee5de933c472c48efcb5b67a0"/></figure>
+<h3>Reasons for the Problem</h3>
+<p>When requirements for the software have changed or corrections have been made, nobody had time to clean up the old code.</p>
+<p>Such code could also be found in complex conditionals, when one of the branches becomes unreachable (due to error or other circumstances).</p>
+<h3>Treatment</h3>
+<p>The quickest way to find dead code is to use a good <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a>.</p>
+<ul>
+<li>
+<p>Delete unused code and unneeded files.</p>
+</li>
+<li>
+<p>In the case of an unnecessary class, <a href="/inline-class">Inline Class</a> or <a href="/collapse-hierarchy">Collapse Hierarchy</a> can be applied if a subclass or superclass is used.</p>
+</li>
+<li>
+<p>To remove unneeded parameters, use <a href="/remove-parameter">Remove Parameter</a>.</p>
+</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/e18d7720362542dfe67c2d2e17b23ba3.png" srcset="/images/refactoring/content/smells/dead-code-02-2x.png?id=bf78ebf643d890b41b60058d8e67d845 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/dead-code-02.png?id=b368f23b7cc88340933b761cf2ad1954"/></figure>
+<h3>Payoff</h3>
+<ul>
+<li>
+<p>Reduced code size.</p>
+</li>
+<li>
+<p>Simpler support.</p>
+</li>
+</ul>
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+    
+</body>
+</html>

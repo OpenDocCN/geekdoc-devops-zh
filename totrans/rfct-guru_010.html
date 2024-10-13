@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Large Class</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Large Class</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/smells/large-class">https://refactoringguru.cn/smells/large-class</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <h3>Signs and Symptoms</h3>
+<p>A class contains many fields/methods/lines of code.</p>
+<figure class="image"><img width="500" height="300" src="../Images/e24321a2cdcffc7070cf5f92c3dc4206.png" srcset="/images/refactoring/content/smells/large-class-01-2x.png?id=44aea94399b8bd6398a01b46b5bc7f29 2x" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/large-class-01.png?id=acac82f25cc90aaa413c2daefebf0e4b"/></figure>
+<h3>Reasons for the Problem</h3>
+<p>Classes usually start small. But over time, they get bloated as the program grows.</p>
+<p>As is the case with long methods as well, programmers usually find it mentally less taxing to place a new feature in an existing class than to create a new class for the feature.</p>
+<figure class="image"><img width="500" height="300" src="../Images/c672e4dfde4bcbc1810a191ecf568037.png" srcset="/images/refactoring/content/smells/large-class-02-2x.png?id=f51627abdfb96fad29cb114d00795fec 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/large-class-02.png?id=973b37334ae57489945a88b9327f81e3"/></figure>
+<h3>Treatment</h3>
+<p>When a class is wearing too many (functional) hats, think about splitting it up:</p>
+<ul>
+<li>
+<p><a href="/extract-class">Extract Class</a> helps if part of the behavior of the large class can be spun off into a separate component.</p>
+</li>
+<li>
+<p><a href="/extract-subclass">Extract Subclass</a> helps if part of the behavior of the large class can be implemented in different ways or is used in rare cases.</p>
+</li>
+<li>
+<p><a href="/extract-interface">Extract Interface</a> helps if it's necessary to have a list of the operations and behaviors that the client can use.</p>
+</li>
+<li>
+<p>If a large class is responsible for the graphical interface, you may try to move some of its data and behavior to a separate domain object. In doing so, it may be necessary to store copies of some data in two places and keep the data consistent. <a href="/duplicate-observed-data">Duplicate Observed Data</a> offers a way to do this.</p>
+</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/c5884391409a94a6ab02fc64bb424d0f.png" srcset="/images/refactoring/content/smells/large-class-03-2x.png?id=2e497ff65fc035f0d51f908361daee78 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/large-class-03.png?id=f0a0109f731dbc420ffe385cb658f0de"/></figure>
+<h3>Payoff</h3>
+<ul>
+<li>
+<p>Refactoring of these classes spares developers from needing to remember a large number of attributes for a class.</p>
+</li>
+<li>
+<p>In many cases, splitting large classes into parts avoids duplication of code and functionality.</p>
+</li>
+</ul>
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+    
+</body>
+</html>

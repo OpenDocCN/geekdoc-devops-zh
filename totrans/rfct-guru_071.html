@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Replace Type Code with State/Strategy</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Replace Type Code with State/Strategy</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/replace-type-code-with-state-strategy">https://refactoringguru.cn/replace-type-code-with-state-strategy</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    <blockquote>
+<p><strong>What's type code?</strong> Type code occurs when, instead of a separate data type, you have a set of numbers or strings that form a list of allowable values for some entity. Often these specific numbers and strings are given understandable names via constants, which is the reason for why such type code is encountered so much.</p>
+</blockquote>
+
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>You have a coded type that affects behavior but you can't use subclasses to get rid of it.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Replace type code with a state object. If it's necessary to replace a field value with type code, another state object is "plugged in".</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container ">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <div class="ba-container"><img src="../Images/6414214585273f341380c0154622f4ec.png" alt="Replace Type Code with State-Strategy - Before" width="152" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Replace Type Code with State-Strategy - Before.png?id=5fa75a3c084933dcb4d1d1f0c60e56d3"/></div>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <div class="ba-container"><img src="../Images/d294761863153e227234b75ca0d43964.png" alt="Replace Type Code with State-Strategy - After" width="452" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Replace Type Code with State-Strategy - After.png?id=1fb190a5b389c0a88e7335648b869748"/></div>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>You have type code and it affects the behavior of a class, therefore we can't use <a href="/replace-type-code-with-class">Replace Type Code with Class</a>.</p>
+<p>Type code affects the behavior of a class but we can't create subclasses for the coded type due to the existing class hierarchy or other reasons. Thus means that we can't apply <a href="/replace-type-code-with-subclasses">Replace Type Code with Subclasses</a>.</p>
+<h3>Benefits</h3>
+<ul>
+<li>
+<p>This refactoring technique is a way out of situations when a field with a coded type changes its value during the object's lifetime. In this case, replacement of the value is made via replacement of the state object to which the original class refers.</p>
+</li>
+<li>
+<p>If you need to add a new value of a coded type, all you need to do is to add a new state subclass without altering the existing code (cf. the <em>Open/Closed Principle</em>).</p>
+</li>
+</ul>
+<h3>Drawbacks</h3>
+<ul>
+<li>If you have a simple case of type code but you use this refactoring technique anyway, you will have many extra (and unneeded) classes.</li>
+</ul>
+<h3>Good to Know</h3>
+<p>Implementation of this refactoring technique can make use of one of two design patterns: <strong>State</strong> or <strong>Strategy</strong>. Implementation is the same no matter which pattern you choose. So which pattern should you pick in a particular situation?</p>
+<p>If you're trying to split a conditional that controls the selection of algorithms, use Strategy.</p>
+<p>But if each value of the coded type is responsible not only for selecting an algorithm but for the whole condition of the class, class state, field values, and many other actions, State is better for the job.</p>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Use <a href="/self-encapsulate-field">Self Encapsulate Field</a> to create a getter for the field that contains type code.</p>
+</li>
+<li>
+<p>Create a new class and give it an understandable name that fits the purpose of the type code. This class will be playing the role of <em>state</em> (or <em>strategy</em>). In it, create an abstract coded field getter.</p>
+</li>
+<li>
+<p>Create subclasses of the state class for each value of the coded type. In each subclass, redefine the getter of the coded field so that it returns the corresponding value of the coded type.</p>
+</li>
+<li>
+<p>In the abstract state class, create a static factory method that accepts the value of the coded type as a parameter. Depending on this parameter, the factory method will create objects of various states. For this, in its code create a large conditional; it'll be the only one when refactoring is complete.</p>
+</li>
+<li>
+<p>In the original class, change the type of the coded field to the state class. In the field's setter, call the factory state method for getting new state objects.</p>
+</li>
+<li>
+<p>Now you can start to move the fields and methods from the superclass to the corresponding state subclasses (using <a href="/push-down-field">Push Down Field</a> and <a href="/push-down-method">Push Down Method</a>).</p>
+</li>
+<li>
+<p>When everything moveable has been moved, use <a href="/replace-conditional-with-polymorphism">Replace Conditional with Polymorphism</a> in order to get rid of conditionals that use type code once and for all.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

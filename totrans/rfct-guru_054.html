@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Remove Middle Man</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Remove Middle Man</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/remove-middle-man">https://refactoringguru.cn/remove-middle-man</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>A class has too many methods that simply delegate to other objects.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Delete these methods and force the client to call the end methods directly.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container ">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <div class="ba-container"><img src="../Images/3e9a7d2185aa5e62c84dac385b0124f0.png" alt="Remove Middle Man - Before" width="153" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Remove Middle Man - Before.png?id=f51110f3e0d4423b3f9088e92fc3dce4"/></div>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <div class="ba-container"><img src="../Images/57a675cde319ef14aa00ccf9a9c57bfd.png" alt="Remove Middle Man - After" width="415" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Remove Middle Man - After.png?id=f7de1016e76545f7c51af09463ce5f4c"/></div>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>To describe this technique, we'll use the terms from <a href="/hide-delegate">Hide Delegate</a>, which are:</p>
+<ul>
+<li>
+<p><em>Server</em> is the object to which the client has direct access.</p>
+</li>
+<li>
+<p><em>Delegate</em> is the end object that contains the functionality needed by the client.</p>
+</li>
+</ul>
+<p>There are two types of problems:</p>
+<ol>
+<li>
+<p>The <em>server-class</em> doesn't do anything itself and simply creates needless complexity. In this case, give thought to whether this class is needed at all.</p>
+</li>
+<li>
+<p>Every time a new feature is added to the <em>delegate</em>, you need to create a delegating method for it in the <em>server-class</em>. If a lot of changes are made, this will be rather tiresome.</p>
+</li>
+</ol>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Create a getter for accessing the <em>delegate-class</em> object from the <em>server-class</em> object.</p>
+</li>
+<li>
+<p>Replace calls to delegating methods in the <em>server-class</em> with direct calls for methods in the <em>delegate-class</em>.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

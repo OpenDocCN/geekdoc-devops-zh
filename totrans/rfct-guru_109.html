@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Replace Delegation with Inheritance</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Replace Delegation with Inheritance</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/replace-delegation-with-inheritance">https://refactoringguru.cn/replace-delegation-with-inheritance</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>A class contains many simple methods that delegate to all methods of another class.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Make the class a delegate inheritor, which makes the delegating methods unnecessary.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container ">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <div class="ba-container"><img src="../Images/c94d57d4804776252ae243dc24eba82f.png" alt="Replace Delegation with Inheritance - Before" width="453" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Replace Delegation with Inheritance - Before.png?id=b408bcc35ce5a341e675818d6c1124a2"/></div>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <div class="ba-container"><img src="../Images/f6fff96ce905e33ab4e474a8d7bdc4a5.png" alt="Replace Delegation with Inheritance - After" width="152" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Replace Delegation with Inheritance - After.png?id=633a1c3ff0e87033e10408df57ac6118"/></div>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>Delegation is a more flexible approach than inheritance, since it allows changing how delegation is implemented and placing other classes there as well. Nonetheless, delegation stops being beneficial if you delegate actions to only one class and all of its public methods.</p>
+<p>In such a case, if you replace delegation with inheritance, you cleanse the class of a large number of delegating methods and spare yourself from needing to create them for each new delegate class method.</p>
+<h3>Benefits</h3>
+<ul>
+<li>Reduces code length. All these delegating methods are no longer necessary.</li>
+</ul>
+<h3>When Not to Use</h3>
+<ul>
+<li>
+<p>Don't use this technique if the class contains delegation to only a portion of the public methods of the delegate class. By doing so, you would violate the <em>Liskov substitution principle</em>.</p>
+</li>
+<li>
+<p>This technique can be used only if the class still doesn't have parents.</p>
+</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Make the class a subclass of the delegate class.</p>
+</li>
+<li>
+<p>Place the current object in a field containing a reference to the delegate object.</p>
+</li>
+<li>
+<p>Delete the methods with simple delegation one by one. If their names were different, use <a href="/rename-method">Rename Method</a> to give all the methods a single name.</p>
+</li>
+<li>
+<p>Replace all references to the delegate field with references to the current object.</p>
+</li>
+<li>
+<p>Remove the delegate field.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

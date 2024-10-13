@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Lazy Class</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Lazy Class</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/smells/lazy-class">https://refactoringguru.cn/smells/lazy-class</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <h3>Signs and Symptoms</h3>
+<p>Understanding and maintaining classes always costs time and money. So if a class doesn't do enough to earn your attention, it should be deleted.</p>
+<figure class="image"><img width="500" height="300" src="../Images/d72bf0853173967b170dc2bce1a39ba4.png" srcset="/images/refactoring/content/smells/lazy-class-01-2x.png?id=3b5b07bc60eb98c883fc68c5e1a05aed 2x" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/lazy-class-01.png?id=efec5911dfaaa3ba69d3eb4dab03fd3c"/></figure>
+<h3>Reasons for the Problem</h3>
+<p>Perhaps a class was designed to be fully functional but after some of the refactoring it has become ridiculously small.</p>
+<p>Or perhaps it was designed to support future development work that never got done.</p>
+<h3>Treatment</h3>
+<ul>
+<li>
+<p>Components that are near-useless should be given the <a href="/inline-class">Inline Class</a> treatment.</p>
+</li>
+<li>
+<p>For subclasses with few functions, try <a href="/collapse-hierarchy">Collapse Hierarchy</a>.</p>
+</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/5d73de28efa26b7b7bbb88ac74a98ec3.png" srcset="/images/refactoring/content/smells/lazy-class-02-2x.png?id=d46dd63f159b40aa266ccbdbefb319bd 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/lazy-class-02.png?id=393302f2bd27ba0197660caea274ae23"/></figure>
+<h3>Payoff</h3>
+<ul>
+<li>
+<p>Reduced code size.</p>
+</li>
+<li>
+<p>Easier maintenance.</p>
+</li>
+</ul>
+<h3>When to Ignore</h3>
+<ul>
+<li>Sometimes a <em>Lazy Class</em> is created in order to delineate intentions for future development, In this case, try to maintain a balance between clarity and simplicity in your code.</li>
+</ul>
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+    
+</body>
+</html>

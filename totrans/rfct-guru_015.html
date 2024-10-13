@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Switch Statements</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Switch Statements</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/smells/switch-statements">https://refactoringguru.cn/smells/switch-statements</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <h3>Signs and Symptoms</h3>
+<p>You have a complex <code>switch</code> operator or sequence of <code>if</code> statements.</p>
+<figure class="image"><img width="500" height="300" src="../Images/0f91a3c80bf69b3afccfc40c21d4f48e.png" srcset="/images/refactoring/content/smells/switch-statements-01-2x.png?id=da7f9cad4c4bb8bf5d6910aba08680be 2x" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/switch-statements-01.png?id=1c5a538d451c3d2b2e43d0d4f53b994b"/></figure>
+<h3>Reasons for the Problem</h3>
+<p>Relatively rare use of <code>switch</code> and <code>case</code> operators is one of the hallmarks of object-oriented code. Often code for a single <code>switch</code> can be scattered in different places in the program. When a new condition is added, you have to find all the <code>switch</code> code and modify it.</p>
+<p>As a rule of thumb, when you see <code>switch</code> you should think of polymorphism.</p>
+<h3>Treatment</h3>
+<ul>
+<li>
+<p>To isolate <code>switch</code> and put it in the right class, you may need <a href="/extract-method">Extract Method</a> and then <a href="/move-method">Move Method</a>.</p>
+</li>
+<li>
+<p>If a <code>switch</code> is based on type code, such as when the program's runtime mode is switched, use <a href="/replace-type-code-with-subclasses">Replace Type Code with Subclasses</a> or <a href="/replace-type-code-with-state-strategy">Replace Type Code with State/Strategy</a>.</p>
+</li>
+<li>
+<p>After specifying the inheritance structure, use <a href="/replace-conditional-with-polymorphism">Replace Conditional with Polymorphism</a>.</p>
+</li>
+<li>
+<p>If there aren't too many conditions in the operator and they all call same method with different parameters, polymorphism will be superfluous. If this case, you can break that method into multiple smaller methods with <a href="/replace-parameter-with-explicit-methods">Replace Parameter with Explicit Methods</a> and change the <code>switch</code> accordingly.</p>
+</li>
+<li>
+<p>If one of the conditional options is <code>null</code>, use <a href="/introduce-null-object">Introduce Null Object</a>.</p>
+</li>
+</ul>
+<h3>Payoff</h3>
+<ul>
+<li>Improved code organization.</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/01300532ddcf0f8454f8c1e4fe08f997.png" srcset="/images/refactoring/content/smells/switch-statements-02-2x.png?id=b7c9163ebe366c956f1aa64c4b3312e4 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/switch-statements-02.png?id=29ec9ad9c6d760d2b940a68a1d23c4be"/></figure>
+<h3>When to Ignore</h3>
+<ul>
+<li>
+<p>When a <code>switch</code> operator performs simple actions, there's no reason to make code changes.</p>
+</li>
+<li>
+<p>Often <code>switch</code> operators are used by factory design patterns (<a href="/design-patterns/factory-method">Factory Method</a> or <a href="/design-patterns/abstract-factory">Abstract Factory</a>) to select a created class.</p>
+</li>
+</ul>
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+    
+</body>
+</html>

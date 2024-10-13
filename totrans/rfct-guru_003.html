@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Technical debt</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Technical debt</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/refactoring/technical-debt">https://refactoringguru.cn/refactoring/technical-debt</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <p>Everyone does their best to write excellent code from scratch. There probably isn't a programmer out there who intentionally writes unclean code to the detriment of the project. But at what point does clean code become unclean?</p>
+<p>The metaphor of "technical debt" in regards to unclean code was originally suggested by Ward Cunningham.</p>
+<p>If you get a loan from a bank, this allows you to make purchases faster. You pay extra for expediting the process - you don't just pay off the principal, but also the additional interest on the loan. Needless to say, you can even rack up so much interest that the amount of interest exceeds your total income, making full repayment impossible.</p>
+<p>The same thing can happen with code. You can temporarily speed up without writing tests for new features, but this will gradually slow your progress every day until you eventually pay off the debt by writing tests.</p>
+<h2>Causes of technical debt</h2>
+<h4><i class="fa fa-badge-percent" aria-hidden="true"/> Business pressure</h4>
+<p>Sometimes business circumstances might force you to roll out features before they're completely finished. In this case, patches and kludges will appear in the code to hide the unfinished parts of the project.</p>
+<h4><i class="fa fa-badge-percent" aria-hidden="true"/> Lack of understanding of the consequences of technical debt</h4>
+<p>Sometimes your employer might not understand that technical debt has "interest" insofar as it slows down the pace of development as debt accumulates. This can make it too difficult to dedicate the team's time to refactoring because management doesn't see the value of it.</p>
+<h4><i class="fa fa-badge-percent" aria-hidden="true"/> Failing to combat the strict coherence of components</h4>
+<p>This is when the project resembles a monolith rather than the product of individual modules. In this case, any changes to one part of the project will affect others. Team development is made more difficult because it's difficult to isolate the work of individual members.</p>
+<h4><i class="fa fa-badge-percent" aria-hidden="true"/> Lack of tests</h4>
+<p>The lack of immediate feedback encourages quick, but risky workarounds or kludges. In worst cases, these changes are implemented and deployed right into the production without any prior testing. The consequences can be catastrophic. For example, an innocent-looking hotfix might send a weird test email to thousands of customers or even worse, flush or corrupt an entire database.</p>
+<h4><i class="fa fa-badge-percent" aria-hidden="true"/> Lack of documentation</h4>
+<p>This slows down the introduction of new people to the project and can grind development to a halt if key people leave the project.</p>
+<h4><i class="fa fa-badge-percent" aria-hidden="true"/> Lack of interaction between team members</h4>
+<p>If the knowledge base isn't distributed throughout the company, people will end up working with an outdated understanding of processes and information about the project. This situation can be exacerbated when junior developers are incorrectly trained by their mentors.</p>
+<h4><i class="fa fa-badge-percent" aria-hidden="true"/> Long-term simultaneous development in several branches</h4>
+<p>This can lead to the accumulation of technical debt, which is then increased when changes are merged. The more changes made in isolation, the greater the total technical debt.</p>
+<h4><i class="fa fa-badge-percent" aria-hidden="true"/> Delayed refactoring</h4>
+<p>The project's requirements are constantly changing and at some point it may become obvious that parts of the code are obsolete, have become cumbersome, and must be redesigned to meet new requirements.</p>
+<p>On the other hand, the project's programmers are writing new code every day that works with the obsolete parts. Therefore, the longer refactoring is delayed, the more dependent code will have to be reworked in the future.</p>
+<h4><i class="fa fa-badge-percent" aria-hidden="true"/> Lack of compliance monitoring</h4>
+<p>This happens when everyone working on the project writes code as they see fit (i.e. the same way they wrote the last project).</p>
+<h4><i class="fa fa-badge-percent" aria-hidden="true"/> Incompetence</h4>
+<p>This is when the developer just doesn't know how to write decent code.</p>
+
+        
+</body>
+</html>

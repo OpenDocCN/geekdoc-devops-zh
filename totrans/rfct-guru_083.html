@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Rename Method</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Rename Method</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/rename-method">https://refactoringguru.cn/rename-method</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>The name of a method doesn't explain what the method does.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Rename the method.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container ">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <div class="ba-container"><img src="../Images/70ae2e1f15a4fb52fb5072d225174e50.png" alt="Rename Method - Before" width="171" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Rename Method - Before.png?id=7943798ae9db6b5b232860eed6262462"/></div>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <div class="ba-container"><img src="../Images/dd39c41b3b9c03af7ee9efdcfd357ce5.png" alt="Rename Method - After" width="171" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Rename Method - After.png?id=62b4e6747951bbbacba3ede379fef200"/></div>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>Perhaps a method was poorly named from the very beginning—for example, someone created the method in a rush and didn't give proper care to naming it well.</p>
+<p>Or perhaps the method was well named at first but as its functionality grew, the method name stopped being a good descriptor.</p>
+<h3>Benefits</h3>
+<ul>
+<li>Code readability. Try to give the new method a name that reflects what it does. Something like <code>createOrder()</code>, <code>renderCustomerInfo()</code>, etc.</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>See whether the method is defined in a superclass or subclass. If so, you must repeat all steps in these classes too.</p>
+</li>
+<li>
+<p>The next method is important for maintaining the functionality of the program during the refactoring process. Create a new method with a new name. Copy the code of the old method to it. Delete all the code in the old method and, instead of it, insert a call for the new method.</p>
+</li>
+<li>
+<p>Find all references to the old method and replace them with references to the new one.</p>
+</li>
+<li>
+<p>Delete the old method. If the old method is part of a public interface, don't perform this step. Instead, mark the old method as deprecated.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

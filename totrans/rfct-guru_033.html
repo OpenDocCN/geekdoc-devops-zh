@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Message Chains</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Message Chains</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/smells/message-chains">https://refactoringguru.cn/smells/message-chains</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <h3>Signs and Symptoms</h3>
+<p>In code you see a series of calls resembling <code>$a-&gt;b()-&gt;c()-&gt;d()</code></p>
+<figure class="image"><img width="500" height="300" src="../Images/da48776005a484257234816b3b109603.png" srcset="/images/refactoring/content/smells/message-chains-01-2x.png?id=63332ad44f028e0d60f42d3a56e0280a 2x" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/message-chains-01.png?id=c290ab1d348b3e6ab500c0b949f3d3f8"/></figure>
+<h3>Reasons for the Problem</h3>
+<p>A message chain occurs when a client requests another object, that object requests yet another one, and so on. These chains mean that the client is dependent on navigation along the class structure. Any changes in these relationships require modifying the client.</p>
+<h3>Treatment</h3>
+<ul>
+<li>
+<p>To delete a message chain, use <a href="/hide-delegate">Hide Delegate</a>.</p>
+</li>
+<li>
+<p>Sometimes it's better to think of why the end object is being used. Perhaps it would make sense to use <a href="/extract-method">Extract Method</a> for this functionality and move it to the beginning of the chain, by using <a href="/move-method">Move Method</a>.</p>
+</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/0d9ca5d076229623e4a27bbf6645f830.png" srcset="/images/refactoring/content/smells/message-chains-02-2x.png?id=07214cc9363ca16dcbaab4bb6e1edeef 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/message-chains-02.png?id=d348325f450e592900b1a4a2ed960b53"/></figure>
+<h3>Payoff</h3>
+<ul>
+<li>
+<p>Reduces dependencies between classes of a chain.</p>
+</li>
+<li>
+<p>Reduces the amount of bloated code.</p>
+</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/02602df7d90cb2972eb59613059aeb04.png" srcset="/images/refactoring/content/smells/message-chains-03-2x.png?id=2e0e5bdf1e249a09f9c8e67f01de6bd1 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/message-chains-03.png?id=e651ac11f057e3e2e7c7786fc4051a66"/></figure>
+<h3>When to Ignore</h3>
+<ul>
+<li>Overly aggressive delegate hiding can cause code in which it's hard to see where the functionality is actually occurring. Which is another way of saying, avoid the <a href="/smells/middle-man">Middle Man</a> smell as well.</li>
+</ul>
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+    
+</body>
+</html>

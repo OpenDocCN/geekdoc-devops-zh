@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Change Unidirectional Association to Bidirectional</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Change Unidirectional Association to Bidirectional</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/change-unidirectional-association-to-bidirectional">https://refactoringguru.cn/change-unidirectional-association-to-bidirectional</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>You have two classes that each need to use the features of the other, but the association between them is only unidirectional.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Add the missing association to the class that needs it.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container ">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <div class="ba-container"><img src="../Images/6e69410d2c835f4e8f519d3f76483180.png" alt="Change Unidirectional Association to Bidirectional - Before" width="396" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Change Unidirectional Association to Bidirectional - Before.png?id=a31d8472bbb2be95836c8b5e2334ac77"/></div>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <div class="ba-container"><img src="../Images/6e7ed019a16535771af065641470eec8.png" alt="Change Unidirectional Association to Bidirectional - After" width="396" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Change Unidirectional Association to Bidirectional - After.png?id=058ba44a44610bcb9caa4c23f60ad0bc"/></div>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>Originally the classes had a unidirectional association. But with time, client code needed access to both sides of the association.</p>
+<h3>Benefits</h3>
+<ul>
+<li>If a class needs a reverse association, you can simply calculate it. But if these calculations are complex, it's better to keep the reverse association.</li>
+</ul>
+<h3>Drawbacks</h3>
+<ul>
+<li>
+<p>Bidirectional associations are much harder to implement and maintain than unidirectional ones.</p>
+</li>
+<li>
+<p>Bidirectional associations make classes interdependent. With a unidirectional association, one of them can be used independently of the other.</p>
+</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Add a field for holding the reverse association.</p>
+</li>
+<li>
+<p>Decide which class will be "dominant". This class will contain the methods that create or update the association as elements are added or changed, establishing the association in its class and calling the utility methods for establishing the association in the associated object.</p>
+</li>
+<li>
+<p>Create a utility method for establishing the association in the "non-dominant" class. The method should use what it's given in parameters to complete the field. Give the method an obvious name so that it isn't used later for any other purposes.</p>
+</li>
+<li>
+<p>If old methods for controlling the unidirectional association were in the "dominant" class, complement them with calls to utility methods from the associated object.</p>
+</li>
+<li>
+<p>If the old methods for controlling the association were in the "non-dominant" class, create the methods in the "dominant" class, call them, and delegate execution to them.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

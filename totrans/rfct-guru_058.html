@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Self Encapsulate Field</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Self Encapsulate Field</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/self-encapsulate-field">https://refactoringguru.cn/self-encapsulate-field</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    <blockquote>
+<p>Self-encapsulation is distinct from ordinary <a href="/encapsulate-field">Encapsulate Field</a>: the refactoring technique given here is performed on a private field.</p>
+</blockquote>
+
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>You use direct access to private fields inside a class.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Create a getter and setter for the field, and use only them for accessing the field.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container java" data-lang="java">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="java">class Range {
+  private int low, high;
+  boolean includes(int arg) {
+    return arg &gt;= low &amp;&amp; arg &lt;= high;
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="java">class Range {
+  private int low, high;
+  boolean includes(int arg) {
+    return arg &gt;= getLow() &amp;&amp; arg &lt;= getHigh();
+  }
+  int getLow() {
+    return low;
+  }
+  int getHigh() {
+    return high;
+  }
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container csharp" data-lang="csharp">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="csharp">class Range 
+{
+  private int low, high;
+  
+  bool Includes(int arg) 
+  {
+    return arg &gt;= low &amp;&amp; arg &lt;= high;
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="csharp">class Range 
+{
+  private int low, high;
+  
+  int Low {
+    get { return low; }
+  }
+  int High {
+    get { return high; }
+  }
+  
+  bool Includes(int arg) 
+  {
+    return arg &gt;= Low &amp;&amp; arg &lt;= High;
+  }
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container php" data-lang="php">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="php">private $low;
+private $high;
+
+function includes($arg) {
+  return $arg &gt;= $this-&gt;low &amp;&amp; $arg &lt;= $this-&gt;high;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="php">private $low;
+private $high;
+
+function includes($arg) {
+  return $arg &gt;= $this-&gt;getLow() &amp;&amp; $arg &lt;= $this-&gt;getHigh();
+}
+function getLow() {
+  return $this-&gt;low;
+}
+function getHigh() {
+  return $this-&gt;high;
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container typescript" data-lang="typescript">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="typescript">class Range {
+  private low: number
+  private high: number;
+  includes(arg: number): boolean {
+    return arg &gt;= low &amp;&amp; arg &lt;= high;
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="typescript">class Range {
+  private low: number
+  private high: number;
+  includes(arg: number): boolean {
+    return arg &gt;= getLow() &amp;&amp; arg &lt;= getHigh();
+  }
+  getLow(): number {
+    return low;
+  }
+  getHigh(): number {
+    return high;
+  }
+}</pre>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>Sometimes directly accessing a private field inside a class just isn't flexible enough. You want to be able to initiate a field value when the first query is made or perform certain operations on new values of the field when they're assigned, or maybe do all this in various ways in subclasses.</p>
+<h3>Benefits</h3>
+<ul>
+<li>
+<p><em>Indirect access to fields</em> is when a field is acted on via access methods (getters and setters). This approach is much more flexible than <em>direct access to fields</em>.</p>
+<ul>
+<li>
+<p>First, you can perform complex operations when data in the field is set or received. <em>Lazy initialization</em> and <em>validation of field values</em> are easily implemented inside field getters and setters.</p>
+</li>
+<li>
+<p>Second and more crucially, you can redefine getters and setters in subclasses.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>You have the option of not implementing a setter for a field at all. The field value will be specified only in the constructor, thus making the field unchangeable throughout the entire object lifespan.</p>
+</li>
+</ul>
+<h3>Drawbacks</h3>
+<ul>
+<li>When <em>direct access to fields</em> is used, code looks simpler and more presentable, although flexibility is diminished.</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Create a getter (and optional setter) for the field. They should be either <code>protected</code> or <code>public</code>.</p>
+</li>
+<li>
+<p>Find all direct invocations of the field and replace them with getter and setter calls.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

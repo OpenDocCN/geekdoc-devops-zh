@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Inline Method</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Inline Method</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/inline-method">https://refactoringguru.cn/inline-method</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>When a method body is more obvious than the method itself, use this technique.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Replace calls to the method with the method's content and delete the method itself.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container java" data-lang="java">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="java">class PizzaDelivery {
+  // ...
+  int getRating() {
+    return moreThanFiveLateDeliveries() ? 2 : 1;
+  }
+  boolean moreThanFiveLateDeliveries() {
+    return numberOfLateDeliveries &gt; 5;
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="java">class PizzaDelivery {
+  // ...
+  int getRating() {
+    return numberOfLateDeliveries &gt; 5 ? 2 : 1;
+  }
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container csharp" data-lang="csharp">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="csharp">class PizzaDelivery 
+{
+  // ...
+  int GetRating() 
+  {
+    return MoreThanFiveLateDeliveries() ? 2 : 1;
+  }
+  bool MoreThanFiveLateDeliveries() 
+  {
+    return numberOfLateDeliveries &gt; 5;
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="csharp">class PizzaDelivery 
+{
+  // ...
+  int GetRating() 
+  {
+    return numberOfLateDeliveries &gt; 5 ? 2 : 1;
+  }
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container php" data-lang="php">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="php">function getRating() {
+  return ($this-&gt;moreThanFiveLateDeliveries()) ? 2 : 1;
+}
+function moreThanFiveLateDeliveries() {
+  return $this-&gt;numberOfLateDeliveries &gt; 5;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="php">function getRating() {
+  return ($this-&gt;numberOfLateDeliveries &gt; 5) ? 2 : 1;
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container python" data-lang="python">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="python">class PizzaDelivery:
+    # ...
+    def getRating(self):
+        return 2 if self.moreThanFiveLateDeliveries() else 1
+  
+    def moreThanFiveLateDeliveries(self):
+        return self.numberOfLateDeliveries &gt; 5</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="python">class PizzaDelivery:
+  # ...
+  def getRating(self):
+    return 2 if self.numberOfLateDeliveries &gt; 5 else 1</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container typescript" data-lang="typescript">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="typescript">class PizzaDelivery {
+  // ...
+  getRating(): number {
+    return moreThanFiveLateDeliveries() ? 2 : 1;
+  }
+  moreThanFiveLateDeliveries(): boolean {
+    return numberOfLateDeliveries &gt; 5;
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="typescript">class PizzaDelivery {
+  // ...
+  getRating(): number {
+    return numberOfLateDeliveries &gt; 5 ? 2 : 1;
+  }
+}</pre>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>A method simply delegates to another method. In itself, this delegation is no problem. But when there are many such methods, they become a confusing tangle that's hard to sort through.</p>
+<p>Often methods aren't too short <em>originally</em>, but become that way as changes are made to the program. So don't be shy about getting rid of methods that have outlived their use.</p>
+<h3>Benefits</h3>
+<ul>
+<li>By minimizing the number of unneeded methods, you make the code more straightforward.</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Make sure that the method isn't redefined in subclasses. If the method is redefined, refrain from this technique.</p>
+</li>
+<li>
+<p>Find all calls to the method. Replace these calls with the content of the method.</p>
+</li>
+<li>
+<p>Delete the method.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

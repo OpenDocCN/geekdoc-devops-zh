@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Replace Type Code with Subclasses</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Replace Type Code with Subclasses</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/replace-type-code-with-subclasses">https://refactoringguru.cn/replace-type-code-with-subclasses</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    <blockquote>
+<p><strong>What's type code?</strong> Type code occurs when, instead of a separate data type, you have a set of numbers or strings that form a list of allowable values for some entity. Often these specific numbers and strings are given understandable names via constants, which is the reason for why such type code is encountered so much.</p>
+</blockquote>
+
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>You have a coded type that directly affects program behavior (values of this field trigger various code in conditionals).</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Create subclasses for each value of the coded type. Then extract the relevant behaviors from the original class to these subclasses. Replace the control flow code with polymorphism.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container ">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <div class="ba-container"><img src="../Images/1d382c4cf6a0d8ebe30c0a90e3b8de80.png" alt="Replace Type Code with Subclasses - Before" width="152" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Replace Type Code with Subclasses - Before.png?id=5fa75a3c084933dcb4d1d1f0c60e56d3"/></div>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <div class="ba-container"><img src="../Images/6c105053020a608a75c754ba69ab0ce8.png" alt="Replace Type Code with Subclasses - After" width="302" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Replace Type Code with Subclasses - After.png?id=9a9b00b277bd590e01589a441f50410e"/></div>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>This refactoring technique is a more complicated twist on <a href="/replace-type-code-with-class">Replace Type Code with Class</a>.</p>
+<p>As in the first refactoring method, you have a set of simple values that constitute all the allowed values for a field. Although these values are often specified as constants and have understandable names, their use makes your code very error-prone since they're still primitives in effect. For example, you have a method that accepts one of these values in the parameters. At a certain moment, instead of the constant <code>USER_TYPE_ADMIN</code> with the value <code>"ADMIN"</code>, the method receives the same string in lower case (<code>"admin"</code>), which will cause execution of something else that the author (you) didn't intend.</p>
+<p>Here we're dealing with control flow code such as the conditionals <code>if</code>, <code>switch</code> and <code>?:</code>. In other words, fields with coded values (such as <code>$user-&gt;type === self::USER_TYPE_ADMIN</code>) are used inside the conditions of these operators. If we were to use <a href="/replace-type-code-with-class">Replace Type Code with Class</a> here, all these control flow constructions would be best moved to a class responsible for the data type. Ultimately, this would of course create a type class very similar to the original one, with the same problems as well.</p>
+<h3>Benefits</h3>
+<ul>
+<li>
+<p>Delete the control flow code. Instead of a bulky <code>switch</code> in the original class, move the code to appropriate subclasses. This improves adherence to the <em>Single Responsibility Principle</em> and makes the program more readable in general.</p>
+</li>
+<li>
+<p>If you need to add a new value for a coded type, all you need to do is add a new subclass without touching the existing code (cf. the <em>Open/Closed Principle</em>).</p>
+</li>
+<li>
+<p>By replacing type code with classes, we pave the way for type hinting for methods and fields at the level of the programming language. This wouldn't be possible using simple numeric or string values contained in a coded type.</p>
+</li>
+</ul>
+<h3>When Not to Use</h3>
+<ul>
+<li>
+<p>This technique isn't applicable if you already have a class hierarchy. You can't create a dual hierarchy via inheritance in object-oriented programming. Still, you can replace type code via composition instead of inheritance. To do so, use <a href="/replace-type-code-with-state-strategy">Replace Type Code with State/Strategy</a>.</p>
+</li>
+<li>
+<p>If the values of type code can change after an object is created, avoid this technique. We would have to somehow replace the class of the object itself on the fly, which isn't possible. Still, an alternative in this case too would be <a href="/replace-type-code-with-state-strategy">Replace Type Code with State/Strategy</a>.</p>
+</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Use <a href="/self-encapsulate-field">Self Encapsulate Field</a> to create a getter for the field that contains type code.</p>
+</li>
+<li>
+<p>Make the superclass constructor private. Create a static factory method with the same parameters as the superclass constructor. It must contain the parameter that will take the starting values of the coded type. Depending on this parameter, the factory method will create objects of various subclasses. To do so, in its code you must create a large conditional but, at least, it'll be the only one when it's truly necessary; otherwise, subclasses and polymorphism will do.</p>
+</li>
+<li>
+<p>Create a unique subclass for each value of the coded type. In it, redefine the getter of the coded type so that it returns the corresponding value of the coded type.</p>
+</li>
+<li>
+<p>Delete the field with type code from the superclass. Make its getter abstract.</p>
+</li>
+<li>
+<p>Now that you have subclasses, you can start to move the fields and methods from the superclass to corresponding subclasses (with the help of <a href="/push-down-field">Push Down Field</a> and <a href="/push-down-method">Push Down Method</a>).</p>
+</li>
+<li>
+<p>When everything possible has been moved, use <a href="/replace-conditional-with-polymorphism">Replace Conditional with Polymorphism</a> in order to get rid of conditions that use the type code once and for all.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

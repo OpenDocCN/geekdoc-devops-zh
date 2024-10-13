@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Data Clumps</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Data Clumps</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/smells/data-clumps">https://refactoringguru.cn/smells/data-clumps</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <h3>Signs and Symptoms</h3>
+<p>Sometimes different parts of the code contain identical groups of variables (such as parameters for connecting to a database). These clumps should be turned into their own classes.</p>
+<figure class="image"><img width="500" height="300" src="../Images/541b261be789a54e050745d017aca2e6.png" srcset="/images/refactoring/content/smells/data-clumps-01-2x.png?id=64c7f4113e3c06f10dbec825833fa190 2x" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/data-clumps-01.png?id=9d8a38ce942720cee728797eba695a2f"/></figure>
+<h3>Reasons for the Problem</h3>
+<p>Often these data groups are due to poor program structure or "copypasta programming”.</p>
+<p>If you want to make sure whether or not some data is a data clump, just delete one of the data values and see whether the other values still make sense. If this isn't the case, this is a good sign that this group of variables should be combined into an object.</p>
+<h3>Treatment</h3>
+<ul>
+<li>
+<p>If repeating data comprises the fields of a class, use <a href="/extract-class">Extract Class</a> to move the fields to their own class.</p>
+</li>
+<li>
+<p>If the same data clumps are passed in the parameters of methods, use <a href="/introduce-parameter-object">Introduce Parameter Object</a> to set them off as a class.</p>
+</li>
+<li>
+<p>If some of the data is passed to other methods, think about passing the entire data object to the method instead of just individual fields. <a href="/preserve-whole-object">Preserve Whole Object</a> will help with this.</p>
+</li>
+<li>
+<p>Look at the code used by these fields. It may be a good idea to move this code to a data class.</p>
+</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/1d9be22d7f5886dccf71962d24879d48.png" srcset="/images/refactoring/content/smells/data-clumps-02-2x.png?id=195f24da42dbd21508aa9ef46a57abba 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/data-clumps-02.png?id=cfb0a8fa64a983473dd31527e28ae158"/></figure>
+<h3>Payoff</h3>
+<ul>
+<li>
+<p>Improves understanding and organization of code. Operations on particular data are now gathered in a single place, instead of haphazardly throughout the code.</p>
+</li>
+<li>
+<p>Reduces code size.</p>
+</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/b60ecfe494109565427af75ca2f31d20.png" srcset="/images/refactoring/content/smells/data-clumps-03-2x.png?id=2b4a70e09a6236715a9bc4bd4663508b 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/data-clumps-03.png?id=c170bbdea77b7d4a26947ef328b70adc"/></figure>
+<h3>When to Ignore</h3>
+<ul>
+<li>Passing an entire object in the parameters of a method, instead of passing just its values (primitive types), may create an undesirable dependency between the two classes.</li>
+</ul>
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+    
+</body>
+</html>

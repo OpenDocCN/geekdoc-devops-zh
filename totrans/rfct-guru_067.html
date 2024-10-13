@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Encapsulate Field</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Encapsulate Field</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/encapsulate-field">https://refactoringguru.cn/encapsulate-field</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>You have a public field.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Make the field private and create access methods for it.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container java" data-lang="java">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="java">class Person {
+  public String name;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="java">class Person {
+  private String name;
+
+  public String getName() {
+    return name;
+  }
+  public void setName(String arg) {
+    name = arg;
+  }
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container csharp" data-lang="csharp">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="csharp">class Person 
+{
+  public string name;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="csharp">class Person 
+{
+  private string name;
+
+  public string Name
+  {
+    get { return name; }
+    set { name = value; }
+  }
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container php" data-lang="php">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="php">public $name;</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="php">private $name;
+
+public getName() {
+  return $this-&gt;name;
+}
+
+public setName($arg) {
+  $this-&gt;name = $arg;
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container typescript" data-lang="typescript">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="typescript">class Person {
+  name: string;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="typescript">class Person {
+  private _name: string;
+
+  get name() {
+    return this._name;
+  }
+  setName(arg: string): void {
+    this._name = arg;
+  }
+}</pre>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>One of the pillars of object-oriented programming is <em>Encapsulation</em>, the ability to conceal object data. Otherwise, all objects would be public and other objects could get and modify the data of your object without any checks and balances! Data is separated from the behaviors associated with this data, modularity of program sections is compromised, and maintenance becomes complicated.</p>
+<h3>Benefits</h3>
+<ul>
+<li>
+<p>If the data and behavior of a component are closely interrelated and are in the same place in the code, it's much easier for you to maintain and develop this component.</p>
+</li>
+<li>
+<p>You can also perform complicated operations related to access to object fields.</p>
+</li>
+</ul>
+<h3>When Not to Use</h3>
+<ul>
+<li>
+<p>In some cases, encapsulation is ill-advised due to performance considerations. These cases are rare but when they happen, this circumstance is very important.</p>
+<p>Say that you have a graphical editor that contains objects possessing x- and y-coordinates. These fields are unlikely to change in the future. What's more, the program involves a great many different objects in which these fields are present. So accessing the coordinate fields directly saves significant CPU cycles that would otherwise be taken up by calling access methods.</p>
+<p>As an example of this unusual case, there's the <a href="http://docs.oracle.com/javase/7/docs/api/java/awt/Point.html">Point</a> class in Java. All fields of this class are public.</p>
+</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Create a getter and setter for the field.</p>
+</li>
+<li>
+<p>Find all invocations of the field. Replace receipt of the field value with the getter, and replace setting of new field values with the setter.</p>
+</li>
+<li>
+<p>After all field invocations have been replaced, make the field private.</p>
+</li>
+</ol>
+<h4>Next Steps</h4>
+<p><em>Encapsulate Field</em> is only the first step in bringing data and the behaviors involving this data closer together. After you create simple methods for access fields, you should recheck the places where these methods are called. It's quite possible that the code in these areas would look more appropriate in the access methods.</p>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

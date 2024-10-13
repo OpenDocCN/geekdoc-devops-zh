@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Replace Magic Number with Symbolic Constant</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Replace Magic Number with Symbolic Constant</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/replace-magic-number-with-symbolic-constant">https://refactoringguru.cn/replace-magic-number-with-symbolic-constant</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>Your code uses a number that has a certain meaning to it.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Replace this number with a constant that has a human-readable name explaining the meaning of the number.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container java" data-lang="java">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="java">double potentialEnergy(double mass, double height) {
+  return mass * height * 9.81;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="java">static final double GRAVITATIONAL_CONSTANT = 9.81;
+
+double potentialEnergy(double mass, double height) {
+  return mass * height * GRAVITATIONAL_CONSTANT;
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container csharp" data-lang="csharp">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="csharp">double PotentialEnergy(double mass, double height) 
+{
+  return mass * height * 9.81;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="csharp">const double GRAVITATIONAL_CONSTANT = 9.81;
+
+double PotentialEnergy(double mass, double height) 
+{
+  return mass * height * GRAVITATIONAL_CONSTANT;
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container php" data-lang="php">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="php">function potentialEnergy($mass, $height) {
+  return $mass * $height * 9.81;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="php">define("GRAVITATIONAL_CONSTANT", 9.81);
+
+function potentialEnergy($mass, $height) {
+  return $mass * $height * GRAVITATIONAL_CONSTANT;
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container python" data-lang="python">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="python">def potentialEnergy(mass, height):
+    return mass * height * 9.81</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="python">GRAVITATIONAL_CONSTANT = 9.81
+
+def potentialEnergy(mass, height):
+    return mass * height * GRAVITATIONAL_CONSTANT</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container typescript" data-lang="typescript">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="typescript">potentialEnergy(mass: number, height: number): number {
+  return mass * height * 9.81;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="typescript">static const GRAVITATIONAL_CONSTANT = 9.81;
+
+potentialEnergy(mass: number, height: number): number {
+  return mass * height * GRAVITATIONAL_CONSTANT;
+}</pre>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>A magic number is a numeric value that's encountered in the source but has no obvious meaning. This "anti-pattern" makes it harder to understand the program and refactor the code.</p>
+<p>Yet more difficulties arise when you need to change this magic number. Find and replace won't work for this: the same number may be used for different purposes in different places, meaning that you will have to verify every line of code that uses this number.</p>
+<h3>Benefits</h3>
+<ul>
+<li>
+<p>The symbolic constant can serve as live documentation of the meaning of its value.</p>
+</li>
+<li>
+<p>It's much easier to change the value of a constant than to search for this number throughout the entire codebase, without the risk of accidentally changing the same number used elsewhere for a different purpose.</p>
+</li>
+<li>
+<p>Reduce duplicate use of a number or string in the code. This is especially important when the value is complicated and long (such as <code>3.14159</code> or <code>0xCAFEBABE</code>).</p>
+</li>
+</ul>
+<h3>Good to Know</h3>
+<h4>Not all numbers are magical.</h4>
+<p>If the purpose of a number is obvious, there's no need to replace it. A classic example is:</p>
+<figure class="code">
+<pre class="code">for (i = 0; i &lt; сount; i++) { ... }
+</pre>
+</figure>
+<h4>Alternatives</h4>
+<ol>
+<li>
+<p>Sometimes a magic number can be replaced with method calls. For example, if you have a magic number that signifies the number of elements in a collection, you don't need to use it for checking the last element of the collection. Instead, use the standard method for getting the collection length.</p>
+</li>
+<li>
+<p>Magic numbers are sometimes used as type code. Say that you have two types of users and you use a number field in a class to specify which is which: administrators are <code>1</code> and ordinary users are <code>2</code>.</p>
+<p>In this case, you should use one of the refactoring methods to avoid type code:</p>
+<ul>
+<li>
+<p><a href="/replace-type-code-with-class">Replace Type Code with Class</a></p>
+</li>
+<li>
+<p><a href="/replace-type-code-with-subclasses">Replace Type Code with Subclasses</a></p>
+</li>
+<li>
+<p><a href="/replace-type-code-with-state-strategy">Replace Type Code with State/Strategy</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Declare a constant and assign the value of the magic number to it.</p>
+</li>
+<li>
+<p>Find all mentions of the magic number.</p>
+</li>
+<li>
+<p>For each of the numbers that you find, double-check that the magic number in this particular case corresponds to the purpose of the constant. If yes, replace the number with your constant. This is an important step, since the same number can mean absolutely different things (and replaced with different constants, as the case may be).</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

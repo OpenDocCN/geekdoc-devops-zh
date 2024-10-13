@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Decompose Conditional</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Decompose Conditional</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/decompose-conditional">https://refactoringguru.cn/decompose-conditional</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>You have a complex conditional (<code>if-then</code>/<code>else</code> or <code>switch</code>).</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Decompose the complicated parts of the conditional into separate methods: the condition, <code>then</code> and <code>else</code>.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container java" data-lang="java">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="java">if (date.before(SUMMER_START) || date.after(SUMMER_END)) {
+  charge = quantity * winterRate + winterServiceCharge;
+}
+else {
+  charge = quantity * summerRate;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="java">if (isSummer(date)) {
+  charge = summerCharge(quantity);
+}
+else {
+  charge = winterCharge(quantity);
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container csharp" data-lang="csharp">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="csharp">if (date &lt; SUMMER_START || date &gt; SUMMER_END) 
+{
+  charge = quantity * winterRate + winterServiceCharge;
+}
+else 
+{
+  charge = quantity * summerRate;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="csharp">if (isSummer(date))
+{
+  charge = SummerCharge(quantity);
+}
+else 
+{
+  charge = WinterCharge(quantity);
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container php" data-lang="php">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="php">if ($date-&gt;before(SUMMER_START) || $date-&gt;after(SUMMER_END)) {
+  $charge = $quantity * $winterRate + $winterServiceCharge;
+} else {
+  $charge = $quantity * $summerRate;
+}
+</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="php">if (isSummer($date)) {
+  $charge = summerCharge($quantity);
+} else {
+  $charge = winterCharge($quantity);
+}
+</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container python" data-lang="python">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="python">if date.before(SUMMER_START) or date.after(SUMMER_END):
+    charge = quantity * winterRate + winterServiceCharge
+else:
+    charge = quantity * summerRate</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="python">if isSummer(date):
+    charge = summerCharge(quantity)
+else:
+    charge = winterCharge(quantity)</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container typescript" data-lang="typescript">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="typescript">if (date.before(SUMMER_START) || date.after(SUMMER_END)) {
+  charge = quantity * winterRate + winterServiceCharge;
+}
+else {
+  charge = quantity * summerRate;
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="typescript">if (isSummer(date)) {
+  charge = summerCharge(quantity);
+}
+else {
+  charge = winterCharge(quantity);
+}</pre>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>The longer a piece of code is, the harder it's to understand. Things become even more hard to understand when the code is filled with conditions:</p>
+<ul>
+<li>
+<p>While you're busy figuring out what the code in the <code>then</code> block does, you forget what the relevant condition was.</p>
+</li>
+<li>
+<p>While you're busy parsing <code>else</code>, you forget what the code in <code>then</code> does.</p>
+</li>
+</ul>
+<h3>Benefits</h3>
+<ul>
+<li>
+<p>By extracting conditional code to clearly named methods, you make life easier for the person who'll be maintaining the code later (such as you, two months from now!).</p>
+</li>
+<li>
+<p>This refactoring technique is also applicable for short expressions in conditions. The string <code>isSalaryDay()</code> is much prettier and more descriptive than code for comparing dates.</p>
+</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Extract the conditional to a separate method via <a href="/extract-method">Extract Method</a>.</p>
+</li>
+<li>
+<p>Repeat the process for the <code>then</code> and <code>else</code> blocks.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

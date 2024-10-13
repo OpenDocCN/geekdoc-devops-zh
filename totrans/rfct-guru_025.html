@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Duplicate Code</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Duplicate Code</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/smells/duplicate-code">https://refactoringguru.cn/smells/duplicate-code</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <h3>Signs and Symptoms</h3>
+<p>Two code fragments look almost identical.</p>
+<figure class="image"><img width="500" height="300" src="../Images/d1118881809506374244fba663398101.png" srcset="/images/refactoring/content/smells/duplicate-code-01-2x.png?id=9e462bc4bd52927cf45cfc7dbc5907af 2x" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/duplicate-code-01.png?id=16fe591195fa50073551852b3d44844e"/></figure>
+<h3>Reasons for the Problem</h3>
+<p>Duplication usually occurs when multiple programmers are working on different parts of the same program at the same time. Since they're working on different tasks, they may be unaware their colleague has already written similar code that could be repurposed for their own needs.</p>
+<p>There's also more subtle duplication, when specific parts of code look different but actually perform the same job. This kind of duplication can be hard to find and fix.</p>
+<p>Sometimes duplication is purposeful. When rushing to meet deadlines and the existing code is "almost right" for the job, novice programmers may not be able to resist the temptation of copying and pasting the relevant code. And in some cases, the programmer is simply too lazy to de-clutter.</p>
+<h3>Treatment</h3>
+<ul>
+<li>
+<p>If the same code is found in two or more methods in the same class: use <a href="/extract-method">Extract Method</a> and place calls for the new method in both places.</p>
+ <figure class="image"><img width="500" height="300" src="../Images/41e8f26836f89d1d5a02c176628e4a2b.png" srcset="/images/refactoring/content/smells/duplicate-code-02-2x.png?id=5b9325ca1b0369ec3423808380fa9022 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/duplicate-code-02.png?id=50d92af3defe2c2688f66cde102c9c09"/></figure>
+</li>
+<li>
+<p>If the same code is found in two subclasses of the same level:</p>
+<ul>
+<li>
+<p>Use <a href="/extract-method">Extract Method</a> for both classes, followed by <a href="/pull-up-field">Pull Up Field</a> for the fields used in the method that you're pulling up.</p>
+</li>
+<li>
+<p>If the duplicate code is inside a constructor, use <a href="/pull-up-constructor-body">Pull Up Constructor Body</a>.</p>
+</li>
+<li>
+<p>If the duplicate code is similar but not completely identical, use <a href="/form-template-method">Form Template Method</a>.</p>
+</li>
+<li>
+<p>If two methods do the same thing but use different algorithms, select the best algorithm and apply <a href="/substitute-algorithm">Substitute Algorithm</a>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If duplicate code is found in two different classes:</p>
+<ul>
+<li>
+<p>If the classes aren't part of a hierarchy, use <a href="/extract-superclass">Extract Superclass</a> in order to create a single superclass for these classes that maintains all the previous functionality.</p>
+</li>
+<li>
+<p>If it's difficult or impossible to create a superclass, use <a href="/extract-class">Extract Class</a> in one class and use the new component in the other.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If a large number of conditional expressions are present and perform the same code (differing only in their conditions), merge these operators into a single condition using <a href="/consolidate-conditional-expression">Consolidate Conditional Expression</a> and use <a href="/extract-method">Extract Method</a> to place the condition in a separate method with an easy-to-understand name.</p>
+</li>
+<li>
+<p>If the same code is performed in all branches of a conditional expression: place the identical code outside of the condition tree by using <a href="/consolidate-duplicate-conditional-fragments">Consolidate Duplicate Conditional Fragments</a>.</p>
+</li>
+</ul>
+<h3>Payoff</h3>
+<ul>
+<li>
+<p>Merging duplicate code simplifies the structure of your code and makes it shorter.</p>
+</li>
+<li>
+<p>Simplification + shortness = code that's easier to simplify and cheaper to support.</p>
+</li>
+</ul>
+<figure class="image"><img width="500" height="300" src="../Images/441d52b1f9190dcdac9eac15479dea79.png" srcset="/images/refactoring/content/smells/duplicate-code-03-2x.png?id=33df6a84eddb7c888f6757d4d80d5e20 2x" loading="lazy" data-original-src="https://refactoringguru.cn/images/refactoring/content/smells/duplicate-code-03.png?id=bd88b98ff5e5e1b5a4019cb0a50df9f5"/></figure>
+<h3>When to Ignore</h3>
+<ul>
+<li>In very rare cases, merging two identical fragments of code can make the code less intuitive and obvious.</li>
+</ul>
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+    
+</body>
+</html>

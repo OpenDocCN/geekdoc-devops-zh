@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Extract Class</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Extract Class</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/extract-class">https://refactoringguru.cn/extract-class</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>When one class does the work of two, awkwardness results.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Instead, create a new class and place the fields and methods responsible for the relevant functionality in it.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container ">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <div class="ba-container"><img src="../Images/736293f9ca11de26be58439303a15c5a.png" alt="Extract Class - Before" width="209" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Extract Class - Before.png?id=7cb7db0fe2ab0d17f067d411f9e98f15"/></div>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <div class="ba-container"><img src="../Images/adf613cc50f99eeeec3a47ac215f5cf7.png" alt="Extract Class - After" width="509" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Extract Class - After.png?id=717d80baaa902d09acbaa55fd0539638"/></div>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>Classes always start out clear and easy to understand. They do their job and mind their own business as it were, without butting into the work of other classes. But as the program expands, a method is added and then a field... and eventually, some classes are performing more responsibilities than ever envisioned.</p>
+<h3>Benefits</h3>
+<ul>
+<li>
+<p>This refactoring method will help maintain adherence to the <em>Single Responsibility Principle</em>. The code of your classes will be more obvious and understandable.</p>
+</li>
+<li>
+<p>Single-responsibility classes are more reliable and tolerant of changes. For example, say that you have a class responsible for ten different things. When you change this class to make it better for one thing, you risk breaking it for the nine others.</p>
+</li>
+</ul>
+<h3>Drawbacks</h3>
+<ul>
+<li>If you "overdo it" with this refactoring technique, you will have to resort to <a href="/inline-class">Inline Class</a>.</li>
+</ul>
+<h3>How to Refactor</h3>
+<p>Before starting, decide on how exactly you want to split up the responsibilities of the class.</p>
+<ol>
+<li>
+<p>Create a new class to contain the relevant functionality.</p>
+</li>
+<li>
+<p>Create a relationship between the old class and the new one. Optimally, this relationship is unidirectional; this allows reusing the second class without any issues. Nonetheless, if you think that a two-way relationship is necessary, this can always be set up.</p>
+</li>
+<li>
+<p>Use <a href="/move-field">Move Field</a> and <a href="/move-method">Move Method</a> for each field and method that you have decided to move to the new class. For methods, start with private ones in order to reduce the risk of making a large number of errors. Try to relocate just a little bit at a time and test the results after each move, in order to avoid a pileup of error-fixing at the very end.</p>
+<p>After you're done moving, take one more look at the resulting classes. An old class with changed responsibilities may be renamed for increased clarity. Check again to see whether you can get rid of two-way class relationships, if any are present.</p>
+</li>
+<li>
+<p>Also give thought to accessibility to the new class from the outside. You can hide the class  from the client entirely by making it private, managing it via the fields from the old class. Alternatively, you can make it a public one by allowing the client to change values directly. Your decision here depends on how safe it's for the behavior of the old class when unexpected direct changes are made to the values in the new class.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

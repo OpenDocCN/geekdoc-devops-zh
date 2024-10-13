@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Extract Interface</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Extract Interface</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/extract-interface">https://refactoringguru.cn/extract-interface</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>Multiple clients are using the same part of a class interface. Another case: part of the interface in two classes is the same.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Move this identical portion to its own interface.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container ">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <div class="ba-container"><img src="../Images/e7242766e433c6cf65b6e21e9c10c6fe.png" alt="Extract Interface - Before" width="209" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Extract Interface - Before.png?id=fc2bba34908c16e2b86c5c9cc8c424b1"/></div>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <div class="ba-container"><img src="../Images/0d0457ec9846012dbd8374b3becb2dfe.png" alt="Extract Interface - After" width="209" data-original-src="https://refactoringguru.cn/images/refactoring/diagrams/Extract Interface - After.png?id=2692cc5b979184941c55080bc89226b4"/></div>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<ol>
+<li>
+<p>Interfaces are very apropos when classes play special roles in different situations. Use <a href="/extract-interface">Extract Interface</a> to explicitly indicate which role.</p>
+</li>
+<li>
+<p>Another convenient case arises when you need to describe the operations that a class performs on its server. If it's planned to eventually allow use of servers of multiple types, all servers must implement the interface.</p>
+</li>
+</ol>
+<h3>Good to Know</h3>
+<p>There's a certain resemblance between <a href="/extract-superclass">Extract Superclass</a> and <a href="/extract-interface">Extract Interface</a>.</p>
+<p>Extracting an interface allows isolating only common interfaces, not common code. In other words, if classes contain <a href="/smells/duplicate-code">Duplicate Code</a>, extracting the interface won't help you to deduplicate.</p>
+<p>All the same, this problem can be mitigated by applying <a href="/extract-class">Extract Class</a> to move the behavior that contains the duplication to a separate component and delegating all the work to it. If the common behavior is large in size, you can always use <a href="/extract-superclass">Extract Superclass</a>. This is even easier, of course, but remember that if you take this path you will get only one parent class.</p>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Create an empty interface.</p>
+</li>
+<li>
+<p>Declare common operations in the interface.</p>
+</li>
+<li>
+<p>Declare the necessary classes as implementing the interface.</p>
+</li>
+<li>
+<p>Change type declarations in the client code to use the new interface.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Composing Methods</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Composing Methods</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/refactoring/techniques/composing-methods">https://refactoringguru.cn/refactoring/techniques/composing-methods</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <p>Much of refactoring is devoted to correctly composing methods. In most cases, excessively long methods are the root of all evil. The vagaries of code inside these methods conceal the execution logic and make the method extremely hard to understand—and even harder to change.</p>
+<p>The refactoring techniques in this group streamline methods, remove code duplication, and pave the way for future improvements.</p>
+<div class="relations link-list">
+  <div class="dl"><div class="dt"><a href="/extract-method">Extract Method</a></div><div class="dd">
+<p><strong>Problem:</strong> You have a code fragment that can be grouped together.</p>
+<p><strong>Solution:</strong> Move this code to a separate new method (or function) and replace the old code with a call to the method.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/inline-method">Inline Method</a></div><div class="dd">
+<p><strong>Problem:</strong> When a method body is more obvious than the method itself, use this technique.</p>
+<p><strong>Solution:</strong> Replace calls to the method with the method's content and delete the method itself.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/extract-variable">Extract Variable</a></div><div class="dd">
+<p><strong>Problem:</strong> You have an expression that's hard to understand.</p>
+<p><strong>Solution:</strong> Place the result of the expression or its parts in separate variables that are self-explanatory.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/inline-temp">Inline Temp</a></div><div class="dd">
+<p><strong>Problem:</strong> You have a temporary variable that's assigned the result of a simple expression and nothing more.</p>
+<p><strong>Solution:</strong> Replace the references to the variable with the expression itself.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/replace-temp-with-query">Replace Temp with Query</a></div><div class="dd">
+<p><strong>Problem:</strong> You place the result of an expression in a local variable for later use in your code.</p>
+<p><strong>Solution:</strong> Move the entire expression to a separate method and return the result from it. Query the method instead of using a variable. Incorporate the new method in other methods, if necessary.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/split-temporary-variable">Split Temporary Variable</a></div><div class="dd">
+<p><strong>Problem:</strong> You have a local variable that's used to store various intermediate values inside a method (except for cycle variables).</p>
+<p><strong>Solution:</strong> Use different variables for different values. Each variable should be responsible for only one particular thing.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/remove-assignments-to-parameters">Remove Assignments to Parameters</a></div><div class="dd">
+<p><strong>Problem:</strong> Some value is assigned to a parameter inside method's body.</p>
+<p><strong>Solution:</strong> Use a local variable instead of a parameter.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/replace-method-with-method-object">Replace Method with Method Object</a></div><div class="dd">
+<p><strong>Problem:</strong> You have a long method in which the local variables are so intertwined that you can't apply <i>Extract Method</i>.</p>
+<p><strong>Solution:</strong> Transform the method into a separate class so that the local variables become fields of the class. Then you can split the method into several methods within the same class.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/substitute-algorithm">Substitute Algorithm</a></div><div class="dd">
+<p><strong>Problem:</strong> So you want to replace an existing algorithm with a new one?</p>
+<p><strong>Solution:</strong> Replace the body of the method that implements the algorithm with a new algorithm.</p>
+</div></div>
+</div>
+
+        
+</body>
+</html>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Replace Exception with Test</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Replace Exception with Test</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/replace-exception-with-test">https://refactoringguru.cn/replace-exception-with-test</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>You throw an exception in a place where a simple test would do the job?</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Replace the exception with a condition test.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container java" data-lang="java">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="java">double getValueForPeriod(int periodNumber) {
+  try {
+    return values[periodNumber];
+  } catch (ArrayIndexOutOfBoundsException e) {
+    return 0;
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="java">double getValueForPeriod(int periodNumber) {
+  if (periodNumber &gt;= values.length) {
+    return 0;
+  }
+  return values[periodNumber];
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container csharp" data-lang="csharp">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="csharp">double GetValueForPeriod(int periodNumber) 
+{
+  try 
+  {
+    return values[periodNumber];
+  } 
+  catch (IndexOutOfRangeException e) 
+  {
+    return 0;
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="csharp">double GetValueForPeriod(int periodNumber) 
+{
+  if (periodNumber &gt;= values.Length) 
+  {
+    return 0;
+  }
+  return values[periodNumber];
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container php" data-lang="php">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="php">function getValueForPeriod($periodNumber) {
+  try {
+    return $this-&gt;values[$periodNumber];
+  } catch (ArrayIndexOutOfBoundsException $e) {
+    return 0;
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="php">function getValueForPeriod($periodNumber) {
+  if ($periodNumber &gt;= count($this-&gt;values)) {
+    return 0;
+  }
+  return $this-&gt;values[$periodNumber];
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container python" data-lang="python">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="python">def getValueForPeriod(periodNumber):
+    try:
+        return values[periodNumber]
+    except IndexError:
+        return 0</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="python">def getValueForPeriod(self, periodNumber):
+    if periodNumber &gt;= len(self.values):
+        return 0
+    return self.values[periodNumber]</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container typescript" data-lang="typescript">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="typescript">getValueForPeriod(periodNumber: number): number {
+  try {
+    return values[periodNumber];
+  } catch (ArrayIndexOutOfBoundsException e) {
+    return 0;
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="typescript">getValueForPeriod(periodNumber: number): number {
+  if (periodNumber &gt;= values.length) {
+    return 0;
+  }
+  return values[periodNumber];
+}</pre>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>Exceptions should be used to handle irregular behavior related to an unexpected error. They shouldn't serve as a replacement for testing. If an exception can be avoided by simply verifying a condition before running, then do so. Exceptions should be reserved for real errors.</p>
+<p>For instance, you entered a minefield and triggered a mine there, resulting in an exception; the exception was successfully handled and you were lifted through the air to safety beyond the mine field. But you could have avoided this all by simply reading the warning sign in front of the minefield to begin with.</p>
+<h3>Benefits</h3>
+<ul>
+<li>A simple conditional can sometimes be more obvious than exception handling code.</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Create a conditional for an edge case and move it before the try/catch block.</p>
+</li>
+<li>
+<p>Move code from the <code>catch</code> section inside this conditional.</p>
+</li>
+<li>
+<p>In the <code>catch</code> section, place the code for throwing a usual unnamed exception and run all the tests.</p>
+</li>
+<li>
+<p>If no exceptions were thrown during the tests, get rid of the <code>try</code>/<code>catch</code> operator.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

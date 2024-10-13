@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Remove Control Flag</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Remove Control Flag</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/remove-control-flag">https://refactoringguru.cn/remove-control-flag</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>You have a boolean variable that acts as a control flag for multiple boolean expressions.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Instead of the variable, use <code>break</code>, <code>continue</code> and <code>return</code>.</p>
+
+        </div>
+    </div>
+
+    
+    <h3>Why Refactor</h3>
+<p>Control flags date back to the days of yore, when "proper" programmers always had one entry point for their functions (the function declaration line) and one exit point (at the very end of the function).</p>
+<p>In modern programming languages this style tic is obsolete, since we have special operators for modifying the control flow in loops and other complex constructions:</p>
+<ul>
+<li>
+<p><code>break</code>: stops loop</p>
+</li>
+<li>
+<p><code>continue</code>: stops execution of the current loop branch and goes to check the loop conditions in the next iteration</p>
+</li>
+<li>
+<p><code>return</code>: stops execution of the entire function and returns its result if given in the operator</p>
+</li>
+</ul>
+<h3>Benefits</h3>
+<ul>
+<li>Control flag code is often much more ponderous than code written with control flow operators.</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Find the value assignment to the control flag that causes the exit from the loop or current iteration.</p>
+</li>
+<li>
+<p>Replace it with <code>break</code>, if this is an exit from a loop; <code>continue</code>, if this is an exit from an iteration, or <code>return</code>, if you need to return this value from the function.</p>
+</li>
+<li>
+<p>Remove the remaining code and checks associated with the control flag.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

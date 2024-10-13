@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Replace Parameter with Explicit Methods</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Replace Parameter with Explicit Methods</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/replace-parameter-with-explicit-methods">https://refactoringguru.cn/replace-parameter-with-explicit-methods</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>A method is split into parts, each of which is run depending on the value of a parameter.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Extract the individual parts of the method into their own methods and call them instead of the original method.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container java" data-lang="java">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="java">void setValue(String name, int value) {
+  if (name.equals("height")) {
+    height = value;
+    return;
+  }
+  if (name.equals("width")) {
+    width = value;
+    return;
+  }
+  Assert.shouldNeverReachHere();
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="java">void setHeight(int arg) {
+  height = arg;
+}
+void setWidth(int arg) {
+  width = arg;
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container csharp" data-lang="csharp">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="csharp">void SetValue(string name, int value) 
+{
+  if (name.Equals("height")) 
+  {
+    height = value;
+    return;
+  }
+  if (name.Equals("width")) 
+  {
+    width = value;
+    return;
+  }
+  Assert.Fail();
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="csharp">void SetHeight(int arg) 
+{
+  height = arg;
+}
+void SetWidth(int arg) 
+{
+  width = arg;
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container php" data-lang="php">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="php">function setValue($name, $value) {
+  if ($name === "height") {
+    $this-&gt;height = $value;
+    return;
+  }
+  if ($name === "width") {
+    $this-&gt;width = $value;
+    return;
+  }
+  assert("Should never reach here");
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="php">function setHeight($arg) {
+  $this-&gt;height = $arg;
+}
+function setWidth($arg) {
+  $this-&gt;width = $arg;
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container python" data-lang="python">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="python">def output(self, type):
+    if name == "banner"
+        # Print the banner.
+        # ...
+    if name == "info"
+        # Print the info.
+        # ...</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="python">def outputBanner(self):
+    # Print the banner.
+    # ...
+
+def outputInfo(self):
+    # Print the info.
+    # ...</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container typescript" data-lang="typescript">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="typescript"> setValue(name: string, value: number): void {
+  if (name.equals("height")) {
+    height = value;
+    return;
+  }
+  if (name.equals("width")) {
+    width = value;
+    return;
+  }
+  
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="typescript">setHeight(arg: number): void {
+  height = arg;
+}
+setWidth(arg: number): number {
+  width = arg;
+}</pre>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>A method containing parameter-dependent variants has grown massive. Non-trivial code is run in each branch and new variants are added very rarely.</p>
+<h3>Benefits</h3>
+<ul>
+<li>Improves code readability. It's much easier to understand the purpose of <code>startEngine()</code> than <code>setValue("engineEnabled", true)</code>.</li>
+</ul>
+<h3>When Not to Use</h3>
+<ul>
+<li>Don't replace a parameter with explicit methods if a method is rarely changed and new variants aren't added inside it.</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>For each variant of the method, create a separate method. Run these methods based on the value of a parameter in the main method.</p>
+</li>
+<li>
+<p>Find all places where the original method is called. In these places, place a call for one of the new parameter-dependent variants.</p>
+</li>
+<li>
+<p>When no calls to the original method remain, delete it.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>

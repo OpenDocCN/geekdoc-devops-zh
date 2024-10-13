@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Moving Features between Objects</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Moving Features between Objects</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/refactoring/techniques/moving-features-between-objects">https://refactoringguru.cn/refactoring/techniques/moving-features-between-objects</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+                
+    <p>Even if you have distributed functionality among different classes in a less-than-perfect way, there's still hope.</p>
+<p>These refactoring techniques show how to safely move functionality between classes, create new classes, and hide implementation details from public access.</p>
+<div class="relations link-list">
+  <div class="dl"><div class="dt"><a href="/move-method">Move Method</a></div><div class="dd">
+<p><strong>Problem:</strong> A method is used more in another class than in its own class.</p>
+<p><strong>Solution:</strong> Create a new method in the class that uses the method the most, then move code from the old method to there. Turn the code of the original method into a reference to the new method in the other class or else remove it entirely.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/move-field">Move Field</a></div><div class="dd">
+<p><strong>Problem:</strong> A field is used more in another class than in its own class.</p>
+<p><strong>Solution:</strong> Create a field in a new class and redirect all users of the old field to it.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/extract-class">Extract Class</a></div><div class="dd">
+<p><strong>Problem:</strong> When one class does the work of two, awkwardness results.</p>
+<p><strong>Solution:</strong> Instead, create a new class and place the fields and methods responsible for the relevant functionality in it.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/inline-class">Inline Class</a></div><div class="dd">
+<p><strong>Problem:</strong> A class does almost nothing and isn't responsible for anything, and no additional responsibilities are planned for it.</p>
+<p><strong>Solution:</strong> Move all features from the class to another one.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/hide-delegate">Hide Delegate</a></div><div class="dd">
+<p><strong>Problem:</strong> The client gets object B from a field or method of object А. Then the client calls a method of object B.</p>
+<p><strong>Solution:</strong> Create a new method in class A that delegates the call to object B. Now the client doesn't know about, or depend on, class B.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/remove-middle-man">Remove Middle Man</a></div><div class="dd">
+<p><strong>Problem:</strong> A class has too many methods that simply delegate to other objects.</p>
+<p><strong>Solution:</strong> Delete these methods and force the client to call the end methods directly.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/introduce-foreign-method">Introduce Foreign Method</a></div><div class="dd">
+<p><strong>Problem:</strong> A utility class doesn't contain the method that you need and you can't add the method to the class.</p>
+<p><strong>Solution:</strong> Add the method to a client class and pass an object of the utility class to it as an argument.</p>
+</div></div>
+  <div class="dl"><div class="dt"><a href="/introduce-local-extension">Introduce Local Extension</a></div><div class="dd">
+<p><strong>Problem:</strong> A utility class doesn't contain some methods that you need. But you can't add these methods to the class.</p>
+<p><strong>Solution:</strong> Create a new class containing the methods and make it either the child or wrapper of the utility class.</p>
+</div></div>
+</div>
+
+        
+</body>
+</html>

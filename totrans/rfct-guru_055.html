@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Introduce Foreign Method</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Introduce Foreign Method</h1>
+<blockquote>原文：<a href="https://refactoringguru.cn/introduce-foreign-method">https://refactoringguru.cn/introduce-foreign-method</a></blockquote>
+    
+    
+
+    <script type="text/javascript">
+        // Shorten examples titles for users.
+        var h1 = document.getElementsByTagName("H1")[0];
+        if (h1.offsetHeight &amp;gt; 160) {
+            h1.className += ' smaller';
+        }
+
+        // Small beautification for pattern examples.
+        var title = h1.innerHTML;
+        title = title.replace(/^(Java|C\+\+|C#|PHP|Python|Ruby|Delphi): (.*)$/, '&amp;lt;strong&amp;gt;$1:&amp;lt;/strong&amp;gt; $2');
+        h1.innerHTML = title;
+    </script>
+
+    
+    
+
+    <div class="before-after-container">
+        <div class="before">
+            <h3>Problem</h3>
+            <p>A utility class doesn't contain the method that you need and you can't add the method to the class.</p>
+
+        </div>
+        <div class="after">
+            <h3>Solution</h3>
+            <p>Add the method to a client class and pass an object of the utility class to it as an argument.</p>
+
+        </div>
+    </div>
+
+        <div class="examples">
+                    <div class="before-after before-after-container java" data-lang="java">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="java">class Report {
+  // ...
+  void sendReport() {
+    Date nextDay = new Date(previousEnd.getYear(),
+      previousEnd.getMonth(), previousEnd.getDate() + 1);
+    // ...
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="java">class Report {
+  // ...
+  void sendReport() {
+    Date newStart = nextDay(previousEnd);
+    // ...
+  }
+  private static Date nextDay(Date arg) {
+    return new Date(arg.getYear(), arg.getMonth(), arg.getDate() + 1);
+  }
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container csharp" data-lang="csharp">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="csharp">class Report 
+{
+  // ...
+  void SendReport() 
+  {
+    DateTime nextDay = previousEnd.AddDays(1);
+    // ...
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="csharp">class Report 
+{
+  // ...
+  void SendReport() 
+  {
+    DateTime nextDay = NextDay(previousEnd);
+    // ...
+  }
+  private static DateTime NextDay(DateTime date) 
+  {
+    return date.AddDays(1);
+  }
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container php" data-lang="php">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="php">class Report {
+  // ...
+  public function sendReport() {
+    $previousDate = clone $this-&gt;previousDate;
+    $paymentDate = $previousDate-&gt;modify("+7 days");
+    // ...
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="php">class Report {
+  // ...
+  public function sendReport() {
+    $paymentDate = self::nextWeek($this-&gt;previousDate);
+    // ...
+  }
+  /**
+   * Foreign method. Should be in Date.
+   */
+  private static function nextWeek(DateTime $arg) {
+    $previousDate = clone $arg;
+    return $previousDate-&gt;modify("+7 days");
+  }
+}</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container python" data-lang="python">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="python">class Report:
+    # ...
+    def sendReport(self):
+        nextDay = Date(self.previousEnd.getYear(),
+            self.previousEnd.getMonth(), self.previousEnd.getDate() + 1)
+        # ...</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="python">class Report:
+    # ...
+    def sendReport(self):
+        newStart = self._nextDay(self.previousEnd)
+        # ...
+        
+    def _nextDay(self, arg):
+        return Date(arg.getYear(), arg.getMonth(), arg.getDate() + 1)</pre>
+                                    </div>
+            </div>
+                    <div class="before-after before-after-container typescript" data-lang="typescript">
+                <div class="before">
+                    <div class="ba">Before</div>
+                                            <pre class="code" lang="typescript">class Report {
+  // ...
+  sendReport(): void {
+    let nextDay: Date = new Date(previousEnd.getYear(),
+      previousEnd.getMonth(), previousEnd.getDate() + 1);
+    // ...
+  }
+}</pre>
+                                    </div>
+                <div class="after">
+                    <div class="ba">After</div>
+                                            <pre class="code" lang="typescript">class Report {
+  // ...
+  sendReport() {
+    let newStart: Date = nextDay(previousEnd);
+    // ...
+  }
+  private static nextDay(arg: Date): Date {
+    return new Date(arg.getFullYear(), arg.getMonth(), arg.getDate() + 1);
+  }
+}</pre>
+                                    </div>
+            </div>
+            </div>
+    
+    <h3>Why Refactor</h3>
+<p>You have code that uses the data and methods of a certain class. You realize that the code will look and work much better inside a new method in the class. But you can't add the method to the class because, for example,  the class is located in a third-party library.</p>
+<p>This refactoring has a big payoff when the code that you want to move to the method is repeated several times in different places in your program.</p>
+<p>Since you're passing an object of the utility class to the parameters of the new method, you have access to all of its fields. Inside the method, you can do practically everything that you want, as if the method were part of the utility class.</p>
+<h3>Benefits</h3>
+<ul>
+<li>Removes code duplication. If your code is repeated in several places, you can replace these code fragments with a method call. This is better than duplication even considering that the foreign method is located in a suboptimal place.</li>
+</ul>
+<h3>Drawbacks</h3>
+<ul>
+<li>The reasons for having the method of a utility class in a client class won't always be clear to the person maintaining the code after you. If the method can be used in other classes, you could benefit by creating a wrapper for the utility class and placing the method there. This is also beneficial when there are several such utility methods. <a href="/introduce-local-extension">Introduce Local Extension</a> can help with this.</li>
+</ul>
+<h3>How to Refactor</h3>
+<ol>
+<li>
+<p>Create a new method in the client class.</p>
+</li>
+<li>
+<p>In this method, create a parameter to which the object of the utility class will be passed. If this object can be obtained from the client class, you don't have to create such a parameter.</p>
+</li>
+<li>
+<p>Extract the relevant code fragments to this method and replace them with method calls.</p>
+</li>
+<li>
+<p>Be sure to leave the <em>Foreign method</em> tag in the comments for the method along with the advice to place this method in a utility class if such becomes possible later. This will make it easier to understand why this method is located in this particular class for those who'll be maintaining the software in the future.</p>
+</li>
+</ol>
+
+
+    <div class="prom banner-content banner banner-striped banner-with-image" data-id="Ref: Part of the ebook" data-creative-id="animated-en" data-position="content_bottom">
+        <div class="banner-image">
+            <a href="/refactoring/course">
+                <video id="banner-zzz" loop="" muted="" playsinline="" width="200" height="200">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56" type="video/mp4">
+                    <source src="/images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4" type="image/png">
+                    Your browser does not support HTML video.
+                </source></source></video>
+            </a>
+        </div>
+        <script>
+            if (/CPU (?:iPhone )?OS [1-9]_/.test(navigator.userAgent)) {
+                // Don't autoplay on old iOS, since it doesn not support playsinline.
+            }
+            else {
+                document.getElementById('banner-zzz').play();
+            }
+        </script>
+
+        <div class="banner-text">
+            <h3 class="title">Tired of reading?</h3>
+            <p class="big">No wonder, it takes <span class="blue">7 hours</span> to read all of the text we have here.</p>
+            <p>Try our interactive course on refactoring. It offers a less tedious approach to learning new stuff.</p>
+            <a class="btn btn-secondary" href="/refactoring/course"><i class="fa fa-star" aria-hidden="true"/> Let's see…</a>
+        </div>
+    </div>
+
+
+        
+</body>
+</html>
