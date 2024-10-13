@@ -1,0 +1,85 @@
+- en: Refused Bequest
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/smells/refused-bequest](https://refactoringguru.cn/smells/refused-bequest)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Signs and Symptoms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If a subclass uses only some of the methods and properties inherited from its
+    parents, the hierarchy is off-kilter. The unneeded methods may simply go unused
+    or be redefined and give off exceptions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0b6f648517cd81edc72c4faba66d6d14.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Reasons for the Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Someone was motivated to create inheritance between classes only by the desire
+    to reuse the code in a superclass. But the superclass and subclass are completely
+    different.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f4d083c81ad4214e1ab01090ca70ad8c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Treatment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If inheritance makes no sense and the subclass really does have nothing in common
+    with the superclass, eliminate inheritance in favor of [Replace Inheritance with
+    Delegation](/replace-inheritance-with-delegation).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If inheritance is appropriate, get rid of unneeded fields and methods in the
+    subclass. Extract all fields and methods needed by the subclass from the parent
+    class, put them in a new superclass, and set both classes to inherit from it ([Extract
+    Superclass](/extract-superclass)).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/331013bc7800d51fe86af851c77ff068.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Payoff
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Improves code clarity and organization. You will no longer have to wonder why
+    the `Dog` class is inherited from the `Chair` class (even though they both have
+    4 legs).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

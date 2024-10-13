@@ -1,0 +1,164 @@
+- en: Replace Type Code with Class
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/replace-type-code-with-class](https://refactoringguru.cn/replace-type-code-with-class)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**What''s type code?** Type code occurs when, instead of a separate data type,
+    you have a set of numbers or strings that form a list of allowable values for
+    some entity. Often these specific numbers and strings are given understandable
+    names via constants, which is the reason for why such type code is encountered
+    so much.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A class has a field that contains type code. The values of this type aren't
+    used in operator conditions and don't affect the behavior of the program.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a new class and use its objects instead of the type code values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Replace Type Code with Class - Before](../Images/f2c2339ea0a1ae755cc26fa3e34bc06a.png)After![Replace
+    Type Code with Class - After](../Images/2cea81c57dd8c0ba9a3c2dfce78eda64.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: One of the most common reasons for type code is working with databases, when
+    a database has fields in which some complex concept is coded with a number or
+    string.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, you have the class `User` with the field `user_role`, which contains
+    information about the access privileges of each user, whether administrator, editor,
+    or ordinary user. So in this case, this information is coded in the field as `A`,
+    `E`, and `U` respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What are the shortcomings of this approach? The field setters often don't check
+    which value is sent, which can cause big problems when someone sends unintended
+    or wrong values to these fields.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition, type verification is impossible for these fields. It's possible
+    to send any number or string to them, which won't be type checked by your IDE
+    and even allow your program to run (and crash later).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We want to turn sets of primitive values—which is what coded types are—into
+    full-fledged classes with all the benefits that object-oriented programming has
+    to offer.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: By replacing type code with classes, we allow type hinting for values passed
+    to methods and fields at the level of the programming language.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For example, while the compiler previously didn't see difference between your
+    numeric constant and some arbitrary number when a value is passed to a method,
+    now when data that doesn't fit the indicated type class is passed, you're warned
+    of the error inside your IDE.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Thus we make it possible to move code to the classes of the type. If you needed
+    to perform complex manipulations with type values throughout the whole program,
+    now this code can "live" inside one or multiple type classes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When Not to Use
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If the values of a coded type are used inside control flow structures (`if`,
+    `switch`, etc.) and control a class behavior, you should use one of the two refactoring
+    techniques for type code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Type Code with Subclasses](/replace-type-code-with-subclasses)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a new class and give it a new name that corresponds to the purpose of
+    the coded type. Here we'll call it *type class*.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Copy the field containing type code to the *type class* and make it private.
+    Then create a getter for the field. A value will be set for this field only from
+    the constructor.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For each value of the coded type, create a static method in *type class*. It'll
+    be creating a new *type class* object corresponding to this value of the coded
+    type.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the original class, replace the type of the coded field with *type class*.
+    Create a new object of this type in the constructor as well as in the field setter.
+    Change the field getter so that it calls the *type class* getter.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Replace any mentions of values of the coded type with calls of the relevant
+    *type class* static methods.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Remove the coded type constants from the original class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

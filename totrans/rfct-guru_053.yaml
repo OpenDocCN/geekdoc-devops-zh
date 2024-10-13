@@ -1,0 +1,111 @@
+- en: Hide Delegate
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/hide-delegate](https://refactoringguru.cn/hide-delegate)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The client gets object B from a field or method of object А. Then the client
+    calls a method of object B.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a new method in class A that delegates the call to object B. Now the
+    client doesn't know about, or depend on, class B.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Hide Delegate - Before](../Images/0e3d0cfd7c90197dc21759d9324a7931.png)After![Hide
+    Delegate - After](../Images/604f24e39e5d58b3b5bdcff7872367ea.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To start with, let''s look at terminology:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Server* is the object to which the client has direct access.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Delegate* is the end object that contains the functionality needed by the
+    client.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A call chain appears when a client requests an object from another object, then
+    the second object requests another one, and so on. These sequences of calls involve
+    the client in navigation along the class structure. Any changes in these interrelationships
+    will require changes on the client side.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Hides delegation from the client. The less that the client code needs to know
+    about the details of relationships between objects, the easier it's to make changes
+    to your program.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Drawbacks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you need to create an excessive number of delegating methods, *server-class*
+    risks becoming an unneeded go-between, leading to an excess of [Middle Man](/smells/middle-man).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For each method of the *delegate-class* called by the client, create a method
+    in the *server-class* that delegates the call to the *delegate-class*.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Change the client code so that it calls the methods of the *server-class*.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If your changes free the client from needing the *delegate-class*, you can remove
+    the access method to the *delegate-class* from the *server-class* (the method
+    that was originally used to get the *delegate-class*).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

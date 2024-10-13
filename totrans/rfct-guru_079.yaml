@@ -1,0 +1,208 @@
+- en: Replace Conditional with Polymorphism
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/replace-conditional-with-polymorphism](https://refactoringguru.cn/replace-conditional-with-polymorphism)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have a conditional that performs various actions depending on object type
+    or properties.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create subclasses matching the branches of the conditional. In them, create
+    a shared method and move code from the corresponding branch of the conditional
+    to it. Then replace the conditional with the relevant method call. The result
+    is that the proper implementation will be attained via polymorphism depending
+    on the object class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This refactoring technique can help if your code contains operators performing
+    various tasks that vary based on:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Class of the object or interface that it implements
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Value of an object's field
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Result of calling one of an object's methods
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a new object property or type appears, you will need to search for and add
+    code in all similar conditionals. Thus the benefit of this technique is multiplied
+    if there are multiple conditionals scattered throughout all of an object's methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This technique adheres to the *Tell-Don''t-Ask* principle: instead of asking
+    an object about its state and then performing actions based on this, it''s much
+    easier to simply tell the object what it needs to do and let it decide for itself
+    how to do that.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Removes duplicate code. You get rid of many almost identical conditionals.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you need to add a new execution variant, all you need to do is add a new
+    subclass without touching the existing code (*Open/Closed Principle*).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Preparing to Refactor
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'For this refactoring technique, you should have a ready hierarchy of classes
+    that will contain alternative behaviors. If you don''t have a hierarchy like this,
+    create one. Other techniques will help to make this happen:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Type Code with Subclasses](/replace-type-code-with-subclasses). Subclasses
+    will be created for all values of a particular object property. This approach
+    is simple but less flexible since you can''t create subclasses for the other properties
+    of the object.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy).
+    A class will be dedicated for a particular object property and subclasses will
+    be created from it for each value of the property. The current class will contain
+    references to the objects of this type and delegate execution to them.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The following steps assume that you have already created the hierarchy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Refactoring Steps
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: If the conditional is in a method that performs other actions as well, perform
+    [Extract Method](/extract-method).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For each hierarchy subclass, redefine the method that contains the conditional
+    and copy the code of the corresponding conditional branch to that location.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Delete this branch from the conditional.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Repeat replacement until the conditional is empty. Then delete the conditional
+    and declare the method abstract.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

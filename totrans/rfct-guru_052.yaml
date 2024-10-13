@@ -1,0 +1,94 @@
+- en: Inline Class
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/inline-class](https://refactoringguru.cn/inline-class)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A class does almost nothing and isn't responsible for anything, and no additional
+    responsibilities are planned for it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Move all features from the class to another one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Inline Class - Before](../Images/4695a712409087882747ed595c25ab2b.png)After![Inline
+    Class - After](../Images/177c42679c4e44ffaa27aafeea1037d2.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Often this technique is needed after the features of one class are "transplanted"
+    to other classes, leaving that class with little to do.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Eliminating needless classes frees up operating memory on the computer—and bandwidth
+    in your head.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the recipient class, create the public fields and methods present in the
+    donor class. Methods should refer to the equivalent methods of the donor class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Replace all references to the donor class with references to the fields and
+    methods of the recipient class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Now test the program and make sure that no errors have been added. If tests
+    show that everything is working A-OK, start using [Move Method](/move-method)
+    and [Move Field](/move-field) to completely transplant all functionality to the
+    recipient class from the original one. Continue doing so until the original class
+    is completely empty.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Delete the original class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

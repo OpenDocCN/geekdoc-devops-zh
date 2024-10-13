@@ -1,0 +1,90 @@
+- en: Middle Man
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/smells/middle-man](https://refactoringguru.cn/smells/middle-man)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Signs and Symptoms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If a class performs only one action, delegating work to another class, why does
+    it exist at all?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/10c52abdb49ddd95dfb73e53130ba991.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Reasons for the Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This smell can be the result of overzealous elimination of [Message Chains](/smells/message-chains).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In other cases, it can be the result of the useful work of a class being gradually
+    moved to other classes. The class remains as an empty shell that doesn't do anything
+    other than delegate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Treatment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If most of a method's classes delegate to another class, [Remove Middle Man](/remove-middle-man)
+    is in order.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Payoff
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Less bulky code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/4054a8e74184d7250656eaaaf78864c3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When to Ignore
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Don''t delete middle man that have been created for a reason:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A middle man may have been added to avoid interclass dependencies.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some design patterns create middle man on purpose (such as [Proxy](/design-patterns/proxy)
+    or [Decorator](/design-patterns/decorator)).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

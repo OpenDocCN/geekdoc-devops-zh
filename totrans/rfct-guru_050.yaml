@@ -1,0 +1,93 @@
+- en: Move Field
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/move-field](https://refactoringguru.cn/move-field)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A field is used more in another class than in its own class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a field in a new class and redirect all users of the old field to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Move Field - Before](../Images/1cabf1ffa08de496854a32b595118be4.png)After![Move
+    Field - After](../Images/eb80f77173717aac1184337e83d1f216.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Often fields are moved as part of the [Extract Class](/extract-class) technique.
+    Deciding which class to leave the field in can be tough. Here is our rule of thumb:
+    **put a field in the same place as the methods that use it** (or else where most
+    of these methods are).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This rule will help in other cases when a field is simply located in the wrong
+    place.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If the field is public, refactoring will be much easier if you make the field
+    private and provide public access methods (for this, you can use [Encapsulate
+    Field](/encapsulate-field)).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create the same field with access methods in the recipient class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Decide how you will refer to the recipient class. You may already have a field
+    or method that returns the appropriate object; if not, you will need to write
+    a new method or field to store the object of the recipient class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Replace all references to the old field with appropriate calls to methods in
+    the recipient class. If the field isn't private, take care of this in the superclass
+    and subclasses.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Delete the field in the original class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

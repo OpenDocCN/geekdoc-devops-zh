@@ -1,0 +1,151 @@
+- en: Replace Exception with Test
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/replace-exception-with-test](https://refactoringguru.cn/replace-exception-with-test)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You throw an exception in a place where a simple test would do the job?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Replace the exception with a condition test.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Exceptions should be used to handle irregular behavior related to an unexpected
+    error. They shouldn't serve as a replacement for testing. If an exception can
+    be avoided by simply verifying a condition before running, then do so. Exceptions
+    should be reserved for real errors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For instance, you entered a minefield and triggered a mine there, resulting
+    in an exception; the exception was successfully handled and you were lifted through
+    the air to safety beyond the mine field. But you could have avoided this all by
+    simply reading the warning sign in front of the minefield to begin with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A simple conditional can sometimes be more obvious than exception handling code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a conditional for an edge case and move it before the try/catch block.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Move code from the `catch` section inside this conditional.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the `catch` section, place the code for throwing a usual unnamed exception
+    and run all the tests.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If no exceptions were thrown during the tests, get rid of the `try`/`catch`
+    operator.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

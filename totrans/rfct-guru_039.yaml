@@ -1,0 +1,171 @@
+- en: Extract Method
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/extract-method](https://refactoringguru.cn/extract-method)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have a code fragment that can be grouped together.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Move this code to a separate new method (or function) and replace the old code
+    with a call to the method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The more lines found in a method, the harder it's to figure out what the method
+    does. This is the main reason for this refactoring.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Besides eliminating rough edges in your code, extracting methods is also a step
+    in many other refactoring approaches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'More readable code! Be sure to give the new method a name that describes the
+    method''s purpose: `createOrder()`, `renderCustomerInfo()`, etc.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Less code duplication. Often the code that's found in a method can be reused
+    in other places in your program. So you can replace duplicates with calls to your
+    new method.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Isolates independent parts of code, meaning that errors are less likely (such
+    as if the wrong variable is modified).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a new method and name it in a way that makes its purpose self-evident.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Copy the relevant code fragment to your new method. Delete the fragment from
+    its old location and put a call for the new method there instead.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Find all variables used in this code fragment. If they're declared inside the
+    fragment and not used outside of it, simply leave them unchanged—they'll become
+    local variables for the new method.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: If the variables are declared prior to the code that you're extracting, you
+    will need to pass these variables to the parameters of your new method in order
+    to use the values previously contained in them. Sometimes it's easier to get rid
+    of these variables by resorting to [Replace Temp with Query](/replace-temp-with-query).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If you see that a local variable changes in your extracted code in some way,
+    this may mean that this changed value will be needed later in your main method.
+    Double-check! And if this is indeed the case, return the value of this variable
+    to the main method to keep everything functioning.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

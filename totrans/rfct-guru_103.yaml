@@ -1,0 +1,141 @@
+- en: Extract Subclass
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/extract-subclass](https://refactoringguru.cn/extract-subclass)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A class has features that are used only in certain cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a subclass and use it in these cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Extract Subclass - Before](../Images/6d4043f9523f0c7acfa34e35c6aadf8d.png)After![Extract
+    Subclass - After](../Images/af9253c8fa0d89b591e1dea3229872e2.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Your main class has methods and fields for implementing a certain rare use case
+    for the class. While the case is rare, the class is responsible for it and it
+    would be wrong to move all the associated fields and methods to an entirely separate
+    class. But they could be moved to a subclass, which is just what we'll do with
+    the help of this refactoring technique.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Creates a subclass quickly and easily.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can create several separate subclasses if your main class is currently implementing
+    more than one such special case.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Drawbacks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Despite its seeming simplicity, *Inheritance* can lead to a dead end if you
+    have to separate several different class hierarchies. If, for example, you had
+    the class `Dogs` with different behavior depending on the size and fur of dogs,
+    you could tease out two hierarchies:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'by size: `Large`, `Medium` and `Small`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'by fur: `Smooth` and `Shaggy`'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And everything would seem well, except that problems will crop up as soon as
+    you need to create a dog that's both `Large` and `Smooth`, since you can create
+    an object from one class only. That said, you can avoid this problem by using
+    *Compose* instead of *Inherit* (see the [Strategy](/design-patterns/strategy)
+    pattern). In other words, the `Dog` class will have two component fields, size
+    and fur. You will plug in component objects from the necessary classes into these
+    fields. So you can create a `Dog` that has `LargeSize` and `ShaggyFur`.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a new subclass from the class of interest.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If you need additional data to create objects from a subclass, create a constructor
+    and add the necessary parameters to it. Don't forget to call the constructor's
+    parent implementation.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Find all calls to the constructor of the parent class. When the functionality
+    of a subclass is necessary, replace the parent constructor with the subclass constructor.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Move the necessary methods and fields from the parent class to the subclass.
+    Do this via [Push Down Method](/push-down-method) and [Push Down Field](/push-down-field).
+    It''s simpler to start by moving the methods first. This way, the fields remain
+    accessible throughout the whole process: from the parent class prior to the move,
+    and from the subclass itself after the move is complete.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'After the subclass is ready, find all the old fields that controlled the choice
+    of functionality. Delete these fields by using polymorphism to replace all the
+    operators in which the fields had been used. A simple example: in the Car class,
+    you had the field `isElectricCar` and, depending on it, in the `refuel()` method
+    the car is either fueled up with gas or charged with electricity. Post-refactoring,
+    the `isElectricCar` field is removed and the `Car` and `ElectricCar` classes will
+    have their own implementations of the `refuel()` method.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

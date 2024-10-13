@@ -1,0 +1,157 @@
+- en: Duplicate Code
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/smells/duplicate-code](https://refactoringguru.cn/smells/duplicate-code)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Signs and Symptoms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Two code fragments look almost identical.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d1118881809506374244fba663398101.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Reasons for the Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Duplication usually occurs when multiple programmers are working on different
+    parts of the same program at the same time. Since they're working on different
+    tasks, they may be unaware their colleague has already written similar code that
+    could be repurposed for their own needs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There's also more subtle duplication, when specific parts of code look different
+    but actually perform the same job. This kind of duplication can be hard to find
+    and fix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sometimes duplication is purposeful. When rushing to meet deadlines and the
+    existing code is "almost right" for the job, novice programmers may not be able
+    to resist the temptation of copying and pasting the relevant code. And in some
+    cases, the programmer is simply too lazy to de-clutter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Treatment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If the same code is found in two or more methods in the same class: use [Extract
+    Method](/extract-method) and place calls for the new method in both places.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/41e8f26836f89d1d5a02c176628e4a2b.png)'
+  prefs:
+  - PREF_IND
+  type: TYPE_IMG
+- en: 'If the same code is found in two subclasses of the same level:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use [Extract Method](/extract-method) for both classes, followed by [Pull Up
+    Field](/pull-up-field) for the fields used in the method that you're pulling up.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the duplicate code is inside a constructor, use [Pull Up Constructor Body](/pull-up-constructor-body).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the duplicate code is similar but not completely identical, use [Form Template
+    Method](/form-template-method).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If two methods do the same thing but use different algorithms, select the best
+    algorithm and apply [Substitute Algorithm](/substitute-algorithm).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If duplicate code is found in two different classes:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the classes aren't part of a hierarchy, use [Extract Superclass](/extract-superclass)
+    in order to create a single superclass for these classes that maintains all the
+    previous functionality.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If it's difficult or impossible to create a superclass, use [Extract Class](/extract-class)
+    in one class and use the new component in the other.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a large number of conditional expressions are present and perform the same
+    code (differing only in their conditions), merge these operators into a single
+    condition using [Consolidate Conditional Expression](/consolidate-conditional-expression)
+    and use [Extract Method](/extract-method) to place the condition in a separate
+    method with an easy-to-understand name.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'If the same code is performed in all branches of a conditional expression:
+    place the identical code outside of the condition tree by using [Consolidate Duplicate
+    Conditional Fragments](/consolidate-duplicate-conditional-fragments).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Payoff
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Merging duplicate code simplifies the structure of your code and makes it shorter.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Simplification + shortness = code that's easier to simplify and cheaper to support.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/441d52b1f9190dcdac9eac15479dea79.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When to Ignore
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In very rare cases, merging two identical fragments of code can make the code
+    less intuitive and obvious.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

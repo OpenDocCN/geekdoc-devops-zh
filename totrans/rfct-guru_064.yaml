@@ -1,0 +1,113 @@
+- en: Change Unidirectional Association to Bidirectional
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/change-unidirectional-association-to-bidirectional](https://refactoringguru.cn/change-unidirectional-association-to-bidirectional)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have two classes that each need to use the features of the other, but the
+    association between them is only unidirectional.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Add the missing association to the class that needs it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Change Unidirectional Association to Bidirectional - Before](../Images/6e69410d2c835f4e8f519d3f76483180.png)After![Change
+    Unidirectional Association to Bidirectional - After](../Images/6e7ed019a16535771af065641470eec8.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Originally the classes had a unidirectional association. But with time, client
+    code needed access to both sides of the association.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If a class needs a reverse association, you can simply calculate it. But if
+    these calculations are complex, it's better to keep the reverse association.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Drawbacks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Bidirectional associations are much harder to implement and maintain than unidirectional
+    ones.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Bidirectional associations make classes interdependent. With a unidirectional
+    association, one of them can be used independently of the other.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Add a field for holding the reverse association.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Decide which class will be "dominant". This class will contain the methods that
+    create or update the association as elements are added or changed, establishing
+    the association in its class and calling the utility methods for establishing
+    the association in the associated object.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create a utility method for establishing the association in the "non-dominant"
+    class. The method should use what it's given in parameters to complete the field.
+    Give the method an obvious name so that it isn't used later for any other purposes.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If old methods for controlling the unidirectional association were in the "dominant"
+    class, complement them with calls to utility methods from the associated object.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If the old methods for controlling the association were in the "non-dominant"
+    class, create the methods in the "dominant" class, call them, and delegate execution
+    to them.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

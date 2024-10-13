@@ -1,0 +1,169 @@
+- en: Replace Array with Object
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/replace-array-with-object](https://refactoringguru.cn/replace-array-with-object)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This refactoring technique is a special case of [Replace Data Value with Object](/replace-data-value-with-object).
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have an array that contains various types of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Replace the array with an object that will have separate fields for each element.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Arrays are an excellent tool for storing data and collections of a single type.
+    But if you use an array like post office boxes, storing the username in box 1
+    and the user's address in box 14, you will someday be very unhappy that you did.
+    This approach leads to catastrophic failures when somebody puts something in the
+    wrong "box" and also requires your time for figuring out which data is stored
+    where.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the resulting class, you can place all associated behaviors that had been
+    previously stored in the main class or elsewhere.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The fields of a class are much easier to document than the elements of an array.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create the new class that will contain the data from the array. Place the array
+    itself in the class as a public field.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create a field for storing the object of this class in the original class. Don't
+    forget to also create the object itself in the place where you initiated the data
+    array.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the new class, create access methods one by one for each of the array elements.
+    Give them self-explanatory names that indicate what they do. At the same time,
+    replace each use of an array element in the main code with the corresponding access
+    method.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When access methods have been created for all elements, make the array private.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For each element of the array, create a private field in the class and then
+    change the access methods so that they use this field instead of the array.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When all data has been moved, delete the array.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

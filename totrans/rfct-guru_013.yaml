@@ -1,0 +1,110 @@
+- en: Data Clumps
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/smells/data-clumps](https://refactoringguru.cn/smells/data-clumps)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Signs and Symptoms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Sometimes different parts of the code contain identical groups of variables
+    (such as parameters for connecting to a database). These clumps should be turned
+    into their own classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/541b261be789a54e050745d017aca2e6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Reasons for the Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Often these data groups are due to poor program structure or "copypasta programming”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to make sure whether or not some data is a data clump, just delete
+    one of the data values and see whether the other values still make sense. If this
+    isn't the case, this is a good sign that this group of variables should be combined
+    into an object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Treatment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If repeating data comprises the fields of a class, use [Extract Class](/extract-class)
+    to move the fields to their own class.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the same data clumps are passed in the parameters of methods, use [Introduce
+    Parameter Object](/introduce-parameter-object) to set them off as a class.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If some of the data is passed to other methods, think about passing the entire
+    data object to the method instead of just individual fields. [Preserve Whole Object](/preserve-whole-object)
+    will help with this.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Look at the code used by these fields. It may be a good idea to move this code
+    to a data class.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/1d9be22d7f5886dccf71962d24879d48.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Payoff
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Improves understanding and organization of code. Operations on particular data
+    are now gathered in a single place, instead of haphazardly throughout the code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reduces code size.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/b60ecfe494109565427af75ca2f31d20.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When to Ignore
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Passing an entire object in the parameters of a method, instead of passing just
+    its values (primitive types), may create an undesirable dependency between the
+    two classes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

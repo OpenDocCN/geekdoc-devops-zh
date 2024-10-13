@@ -1,0 +1,93 @@
+- en: Push Down Method
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/push-down-method](https://refactoringguru.cn/push-down-method)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Is behavior implemented in a superclass used by only one (or a few) subclasses?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Move this behavior to the subclasses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Push Down Method - Before](../Images/aaff5c194ce1f6fabbd971f8caa3e91b.png)After![Push
+    Down Method - After](../Images/dbf2a0b3b15c2ee1a135293a1be0678c.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: At first a certain method was meant to be universal for all classes but in reality
+    is used in only one subclass. This situation can occur when planned features fail
+    to materialize.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Such situations can also occur after partial extraction (or removal) of functionality
+    from a class hierarchy, leaving a method that's used in only one subclass.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you see that a method is needed by more than one subclass, but not all of
+    them, it may be useful to create an intermediate subclass and move the method
+    to it. This allows avoiding the code duplication that would result from pushing
+    a method down to all subclasses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Improves class coherence. A method is located where you expect to see it.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Declare the method in a subclass and copy its code from the superclass.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Remove the method from the superclass.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Find all places where the method is used and verify that it's called from the
+    necessary subclass.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,69 @@
+- en: How to refactor
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/refactoring/how-to](https://refactoringguru.cn/refactoring/how-to)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Refactoring should be done as a series of small changes, each of which makes
+    the existing code slightly better while still leaving the program in working order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Checklist of refactoring done *right way**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*#### *The code should become cleaner.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*If the code remains just as unclean after refactoring... well, I''m sorry,
+    but you''ve just wasted an hour of your life. Try to figure out why this happened.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It frequently happens when you move away from refactoring with small changes
+    and mix a whole bunch of refactorings into one big change. So it's very easy to
+    lose your mind, especially if you have a time limit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But it can also happen when working with extremely sloppy code. Whatever you
+    improve, the code as a whole remains a disaster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, it's worthwhile to think about completely rewriting parts of the
+    code. But before that, you should have written tests and set aside a good chunk
+    of time. Otherwise, you'll end up with the kinds of results we talked about in
+    the first paragraph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*New functionality shouldn''t be created during refactoring.*'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '*Don''t mix refactoring and direct development of new features. Try to separate
+    these processes at least within the confines of individual commits.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*All existing tests must pass after refactoring.*'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '*There are two cases when tests can break down after refactoring:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**You made an error during refactoring.** This one is a no-brainer: go ahead
+    and fix the error.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Your tests were too low-level.** For example, you were testing private methods
+    of classes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In this case, the tests are to blame. You can either refactor the tests themselves
+    or write an entirely new set of higher-level tests. A great way to avoid this
+    kind of a situation is to write [BDD-style](/refactoring/bdd) tests.****
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL

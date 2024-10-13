@@ -1,0 +1,165 @@
+- en: Replace Type Code with Subclasses
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/replace-type-code-with-subclasses](https://refactoringguru.cn/replace-type-code-with-subclasses)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**What''s type code?** Type code occurs when, instead of a separate data type,
+    you have a set of numbers or strings that form a list of allowable values for
+    some entity. Often these specific numbers and strings are given understandable
+    names via constants, which is the reason for why such type code is encountered
+    so much.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have a coded type that directly affects program behavior (values of this
+    field trigger various code in conditionals).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create subclasses for each value of the coded type. Then extract the relevant
+    behaviors from the original class to these subclasses. Replace the control flow
+    code with polymorphism.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Replace Type Code with Subclasses - Before](../Images/1d382c4cf6a0d8ebe30c0a90e3b8de80.png)After![Replace
+    Type Code with Subclasses - After](../Images/6c105053020a608a75c754ba69ab0ce8.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This refactoring technique is a more complicated twist on [Replace Type Code
+    with Class](/replace-type-code-with-class).
+  prefs: []
+  type: TYPE_NORMAL
+- en: As in the first refactoring method, you have a set of simple values that constitute
+    all the allowed values for a field. Although these values are often specified
+    as constants and have understandable names, their use makes your code very error-prone
+    since they're still primitives in effect. For example, you have a method that
+    accepts one of these values in the parameters. At a certain moment, instead of
+    the constant `USER_TYPE_ADMIN` with the value `"ADMIN"`, the method receives the
+    same string in lower case (`"admin"`), which will cause execution of something
+    else that the author (you) didn't intend.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here we're dealing with control flow code such as the conditionals `if`, `switch`
+    and `?:`. In other words, fields with coded values (such as `$user->type === self::USER_TYPE_ADMIN`)
+    are used inside the conditions of these operators. If we were to use [Replace
+    Type Code with Class](/replace-type-code-with-class) here, all these control flow
+    constructions would be best moved to a class responsible for the data type. Ultimately,
+    this would of course create a type class very similar to the original one, with
+    the same problems as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Delete the control flow code. Instead of a bulky `switch` in the original class,
+    move the code to appropriate subclasses. This improves adherence to the *Single
+    Responsibility Principle* and makes the program more readable in general.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you need to add a new value for a coded type, all you need to do is add a
+    new subclass without touching the existing code (cf. the *Open/Closed Principle*).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: By replacing type code with classes, we pave the way for type hinting for methods
+    and fields at the level of the programming language. This wouldn't be possible
+    using simple numeric or string values contained in a coded type.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When Not to Use
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This technique isn't applicable if you already have a class hierarchy. You can't
+    create a dual hierarchy via inheritance in object-oriented programming. Still,
+    you can replace type code via composition instead of inheritance. To do so, use
+    [Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the values of type code can change after an object is created, avoid this
+    technique. We would have to somehow replace the class of the object itself on
+    the fly, which isn't possible. Still, an alternative in this case too would be
+    [Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Use [Self Encapsulate Field](/self-encapsulate-field) to create a getter for
+    the field that contains type code.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Make the superclass constructor private. Create a static factory method with
+    the same parameters as the superclass constructor. It must contain the parameter
+    that will take the starting values of the coded type. Depending on this parameter,
+    the factory method will create objects of various subclasses. To do so, in its
+    code you must create a large conditional but, at least, it'll be the only one
+    when it's truly necessary; otherwise, subclasses and polymorphism will do.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create a unique subclass for each value of the coded type. In it, redefine the
+    getter of the coded type so that it returns the corresponding value of the coded
+    type.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Delete the field with type code from the superclass. Make its getter abstract.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Now that you have subclasses, you can start to move the fields and methods from
+    the superclass to corresponding subclasses (with the help of [Push Down Field](/push-down-field)
+    and [Push Down Method](/push-down-method)).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When everything possible has been moved, use [Replace Conditional with Polymorphism](/replace-conditional-with-polymorphism)
+    in order to get rid of conditions that use the type code once and for all.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

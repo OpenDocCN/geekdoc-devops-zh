@@ -1,0 +1,113 @@
+- en: Composing Methods
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/refactoring/techniques/composing-methods](https://refactoringguru.cn/refactoring/techniques/composing-methods)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Much of refactoring is devoted to correctly composing methods. In most cases,
+    excessively long methods are the root of all evil. The vagaries of code inside
+    these methods conceal the execution logic and make the method extremely hard to
+    understand—and even harder to change.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The refactoring techniques in this group streamline methods, remove code duplication,
+    and pave the way for future improvements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Extract Method](/extract-method)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a code fragment that can be grouped together.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Move this code to a separate new method (or function) and replace
+    the old code with a call to the method.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Inline Method](/inline-method)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** When a method body is more obvious than the method itself, use
+    this technique.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Replace calls to the method with the method''s content and delete
+    the method itself.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Extract Variable](/extract-variable)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have an expression that''s hard to understand.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Place the result of the expression or its parts in separate variables
+    that are self-explanatory.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Inline Temp](/inline-temp)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a temporary variable that''s assigned the result of a
+    simple expression and nothing more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Replace the references to the variable with the expression itself.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Temp with Query](/replace-temp-with-query)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You place the result of an expression in a local variable for
+    later use in your code.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Move the entire expression to a separate method and return the
+    result from it. Query the method instead of using a variable. Incorporate the
+    new method in other methods, if necessary.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Split Temporary Variable](/split-temporary-variable)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a local variable that''s used to store various intermediate
+    values inside a method (except for cycle variables).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Use different variables for different values. Each variable should
+    be responsible for only one particular thing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Remove Assignments to Parameters](/remove-assignments-to-parameters)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Some value is assigned to a parameter inside method''s body.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Use a local variable instead of a parameter.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Method with Method Object](/replace-method-with-method-object)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a long method in which the local variables are so intertwined
+    that you can''t apply *Extract Method*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Transform the method into a separate class so that the local
+    variables become fields of the class. Then you can split the method into several
+    methods within the same class.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Substitute Algorithm](/substitute-algorithm)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** So you want to replace an existing algorithm with a new one?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Replace the body of the method that implements the algorithm
+    with a new algorithm.'
+  prefs: []
+  type: TYPE_NORMAL

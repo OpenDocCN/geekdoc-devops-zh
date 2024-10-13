@@ -1,0 +1,105 @@
+- en: Alternative Classes with Different Interfaces
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/smells/alternative-classes-with-different-interfaces](https://refactoringguru.cn/smells/alternative-classes-with-different-interfaces)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Signs and Symptoms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Two classes perform identical functions but have different method names.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aa4b4e96c62a48d9a8d2cdadd7817984.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Reasons for the Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The programmer who created one of the classes probably didn't know that a functionally
+    equivalent class already existed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Treatment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Try to put the interface of classes in terms of a common denominator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Rename Method](/rename-method)s to make them identical in all alternative
+    classes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Move Method](/move-method), [Add Parameter](/add-parameter) and [Parameterize
+    Method](/parameterize-method) to make the signature and implementation of methods
+    the same.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If only part of the functionality of the classes is duplicated, try using [Extract
+    Superclass](/extract-superclass). In this case, the existing classes will become
+    subclasses.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After you have determined which treatment method to use and implemented it,
+    you may be able to delete one of the classes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Payoff
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You get rid of unnecessary duplicated code, making the resulting code less bulky.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Code becomes more readable and understandable (you no longer have to guess the
+    reason for creation of a second class performing the exact same functions as the
+    first one).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/82a2d20e8cb101e85d90221c3744b5d5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When to Ignore
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Sometimes merging classes is impossible or so difficult as to be pointless.
+    One example is when the alternative classes are in different libraries that each
+    have their own version of the class.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

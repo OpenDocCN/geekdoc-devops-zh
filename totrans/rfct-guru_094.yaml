@@ -1,0 +1,159 @@
+- en: Replace Constructor with Factory Method
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/replace-constructor-with-factory-method](https://refactoringguru.cn/replace-constructor-with-factory-method)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have a complex constructor that does something more than just setting parameter
+    values in object fields.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a factory method and use it to replace constructor calls.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The most obvious reason for using this refactoring technique is related to [Replace
+    Type Code with Subclasses](/replace-type-code-with-subclasses).
+  prefs: []
+  type: TYPE_NORMAL
+- en: You have code in which a object was previously created and the value of the
+    coded type was passed to it. After use of the refactoring method, several subclasses
+    have appeared and from them you need to create objects depending on the value
+    of the coded type. Changing the original constructor to make it return subclass
+    objects is impossible, so instead we create a static factory method that will
+    return objects of the necessary classes, after which it replaces all calls to
+    the original constructor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Factory methods can be used in other situations as well, when constructors aren't
+    up to the task. They can be important when attempting to [Change Value to Reference](/change-value-to-reference).
+    They can also be used to set various creation modes that go beyond the number
+    and types of parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A factory method doesn't necessarily return an object of the class in which
+    it was called. Often these could be its subclasses, selected based on the arguments
+    given to the method.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A factory method can have a better name that describes what and how it returns
+    what it does, for example `Troops::GetCrew(myTank)`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A factory method can return an already created object, unlike a constructor,
+    which always creates a new instance.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a factory method. Place a call to the current constructor in it.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Replace all constructor calls with calls to the factory method.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Declare the constructor private.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Investigate the constructor code and try to isolate the code not directly related
+    to constructing an object of the current class, moving such code to the factory
+    method.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

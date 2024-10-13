@@ -1,0 +1,128 @@
+- en: Replace Data Value with Object
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/replace-data-value-with-object](https://refactoringguru.cn/replace-data-value-with-object)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A class (or group of classes) contains a data field. The field has its own behavior
+    and associated data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a new class, place the old field and its behavior in the class, and store
+    the object of the class in the original class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Replace Data Value with Object - Before](../Images/e07e5a9791a58403b53f576bd3d78a04.png)After![Replace
+    Data Value with Object - After](../Images/6287a1840499dabf38411a66a0eee24b.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This refactoring is basically a special case of [Extract Class](/extract-class).
+    What makes it different is the cause of the refactoring.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In [Extract Class](/extract-class), we have a single class that's responsible
+    for different things and we want to split up its responsibilities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With replacement of a data value with an object, we have a primitive field (number,
+    string, etc.) that's no longer so simple due to growth of the program and now
+    has associated data and behaviors. On the one hand, there's nothing scary about
+    these fields in and of themselves. However, this fields-and-behaviors family can
+    be present in several classes simultaneously, creating duplicate code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, for all this we create a new class and move both the field and the
+    related data and behaviors to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Improves relatedness inside classes. Data and the relevant behaviors are inside
+    a single class.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before you begin with refactoring, see if there are direct references to the
+    field from within the class. If so, use [Self Encapsulate Field](/self-encapsulate-field)
+    in order to hide it in the original class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a new class and copy your field and relevant getter to it. In addition,
+    create a constructor that accepts the simple value of the field. This class won't
+    have a setter since each new field value that's sent to the original class will
+    create a new value object.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the original class, change the field type to the new class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the getter in the original class, invoke the getter of the associated object.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the setter, create a new value object. You may need to also create a new
+    object in the constructor if initial values had been set there for the field previously.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Next Steps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After applying this refactoring technique, it's wise to apply [Change Value
+    to Reference](/change-value-to-reference) on the field that contains the object.
+    This allows storing a reference to a single object that corresponds to a value
+    instead of storing dozens of objects for one and the same value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most often this approach is needed when you want to have one object be responsible
+    for one real-world object (such as users, orders, documents and so forth). At
+    the same time, this approach won't be useful for objects such as dates, money,
+    ranges, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

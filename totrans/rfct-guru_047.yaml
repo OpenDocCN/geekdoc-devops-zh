@@ -1,0 +1,154 @@
+- en: Substitute Algorithm
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/substitute-algorithm](https://refactoringguru.cn/substitute-algorithm)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So you want to replace an existing algorithm with a new one?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Replace the body of the method that implements the algorithm with a new algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Gradual refactoring isn't the only method for improving a program. Sometimes
+    a method is so cluttered with issues that it's easier to tear down the method
+    and start fresh. And perhaps you have found an algorithm that's much simpler and
+    more efficient. If this is the case, you should simply replace the old algorithm
+    with the new one.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: As time goes on, your algorithm may be incorporated into a well-known library
+    or framework and you want to get rid of your independent implementation, in order
+    to simplify maintenance.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The requirements for your program may change so heavily that your existing algorithm
+    can't be salvaged for the task.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Make sure that you have simplified the existing algorithm as much as possible.
+    Move unimportant code to other methods using [Extract Method](/extract-method).
+    The fewer moving parts in your algorithm, the easier it's to replace.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create your new algorithm in a new method. Replace the old algorithm with the
+    new one and start testing the program.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If the results don't match, return to the old implementation and compare the
+    results. Identify the causes of the discrepancy. While the cause is often an error
+    in the old algorithm, it's more likely due to something not working in the new
+    one.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When all tests are successfully completed, delete the old algorithm for good!
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

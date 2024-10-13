@@ -1,0 +1,118 @@
+- en: Change Value to Reference
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/change-value-to-reference](https://refactoringguru.cn/change-value-to-reference)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So you have many identical instances of a single class that you need to replace
+    with a single object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Convert the identical objects to a single reference object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Change Value to Reference - Before](../Images/babb47ba3a04f231bd232dea19333dfb.png)After![Change
+    Value to Reference - After](../Images/4a912d8cc3dfe96d547f269e9dad3bff.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In many systems, objects can be classified as either values or references.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References**: when one real-world object corresponds to only one object in
+    the program. References are usually user/order/product/etc. objects.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Values**: one real-world object corresponds to multiple objects in the program.
+    These objects could be dates, phone numbers, addresses, colors, and the like.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The selection of reference vs. value isn't always clear-cut. Sometimes there's
+    a simple value with a small amount of unchanging data. Then it becomes necessary
+    to add changeable data and pass these changes every time the object is accessed.
+    In this case it becomes necessary to convert it to a reference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: An object contains all the most current information about a particular entity.
+    If the object is changed in one part of the program, these changes are accessible
+    from the other parts of the program that make use of the object.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Drawbacks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: References are much harder to implement.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Use [Replace Constructor with Factory Method](/replace-constructor-with-factory-method)
+    on the class from which the references are to be generated.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Determine which object will be responsible for providing access to references.
+    Instead of creating a new object, when you need one you now need to get it from
+    a storage object or static dictionary field.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Determine whether references will be created in advance or dynamically as necessary.
+    If objects are created in advance, make sure to load them before use.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Change the factory method so that it returns a reference. If objects are created
+    in advance, decide how to handle errors when a non-existent object is requested.
+    You may also need to use [Rename Method](/rename-method) to inform that the method
+    returns only existing objects.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

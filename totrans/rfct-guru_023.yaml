@@ -1,0 +1,53 @@
+- en: Dispensables
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/refactoring/smells/dispensables](https://refactoringguru.cn/refactoring/smells/dispensables)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: A dispensable is something pointless and unneeded whose absence would make the
+    code cleaner, more efficient and easier to understand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Comments](/smells/comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A method is filled with explanatory comments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Duplicate Code](/smells/duplicate-code)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Two code fragments look almost identical.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Lazy Class](/smells/lazy-class)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding and maintaining classes always costs time and money. So if a class
+    doesn't do enough to earn your attention, it should be deleted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Class](/smells/data-class)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A data class refers to a class that contains only fields and crude methods for
+    accessing them (getters and setters). These are simply containers for data used
+    by other classes. These classes don't contain any additional functionality and
+    can't independently operate on the data that they own.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Dead Code](/smells/dead-code)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A variable, parameter, field, method or class is no longer used (usually because
+    it's obsolete).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Speculative Generality](/smells/speculative-generality)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There's an unused class, method, field or parameter.
+  prefs: []
+  type: TYPE_NORMAL

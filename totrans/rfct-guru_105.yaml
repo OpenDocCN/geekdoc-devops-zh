@@ -1,0 +1,105 @@
+- en: Extract Interface
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/extract-interface](https://refactoringguru.cn/extract-interface)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Multiple clients are using the same part of a class interface. Another case:
+    part of the interface in two classes is the same.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Move this identical portion to its own interface.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Extract Interface - Before](../Images/e7242766e433c6cf65b6e21e9c10c6fe.png)After![Extract
+    Interface - After](../Images/0d0457ec9846012dbd8374b3becb2dfe.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Interfaces are very apropos when classes play special roles in different situations.
+    Use [Extract Interface](/extract-interface) to explicitly indicate which role.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Another convenient case arises when you need to describe the operations that
+    a class performs on its server. If it's planned to eventually allow use of servers
+    of multiple types, all servers must implement the interface.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Good to Know
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There's a certain resemblance between [Extract Superclass](/extract-superclass)
+    and [Extract Interface](/extract-interface).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extracting an interface allows isolating only common interfaces, not common
+    code. In other words, if classes contain [Duplicate Code](/smells/duplicate-code),
+    extracting the interface won't help you to deduplicate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All the same, this problem can be mitigated by applying [Extract Class](/extract-class)
+    to move the behavior that contains the duplication to a separate component and
+    delegating all the work to it. If the common behavior is large in size, you can
+    always use [Extract Superclass](/extract-superclass). This is even easier, of
+    course, but remember that if you take this path you will get only one parent class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create an empty interface.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Declare common operations in the interface.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Declare the necessary classes as implementing the interface.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Change type declarations in the client code to use the new interface.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,78 @@
+- en: When to refactor
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/refactoring/when](https://refactoringguru.cn/refactoring/when)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/44623613715424b09efc9911f6177f93.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Rule of Three
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: When you're doing something for the first time, just get it done.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When you're doing something similar for the second time, cringe at having to
+    repeat but do the same thing anyway.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When you're doing something for the third time, start refactoring.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/f15b43cb02a12af5a641e9da44e5ca09.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When adding a feature
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Refactoring helps you understand other people's code. If you have to deal with
+    someone else's dirty code, try to refactor it first. Clean code is much easier
+    to grasp. You will improve it not only for yourself but also for those who use
+    it after you.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Refactoring makes it easier to add new features. It's much easier to make changes
+    in clean code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/29f953a77055c2c87ef4e8423fa9ec7b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When fixing a bug
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'Bugs in code behave just like those in real life: they live in the darkest,
+    dirtiest places in the code. Clean your code and the errors will practically discover
+    themselves.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Managers appreciate proactive refactoring as it eliminates the need for special
+    refactoring tasks later. Happy bosses make happy programmers!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/122e578dd491cde813f15b77fd2b4e24.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: During a code review
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: The code review may be the last chance to tidy up the code before it becomes
+    available to the public.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It's best to perform such reviews in a pair with an author. This way you could
+    fix simple problems quickly and gauge the time for fixing the more difficult ones.
+  prefs: []
+  type: TYPE_NORMAL

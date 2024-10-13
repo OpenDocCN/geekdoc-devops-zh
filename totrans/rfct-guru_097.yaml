@@ -1,0 +1,134 @@
+- en: Dealing with Generalization
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/refactoring/techniques/dealing-with-generalization](https://refactoringguru.cn/refactoring/techniques/dealing-with-generalization)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Abstraction has its own group of refactoring techniques, primarily associated
+    with moving functionality along the class inheritance hierarchy, creating new
+    classes and interfaces, and replacing inheritance with delegation and vice versa.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pull Up Field](/pull-up-field)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Two classes have the same field.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Remove the field from subclasses and move it to the superclass.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pull Up Method](/pull-up-method)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Your subclasses have methods that perform similar work.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Make the methods identical and then move them to the relevant
+    superclass.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pull Up Constructor Body](/pull-up-constructor-body)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Your subclasses have constructors with code that''s mostly identical.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Create a superclass constructor and move the code that''s the
+    same in the subclasses to it. Call the superclass constructor in the subclass
+    constructors.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Push Down Method](/push-down-method)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Is behavior implemented in a superclass used by only one (or a
+    few) subclasses?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Move this behavior to the subclasses.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Push Down Field](/push-down-field)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Is a field used only in a few subclasses?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Move the field to these subclasses.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Extract Subclass](/extract-subclass)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** A class has features that are used only in certain cases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Create a subclass and use it in these cases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Extract Superclass](/extract-superclass)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have two classes with common fields and methods.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Create a shared superclass for them and move all the identical
+    fields and methods to it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Extract Interface](/extract-interface)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Multiple clients are using the same part of a class interface.
+    Another case: part of the interface in two classes is the same.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Move this identical portion to its own interface.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Collapse Hierarchy](/collapse-hierarchy)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a class hierarchy in which a subclass is practically
+    the same as its superclass.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Merge the subclass and superclass.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Form Template Method](/form-template-method)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Your subclasses implement algorithms that contain similar steps
+    in the same order.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Move the algorithm structure and identical steps to a superclass,
+    and leave implementation of the different steps in the subclasses.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Inheritance with Delegation](/replace-inheritance-with-delegation)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a subclass that uses only a portion of the methods of
+    its superclass (or it''s not possible to inherit superclass data).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Create a field and put a superclass object in it, delegate methods
+    to the superclass object, and get rid of inheritance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Delegation with Inheritance](/replace-delegation-with-inheritance)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** A class contains many simple methods that delegate to all methods
+    of another class.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Make the class a delegate inheritor, which makes the delegating
+    methods unnecessary.'
+  prefs: []
+  type: TYPE_NORMAL

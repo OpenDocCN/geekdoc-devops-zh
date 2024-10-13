@@ -1,0 +1,99 @@
+- en: Parameterize Method
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/parameterize-method](https://refactoringguru.cn/parameterize-method)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Multiple methods perform similar actions that are different only in their internal
+    values, numbers or operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Combine these methods by using a parameter that will pass the necessary special
+    value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Parameterize Method - Before](../Images/ac8ba6973aac40782b9451dfd0baff6f.png)After![Parameterize
+    Method - After](../Images/16d57d45872e6db45d63821d9a53117d.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you have similar methods, you probably have duplicate code, with all the
+    consequences that this entails.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What's more, if you need to add yet another version of this functionality, you
+    will have to create yet another method. Instead, you could simply run the existing
+    method with a different parameter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Drawbacks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Sometimes this refactoring technique can be taken too far, resulting in a long
+    and complicated common method instead of multiple simpler ones.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Also be careful when moving activation/deactivation of functionality to a parameter.
+    This can eventually lead to creation of a large conditional operator that will
+    need to be treated via [Replace Parameter with Explicit Methods](/replace-parameter-with-explicit-methods).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a new method with a parameter and move it to the code that's the same
+    for all classes, by applying [Extract Method](/extract-method). Note that sometimes
+    only a certain part of methods is actually the same. In this case, refactoring
+    consists of extracting only the same part to a new method.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the code of the new method, replace the special/differing value with a parameter.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For each old method, find the places where it's called, replacing these calls
+    with calls to the new method that include a parameter. Then delete the old method.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

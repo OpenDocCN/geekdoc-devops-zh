@@ -1,0 +1,161 @@
+- en: Introduce Null Object
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/introduce-null-object](https://refactoringguru.cn/introduce-null-object)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since some methods return `null` instead of real objects, you have many checks
+    for `null` in your code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Instead of `null`, return a null object that exhibits the default behavior.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Dozens of checks for `null` make your code longer and uglier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Drawbacks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The price of getting rid of conditionals is creating yet another new class.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: From the class in question, create a subclass that will perform the role of
+    null object.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In both classes, create the method `isNull()`, which will return `true` for
+    a null object and `false` for a real class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Find all places where the code may return `null` instead of a real object. Change
+    the code so that it returns a null object.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Find all places where the variables of the real class are compared with `null`.
+    Replace these checks with a call for `isNull()`.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If methods of the original class are run in these conditionals when a value
+    doesn't equal `null`, redefine these methods in the null class and insert the
+    code from the `else` part of the condition there. Then you can delete the entire
+    conditional and differing behavior will be implemented via polymorphism.
+  prefs:
+  - PREF_OL
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If things aren't so simple and the methods can't be redefined, see if you can
+    simply extract the operators that were supposed to be performed in the case of
+    a `null` value to new methods of the null object. Call these methods instead of
+    the old code in `else` as the operations by default.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

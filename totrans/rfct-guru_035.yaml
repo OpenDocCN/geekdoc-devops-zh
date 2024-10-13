@@ -1,0 +1,19 @@
+- en: Other Smells
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/refactoring/smells/other](https://refactoringguru.cn/refactoring/smells/other)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Below are the smells which don't fall into any broad category.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Incomplete Library Class](/smells/incomplete-library-class)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sooner or later, [libraries](https://en.wikipedia.org/wiki/Library_(computing))
+    stop meeting user needs. The only solution to the problem—changing the library—is
+    often impossible since the library is read-only.
+  prefs: []
+  type: TYPE_NORMAL

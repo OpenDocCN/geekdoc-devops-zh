@@ -1,0 +1,35 @@
+- en: Change Preventers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/refactoring/smells/change-preventers](https://refactoringguru.cn/refactoring/smells/change-preventers)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: These smells mean that if you need to change something in one place in your
+    code, you have to make many changes in other places too. Program development becomes
+    much more complicated and expensive as a result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Divergent Change](/smells/divergent-change)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You find yourself having to change many unrelated methods when you make changes
+    to a class. For example, when adding a new product type you have to change the
+    methods for finding, displaying, and ordering products.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Shotgun Surgery](/smells/shotgun-surgery)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Making any modifications requires that you make many small changes to many different
+    classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Parallel Inheritance Hierarchies](/smells/parallel-inheritance-hierarchies)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whenever you create a subclass for a class, you find yourself needing to create
+    a subclass for another class.
+  prefs: []
+  type: TYPE_NORMAL

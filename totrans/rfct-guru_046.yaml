@@ -1,0 +1,176 @@
+- en: Replace Method with Method Object
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/replace-method-with-method-object](https://refactoringguru.cn/replace-method-with-method-object)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have a long method in which the local variables are so intertwined that
+    you can't apply *Extract Method*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Transform the method into a separate class so that the local variables become
+    fields of the class. Then you can split the method into several methods within
+    the same class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A method is too long and you can't separate it due to tangled masses of local
+    variables that are hard to isolate from each other.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first step is to isolate the entire method into a separate class and turn
+    its local variables into fields of the class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Firstly, this allows isolating the problem at the class level. Secondly, it
+    paves the way for splitting a large and unwieldy method into smaller ones that
+    wouldn't fit with the purpose of the original class anyway.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Isolating a long method in its own class allows stopping a method from ballooning
+    in size. This also allows splitting it into submethods within the class, without
+    polluting the original class with utility methods.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Drawbacks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another class is added, increasing the overall complexity of the program.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a new class. Name it based on the purpose of the method that you're refactoring.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the new class, create a private field for storing a reference to an instance
+    of the class in which the method was previously located. It could be used to get
+    some required data from the original class if needed.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create a separate private field for each local variable of the method.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create a constructor that accepts as parameters the values of all local variables
+    of the method and also initializes the corresponding private fields.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Declare the main method and copy the code of the original method to it, replacing
+    the local variables with private fields.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Replace the body of the original method in the original class by creating a
+    method object and calling its main method.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

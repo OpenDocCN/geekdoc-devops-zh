@@ -1,0 +1,105 @@
+- en: Large Class
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/smells/large-class](https://refactoringguru.cn/smells/large-class)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Signs and Symptoms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A class contains many fields/methods/lines of code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e24321a2cdcffc7070cf5f92c3dc4206.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Reasons for the Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Classes usually start small. But over time, they get bloated as the program
+    grows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As is the case with long methods as well, programmers usually find it mentally
+    less taxing to place a new feature in an existing class than to create a new class
+    for the feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c672e4dfde4bcbc1810a191ecf568037.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Treatment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When a class is wearing too many (functional) hats, think about splitting it
+    up:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Extract Class](/extract-class) helps if part of the behavior of the large
+    class can be spun off into a separate component.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Extract Subclass](/extract-subclass) helps if part of the behavior of the
+    large class can be implemented in different ways or is used in rare cases.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Extract Interface](/extract-interface) helps if it''s necessary to have a
+    list of the operations and behaviors that the client can use.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a large class is responsible for the graphical interface, you may try to
+    move some of its data and behavior to a separate domain object. In doing so, it
+    may be necessary to store copies of some data in two places and keep the data
+    consistent. [Duplicate Observed Data](/duplicate-observed-data) offers a way to
+    do this.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/c5884391409a94a6ab02fc64bb424d0f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Payoff
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Refactoring of these classes spares developers from needing to remember a large
+    number of attributes for a class.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In many cases, splitting large classes into parts avoids duplication of code
+    and functionality.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,37 @@
+- en: Couplers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/refactoring/smells/couplers](https://refactoringguru.cn/refactoring/smells/couplers)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: All the smells in this group contribute to excessive coupling between classes
+    or show what happens if coupling is replaced by excessive delegation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Feature Envy](/smells/feature-envy)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A method accesses the data of another object more than its own data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Inappropriate Intimacy](/smells/inappropriate-intimacy)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One class uses the internal fields and methods of another class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Message Chains](/smells/message-chains)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In code you see a series of calls resembling `$a->b()->c()->d()`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Middle Man](/smells/middle-man)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If a class performs only one action, delegating work to another class, why does
+    it exist at all?
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,173 @@
+- en: Organizing Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/refactoring/techniques/organizing-data](https://refactoringguru.cn/refactoring/techniques/organizing-data)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: These refactoring techniques help with data handling, replacing primitives with
+    rich class functionality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another important result is untangling of class associations, which makes classes
+    more portable and reusable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Self Encapsulate Field](/self-encapsulate-field)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You use direct access to private fields inside a class.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Create a getter and setter for the field, and use only them for
+    accessing the field.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Data Value with Object](/replace-data-value-with-object)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** A class (or group of classes) contains a data field. The field
+    has its own behavior and associated data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Create a new class, place the old field and its behavior in the
+    class, and store the object of the class in the original class.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Change Value to Reference](/change-value-to-reference)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** So you have many identical instances of a single class that you
+    need to replace with a single object.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Convert the identical objects to a single reference object.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Change Reference to Value](/change-reference-to-value)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a reference object that''s too small and infrequently
+    changed to justify managing its life cycle.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Turn it into a value object.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Array with Object](/replace-array-with-object)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have an array that contains various types of data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Replace the array with an object that will have separate fields
+    for each element.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Duplicate Observed Data](/duplicate-observed-data)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Is domain data stored in classes responsible for the GUI?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Then it''s a good idea to separate the data into separate classes,
+    ensuring connection and synchronization between the domain class and the GUI.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Change Unidirectional Association to Bidirectional](/change-unidirectional-association-to-bidirectional)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have two classes that each need to use the features of the
+    other, but the association between them is only unidirectional.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Add the missing association to the class that needs it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Change Bidirectional Association to Unidirectional](/change-bidirectional-association-to-unidirectional)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a bidirectional association between classes, but one
+    of the classes doesn''t use the other''s features.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Remove the unused association.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Magic Number with Symbolic Constant](/replace-magic-number-with-symbolic-constant)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Your code uses a number that has a certain meaning to it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Replace this number with a constant that has a human-readable
+    name explaining the meaning of the number.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Encapsulate Field](/encapsulate-field)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a public field.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Make the field private and create access methods for it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Encapsulate Collection](/encapsulate-collection)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** A class contains a collection field and a simple getter and setter
+    for working with the collection.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Make the getter-returned value read-only and create methods for
+    adding/deleting elements of the collection.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Type Code with Class](/replace-type-code-with-class)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** A class has a field that contains type code. The values of this
+    type aren''t used in operator conditions and don''t affect the behavior of the
+    program.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Create a new class and use its objects instead of the type code
+    values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Type Code with Subclasses](/replace-type-code-with-subclasses)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a coded type that directly affects program behavior (values
+    of this field trigger various code in conditionals).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Create subclasses for each value of the coded type. Then extract
+    the relevant behaviors from the original class to these subclasses. Replace the
+    control flow code with polymorphism.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a coded type that affects behavior but you can''t use
+    subclasses to get rid of it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Replace type code with a state object. If it''s necessary to
+    replace a field value with type code, another state object is "plugged in".'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Subclass with Fields](/replace-subclass-with-fields)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have subclasses differing only in their (constant-returning)
+    methods.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Replace the methods with fields in the parent class and delete
+    the subclasses.'
+  prefs: []
+  type: TYPE_NORMAL

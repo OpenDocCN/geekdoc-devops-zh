@@ -1,0 +1,128 @@
+- en: Extract Class
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/extract-class](https://refactoringguru.cn/extract-class)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When one class does the work of two, awkwardness results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Instead, create a new class and place the fields and methods responsible for
+    the relevant functionality in it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Extract Class - Before](../Images/736293f9ca11de26be58439303a15c5a.png)After![Extract
+    Class - After](../Images/adf613cc50f99eeeec3a47ac215f5cf7.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Classes always start out clear and easy to understand. They do their job and
+    mind their own business as it were, without butting into the work of other classes.
+    But as the program expands, a method is added and then a field... and eventually,
+    some classes are performing more responsibilities than ever envisioned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This refactoring method will help maintain adherence to the *Single Responsibility
+    Principle*. The code of your classes will be more obvious and understandable.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Single-responsibility classes are more reliable and tolerant of changes. For
+    example, say that you have a class responsible for ten different things. When
+    you change this class to make it better for one thing, you risk breaking it for
+    the nine others.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Drawbacks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you "overdo it" with this refactoring technique, you will have to resort
+    to [Inline Class](/inline-class).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before starting, decide on how exactly you want to split up the responsibilities
+    of the class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a new class to contain the relevant functionality.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create a relationship between the old class and the new one. Optimally, this
+    relationship is unidirectional; this allows reusing the second class without any
+    issues. Nonetheless, if you think that a two-way relationship is necessary, this
+    can always be set up.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Use [Move Field](/move-field) and [Move Method](/move-method) for each field
+    and method that you have decided to move to the new class. For methods, start
+    with private ones in order to reduce the risk of making a large number of errors.
+    Try to relocate just a little bit at a time and test the results after each move,
+    in order to avoid a pileup of error-fixing at the very end.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: After you're done moving, take one more look at the resulting classes. An old
+    class with changed responsibilities may be renamed for increased clarity. Check
+    again to see whether you can get rid of two-way class relationships, if any are
+    present.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Also give thought to accessibility to the new class from the outside. You can
+    hide the class from the client entirely by making it private, managing it via
+    the fields from the old class. Alternatively, you can make it a public one by
+    allowing the client to change values directly. Your decision here depends on how
+    safe it's for the behavior of the old class when unexpected direct changes are
+    made to the values in the new class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

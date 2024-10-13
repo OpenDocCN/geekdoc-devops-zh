@@ -1,0 +1,39 @@
+- en: Object-Orientation Abusers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/refactoring/smells/oo-abusers](https://refactoringguru.cn/refactoring/smells/oo-abusers)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: All these smells are incomplete or incorrect application of object-oriented
+    programming principles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Switch Statements](/smells/switch-statements)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You have a complex `switch` operator or sequence of `if` statements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Temporary Field](/smells/temporary-field)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Temporary fields get their values (and thus are needed by objects) only under
+    certain circumstances. Outside of these circumstances, they're empty.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Refused Bequest](/smells/refused-bequest)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If a subclass uses only some of the methods and properties inherited from its
+    parents, the hierarchy is off-kilter. The unneeded methods may simply go unused
+    or be redefined and give off exceptions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Alternative Classes with Different Interfaces](/smells/alternative-classes-with-different-interfaces)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Two classes perform identical functions but have different method names.
+  prefs: []
+  type: TYPE_NORMAL

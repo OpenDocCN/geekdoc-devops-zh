@@ -1,0 +1,119 @@
+- en: Separate Query from Modifier
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/separate-query-from-modifier](https://refactoringguru.cn/separate-query-from-modifier)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Do you have a method that returns a value but also changes something inside
+    an object?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Split the method into two separate methods. As you would expect, one of them
+    should return the value and the other one modifies the object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Separate Query from Modifier - Before](../Images/b677d404e57bd619bcb7e6c70e82c178.png)After![Separate
+    Query from Modifier - After](../Images/e57843da4ccd7e78aea0a90c2a1b9bbd.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This factoring technique implements *Command and Query Responsibility Segregation*.
+    This principle tells us to separate code responsible for getting data from code
+    that changes something inside an object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code for getting data is named a *query*. Code for changing things in the *visible
+    state* of an object is named a *modifier*. When a *query* and *modifier* are combined,
+    you don't have a way to get data without making changes to its condition. In other
+    words, you ask a question and can change the answer even as it's being received.
+    This problem becomes even more severe when the person calling the query may not
+    know about the method's "side effects", which often leads to runtime errors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But remember that side effects are dangerous only in the case of *modifiers*
+    that change the **visible** state of an object. These could be, for example, fields
+    accessible from an object's public interface, entry in a database, in files, etc.
+    If a *modifier* only caches a complex operation and saves it within the private
+    field of a class, it can hardly cause any side effects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you have a *query* that doesn't change the state of your program, you can
+    call it as many times as you like without having to worry about unintended changes
+    in the result caused by the mere fact of you calling the method.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Drawbacks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In some cases it's convenient to get data after performing a command. For example,
+    when deleting something from a database you want to know how many rows were deleted.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a new *query method* to return what the original method did.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Change the original method so that it returns only the result of calling the
+    new *query method*.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Replace all references to the original method with a call to the *query method*.
+    Immediately before this line, place a call to the *modifier method*. This will
+    save you from side effects in case if the original method was used in a condition
+    of a conditional operator or loop.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Get rid of the value-returning code in the original method, which now has become
+    a proper *modifier method*.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,116 @@
+- en: Collapse Hierarchy
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/collapse-hierarchy](https://refactoringguru.cn/collapse-hierarchy)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have a class hierarchy in which a subclass is practically the same as its
+    superclass.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Merge the subclass and superclass.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Collapse Hierarchy - Before](../Images/17ee75b3ee6b56cc0277bcaa1a8adca0.png)After![Collapse
+    Hierarchy - After](../Images/339856baf0d53a6c3a53cc7adfa6915e.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Your program has grown over time and a subclass and superclass have become practically
+    the same. A feature was removed from a subclass, a method was moved to the superclass...
+    and now you have two look-alike classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Program complexity is reduced. Fewer classes mean fewer things to keep straight
+    in your head and fewer breakable moving parts to worry about during future code
+    changes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Navigating through your code is easier when methods are defined in one class
+    early. You don't need to comb through the entire hierarchy to find a particular
+    method.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When Not to Use
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Does the class hierarchy that you're refactoring have more than one subclass?
+    If so, after refactoring is complete, the remaining subclasses should become the
+    inheritors of the class in which the hierarchy was collapsed.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But keep in mind that this can lead to violations of the *Liskov substitution
+    principle*. For example, if your program emulates city transport networks and
+    you accidentally collapse the `Transport` superclass into the `Car` subclass,
+    then the `Plane` class may become the inheritor of `Car`. Oops!
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Select which class is easier to remove: the superclass or its subclass.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Use [Pull Up Field](/pull-up-field) and [Pull Up Method](/pull-up-method) if
+    you decide to get rid of the subclass. If you choose to eliminate the superclass,
+    go for [Push Down Field](/push-down-field) and [Push Down Method](/push-down-method).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Replace all uses of the class that you're deleting with the class to which the
+    fields and methods are to be migrated. Often this will be code for creating classes,
+    variable and parameter typing, and documentation in code comments.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Delete the empty class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

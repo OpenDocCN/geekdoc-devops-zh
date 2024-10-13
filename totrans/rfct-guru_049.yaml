@@ -1,0 +1,109 @@
+- en: Move Method
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/move-method](https://refactoringguru.cn/move-method)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A method is used more in another class than in its own class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a new method in the class that uses the method the most, then move code
+    from the old method to there. Turn the code of the original method into a reference
+    to the new method in the other class or else remove it entirely.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Move Method - Before](../Images/ef0fdb8b01de0bf9f9ec2a2f7a327c38.png)After![Move
+    Method - After](../Images/e6915fa5898436114da3e325cffd62fa.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You want to move a method to a class that contains most of the data used by
+    the method. This makes **classes more internally coherent**.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You want to move a method in order to reduce or eliminate the dependency of
+    the class calling the method on the class in which it's located. This can be useful
+    if the calling class is already dependent on the class to which you're planning
+    to move the method. This **reduces dependency between classes**.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Verify all features used by the old method in its class. It may be a good idea
+    to move them as well. As a rule, if a feature is used only by the method under
+    consideration, you should certainly move the feature to it. If the feature is
+    used by other methods too, you should move these methods as well. Sometimes it's
+    much easier to move a large number of methods than to set up relationships between
+    them in different classes.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Make sure that the method isn't declared in superclasses and subclasses. If
+    this is the case, you will either have to refrain from moving or else implement
+    a kind of polymorphism in the recipient class in order to ensure varying functionality
+    of a method split up among donor classes.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Declare the new method in the recipient class. You may want to give a new name
+    for the method that's more appropriate for it in the new class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Decide how you will refer to the recipient class. You may already have a field
+    or method that returns an appropriate object, but if not, you will need to write
+    a new method or field to store the object of the recipient class.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Now you have a way to refer to the recipient object and a new method in its
+    class. With all this under your belt, you can turn the old method into a reference
+    to the new method.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Take a look: can you delete the old method entirely? If so, place a reference
+    to the new method in all places that use the old one.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

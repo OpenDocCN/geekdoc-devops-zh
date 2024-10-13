@@ -1,0 +1,84 @@
+- en: Incomplete Library Class
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/smells/incomplete-library-class](https://refactoringguru.cn/smells/incomplete-library-class)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Signs and Symptoms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Sooner or later, [libraries](https://en.wikipedia.org/wiki/Library_(computing))
+    stop meeting user needs. The only solution to the problem—changing the library—is
+    often impossible since the library is read-only.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3b8ee9f3114d6e2d9c10786df57b511c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Reasons for the Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The author of the library hasn't provided the features you need or has refused
+    to implement them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Treatment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To introduce a few methods to a library class, use [Introduce Foreign Method](/introduce-foreign-method).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For big changes in a class library, use [Introduce Local Extension](/introduce-local-extension).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Payoff
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Reduces code duplication (instead of creating your own library from scratch,
+    you can still piggy-back off an existing one).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/60943c416d0180b62787e86496d576ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When to Ignore
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Extending a library can generate additional work if the changes to the library
+    involve changes in code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

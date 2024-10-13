@@ -1,0 +1,154 @@
+- en: Duplicate Observed Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/duplicate-observed-data](https://refactoringguru.cn/duplicate-observed-data)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Is domain data stored in classes responsible for the GUI?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Then it's a good idea to separate the data into separate classes, ensuring connection
+    and synchronization between the domain class and the GUI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Duplicate Observed Data - Before](../Images/d474b659b984c093e310fcc415160b12.png)After![Duplicate
+    Observed Data - After](../Images/e4d42f7bc1219ac9900b28e6908ee2eb.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You want to have multiple interface views for the same data (for example, you
+    have both a desktop app and a mobile app). If you fail to separate the GUI from
+    the domain, you will have a very hard time avoiding code duplication and a large
+    number of mistakes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You split responsibility between business logic classes and presentation classes
+    (cf. the *Single Responsibility Principle*), which makes your program more readable
+    and understandable.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you need to add a new interface view, create new presentation classes; you
+    don't need to touch the code of the business logic (cf. the *Open/Closed Principle*).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now different people can work on the business logic and the user interfaces.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When Not to Use
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This refactoring technique, which in its classic form is performed using the
+    [Observer](/design-patterns/observer) template, isn't applicable for web apps,
+    where all classes are recreated between queries to the web server.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: All the same, the general principle of extracting business logic into separate
+    classes can be justified for web apps as well. But this will be implemented using
+    different refactoring techniques depending on how your system is designed.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Hide direct access to domain data in the *GUI class*. For this, it's best to
+    use [Self Encapsulate Field](/self-encapsulate-field). So you create the getters
+    and setters for this data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In handlers for *GUI class* events, use setters to set new field values. This
+    will let you pass these values to the associated *domain object*.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create a domain class and copy necessary fields from the *GUI class* to it.
+    Create getters and seters for all these fields.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Create an Observer pattern for these two classes:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the *domain class*, create an array for storing observer objects (*GUI objects*),
+    as well as methods for registering, deleting and notifying them.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the *GUI class*, create a field for storing references to the *domain class*
+    as well as the `update()` method, which will be reacting to changes in the object
+    and update the values of fields in the *GUI class*. Note that value updates should
+    be established directly in the method, in order to avoid recursion.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the *GUI class* constructor, create an instance of *domain class* and save
+    it in the field you have created. Register the *GUI object* as an observer in
+    the *domain object*.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the setters for *domain class* fields, call the method for notifying the
+    observer (in other words, method for updating in the *GUI class*), in order to
+    pass the new values to the GUI.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Change the setters of the *GUI class* fields so that they set new values in
+    the domain object directly. Watch out to make sure that values aren't set through
+    a *domain class* setter—otherwise infinite recursion will result.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

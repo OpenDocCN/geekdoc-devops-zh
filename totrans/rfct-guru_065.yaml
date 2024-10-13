@@ -1,0 +1,129 @@
+- en: Change Bidirectional Association to Unidirectional
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/change-bidirectional-association-to-unidirectional](https://refactoringguru.cn/change-bidirectional-association-to-unidirectional)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have a bidirectional association between classes, but one of the classes
+    doesn't use the other's features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Remove the unused association.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Change Bidirectional Association to Unidirectional - Before](../Images/798cc372424c2131fa86cfbcb618d86c.png)After![Change
+    Bidirectional Association to Unidirectional - After](../Images/0e008dd4ff7cbff40b3af99c0b584c66.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A bidirectional association is generally harder to maintain than a unidirectional
+    one, requiring additional code for properly creating and deleting the relevant
+    objects. This makes the program more complicated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition, an improperly implemented bidirectional association can cause problems
+    for garbage collection (in turn leading to memory bloat by unused objects).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example: the garbage collector removes objects from memory that are no longer
+    referenced by other objects. Let''s say that an object pair `User`-`Order` was
+    created, used, and then abandoned. But these objects won''t be cleared from memory
+    since they still refer to each other. That said, this problem is becoming less
+    important thanks to advances in programming languages, which now automatically
+    identify unused object references and remove them from memory.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There's also the problem of interdependency between classes. In a bidirectional
+    association, the two classes must know about each other, meaning that they can't
+    be used separately. If many of these associations are present, different parts
+    of the program become too dependent on each other and any changes in one component
+    may affect the other components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Simplifies the class that doesn't need the relationship. Less code equals less
+    code maintenance.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reduces dependency between classes. Independent classes are easier to maintain
+    since any changes to a class affect only that class.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Make sure that one of the following is true for your classes:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: No association is used.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There's another way to get the associated object, such through a database query.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The associated object can be passed as an argument to the methods that use it.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Depending on your situation, use of a field that contains an association with
+    another object should be replaced by a parameter or method call for getting the
+    object in a different way.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Delete the code that assigns the associated object to the field.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Delete the now-unused field.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,151 @@
+- en: Simplifying Method Calls
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/refactoring/techniques/simplifying-method-calls](https://refactoringguru.cn/refactoring/techniques/simplifying-method-calls)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: These techniques make method calls simpler and easier to understand. This, in
+    turn, simplifies the interfaces for interaction between classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Rename Method](/rename-method)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** The name of a method doesn''t explain what the method does.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Rename the method.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Add Parameter](/add-parameter)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** A method doesn''t have enough data to perform certain actions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Create a new parameter to pass the necessary data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Remove Parameter](/remove-parameter)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** A parameter isn''t used in the body of a method.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Remove the unused parameter.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Separate Query from Modifier](/separate-query-from-modifier)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Do you have a method that returns a value but also changes something
+    inside an object?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Split the method into two separate methods. As you would expect,
+    one of them should return the value and the other one modifies the object.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Parameterize Method](/parameterize-method)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Multiple methods perform similar actions that are different only
+    in their internal values, numbers or operations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Combine these methods by using a parameter that will pass the
+    necessary special value.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Parameter with Explicit Methods](/replace-parameter-with-explicit-methods)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** A method is split into parts, each of which is run depending on
+    the value of a parameter.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Extract the individual parts of the method into their own methods
+    and call them instead of the original method.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Preserve Whole Object](/preserve-whole-object)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You get several values from an object and then pass them as parameters
+    to a method.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Instead, try passing the whole object.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Parameter with Method Call](/replace-parameter-with-method-call)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Calling a query method and passing its results as the parameters
+    of another method, while that method could call the query directly.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Instead of passing the value through a parameter, try placing
+    a query call inside the method body.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introduce Parameter Object](/introduce-parameter-object)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** Your methods contain a repeating group of parameters.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Replace these parameters with an object.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Remove Setting Method](/remove-setting-method)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** The value of a field should be set only when it''s created, and
+    not change at any time after that.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** So remove methods that set the field''s value.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Hide Method](/hide-method)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** A method isn''t used by other classes or is used only inside its
+    own class hierarchy.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Make the method private or protected.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Constructor with Factory Method](/replace-constructor-with-factory-method)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You have a complex constructor that does something more than just
+    setting parameter values in object fields.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Create a factory method and use it to replace constructor calls.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Error Code with Exception](/replace-error-code-with-exception)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** A method returns a special value that indicates an error?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Throw an exception instead.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Replace Exception with Test](/replace-exception-with-test)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem:** You throw an exception in a place where a simple test would do
+    the job?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** Replace the exception with a condition test.'
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,110 @@
+- en: Long Parameter List
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/smells/long-parameter-list](https://refactoringguru.cn/smells/long-parameter-list)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Signs and Symptoms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: More than three or four parameters for a method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bdb16c81e84680bf5b5f68860ae9d70d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Reasons for the Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A long list of parameters might happen after several types of algorithms are
+    merged in a single method. A long list may have been created to control which
+    algorithm will be run and how.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Long parameter lists may also be the byproduct of efforts to make classes more
+    independent of each other. For example, the code for creating specific objects
+    needed in a method was moved from the method to the code for calling the method,
+    but the created objects are passed to the method as parameters. Thus the original
+    class no longer knows about the relationships between objects, and dependency
+    has decreased. But if several of these objects are created, each of them will
+    require its own parameter, which means a longer parameter list.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It's hard to understand such lists, which become contradictory and hard to use
+    as they grow longer. Instead of a long list of parameters, a method can use the
+    data of its own object. If the current object doesn't contain all necessary data,
+    another object (which will get the necessary data) can be passed as a method parameter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Treatment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Check what values are passed to parameters. If some of the arguments are just
+    results of method calls of another object, use [Replace Parameter with Method
+    Call](/replace-parameter-with-method-call). This object can be placed in the field
+    of its own class or passed as a method parameter.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Instead of passing a group of data received from another object as parameters,
+    pass the object itself to the method, by using [Preserve Whole Object](/preserve-whole-object).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But if these parameters are coming from different sources, you can pass them
+    as a single parameter object via [Introduce Parameter Object](/introduce-parameter-object).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/00c402154dfcee5b9ae76a961b244beb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Payoff
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: More readable, shorter code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Refactoring may reveal previously unnoticed duplicate code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When to Ignore
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Don't get rid of parameters if doing so would cause unwanted dependency between
+    classes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

@@ -1,0 +1,124 @@
+- en: Long Method
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/smells/long-method](https://refactoringguru.cn/smells/long-method)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Signs and Symptoms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A method contains too many lines of code. Generally, any method longer than
+    ten lines should make you start asking questions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/327047b314b2a85724c738383e3d6f66.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Reasons for the Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Like the Hotel California, something is always being added to a method but nothing
+    is ever taken out. Since it's easier to write code than to read it, this "smell"
+    remains unnoticed until the method turns into an ugly, oversized beast.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mentally, it''s often harder to create a new method than to add to an existing
+    one: "But it''s just two lines, there''s no use in creating a whole method just
+    for that..." Which means that another line is added and then yet another, giving
+    birth to a tangle of spaghetti code.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Treatment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As a rule of thumb, if you feel the need to comment on something inside a method,
+    you should take this code and put it in a new method. Even a single line can and
+    should be split off into a separate method, if it requires explanations. And if
+    the method has a descriptive name, nobody will need to look at the code to see
+    what it does.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f5b674bc074542f28730233de71d5182.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To reduce the length of a method body, use [Extract Method](/extract-method).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If local variables and parameters interfere with extracting a method, use [Replace
+    Temp with Query](/replace-temp-with-query), [Introduce Parameter Object](/introduce-parameter-object)
+    or [Preserve Whole Object](/preserve-whole-object).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If none of the previous recipes help, try moving the entire method to a separate
+    object via [Replace Method with Method Object](/replace-method-with-method-object).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Conditional operators and loops are a good clue that code can be moved to a
+    separate method. For conditionals, use [Decompose Conditional](/decompose-conditional).
+    If loops are in the way, try [Extract Method](/extract-method).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Payoff
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Among all types of object-oriented code, classes with short methods live longest.
+    The longer a method or function is, the harder it becomes to understand and maintain
+    it.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In addition, long methods offer the perfect hiding place for unwanted duplicate
+    code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/8519663b669d4ad0afd734e85b668b7e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Performance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Does an increase in the number of methods hurt performance, as many people claim?
+    In almost all cases the impact is so negligible that it's not even worth worrying
+    about.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plus, now that you have clear and understandable code, you're more likely to
+    find truly effective methods for restructuring code and getting real performance
+    gains if the need ever arises.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

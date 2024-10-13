@@ -1,0 +1,142 @@
+- en: Encapsulate Collection
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/encapsulate-collection](https://refactoringguru.cn/encapsulate-collection)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A class contains a collection field and a simple getter and setter for working
+    with the collection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Make the getter-returned value read-only and create methods for adding/deleting
+    elements of the collection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before![Encapsulate Collection - Before](../Images/d61c9af4590593edec45f293fecc0885.png)After![Encapsulate
+    Collection - After](../Images/72ab1dc242723ae23322fc28d823464e.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A class contains a field that contains a collection of objects. This collection
+    could be an array, list, set or vector. A normal getter and setter have been created
+    for working with the collection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But the collections should be used by a protocol that's a bit different from
+    the one used by other data types. The getter method shouldn't return the collection
+    object itself, since this would let clients change collection contents without
+    the knowledge of the owner class. In addition, this would show too much of the
+    internal structures of the object data to clients. The method for getting collection
+    elements should return a value that doesn't allow changing the collection or disclose
+    excessive data about its structure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition, there shouldn't be a method that assigns a value to the collection.
+    Instead, there should be operations for adding and deleting elements. Thanks to
+    this, the owner object gains control over addition and deletion of collection
+    elements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Such a protocol properly encapsulates a collection, which ultimately reduces
+    the degree of association between the owner class and the client code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The collection field is encapsulated inside a class. When the getter is called,
+    it returns a copy of the collection, which prevents accidental changing or overwriting
+    of the collection elements without the knowledge of the class that contains the
+    collection.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If collection elements are contained inside a primitive type, such as an array,
+    you create more convenient methods for working with the collection.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If collection elements are contained inside a non-primitive container (standard
+    collection class), by encapsulating the collection you can restrict access to
+    unwanted standard methods of the collection (such as by restricting addition of
+    new elements).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create methods for adding and deleting collection elements. They must accept
+    collection elements in their parameters.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Assign an empty collection to the field as the initial value if this isn't done
+    in the class constructor.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Find the calls of the collection field setter. Change the setter so that it
+    uses operations for adding and deleting elements, or make these operations call
+    client code.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Note that setters can be used only to replace all collection elements with other
+    ones. Therefore it may be advisable to change the setter name ([Rename Method](/rename-method))
+    to `replace`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Find all calls of the collection getter after which the collection is changed.
+    Change the code so that it uses your new methods for adding and deleting elements
+    from the collection.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Change the getter so that it returns a read-only representation of the collection.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Inspect the client code that uses the collection for code that would look better
+    inside of the collection class itself.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL

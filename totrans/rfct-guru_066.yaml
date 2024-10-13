@@ -1,0 +1,212 @@
+- en: Replace Magic Number with Symbolic Constant
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://refactoringguru.cn/replace-magic-number-with-symbolic-constant](https://refactoringguru.cn/replace-magic-number-with-symbolic-constant)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Your code uses a number that has a certain meaning to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Replace this number with a constant that has a human-readable name explaining
+    the meaning of the number.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: After
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Why Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A magic number is a numeric value that's encountered in the source but has no
+    obvious meaning. This "anti-pattern" makes it harder to understand the program
+    and refactor the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Yet more difficulties arise when you need to change this magic number. Find
+    and replace won''t work for this: the same number may be used for different purposes
+    in different places, meaning that you will have to verify every line of code that
+    uses this number.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The symbolic constant can serve as live documentation of the meaning of its
+    value.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It's much easier to change the value of a constant than to search for this number
+    throughout the entire codebase, without the risk of accidentally changing the
+    same number used elsewhere for a different purpose.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reduce duplicate use of a number or string in the code. This is especially important
+    when the value is complicated and long (such as `3.14159` or `0xCAFEBABE`).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Good to Know
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Not all numbers are magical.
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'If the purpose of a number is obvious, there''s no need to replace it. A classic
+    example is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Alternatives
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Sometimes a magic number can be replaced with method calls. For example, if
+    you have a magic number that signifies the number of elements in a collection,
+    you don't need to use it for checking the last element of the collection. Instead,
+    use the standard method for getting the collection length.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Magic numbers are sometimes used as type code. Say that you have two types
+    of users and you use a number field in a class to specify which is which: administrators
+    are `1` and ordinary users are `2`.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'In this case, you should use one of the refactoring methods to avoid type code:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[Replace Type Code with Class](/replace-type-code-with-class)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Replace Type Code with Subclasses](/replace-type-code-with-subclasses)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Refactor
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Declare a constant and assign the value of the magic number to it.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Find all mentions of the magic number.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For each of the numbers that you find, double-check that the magic number in
+    this particular case corresponds to the purpose of the constant. If yes, replace
+    the number with your constant. This is an important step, since the same number
+    can mean absolutely different things (and replaced with different constants, as
+    the case may be).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  prefs: []
+  type: TYPE_NORMAL
+- en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your browser does not support HTML video.](/refactoring/course)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tired of reading?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No wonder, it takes 7 hours to read all of the text we have here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our interactive course on refactoring. It offers a less tedious approach
+    to learning new stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Let''s see…*](/refactoring/course)'
+  prefs: []
+  type: TYPE_NORMAL
