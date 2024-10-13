@@ -1,116 +1,171 @@
 - en: Collapse Hierarchy
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 合并层次结构
 - en: 原文：[https://refactoringguru.cn/collapse-hierarchy](https://refactoringguru.cn/collapse-hierarchy)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/collapse-hierarchy](https://refactoringguru.cn/collapse-hierarchy)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a class hierarchy in which a subclass is practically the same as its
     superclass.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 您有一个类层次结构，其中子类几乎与其超类相同。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Merge the subclass and superclass.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 合并子类和超类。
 - en: Before![Collapse Hierarchy - Before](../Images/17ee75b3ee6b56cc0277bcaa1a8adca0.png)After![Collapse
     Hierarchy - After](../Images/339856baf0d53a6c3a53cc7adfa6915e.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[合并层次结构 - 之前](../Images/17ee75b3ee6b56cc0277bcaa1a8adca0.png)之后！[合并层次结构 -
+    之后](../Images/339856baf0d53a6c3a53cc7adfa6915e.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: Your program has grown over time and a subclass and superclass have become practically
     the same. A feature was removed from a subclass, a method was moved to the superclass...
     and now you have two look-alike classes.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的程序随着时间的推移而增长，子类和超类几乎变得相同。一个功能从子类中删除，一个方法移到超类……现在您有两个相似的类。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Program complexity is reduced. Fewer classes mean fewer things to keep straight
     in your head and fewer breakable moving parts to worry about during future code
     changes.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 程序复杂性降低。更少的类意味着您头脑中需要理清的事物更少，并且在将来代码更改时需要担心的可破坏的活动部分也更少。
 - en: Navigating through your code is easier when methods are defined in one class
     early. You don't need to comb through the entire hierarchy to find a particular
     method.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当方法在一个类中早期定义时，浏览您的代码会更容易。您无需遍历整个层次结构来找到特定方法。
 - en: When Not to Use
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么时候不使用
 - en: Does the class hierarchy that you're refactoring have more than one subclass?
     If so, after refactoring is complete, the remaining subclasses should become the
     inheritors of the class in which the hierarchy was collapsed.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 您正在重构的类层次结构是否有多个子类？如果是这样，重构完成后，剩余的子类应成为合并层次结构的类的继承者。
 - en: But keep in mind that this can lead to violations of the *Liskov substitution
     principle*. For example, if your program emulates city transport networks and
     you accidentally collapse the `Transport` superclass into the `Car` subclass,
     then the `Plane` class may become the inheritor of `Car`. Oops!
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 但请记住，这可能导致违反*里斯科夫替换原则*。例如，如果您的程序模拟城市交通网络，您不小心将`Transport`超类合并到`Car`子类中，那么`Plane`类可能会成为`Car`的继承者。哎呀！
 - en: How to Refactor
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: 'Select which class is easier to remove: the superclass or its subclass.'
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 选择哪个类更容易删除：超类还是其子类。
 - en: Use [Pull Up Field](/pull-up-field) and [Pull Up Method](/pull-up-method) if
     you decide to get rid of the subclass. If you choose to eliminate the superclass,
     go for [Push Down Field](/push-down-field) and [Push Down Method](/push-down-method).
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果您决定去掉子类，请使用[提升字段](/pull-up-field)和[提升方法](/pull-up-method)。如果您选择删除超类，请使用[下推字段](/push-down-field)和[下推方法](/push-down-method)。
 - en: Replace all uses of the class that you're deleting with the class to which the
     fields and methods are to be migrated. Often this will be code for creating classes,
     variable and parameter typing, and documentation in code comments.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将您要删除的类的所有用法替换为字段和方法要迁移到的类。通常这将涉及创建类的代码、变量和参数类型定义，以及代码注释中的文档。
 - en: Delete the empty class.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除空类。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

@@ -1,113 +1,170 @@
 - en: Replace Delegation with Inheritance
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用继承替代委托
 - en: 原文：[https://refactoringguru.cn/replace-delegation-with-inheritance](https://refactoringguru.cn/replace-delegation-with-inheritance)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-delegation-with-inheritance](https://refactoringguru.cn/replace-delegation-with-inheritance)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A class contains many simple methods that delegate to all methods of another
     class.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个类包含许多简单方法，这些方法委托给另一个类的所有方法。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Make the class a delegate inheritor, which makes the delegating methods unnecessary.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 使类成为委托继承者，从而使委托方法变得不必要。
 - en: Before![Replace Delegation with Inheritance - Before](../Images/c94d57d4804776252ae243dc24eba82f.png)After![Replace
     Delegation with Inheritance - After](../Images/f6fff96ce905e33ab4e474a8d7bdc4a5.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![用继承替代委托 - 之前](../Images/c94d57d4804776252ae243dc24eba82f.png)之后![用继承替代委托
+    - 之后](../Images/f6fff96ce905e33ab4e474a8d7bdc4a5.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Delegation is a more flexible approach than inheritance, since it allows changing
     how delegation is implemented and placing other classes there as well. Nonetheless,
     delegation stops being beneficial if you delegate actions to only one class and
     all of its public methods.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 委托是一种比继承更灵活的方法，因为它允许更改委托的实现方式并放置其他类。不过，如果你只将操作委托给一个类及其所有公共方法，委托就会失去其优势。
 - en: In such a case, if you replace delegation with inheritance, you cleanse the
     class of a large number of delegating methods and spare yourself from needing
     to create them for each new delegate class method.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，如果用继承替代委托，你可以清理类中大量的委托方法，避免为每个新委托类方法创建它们的需要。
 - en: Benefits
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Reduces code length. All these delegating methods are no longer necessary.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 减少代码长度。这些委托方法不再是必需的。
 - en: When Not to Use
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时不使用
 - en: Don't use this technique if the class contains delegation to only a portion
     of the public methods of the delegate class. By doing so, you would violate the
     *Liskov substitution principle*.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果类仅对委托类的部分公共方法进行委托，则不要使用此技术。这样做将违反*李斯科夫替换原则*。
 - en: This technique can be used only if the class still doesn't have parents.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仅当类仍没有父类时，才能使用此技术。
 - en: How to Refactor
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Make the class a subclass of the delegate class.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使类成为委托类的子类。
 - en: Place the current object in a field containing a reference to the delegate object.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将当前对象放入一个包含对委托对象引用的字段中。
 - en: Delete the methods with simple delegation one by one. If their names were different,
     use [Rename Method](/rename-method) to give all the methods a single name.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 逐一删除简单委托的方法。如果它们的名称不同，可以使用[重命名方法](/rename-method)将所有方法赋予一个统一的名称。
 - en: Replace all references to the delegate field with references to the current
     object.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将对委托字段的所有引用替换为对当前对象的引用。
 - en: Remove the delegate field.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除委托字段。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

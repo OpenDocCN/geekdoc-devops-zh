@@ -1,74 +1,106 @@
 - en: Extract Subclass
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提取子类
 - en: 原文：[https://refactoringguru.cn/extract-subclass](https://refactoringguru.cn/extract-subclass)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/extract-subclass](https://refactoringguru.cn/extract-subclass)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A class has features that are used only in certain cases.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个类的特性只在特定情况下使用。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a subclass and use it in these cases.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个子类并在这些情况下使用它。
 - en: Before![Extract Subclass - Before](../Images/6d4043f9523f0c7acfa34e35c6aadf8d.png)After![Extract
     Subclass - After](../Images/af9253c8fa0d89b591e1dea3229872e2.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![提取子类 - 之前](../Images/6d4043f9523f0c7acfa34e35c6aadf8d.png)之后![提取子类 - 之后](../Images/af9253c8fa0d89b591e1dea3229872e2.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Your main class has methods and fields for implementing a certain rare use case
     for the class. While the case is rare, the class is responsible for it and it
     would be wrong to move all the associated fields and methods to an entirely separate
     class. But they could be moved to a subclass, which is just what we'll do with
     the help of this refactoring technique.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的主类有用于实现某个罕见用例的方法和字段。虽然这种情况很罕见，但这个类对此负责，将所有相关字段和方法移动到一个完全独立的类是错误的。然而，它们可以被移动到一个子类，这正是我们将通过这种重构技术实现的。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Creates a subclass quickly and easily.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 快速简便地创建子类。
 - en: You can create several separate subclasses if your main class is currently implementing
     more than one such special case.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你的主类当前实现多个特殊情况，可以创建几个独立的子类。
 - en: Drawbacks
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: 'Despite its seeming simplicity, *Inheritance* can lead to a dead end if you
     have to separate several different class hierarchies. If, for example, you had
     the class `Dogs` with different behavior depending on the size and fur of dogs,
     you could tease out two hierarchies:'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尽管看似简单，*继承*可能会导致死胡同，如果你必须分离几个不同的类层次。例如，如果你有`Dogs`类，其行为根据狗的大小和毛发不同，你可以提炼出两个层次：
 - en: 'by size: `Large`, `Medium` and `Small`'
+  id: totrans-14
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 按大小：`Large`、`Medium`和`Small`
 - en: 'by fur: `Smooth` and `Shaggy`'
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 按毛发：`Smooth`和`Shaggy`
 - en: And everything would seem well, except that problems will crop up as soon as
     you need to create a dog that's both `Large` and `Smooth`, since you can create
     an object from one class only. That said, you can avoid this problem by using
@@ -76,36 +108,48 @@
     pattern). In other words, the `Dog` class will have two component fields, size
     and fur. You will plug in component objects from the necessary classes into these
     fields. So you can create a `Dog` that has `LargeSize` and `ShaggyFur`.
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 一切似乎都很好，除了当你需要创建一个既是`Large`又是`Smooth`的狗时，问题就会出现，因为你只能从一个类创建对象。也就是说，你可以通过使用*组合*而不是*继承*来避免这个问题（见[策略](/design-patterns/strategy)模式）。换句话说，`Dog`类将有两个组件字段，大小和毛发。你将从必要的类中插入组件对象到这些字段中。因此，你可以创建一个拥有`LargeSize`和`ShaggyFur`的`Dog`。
 - en: How to Refactor
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a new subclass from the class of interest.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从感兴趣的类创建一个新的子类。
 - en: If you need additional data to create objects from a subclass, create a constructor
     and add the necessary parameters to it. Don't forget to call the constructor's
     parent implementation.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你需要额外的数据从子类创建对象，请创建一个构造函数并将必要的参数添加到其中。不要忘记调用构造函数的父类实现。
 - en: Find all calls to the constructor of the parent class. When the functionality
     of a subclass is necessary, replace the parent constructor with the subclass constructor.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 找到对父类构造函数的所有调用。当需要子类的功能时，用子类构造函数替换父构造函数。
 - en: 'Move the necessary methods and fields from the parent class to the subclass.
     Do this via [Push Down Method](/push-down-method) and [Push Down Field](/push-down-field).
     It''s simpler to start by moving the methods first. This way, the fields remain
     accessible throughout the whole process: from the parent class prior to the move,
     and from the subclass itself after the move is complete.'
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将必要的方法和字段从父类移动到子类。通过[向下推送方法](/push-down-method)和[向下推送字段](/push-down-field)来完成这一过程。先移动方法通常更简单。这样，字段在整个过程中仍然可以访问：在移动之前来自父类，在移动完成后来自子类。
 - en: 'After the subclass is ready, find all the old fields that controlled the choice
     of functionality. Delete these fields by using polymorphism to replace all the
     operators in which the fields had been used. A simple example: in the Car class,
@@ -113,29 +157,45 @@
     the car is either fueled up with gas or charged with electricity. Post-refactoring,
     the `isElectricCar` field is removed and the `Car` and `ElectricCar` classes will
     have their own implementations of the `refuel()` method.'
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在子类准备好后，找到所有控制功能选择的旧字段。使用多态性删除这些字段，以替代所有使用过这些字段的操作符。一个简单的例子：在Car类中，你有字段`isElectricCar`，并且根据这个字段，在`refuel()`方法中，汽车要么加油，要么充电。重构后，`isElectricCar`字段被移除，`Car`和`ElectricCar`类将拥有各自的`refuel()`方法实现。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦了阅读吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 毫无疑问，阅读我们这里所有的文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

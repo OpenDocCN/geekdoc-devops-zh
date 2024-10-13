@@ -1,169 +1,261 @@
 - en: Replace Error Code with Exception
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用异常替代错误代码
 - en: 原文：[https://refactoringguru.cn/replace-error-code-with-exception](https://refactoringguru.cn/replace-error-code-with-exception)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-error-code-with-exception](https://refactoringguru.cn/replace-error-code-with-exception)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A method returns a special value that indicates an error?
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法返回一个指示错误的特殊值吗？
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Throw an exception instead.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 抛出一个异常。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Returning error codes is an obsolete holdover from procedural programming. In
     modern programming, error handling is performed by special classes, which are
     named exceptions. If a problem occurs, you "throw" an error, which is then "caught"
     by one of the exception handlers. Special error-handling code, which is ignored
     in normal conditions, is activated to respond.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回错误代码是程序设计的过时遗留物。在现代编程中，错误处理由特殊类执行，这些类被称为异常。如果发生问题，你会“抛出”一个错误，然后由其中一个异常处理程序“捕获”它。在正常条件下被忽略的特殊错误处理代码被激活以作出响应。
 - en: Benefits
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Frees code from a large number of conditionals for checking various error codes.
     Exception handlers are a much more succinct way to differentiate normal execution
     paths from abnormal ones.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使代码摆脱大量检查各种错误代码的条件语句。异常处理程序是一种更加简洁的方式来区分正常执行路径和异常路径。
 - en: Exception classes can implement their own methods, thus containing part of the
     error handling functionality (such as for sending error messages).
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 异常类可以实现自己的方法，从而包含部分错误处理功能（例如发送错误消息）。
 - en: Unlike exceptions, error codes can't be used in a constructor, since a constructor
     must return only a new object.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与异常不同，错误代码不能在构造函数中使用，因为构造函数必须仅返回一个新对象。
 - en: Drawbacks
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: An exception handler can turn into a goto-like crutch. Avoid this! Don't use
     exceptions to manage code execution. Exceptions should be thrown only to inform
     of an error or critical situation.
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 异常处理程序可能变成一种类似于 goto 的拐杖。避免这样做！不要使用异常来管理代码执行。异常应仅用于通知错误或关键情况。
 - en: How to Refactor
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Try to perform these refactoring steps for only one error code at a time. This
     will make it easier to keep all the important information in your head and avoid
     errors.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试一次仅为一个错误代码执行这些重构步骤。这将更容易让你将所有重要信息牢记在心，避免错误。
 - en: Find all calls to a method that returns error codes and, instead of checking
     for an error code, wrap it in `try`/`catch` blocks.
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查找所有调用返回错误代码的方法，而不是检查错误代码，将其包装在 `try`/`catch` 块中。
 - en: Inside the method, instead of returning an error code, throw an exception.
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在方法内部，抛出异常，而不是返回错误代码。
 - en: Change the method signature so that it contains information about the exception
     being thrown (`@throws` section).
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 更改方法签名，使其包含有关抛出异常的信息（`@throws` 部分）。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持 HTML 视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有文本需要 7 小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。这提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

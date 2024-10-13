@@ -1,97 +1,147 @@
 - en: Pull Up Field
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提升字段
 - en: 原文：[https://refactoringguru.cn/pull-up-field](https://refactoringguru.cn/pull-up-field)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/pull-up-field](https://refactoringguru.cn/pull-up-field)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Two classes have the same field.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个类有相同的字段。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Remove the field from subclasses and move it to the superclass.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 从子类中移除该字段并将其移至父类。
 - en: Before![Pull Up Field - Before](../Images/71f0f8a10392d389ccba11140974e771.png)After![Pull
     Up Field - After](../Images/9b3f149278bdfb600a1f4128775cfb22.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[提升字段 - 之前](../Images/71f0f8a10392d389ccba11140974e771.png)之后！[提升字段 - 之后](../Images/9b3f149278bdfb600a1f4128775cfb22.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: Subclasses grew and developed separately, causing identical (or nearly identical)
     fields and methods to appear.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 子类各自独立发展，导致出现相同（或几乎相同）的字段和方法。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 优势
 - en: Eliminates duplication of fields in subclasses.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 消除子类中的字段重复。
 - en: Eases subsequent relocation of duplicate methods, if they exist, from subclasses
     to a superclass.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果存在重复的方法，便于后续将其从子类迁移到父类。
 - en: How to Refactor
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Make sure that the fields are used for the same needs in subclasses.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 确保子类中的字段用于相同的需求。
 - en: If the fields have different names, give them the same name and replace all
     references to the fields in existing code.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果字段名称不同，将它们重命名为相同的名称，并替换现有代码中所有对这些字段的引用。
 - en: Create a field with the same name in the superclass. Note that if the fields
     were private, the superclass field should be protected.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在父类中创建一个同名字段。请注意，如果这些字段是私有的，父类字段应该是受保护的。
 - en: Remove the fields from the subclasses.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从子类中移除字段。
 - en: You may want to consider using [Self Encapsulate Field](/self-encapsulate-field)
     for the new field, in order to hide it behind access methods.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 你可能想考虑使用 [自我封装字段](/self-encapsulate-field) 来为新字段提供访问方法，从而隐藏它。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持 HTML 视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 看腻了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，这里所有的文本阅读起来需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程，它提供了更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

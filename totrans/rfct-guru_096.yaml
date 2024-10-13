@@ -1,151 +1,237 @@
 - en: Replace Exception with Test
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用测试替换异常
 - en: 原文：[https://refactoringguru.cn/replace-exception-with-test](https://refactoringguru.cn/replace-exception-with-test)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-exception-with-test](https://refactoringguru.cn/replace-exception-with-test)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You throw an exception in a place where a simple test would do the job?
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你在一个简单测试可以完成工作的地方抛出了异常吗？
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Replace the exception with a condition test.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 用条件测试替换异常。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Exceptions should be used to handle irregular behavior related to an unexpected
     error. They shouldn't serve as a replacement for testing. If an exception can
     be avoided by simply verifying a condition before running, then do so. Exceptions
     should be reserved for real errors.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 异常应该用于处理与意外错误相关的不规则行为。它们不应该替代测试。如果可以通过在运行之前验证条件来避免异常，那么就这么做。异常应该留给真正的错误。
 - en: For instance, you entered a minefield and triggered a mine there, resulting
     in an exception; the exception was successfully handled and you were lifted through
     the air to safety beyond the mine field. But you could have avoided this all by
     simply reading the warning sign in front of the minefield to begin with.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，你进入了雷区并触发了一枚地雷，导致了一个异常；这个异常被成功处理，你被抬到安全的地方。但你本可以通过一开始就阅读雷区前的警告标志来避免这一切。
 - en: Benefits
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: A simple conditional can sometimes be more obvious than exception handling code.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 有时，简单的条件比异常处理代码更明显。
 - en: How to Refactor
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a conditional for an edge case and move it before the try/catch block.
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为边缘案例创建条件，并将其移动到try/catch块之前。
 - en: Move code from the `catch` section inside this conditional.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将代码从`catch`部分移动到这个条件内。
 - en: In the `catch` section, place the code for throwing a usual unnamed exception
     and run all the tests.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在`catch`部分，放置抛出普通未命名异常的代码，并运行所有测试。
 - en: If no exceptions were thrown during the tests, get rid of the `try`/`catch`
     operator.
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果在测试中没有抛出任何异常，去掉`try`/`catch`操作符。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦了阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪这里的所有文本要花7个小时阅读。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

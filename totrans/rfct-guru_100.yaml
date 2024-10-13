@@ -1,154 +1,238 @@
 - en: Pull Up Constructor Body
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提升构造函数主体
 - en: 原文：[https://refactoringguru.cn/pull-up-constructor-body](https://refactoringguru.cn/pull-up-constructor-body)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/pull-up-constructor-body](https://refactoringguru.cn/pull-up-constructor-body)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Your subclasses have constructors with code that's mostly identical.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的子类具有大部分相同的构造函数代码。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a superclass constructor and move the code that's the same in the subclasses
     to it. Call the superclass constructor in the subclass constructors.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个超类构造函数，并将子类中相同的代码移到其中。在子类构造函数中调用超类构造函数。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: How is this refactoring technique different from [Pull Up Method](/pull-up-method)?
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个重构技术与[提升方法](/pull-up-method)有什么不同？
 - en: In Java, subclasses can't inherit a constructor, so you can't simply apply [Pull
     Up Method](/pull-up-method) to the subclass constructor and delete it after removing
     all the constructor code to the superclass. In addition to creating a constructor
     in the superclass it's necessary to have constructors in the subclasses with simple
     delegation to the superclass constructor.
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在Java中，子类不能继承构造函数，因此你不能简单地将[提升方法](/pull-up-method)应用于子类构造函数，并在将所有构造函数代码移到超类后删除它。除了在超类中创建构造函数外，子类中还需要有构造函数，以便简单地委托给超类构造函数。
 - en: In C++ and Java (if you didn't explicitly call the superclass constructor) the
     superclass constructor is automatically called prior to the subclass constructor,
     which makes it necessary to move the common code only from the beginning of the
     subclass constructors (since you won't be able to call the superclass constructor
     from an arbitrary place in a subclass constructor).
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在C++和Java中（如果你没有显式调用超类构造函数），超类构造函数会在子类构造函数之前自动调用，这使得只需要从子类构造函数的开头移动公共代码（因为你不能在子类构造函数的任意位置调用超类构造函数）。
 - en: In most programming languages, a subclass constructor can have its own list
     of parameters different from the parameters of the superclass. Therefore you should
     create a superclass constructor only with the parameters that it truly needs.
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在大多数编程语言中，子类构造函数可以有与超类不同的参数列表。因此，你应该仅创建一个真正需要的超类构造函数。
 - en: How to Refactor
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a constructor in a superclass.
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在超类中创建一个构造函数。
 - en: Extract the common code from the beginning of the constructor of each subclass
     to the superclass constructor. Before doing so, try to move as much common code
     as possible to the beginning of the constructor.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将每个子类构造函数开头的公共代码提取到超类构造函数中。在这样做之前，尽量将尽可能多的公共代码移动到构造函数的开头。
 - en: Place the call for the superclass constructor in the first line in the subclass
     constructors.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在子类构造函数的第一行放置对超类构造函数的调用。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

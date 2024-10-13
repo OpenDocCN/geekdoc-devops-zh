@@ -1,126 +1,187 @@
 - en: Replace Inheritance with Delegation
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用委托替代继承
 - en: 原文：[https://refactoringguru.cn/replace-inheritance-with-delegation](https://refactoringguru.cn/replace-inheritance-with-delegation)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-inheritance-with-delegation](https://refactoringguru.cn/replace-inheritance-with-delegation)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a subclass that uses only a portion of the methods of its superclass
     (or it's not possible to inherit superclass data).
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 您有一个子类只使用超类的一部分方法（或无法继承超类数据）。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a field and put a superclass object in it, delegate methods to the superclass
     object, and get rid of inheritance.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个字段并放入一个超类对象，委托方法给超类对象，去掉继承。
 - en: Before![Replace Inheritance with Delegation - Before](../Images/887b3d17bf4bf2eb1f074688663e172a.png)After![Replace
     Inheritance with Delegation - After](../Images/0846621a97f4d93ff403f4d12e083f9c.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![用委托替代继承 - 之前](../Images/887b3d17bf4bf2eb1f074688663e172a.png)之后![用委托替代继承
+    - 之后](../Images/0846621a97f4d93ff403f4d12e083f9c.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: 'Replacing inheritance with composition can substantially improve class design
     if:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 用组合替代继承可以大幅改善类设计，如果：
 - en: Your subclass violates the *Liskov substitution principle*, i.e., if inheritance
     was implemented only to combine common code but not because the subclass is an
     extension of the superclass.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 您的子类违反了*里氏替换原则*，即如果继承只是为了组合公共代码，而不是因为子类是超类的扩展。
 - en: The subclass uses only a portion of the methods of the superclass. In this case,
     it's only a matter of time before someone calls a superclass method that he or
     she wasn't supposed to call.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 子类只使用超类的一部分方法。在这种情况下，总会有人调用本不应该调用的超类方法，这只是时间问题。
 - en: In essence, this refactoring technique splits both classes and makes the superclass
     the helper of the subclass, not its parent. Instead of inheriting all superclass
     methods, the subclass will have only the necessary methods for delegating to the
     methods of the superclass object.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 本质上，这种重构技术将两个类分开，使超类成为子类的助手，而不是其父类。子类将只拥有委托给超类对象的方法，而不是继承所有超类方法。
 - en: Benefits
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: A class doesn't contain any unneeded methods inherited from the superclass.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个类不包含从超类继承的任何不必要的方法。
 - en: Various objects with various implementations can be put in the delegate field.
     In effect you get the [Strategy](/design-patterns/strategy) design pattern.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可以将各种不同实现的对象放入委托字段中。实际上，您获得了[策略](/design-patterns/strategy)设计模式。
 - en: Drawbacks
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: You have to write many simple delegating methods.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 您必须编写许多简单的委托方法。
 - en: How to Refactor
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a field in the subclass for holding the superclass. During the initial
     stage, place the current object in it.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在子类中创建一个字段以持有超类。在初始阶段，将当前对象放入其中。
 - en: Change the subclass methods so that they use the superclass object instead of
     `this`.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 更改子类方法，使其使用超类对象而不是`this`。
 - en: For methods inherited from the superclass that are called in the client code,
     create simple delegating methods in the subclass.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于从超类继承的方法在客户端代码中被调用的情况，请在子类中创建简单的委托方法。
 - en: Remove the inheritance declaration from the subclass.
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从子类中移除继承声明。
 - en: Change the initialization code of the field in which the former superclass is
     stored by creating a new object.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过创建一个新对象来更改存储前超类的字段的初始化代码。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读腻了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

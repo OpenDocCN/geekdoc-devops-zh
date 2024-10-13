@@ -1,82 +1,130 @@
 - en: Replace Constructor with Factory Method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用工厂方法替换构造函数
 - en: 原文：[https://refactoringguru.cn/replace-constructor-with-factory-method](https://refactoringguru.cn/replace-constructor-with-factory-method)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-constructor-with-factory-method](https://refactoringguru.cn/replace-constructor-with-factory-method)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a complex constructor that does something more than just setting parameter
     values in object fields.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 您有一个复杂的构造函数，除了设置对象字段中的参数值外还做其他事情。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a factory method and use it to replace constructor calls.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个工厂方法，并用它替换构造函数调用。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Why Refactor
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: The most obvious reason for using this refactoring technique is related to [Replace
     Type Code with Subclasses](/replace-type-code-with-subclasses).
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用此重构技术的最明显原因与[用子类替换类型代码](/replace-type-code-with-subclasses)有关。
 - en: You have code in which a object was previously created and the value of the
     coded type was passed to it. After use of the refactoring method, several subclasses
     have appeared and from them you need to create objects depending on the value
@@ -84,76 +132,112 @@
     objects is impossible, so instead we create a static factory method that will
     return objects of the necessary classes, after which it replaces all calls to
     the original constructor.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的代码中之前创建了一个对象，并将编码类型的值传递给它。使用重构方法后，出现了多个子类，您需要根据编码类型的值创建对象。改变原始构造函数以返回子类对象是不可能的，因此我们创建一个静态工厂方法，它将返回所需类的对象，之后用它替换所有原始构造函数的调用。
 - en: Factory methods can be used in other situations as well, when constructors aren't
     up to the task. They can be important when attempting to [Change Value to Reference](/change-value-to-reference).
     They can also be used to set various creation modes that go beyond the number
     and types of parameters.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 工厂方法也可以在其他情况下使用，当构造函数无法胜任时。它们在尝试[将值更改为引用](/change-value-to-reference)时可能很重要。它们还可以用于设置超出参数数量和类型的各种创建模式。
 - en: Benefits
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 优势
 - en: A factory method doesn't necessarily return an object of the class in which
     it was called. Often these could be its subclasses, selected based on the arguments
     given to the method.
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 工厂方法不一定返回调用它的类的对象。通常，这些可以是其子类，基于传递给该方法的参数进行选择。
 - en: A factory method can have a better name that describes what and how it returns
     what it does, for example `Troops::GetCrew(myTank)`.
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 工厂方法可以有一个更好的名称，描述它返回什么以及如何返回，例如`Troops::GetCrew(myTank)`。
 - en: A factory method can return an already created object, unlike a constructor,
     which always creates a new instance.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 工厂方法可以返回已经创建的对象，而构造函数总是创建一个新的实例。
 - en: How to Refactor
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a factory method. Place a call to the current constructor in it.
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个工厂方法。在其中调用当前构造函数。
 - en: Replace all constructor calls with calls to the factory method.
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 用对工厂方法的调用替换所有构造函数调用。
 - en: Declare the constructor private.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将构造函数声明为私有。
 - en: Investigate the constructor code and try to isolate the code not directly related
     to constructing an object of the current class, moving such code to the factory
     method.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 调查构造函数代码，尝试隔离与当前类对象构造无关的代码，将这些代码移动到工厂方法中。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

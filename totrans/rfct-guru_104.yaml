@@ -1,97 +1,146 @@
 - en: Extract Superclass
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提取超类
 - en: 原文：[https://refactoringguru.cn/extract-superclass](https://refactoringguru.cn/extract-superclass)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/extract-superclass](https://refactoringguru.cn/extract-superclass)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have two classes with common fields and methods.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有两个具有共同字段和方法的类。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a shared superclass for them and move all the identical fields and methods
     to it.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 为它们创建一个共享的超类，并将所有相同的字段和方法移动到该超类。
 - en: Before![Extract Superclass - Before](../Images/e214bf02725cd535c72bb7d29b0530ea.png)After![Extract
     Superclass - After](../Images/84c18b2581760e89abfac2f645def8a7.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[提取超类 - 之前](../Images/e214bf02725cd535c72bb7d29b0530ea.png)之后！[提取超类 - 之后](../Images/84c18b2581760e89abfac2f645def8a7.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: One type of code duplication occurs when two classes perform similar tasks in
     the same way, or perform similar tasks in different ways. Objects offer a built-in
     mechanism for simplifying such situations via inheritance. But oftentimes this
     similarity remains unnoticed until classes are created, necessitating that an
     inheritance structure be created later.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种代码重复的类型发生在两个类以相同的方式执行相似任务，或以不同方式执行相似任务时。对象提供了一种内置机制，通过继承简化这种情况。但通常情况下，这种相似性在类创建之前是未被注意的，因此需要在后期创建继承结构。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 益处
 - en: Code deduplication. Common fields and methods now "live" in one place only.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 代码去重。共同字段和方法现在只“存在”于一个地方。
 - en: When Not to Use
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时不使用
 - en: You can not apply this technique to classes that already have a superclass.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你不能将此技术应用于已经拥有超类的类。
 - en: How to Refactor
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create an abstract superclass.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个抽象超类。
 - en: Use [Pull Up Field](/pull-up-field), [Pull Up Method](/pull-up-method), and
     [Pull Up Constructor Body](/pull-up-constructor-body) to move the common functionality
     to a superclass. Start with the fields, since in addition to the common fields
     you will need to move the fields that are used in the common methods.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 [提升字段](/pull-up-field)、[提升方法](/pull-up-method) 和 [提升构造函数主体](/pull-up-constructor-body)
+    将共同功能移动到超类。首先处理字段，因为除了共同字段之外，你还需要移动在共同方法中使用的字段。
 - en: Look for places in the client code where use of subclasses can be replaced with
     your new class (such as in type declarations).
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 寻找客户端代码中可以用你的新类替代子类使用的地方（例如，在类型声明中）。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 看够了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有的文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

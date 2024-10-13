@@ -1,162 +1,250 @@
 - en: Replace Parameter with Method Call
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用方法调用替换参数
 - en: 原文：[https://refactoringguru.cn/replace-parameter-with-method-call](https://refactoringguru.cn/replace-parameter-with-method-call)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-parameter-with-method-call](https://refactoringguru.cn/replace-parameter-with-method-call)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Calling a query method and passing its results as the parameters of another
     method, while that method could call the query directly.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 调用查询方法并将其结果作为另一个方法的参数，而那个方法本可以直接调用查询。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Instead of passing the value through a parameter, try placing a query call inside
     the method body.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 不要通过参数传递值，尝试在方法体内放置查询调用。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: A long list of parameters is hard to understand. In addition, calls to such
     methods often resemble a series of cascades, with winding and exhilarating value
     calculations that are hard to navigate yet have to be passed to the method. So
     if a parameter value can be calculated with the help of a method, do this inside
     the method itself and get rid of the parameter.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 一长串参数很难理解。此外，对这样的方式的调用往往类似于一系列的级联，复杂且令人兴奋的值计算难以导航，但必须传递给方法。因此，如果参数值可以借助某个方法计算，请在方法内部执行此操作，去掉参数。
 - en: Benefits
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: We get rid of unneeded parameters and simplify method calls. Such parameters
     are often created not for the project as it's now, but with an eye for future
     needs that may never come.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们去掉不必要的参数，简化方法调用。这些参数通常不是为了当前的项目而创建，而是为了未来可能永远不会到来的需求。
 - en: Drawbacks
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: You may need the parameter tomorrow for other needs... making you rewrite the
     method.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可能明天需要这个参数以满足其他需求……这会让你重新编写方法。
 - en: How to Refactor
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Make sure that the value-getting code doesn't use parameters from the current
     method, since they'll be unavailable from inside another method. If so, moving
     the code isn't possible.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 确保获取值的代码不使用当前方法的参数，因为它们在另一个方法内部不可用。如果是这样，移动代码就不可能。
 - en: If the relevant code is more complicated than a single method or function call,
     use [Extract Method](/extract-method) to isolate this code in a new method and
     make the call simple.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果相关代码比单个方法或函数调用更复杂，请使用 [提取方法](/extract-method) 将这些代码隔离到一个新方法中，使调用更简单。
 - en: In the code of the main method, replace all references to the parameter being
     replaced with calls to the method that gets the value.
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在主方法的代码中，将所有对被替换参数的引用替换为获取值的方法调用。
 - en: Use [Remove Parameter](/remove-parameter) to eliminate the now-unused parameter.
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 [移除参数](/remove-parameter) 来消除现在未使用的参数。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

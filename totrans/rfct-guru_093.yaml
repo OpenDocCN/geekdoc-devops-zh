@@ -1,92 +1,138 @@
 - en: Hide Method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 隐藏方法
 - en: 原文：[https://refactoringguru.cn/hide-method](https://refactoringguru.cn/hide-method)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/hide-method](https://refactoringguru.cn/hide-method)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A method isn't used by other classes or is used only inside its own class hierarchy.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个方法未被其他类使用，或仅在其自身的类层次内使用。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Make the method private or protected.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将方法设为私有或受保护。
 - en: Before![Hide Method - Before](../Images/159ae3d71c1873c8a72a26447f04319e.png)After![Hide
     Method - After](../Images/09ef964c64c9e8e92bdd96dfe314173e.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 前![隐藏方法 - 前](../Images/159ae3d71c1873c8a72a26447f04319e.png)后![隐藏方法 - 后](../Images/09ef964c64c9e8e92bdd96dfe314173e.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Quite often, the need to hide methods for getting and setting values is due
     to development of a richer interface that provides additional behavior, especially
     if you started with a class that added little beyond mere data encapsulation.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，隐藏获取和设置值的方法的需求是由于开发出更丰富的接口，提供额外的行为，尤其是当你开始时的类仅添加了简单的数据封装。
 - en: As new behavior is built into the class, you may find that public getter and
     setter methods are no longer necessary and can be hidden. If you make getter or
     setter methods private and apply direct access to variables, you can delete the
     method.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着新行为融入类中，你可能会发现公共获取器和设置器方法不再必要，可以隐藏。如果将获取器或设置器方法设为私有并直接访问变量，可以删除该方法。
 - en: Benefits
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Hiding methods makes it easier for your code to evolve. When you change a private
     method, you only need to worry about how to not break the current class since
     you know that the method can't be used anywhere else.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 隐藏方法使你的代码更易于演变。当你更改私有方法时，只需担心如何不破坏当前类，因为你知道该方法无法在其他地方使用。
 - en: By making methods private, you underscore the importance of the public interface
     of the class and of the methods that remain public.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过将方法设为私有，你强调了类的公共接口及其保留的公共方法的重要性。
 - en: How to Refactor
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Regularly try to find methods that can be made private. Static code analysis
     and good unit test coverage can offer a big leg up.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 定期寻找可以设为私有的方法。静态代码分析和良好的单元测试覆盖可以提供很大的帮助。
 - en: Make each method as private as possible.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 尽可能将每个方法设为私有。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 毫不奇怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

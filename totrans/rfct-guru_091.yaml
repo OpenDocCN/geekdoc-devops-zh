@@ -1,110 +1,163 @@
 - en: Introduce Parameter Object
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 引入参数对象
 - en: 原文：[https://refactoringguru.cn/introduce-parameter-object](https://refactoringguru.cn/introduce-parameter-object)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/introduce-parameter-object](https://refactoringguru.cn/introduce-parameter-object)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Your methods contain a repeating group of parameters.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的方法中包含一组重复的参数。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Replace these parameters with an object.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 用一个对象替换这些参数。
 - en: Before![Introduce Parameter Object - Before](../Images/7d585b485fa68c7c1717986c140f8bc1.png)After![Introduce
     Parameter Object - After](../Images/8f3eac881ef6934d91e9f0e4dee12d4e.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[引入参数对象 - 之前](../Images/7d585b485fa68c7c1717986c140f8bc1.png)之后！[引入参数对象 -
+    之后](../Images/8f3eac881ef6934d91e9f0e4dee12d4e.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Identical groups of parameters are often encountered in multiple methods. This
     causes code duplication of both the parameters themselves and of related operations.
     By consolidating parameters in a single class, you can also move the methods for
     handling this data there as well, freeing the other methods from this code.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 相同的参数组常常在多个方法中出现。这会导致参数本身及相关操作的代码重复。通过将参数合并到一个类中，您还可以将处理这些数据的方法移到那里，从而使其他方法摆脱这段代码。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: More readable code. Instead of a hodgepodge of parameters, you see a single
     object with a comprehensible name.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更具可读性的代码。您看到的不是一堆混乱的参数，而是一个具有可理解名称的单一对象。
 - en: 'Identical groups of parameters scattered here and there create their own kind
     of code duplication: while identical code isn''t being called, identical groups
     of parameters and arguments are constantly encountered.'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 到处散落的相同参数组会创造出一种代码重复：尽管相同的代码没有被调用，但相同的参数和参数组却不断被遇到。
 - en: Drawbacks
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: If you move only data to a new class and don't plan to move any behaviors or
     related operations there, this begins to smell of a [Data Class](/smells/data-class).
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果您只将数据移动到新类中，并且不打算将任何行为或相关操作移到那里，这开始有[数据类](/smells/data-class)的味道。
 - en: How to Refactor
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a new class that will represent your group of parameters. Make the class
     immutable.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个新的类来表示您的参数组。使该类不可变。
 - en: In the method that you want to refactor, use [Add Parameter](/add-parameter),
     which is where your parameter object will be passed. In all method calls, pass
     the object created from old method parameters to this parameter.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在您想重构的方法中，使用[添加参数](/add-parameter)，这就是您的参数对象将被传递的地方。在所有方法调用中，将从旧方法参数创建的对象传递给此参数。
 - en: Now start deleting old parameters from the method one by one, replacing them
     in the code with fields of the parameter object. Test the program after each parameter
     replacement.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 现在开始逐个从方法中删除旧参数，在代码中用参数对象的字段替换它们。每替换一个参数后测试程序。
 - en: When done, see whether there's any point in moving a part of the method (or
     sometimes even the whole method) to a parameter object class. If so, use [Move
     Method](/move-method) or [Extract Method](/extract-method).
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 完成后，查看是否有必要将方法的一部分（有时甚至整个方法）移到参数对象类中。如果有，请使用 [移动方法](/move-method) 或 [提取方法](/extract-method)。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

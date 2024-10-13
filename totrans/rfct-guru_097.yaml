@@ -1,134 +1,212 @@
 - en: Dealing with Generalization
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 处理泛化
 - en: 原文：[https://refactoringguru.cn/refactoring/techniques/dealing-with-generalization](https://refactoringguru.cn/refactoring/techniques/dealing-with-generalization)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/techniques/dealing-with-generalization](https://refactoringguru.cn/refactoring/techniques/dealing-with-generalization)
 - en: Abstraction has its own group of refactoring techniques, primarily associated
     with moving functionality along the class inheritance hierarchy, creating new
     classes and interfaces, and replacing inheritance with delegation and vice versa.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 抽象有自己的一组重构技术，主要与沿类继承层次移动功能、创建新类和接口、以及用委托替代继承和反之相关。
 - en: '[Pull Up Field](/pull-up-field)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[提取字段](/pull-up-field)'
 - en: '**Problem:** Two classes have the same field.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 两个类有相同的字段。'
 - en: '**Solution:** Remove the field from subclasses and move it to the superclass.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 从子类中移除字段并将其移动到超类中。'
 - en: '[Pull Up Method](/pull-up-method)'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '[提取方法](/pull-up-method)'
 - en: '**Problem:** Your subclasses have methods that perform similar work.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你的子类有执行相似工作的 方法。'
 - en: '**Solution:** Make the methods identical and then move them to the relevant
     superclass.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 使方法相同，然后将它们移动到相关的超类中。'
 - en: '[Pull Up Constructor Body](/pull-up-constructor-body)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[提取构造函数主体](/pull-up-constructor-body)'
 - en: '**Problem:** Your subclasses have constructors with code that''s mostly identical.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你的子类的构造函数中的代码大部分是相同的。'
 - en: '**Solution:** Create a superclass constructor and move the code that''s the
     same in the subclasses to it. Call the superclass constructor in the subclass
     constructors.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 创建一个超类构造函数，将子类中相同的代码移动到其中，并在子类构造函数中调用超类构造函数。'
 - en: '[Push Down Method](/push-down-method)'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[推送方法](/push-down-method)'
 - en: '**Problem:** Is behavior implemented in a superclass used by only one (or a
     few) subclasses?'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 在超类中实现的行为仅被一个（或少数几个）子类使用吗？'
 - en: '**Solution:** Move this behavior to the subclasses.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将该行为移动到子类中。'
 - en: '[Push Down Field](/push-down-field)'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[推送字段](/push-down-field)'
 - en: '**Problem:** Is a field used only in a few subclasses?'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个字段仅在少数子类中使用吗？'
 - en: '**Solution:** Move the field to these subclasses.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将字段移动到这些子类中。'
 - en: '[Extract Subclass](/extract-subclass)'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[提取子类](/extract-subclass)'
 - en: '**Problem:** A class has features that are used only in certain cases.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个类的特性仅在某些情况下使用。'
 - en: '**Solution:** Create a subclass and use it in these cases.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 创建一个子类并在这些情况下使用它。'
 - en: '[Extract Superclass](/extract-superclass)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[提取超类](/extract-superclass)'
 - en: '**Problem:** You have two classes with common fields and methods.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有两个类有共同的字段和方法。'
 - en: '**Solution:** Create a shared superclass for them and move all the identical
     fields and methods to it.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 为它们创建一个共享的超类，并将所有相同的字段和方法移动到其中。'
 - en: '[Extract Interface](/extract-interface)'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '[提取接口](/extract-interface)'
 - en: '**Problem:** Multiple clients are using the same part of a class interface.
     Another case: part of the interface in two classes is the same.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 多个客户端正在使用类接口的相同部分。另一种情况：两个类中的接口部分相同。'
 - en: '**Solution:** Move this identical portion to its own interface.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将这部分相同的内容移动到自己的接口中。'
 - en: '[Collapse Hierarchy](/collapse-hierarchy)'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[合并层次结构](/collapse-hierarchy)'
 - en: '**Problem:** You have a class hierarchy in which a subclass is practically
     the same as its superclass.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有一个类层次结构，其中子类几乎与其超类相同。'
 - en: '**Solution:** Merge the subclass and superclass.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 合并子类和超类。'
 - en: '[Form Template Method](/form-template-method)'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '[形成模板方法](/form-template-method)'
 - en: '**Problem:** Your subclasses implement algorithms that contain similar steps
     in the same order.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你的子类实现的算法包含相似步骤且顺序相同。'
 - en: '**Solution:** Move the algorithm structure and identical steps to a superclass,
     and leave implementation of the different steps in the subclasses.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将算法结构和相同步骤移到超类中，将不同步骤的实现留在子类中。'
 - en: '[Replace Inheritance with Delegation](/replace-inheritance-with-delegation)'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '[用委托替换继承](/replace-inheritance-with-delegation)'
 - en: '**Problem:** You have a subclass that uses only a portion of the methods of
     its superclass (or it''s not possible to inherit superclass data).'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有一个子类仅使用超类方法的一部分（或无法继承超类数据）。'
 - en: '**Solution:** Create a field and put a superclass object in it, delegate methods
     to the superclass object, and get rid of inheritance.'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 创建一个字段并放入超类对象，将方法委托给超类对象，并去掉继承。'
 - en: '[Replace Delegation with Inheritance](/replace-delegation-with-inheritance)'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '[用继承替换委托](/replace-delegation-with-inheritance)'
 - en: '**Problem:** A class contains many simple methods that delegate to all methods
     of another class.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个类包含许多简单的方法，这些方法委托给另一个类的所有方法。'
 - en: '**Solution:** Make the class a delegate inheritor, which makes the delegating
     methods unnecessary.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 使该类成为一个委托继承者，从而使得委托方法变得不必要。'

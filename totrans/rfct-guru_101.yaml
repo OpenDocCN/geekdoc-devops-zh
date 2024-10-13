@@ -1,93 +1,142 @@
 - en: Push Down Method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 向下推送方法
 - en: 原文：[https://refactoringguru.cn/push-down-method](https://refactoringguru.cn/push-down-method)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/push-down-method](https://refactoringguru.cn/push-down-method)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Is behavior implemented in a superclass used by only one (or a few) subclasses?
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 超类中实现的行为是否只被一个（或几个）子类使用？
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Move this behavior to the subclasses.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将该行为移动到子类中。
 - en: Before![Push Down Method - Before](../Images/aaff5c194ce1f6fabbd971f8caa3e91b.png)After![Push
     Down Method - After](../Images/dbf2a0b3b15c2ee1a135293a1be0678c.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![向下推送方法 - 之前](../Images/aaff5c194ce1f6fabbd971f8caa3e91b.png)之后![向下推送方法 -
+    之后](../Images/dbf2a0b3b15c2ee1a135293a1be0678c.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: At first a certain method was meant to be universal for all classes but in reality
     is used in only one subclass. This situation can occur when planned features fail
     to materialize.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 起初某个方法是打算为所有类通用，但实际上只在一个子类中使用。当计划的特性未能实现时，这种情况可能会发生。
 - en: Such situations can also occur after partial extraction (or removal) of functionality
     from a class hierarchy, leaving a method that's used in only one subclass.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种情况也可能在从类层次结构中部分提取（或移除）功能后发生，留下一个只在一个子类中使用的方法。
 - en: If you see that a method is needed by more than one subclass, but not all of
     them, it may be useful to create an intermediate subclass and move the method
     to it. This allows avoiding the code duplication that would result from pushing
     a method down to all subclasses.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你发现一个方法被多个子类所需，但并非所有子类都需要，创建一个中间子类并将该方法移动到其中可能会很有用。这可以避免将方法推送到所有子类中所导致的代码重复。
 - en: Benefits
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Improves class coherence. A method is located where you expect to see it.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提高类的一致性。方法位于你期望看到的地方。
 - en: How to Refactor
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Declare the method in a subclass and copy its code from the superclass.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在子类中声明该方法，并从超类中复制其代码。
 - en: Remove the method from the superclass.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从超类中移除该方法。
 - en: Find all places where the method is used and verify that it's called from the
     necessary subclass.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查找所有使用该方法的地方，并验证它是否从必要的子类调用。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 看累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

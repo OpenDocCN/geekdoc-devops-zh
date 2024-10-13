@@ -1,109 +1,160 @@
 - en: Form Template Method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 表单模板方法
 - en: 原文：[https://refactoringguru.cn/form-template-method](https://refactoringguru.cn/form-template-method)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/form-template-method](https://refactoringguru.cn/form-template-method)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Your subclasses implement algorithms that contain similar steps in the same
     order.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的子类实现了包含相似步骤的算法，这些步骤以相同的顺序进行。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Move the algorithm structure and identical steps to a superclass, and leave
     implementation of the different steps in the subclasses.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将算法结构和相同的步骤移动到超类中，将不同步骤的实现留在子类中。
 - en: Before![Form Template Method - Before](../Images/88924c2c42cf0cd644fe5e19b6f9c0ea.png)After![Form
     Template Method - After](../Images/ed1cf17084697b19489c46fa72322139.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![表单模板方法 - 之前](../Images/88924c2c42cf0cd644fe5e19b6f9c0ea.png)之后![表单模板方法 -
+    之后](../Images/ed1cf17084697b19489c46fa72322139.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Subclasses are developed in parallel, sometimes by different people, which leads
     to code duplication, errors, and difficulties in code maintenance, since each
     change must be made in all subclasses.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 子类是并行开发的，有时由不同的人完成，这导致代码重复、错误以及代码维护的困难，因为每次更改都必须在所有子类中进行。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 优势
 - en: Code duplication doesn't always refer to cases of simple copy/paste. Often duplication
     occurs at a higher level, such as when you have a method for sorting numbers and
     a method for sorting object collections that are differentiated only by the comparison
     of elements. Creating a template method eliminates this duplication by merging
     the shared algorithm steps in a superclass and leaving just the differences in
     the subclasses.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 代码重复并不总是指简单的复制/粘贴。有时，重复发生在更高的层面，例如当你有一个排序数字的方法和一个排序对象集合的方法，而它们之间的区别仅在于元素的比较。创建模板方法通过将共享的算法步骤合并到超类中，消除了这种重复，并将差异留在子类中。
 - en: Forming a template method is an example of the *Open/Closed Principle* in action.
     When a new algorithm version appears, you need only to create a new subclass;
     no changes to existing code are required.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 形成模板方法是*开放/封闭原则*在实践中的一个例子。当出现新的算法版本时，你只需创建一个新的子类；无需对现有代码进行更改。
 - en: How to Refactor
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Split algorithms in the subclasses into their constituent parts described in
     separate methods. [Extract Method](/extract-method) can help with this.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将子类中的算法拆分为描述在单独方法中的组成部分。[提取方法](/extract-method)可以帮助实现这一点。
 - en: The resulting methods that are identical for all subclasses can be moved to
     a superclass via [Pull Up Method](/pull-up-method).
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对所有子类都相同的方法可以通过[上拉方法](/pull-up-method)移动到超类中。
 - en: The non-similar methods can be given consistent names via [Rename Method](/rename-method).
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 不相似的方法可以通过[重命名方法](/rename-method)赋予一致的名称。
 - en: Move the signatures of non-similar methods to a superclass as abstract ones
     by using [Pull Up Method](/pull-up-method). Leave their implementations in the
     subclasses.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将不相似方法的签名作为抽象方法移动到超类中，使用[上拉方法](/pull-up-method)。将它们的实现留在子类中。
 - en: And finally, pull up the main method of the algorithm to the superclass. Now
     it should work with the method steps described in the superclass, both real and
     abstract.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 最后，将算法的主要方法提升到超类中。现在它应该可以与超类中描述的方法步骤一起工作，包括真实和抽象的。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读腻了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看看…*](/refactoring/course)'

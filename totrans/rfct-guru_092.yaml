@@ -1,85 +1,130 @@
 - en: Remove Setting Method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 删除设置方法
 - en: 原文：[https://refactoringguru.cn/remove-setting-method](https://refactoringguru.cn/remove-setting-method)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/remove-setting-method](https://refactoringguru.cn/remove-setting-method)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: The value of a field should be set only when it's created, and not change at
     any time after that.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 字段的值应在创建时设置，之后不应更改。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: So remove methods that set the field's value.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，删除设置字段值的方法。
 - en: Before![Remove Setting Method - Before](../Images/4a53cf7acc6f6aa262853c03dad5fb07.png)After![Remove
     Setting Method - After](../Images/e7d960f7ee175d5a7769137992a2de45.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[删除设置方法 - 之前](../Images/4a53cf7acc6f6aa262853c03dad5fb07.png)之后！[删除设置方法 -
+    之后](../Images/e7d960f7ee175d5a7769137992a2de45.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: You want to prevent any changes to the value of a field.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 您希望防止字段值的任何更改。
 - en: How to Refactor
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: The value of a field should be changeable only in the constructor. If the constructor
     doesn't contain a parameter for setting the value, add one.
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 字段的值只能在构造函数中更改。如果构造函数中没有设置值的参数，请添加一个。
 - en: Find all setter calls.
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查找所有setter调用。
 - en: If a setter call is located right after a call for the constructor of the current
     class, move its argument to the constructor call and remove the setter.
+  id: totrans-12
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果setter调用位于当前类构造函数调用后面，请将其参数移动到构造函数调用中并删除setter。
 - en: Replace setter calls in the constructor with direct access to the field.
+  id: totrans-13
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在构造函数中用直接访问字段替换setter调用。
 - en: Delete the setter.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除setter。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦了阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有的文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这是一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

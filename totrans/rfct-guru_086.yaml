@@ -3,47 +3,57 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 将查询与修改分开
 - en: 原文：[https://refactoringguru.cn/separate-query-from-modifier](https://refactoringguru.cn/separate-query-from-modifier)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/separate-query-from-modifier](https://refactoringguru.cn/separate-query-from-modifier)
 - en: Problem
   id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Do you have a method that returns a value but also changes something inside
     an object?
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你是否有一个返回值但也修改对象内部的某个方法？
 - en: Solution
   id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Split the method into two separate methods. As you would expect, one of them
     should return the value and the other one modifies the object.
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将该方法拆分为两个独立的方法。正如你所预期的，一个返回值，另一个修改对象。
 - en: Before![Separate Query from Modifier - Before](../Images/b677d404e57bd619bcb7e6c70e82c178.png)After![Separate
     Query from Modifier - After](../Images/e57843da4ccd7e78aea0a90c2a1b9bbd.png)
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![将查询与修改分开 - 之前](../Images/b677d404e57bd619bcb7e6c70e82c178.png)之后![将查询与修改分开
+    - 之后](../Images/e57843da4ccd7e78aea0a90c2a1b9bbd.png)
 - en: Why Refactor
   id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: This factoring technique implements *Command and Query Responsibility Segregation*.
     This principle tells us to separate code responsible for getting data from code
     that changes something inside an object.
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 该重构技术实现了*命令与查询职责分离*。这个原则告诉我们将负责获取数据的代码与改变对象内部某些内容的代码分开。
 - en: Code for getting data is named a *query*. Code for changing things in the *visible
     state* of an object is named a *modifier*. When a *query* and *modifier* are combined,
     you don't have a way to get data without making changes to its condition. In other
@@ -53,6 +63,7 @@
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 获取数据的代码称为*查询*。改变对象*可见状态*的代码称为*修改器*。当*查询*与*修改器*结合时，你无法在不改变条件的情况下获取数据。换句话说，你提出问题时可能会改变答案，即使在接收时。这一问题在调用查询的人可能不知道该方法的“副作用”时变得更加严重，这常常导致运行时错误。
 - en: But remember that side effects are dangerous only in the case of *modifiers*
     that change the **visible** state of an object. These could be, for example, fields
     accessible from an object's public interface, entry in a database, in files, etc.
@@ -61,11 +72,13 @@
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 但请记住，副作用在改变对象**可见**状态的*修改器*的情况下是危险的。这可能是例如，从对象的公共接口可访问的字段、数据库中的条目、文件等。如果*修改器*仅缓存复杂操作并将其保存在类的私有字段中，它几乎不会导致任何副作用。
 - en: Benefits
   id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: If you have a *query* that doesn't change the state of your program, you can
     call it as many times as you like without having to worry about unintended changes
     in the result caused by the mere fact of you calling the method.
@@ -73,33 +86,39 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你有一个*查询*，它不改变程序的状态，你可以随意调用它，而不用担心调用该方法会导致的意外结果变化。
 - en: Drawbacks
   id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: In some cases it's convenient to get data after performing a command. For example,
     when deleting something from a database you want to know how many rows were deleted.
   id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在某些情况下，在执行命令后获取数据是方便的。例如，从数据库中删除某些内容时，你想知道删除了多少行。
 - en: How to Refactor
   id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a new *query method* to return what the original method did.
   id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个新的*查询方法*，以返回原方法所做的内容。
 - en: Change the original method so that it returns only the result of calling the
     new *query method*.
   id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 修改原方法，使其仅返回调用新*查询方法*的结果。
 - en: Replace all references to the original method with a call to the *query method*.
     Immediately before this line, place a call to the *modifier method*. This will
     save you from side effects in case if the original method was used in a condition
@@ -108,33 +127,40 @@
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 用对*查询方法*的调用替换对原方法的所有引用。在这一行之前，放置对*修改方法*的调用。如果原方法在条件运算符或循环的条件中被使用，这将避免副作用。
 - en: Get rid of the value-returning code in the original method, which now has become
     a proper *modifier method*.
   id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 消除原方法中返回值的代码，该方法现在已成为适当的*修改方法*。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
   id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 不难理解，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
   id: totrans-25

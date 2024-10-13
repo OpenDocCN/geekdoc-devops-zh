@@ -1,115 +1,169 @@
 - en: Pull Up Method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提升方法
 - en: 原文：[https://refactoringguru.cn/pull-up-method](https://refactoringguru.cn/pull-up-method)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/pull-up-method](https://refactoringguru.cn/pull-up-method)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Your subclasses have methods that perform similar work.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的子类中有执行类似工作的多个方法。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Make the methods identical and then move them to the relevant superclass.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 使这些方法相同，然后将它们移动到相关的超类中。
 - en: Before![Pull Up Method - Before](../Images/4f902fa84225b995e9c5b37ce6a8f189.png)After![Pull
     Up Method - After](../Images/0e414b953a4bd063f1739858a837d8fa.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[提升方法 - 之前](../Images/4f902fa84225b995e9c5b37ce6a8f189.png)之后！[提升方法 - 之后](../Images/0e414b953a4bd063f1739858a837d8fa.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Subclasses grew and developed independently of one another, causing identical
     (or nearly identical) fields and methods.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 子类独立增长和发展，导致相同（或几乎相同）的字段和方法。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Gets rid of duplicate code. If you need to make changes to a method, it's better
     to do so in a single place than have to search for all duplicates of the method
     in subclasses.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 消除重复代码。如果需要对某个方法进行更改，最好在一个地方进行修改，而不是到处寻找子类中该方法的所有重复项。
 - en: This refactoring technique can also be used if, for some reason, a subclass
     redefines a superclass method but performs what's essentially the same work.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果出于某种原因，子类重新定义了超类方法但执行的基本上是相同的工作，则可以使用此重构技术。
 - en: How to Refactor
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Investigate similar methods in superclasses. If they aren't identical, format
     them to match each other.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 调查超类中的相似方法。如果它们不是完全相同的，请格式化以匹配彼此。
 - en: If methods use a different set of parameters, put the parameters in the form
     that you want to see in the superclass.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果方法使用不同的参数集，请将参数放在超类中希望看到的形式。
 - en: 'Copy the method to the superclass. Here you may find that the method code uses
     fields and methods that exist only in subclasses and therefore aren''t available
     in the superclass. To solve this, you can:'
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将方法复制到超类中。在这里你可能会发现方法代码使用了仅存在于子类中的字段和方法，因此在超类中不可用。为了解决这个问题，你可以：
 - en: 'For fields: use either [Pull Up Field](/pull-up-field) or Self-[Encapsulate
     Field](/encapsulate-field) to create getters and setters in subclasses; then declare
     these getters abstractly in the superclass.'
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于字段：使用[提升字段](/pull-up-field)或自我[封装字段](/encapsulate-field)在子类中创建getter和setter；然后在超类中抽象声明这些getter。
 - en: 'For methods: use either [Pull Up Method](/pull-up-method) or declare abstract
     methods for them in the superclass (note that your class will become abstract
     if it wasn''t previously).'
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于方法：使用[提升方法](/pull-up-method)或者在超类中声明抽象方法（请注意，如果类之前不是抽象的，它将变为抽象类）。
 - en: Remove the methods from the subclasses.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从子类中移除方法。
 - en: Check the locations in which the method is called. In some places you may be
     able to replace use of a subclass with the superclass.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 检查方法被调用的位置。在某些地方，你可能能够用超类替代子类。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦了阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更不乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

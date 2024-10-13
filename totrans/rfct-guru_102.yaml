@@ -1,88 +1,135 @@
 - en: Push Down Field
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 向下移动字段
 - en: 原文：[https://refactoringguru.cn/push-down-field](https://refactoringguru.cn/push-down-field)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/push-down-field](https://refactoringguru.cn/push-down-field)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Is a field used only in a few subclasses?
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 字段是否只在少数子类中使用？
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Move the field to these subclasses.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将字段移动到这些子类。
 - en: Before![Push Down Field - Before](../Images/d8cae027e89914dc8aff5f4e41eaba2c.png)After![Push
     Down Field - After](../Images/f58c1673c401c421dde7ddeab7a86ed3.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![向下移动字段 - 之前](../Images/d8cae027e89914dc8aff5f4e41eaba2c.png)之后![向下移动字段 -
+    之后](../Images/f58c1673c401c421dde7ddeab7a86ed3.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: Although it was planned to use a field universally for all classes, in reality
     the field is used only in some subclasses. This situation can occur when planned
     features fail to pan out, for example.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管计划是为所有类通用地使用一个字段，但在现实中，这个字段只在某些子类中使用。这种情况可能发生在计划的功能未能实现时，例如。
 - en: This can also occur due to extraction (or removal) of part of the functionality
     of class hierarchies.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这也可能是由于提取（或移除）类层次结构的部分功能造成的。
 - en: Benefits
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Improves internal class coherency. A field is located where it's actually used.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提高内部类的一致性。字段位于实际使用的位置。
 - en: When moving to several subclasses simultaneously, you can develop the fields
     independently of each other. This does create code duplication, yes, so push down
     fields only when you really do intend to use the fields in different ways.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当同时移动到多个子类时，您可以独立开发字段。这确实会导致代码重复，是的，因此只有在您真的打算以不同方式使用字段时才向下移动字段。
 - en: How to Refactor
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Declare a field in all the necessary subclasses.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在所有必要的子类中声明一个字段。
 - en: Remove the field from the superclass.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从超类中移除字段。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'
