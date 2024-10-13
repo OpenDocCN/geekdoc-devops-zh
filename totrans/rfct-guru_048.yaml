@@ -1,100 +1,156 @@
 - en: Moving Features between Objects
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在对象之间移动特性
 - en: 原文：[https://refactoringguru.cn/refactoring/techniques/moving-features-between-objects](https://refactoringguru.cn/refactoring/techniques/moving-features-between-objects)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/techniques/moving-features-between-objects](https://refactoringguru.cn/refactoring/techniques/moving-features-between-objects)
 - en: Even if you have distributed functionality among different classes in a less-than-perfect
     way, there's still hope.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使你在不同类之间分配功能的方式不尽完美，仍然有希望。
 - en: These refactoring techniques show how to safely move functionality between classes,
     create new classes, and hide implementation details from public access.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些重构技术展示了如何安全地在类之间移动功能，创建新类，并隐藏实现细节以避免公开访问。
 - en: '[Move Method](/move-method)'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '[移动方法](/move-method)'
 - en: '**Problem:** A method is used more in another class than in its own class.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个方法在另一个类中的使用频率超过其自身类中的使用频率。'
 - en: '**Solution:** Create a new method in the class that uses the method the most,
     then move code from the old method to there. Turn the code of the original method
     into a reference to the new method in the other class or else remove it entirely.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 在使用该方法最多的类中创建一个新方法，然后将代码从旧方法移动到那里。将原方法的代码转变为对另一个类中新方法的引用，或者完全删除它。'
 - en: '[Move Field](/move-field)'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '[移动字段](/move-field)'
 - en: '**Problem:** A field is used more in another class than in its own class.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个字段在另一个类中的使用频率超过其自身类中的使用频率。'
 - en: '**Solution:** Create a field in a new class and redirect all users of the old
     field to it.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 在新类中创建一个字段，并将所有使用旧字段的用户重定向到它。'
 - en: '[Extract Class](/extract-class)'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '[提取类](/extract-class)'
 - en: '**Problem:** When one class does the work of two, awkwardness results.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 当一个类完成两个类的工作时，会导致尴尬。'
 - en: '**Solution:** Instead, create a new class and place the fields and methods
     responsible for the relevant functionality in it.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 相反，创建一个新类，并将负责相关功能的字段和方法放入其中。'
 - en: '[Inline Class](/inline-class)'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '[内联类](/inline-class)'
 - en: '**Problem:** A class does almost nothing and isn''t responsible for anything,
     and no additional responsibilities are planned for it.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个类几乎什么都不做，并且不负责任何事情，也没有计划额外的职责。'
 - en: '**Solution:** Move all features from the class to another one.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将类中的所有特性移到另一个类中。'
 - en: '[Hide Delegate](/hide-delegate)'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[隐藏委托](/hide-delegate)'
 - en: '**Problem:** The client gets object B from a field or method of object А. Then
     the client calls a method of object B.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 客户从对象А的字段或方法获取对象B。然后客户调用对象B的方法。'
 - en: '**Solution:** Create a new method in class A that delegates the call to object
     B. Now the client doesn''t know about, or depend on, class B.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 在类A中创建一个新方法，将调用委托给对象B。现在客户端对类B没有了解或依赖。'
 - en: '[Remove Middle Man](/remove-middle-man)'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[去掉中介](/remove-middle-man)'
 - en: '**Problem:** A class has too many methods that simply delegate to other objects.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个类有太多方法，仅仅将请求委托给其他对象。'
 - en: '**Solution:** Delete these methods and force the client to call the end methods
     directly.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 删除这些方法，并强制客户端直接调用最终方法。'
 - en: '[Introduce Foreign Method](/introduce-foreign-method)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[引入外部方法](/introduce-foreign-method)'
 - en: '**Problem:** A utility class doesn''t contain the method that you need and
     you can''t add the method to the class.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个工具类不包含你需要的方法，而你无法将该方法添加到类中。'
 - en: '**Solution:** Add the method to a client class and pass an object of the utility
     class to it as an argument.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将该方法添加到客户端类，并将工具类的对象作为参数传递给它。'
 - en: '[Introduce Local Extension](/introduce-local-extension)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[引入本地扩展](/introduce-local-extension)'
 - en: '**Problem:** A utility class doesn''t contain some methods that you need. But
     you can''t add these methods to the class.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个工具类不包含你需要的一些方法。但你无法将这些方法添加到类中。'
 - en: '**Solution:** Create a new class containing the methods and make it either
     the child or wrapper of the utility class.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 创建一个包含这些方法的新类，并使其成为工具类的子类或包装类。'

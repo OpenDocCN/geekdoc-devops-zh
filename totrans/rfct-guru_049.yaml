@@ -1,109 +1,157 @@
 - en: Move Method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 移动方法
 - en: 原文：[https://refactoringguru.cn/move-method](https://refactoringguru.cn/move-method)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/move-method](https://refactoringguru.cn/move-method)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A method is used more in another class than in its own class.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个方法在另一个类中使用得比在它自己类中多。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a new method in the class that uses the method the most, then move code
     from the old method to there. Turn the code of the original method into a reference
     to the new method in the other class or else remove it entirely.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在使用该方法最多的类中创建一个新方法，然后将旧方法中的代码移动到那里。将原方法的代码转换为对另一个类中新方法的引用，或者完全删除它。
 - en: Before![Move Method - Before](../Images/ef0fdb8b01de0bf9f9ec2a2f7a327c38.png)After![Move
     Method - After](../Images/e6915fa5898436114da3e325cffd62fa.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[移动方法 - 之前](../Images/ef0fdb8b01de0bf9f9ec2a2f7a327c38.png)之后！[移动方法 - 之后](../Images/e6915fa5898436114da3e325cffd62fa.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: You want to move a method to a class that contains most of the data used by
     the method. This makes **classes more internally coherent**.
+  id: totrans-8
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 你想把一个方法移动到一个包含该方法使用的大部分数据的类中。这使得**类的内部更加一致**。
 - en: You want to move a method in order to reduce or eliminate the dependency of
     the class calling the method on the class in which it's located. This can be useful
     if the calling class is already dependent on the class to which you're planning
     to move the method. This **reduces dependency between classes**.
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 你想移动一个方法，以减少或消除调用该方法的类对其所在类的依赖。如果调用类已经依赖于你计划将方法移动到的类，这可能会很有用。这**减少了类之间的依赖性**。
 - en: How to Refactor
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Verify all features used by the old method in its class. It may be a good idea
     to move them as well. As a rule, if a feature is used only by the method under
     consideration, you should certainly move the feature to it. If the feature is
     used by other methods too, you should move these methods as well. Sometimes it's
     much easier to move a large number of methods than to set up relationships between
     them in different classes.
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 验证旧方法在其类中使用的所有特性。将它们一起移动可能是个好主意。一般来说，如果某个特性仅被考虑中的方法使用，你肯定应该将其移动。如果该特性也被其他方法使用，你也应该同时移动这些方法。有时移动大量方法比在不同类之间建立关系要容易得多。
 - en: Make sure that the method isn't declared in superclasses and subclasses. If
     this is the case, you will either have to refrain from moving or else implement
     a kind of polymorphism in the recipient class in order to ensure varying functionality
     of a method split up among donor classes.
+  id: totrans-12
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 确保该方法没有在超类和子类中声明。如果是这样，你要么必须停止移动，要么需要在接收类中实现一种多态，以确保方法在捐赠类之间的不同功能。
 - en: Declare the new method in the recipient class. You may want to give a new name
     for the method that's more appropriate for it in the new class.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在接收类中声明新方法。你可能想给这个方法一个更适合它的新名称。
 - en: Decide how you will refer to the recipient class. You may already have a field
     or method that returns an appropriate object, but if not, you will need to write
     a new method or field to store the object of the recipient class.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 决定你将如何引用接收类。你可能已经有一个返回适当对象的字段或方法，但如果没有，你需要写一个新方法或字段来存储接收类的对象。
 - en: Now you have a way to refer to the recipient object and a new method in its
     class. With all this under your belt, you can turn the old method into a reference
     to the new method.
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 现在你有了引用接收对象的方法以及它的类中的新方法。掌握这些后，你可以将旧方法转换为对新方法的引用。
 - en: 'Take a look: can you delete the old method entirely? If so, place a reference
     to the new method in all places that use the old one.'
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 看看：你能完全删除旧方法吗？如果可以，请在所有使用旧方法的地方放置对新方法的引用。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

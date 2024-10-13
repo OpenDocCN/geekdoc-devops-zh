@@ -1,154 +1,238 @@
 - en: Substitute Algorithm
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 替代算法
 - en: 原文：[https://refactoringguru.cn/substitute-algorithm](https://refactoringguru.cn/substitute-algorithm)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/substitute-algorithm](https://refactoringguru.cn/substitute-algorithm)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: So you want to replace an existing algorithm with a new one?
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以你想用一个新的算法替换现有的算法吗？
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Replace the body of the method that implements the algorithm with a new algorithm.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 用新算法替换实现算法的方法主体。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Gradual refactoring isn't the only method for improving a program. Sometimes
     a method is so cluttered with issues that it's easier to tear down the method
     and start fresh. And perhaps you have found an algorithm that's much simpler and
     more efficient. If this is the case, you should simply replace the old algorithm
     with the new one.
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 渐进式重构并不是改进程序的唯一方法。有时一个方法存在太多问题，以至于拆除该方法并重新开始更为简单。而且也许你找到了一种更简单、更高效的算法。如果是这样，你应该简单地用新算法替换旧算法。
 - en: As time goes on, your algorithm may be incorporated into a well-known library
     or framework and you want to get rid of your independent implementation, in order
     to simplify maintenance.
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 随着时间的推移，你的算法可能会被纳入一个知名的库或框架中，而你想要摆脱独立实现，以简化维护。
 - en: The requirements for your program may change so heavily that your existing algorithm
     can't be salvaged for the task.
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 你的程序的需求可能会发生重大变化，以至于你现有的算法无法用于该任务。
 - en: How to Refactor
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Make sure that you have simplified the existing algorithm as much as possible.
     Move unimportant code to other methods using [Extract Method](/extract-method).
     The fewer moving parts in your algorithm, the easier it's to replace.
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 确保你已尽可能简化现有算法。使用[提取方法](/extract-method)将不重要的代码移动到其他方法中。你算法中的移动部分越少，更容易替换。
 - en: Create your new algorithm in a new method. Replace the old algorithm with the
     new one and start testing the program.
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在一个新方法中创建你的新算法。用新算法替换旧算法，然后开始测试程序。
 - en: If the results don't match, return to the old implementation and compare the
     results. Identify the causes of the discrepancy. While the cause is often an error
     in the old algorithm, it's more likely due to something not working in the new
     one.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果结果不匹配，请返回旧实现并比较结果。找出差异的原因。虽然原因往往是旧算法中的错误，但更可能是新算法中的某些部分未能正常工作。
 - en: When all tests are successfully completed, delete the old algorithm for good!
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当所有测试成功完成后，彻底删除旧算法！
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持 HTML 视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要 7 小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

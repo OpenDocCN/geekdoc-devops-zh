@@ -1,128 +1,184 @@
 - en: Extract Class
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提取类
 - en: 原文：[https://refactoringguru.cn/extract-class](https://refactoringguru.cn/extract-class)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/extract-class](https://refactoringguru.cn/extract-class)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: When one class does the work of two, awkwardness results.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 当一个类完成两个类的工作时，会产生尴尬。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Instead, create a new class and place the fields and methods responsible for
     the relevant functionality in it.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 相反，创建一个新类，将负责相关功能的字段和方法放入其中。
 - en: Before![Extract Class - Before](../Images/736293f9ca11de26be58439303a15c5a.png)After![Extract
     Class - After](../Images/adf613cc50f99eeeec3a47ac215f5cf7.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 前![提取类 - 前](../Images/736293f9ca11de26be58439303a15c5a.png)后![提取类 - 后](../Images/adf613cc50f99eeeec3a47ac215f5cf7.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Classes always start out clear and easy to understand. They do their job and
     mind their own business as it were, without butting into the work of other classes.
     But as the program expands, a method is added and then a field... and eventually,
     some classes are performing more responsibilities than ever envisioned.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 类通常一开始是清晰且易于理解的。它们各自做好自己的工作，而不会干扰其他类的工作。但随着程序的扩展，方法和字段被添加……最终，一些类承担的责任超出了最初的设想。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: This refactoring method will help maintain adherence to the *Single Responsibility
     Principle*. The code of your classes will be more obvious and understandable.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这个重构方法将帮助维护对*单一责任原则*的遵循。你的类的代码将更加明显和易于理解。
 - en: Single-responsibility classes are more reliable and tolerant of changes. For
     example, say that you have a class responsible for ten different things. When
     you change this class to make it better for one thing, you risk breaking it for
     the nine others.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 单一责任的类更加可靠，并且对变化更具容忍性。例如，假设你有一个负责十个不同任务的类。当你改变这个类以使其在某一方面更好时，你可能会破坏它在其他九个方面的功能。
 - en: Drawbacks
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: If you "overdo it" with this refactoring technique, you will have to resort
     to [Inline Class](/inline-class).
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你在使用这个重构技术时“过度”了，你将不得不求助于[内联类](/inline-class)。
 - en: How to Refactor
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Before starting, decide on how exactly you want to split up the responsibilities
     of the class.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始之前，决定你想如何拆分类的责任。
 - en: Create a new class to contain the relevant functionality.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个新类以包含相关功能。
 - en: Create a relationship between the old class and the new one. Optimally, this
     relationship is unidirectional; this allows reusing the second class without any
     issues. Nonetheless, if you think that a two-way relationship is necessary, this
     can always be set up.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在旧类和新类之间创建关系。最佳情况下，这种关系是单向的；这使得重用第二个类没有任何问题。尽管如此，如果你认为有必要建立双向关系，随时可以设置。
 - en: Use [Move Field](/move-field) and [Move Method](/move-method) for each field
     and method that you have decided to move to the new class. For methods, start
     with private ones in order to reduce the risk of making a large number of errors.
     Try to relocate just a little bit at a time and test the results after each move,
     in order to avoid a pileup of error-fixing at the very end.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用[移动字段](/move-field)和[移动方法](/move-method)来处理你决定移动到新类的每个字段和方法。对于方法，从私有方法开始，以减少产生大量错误的风险。尽量逐步迁移，并在每次移动后测试结果，以避免最后堆积大量的错误修复。
 - en: After you're done moving, take one more look at the resulting classes. An old
     class with changed responsibilities may be renamed for increased clarity. Check
     again to see whether you can get rid of two-way class relationships, if any are
     present.
+  id: totrans-19
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 完成移动后，再次查看结果类。一个责任已更改的旧类可以重命名以提高清晰度。再次检查是否可以消除任何双向类关系。
 - en: Also give thought to accessibility to the new class from the outside. You can
     hide the class from the client entirely by making it private, managing it via
     the fields from the old class. Alternatively, you can make it a public one by
     allowing the client to change values directly. Your decision here depends on how
     safe it's for the behavior of the old class when unexpected direct changes are
     made to the values in the new class.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 还要考虑新类的外部可访问性。你可以通过将其设为私有，完全隐藏类，以通过旧类的字段来管理它。或者，你可以将其设为公共，让客户端直接更改值。你的决策取决于在对新类中的值进行意外直接更改时，对旧类行为的安全性。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '您的浏览器不支持HTML视频。  '
 - en: Tired of reading?
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '读得累了吗？  '
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '不奇怪，阅读我们这里所有文本需要7小时。  '
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的重构互动课程，它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)  '

@@ -1,93 +1,139 @@
 - en: Move Field
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 移动字段
 - en: 原文：[https://refactoringguru.cn/move-field](https://refactoringguru.cn/move-field)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/move-field](https://refactoringguru.cn/move-field)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A field is used more in another class than in its own class.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个字段在另一个类中的使用频率高于在其自身类中的使用频率。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a field in a new class and redirect all users of the old field to it.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在新类中创建一个字段，并将所有旧字段的使用者重定向到该字段。
 - en: Before![Move Field - Before](../Images/1cabf1ffa08de496854a32b595118be4.png)After![Move
     Field - After](../Images/eb80f77173717aac1184337e83d1f216.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[移动字段 - 之前](../Images/1cabf1ffa08de496854a32b595118be4.png)之后！[移动字段 - 之后](../Images/eb80f77173717aac1184337e83d1f216.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: 'Often fields are moved as part of the [Extract Class](/extract-class) technique.
     Deciding which class to leave the field in can be tough. Here is our rule of thumb:
     **put a field in the same place as the methods that use it** (or else where most
     of these methods are).'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 字段通常作为[提取类](/extract-class)技术的一部分进行移动。决定将字段保留在哪个类中可能很困难。我们的经验法则是：**将字段放在使用它的方法相同的位置**（或者其他大多数方法的位置）。
 - en: This rule will help in other cases when a field is simply located in the wrong
     place.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个规则在字段简单地位于错误位置时也会有所帮助。
 - en: How to Refactor
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: If the field is public, refactoring will be much easier if you make the field
     private and provide public access methods (for this, you can use [Encapsulate
     Field](/encapsulate-field)).
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果字段是公开的，将字段设为私有并提供公共访问方法将使重构变得容易得多（为此，你可以使用[封装字段](/encapsulate-field)）。
 - en: Create the same field with access methods in the recipient class.
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在接收类中创建相同的字段及其访问方法。
 - en: Decide how you will refer to the recipient class. You may already have a field
     or method that returns the appropriate object; if not, you will need to write
     a new method or field to store the object of the recipient class.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 决定如何引用接收类。你可能已经有一个返回适当对象的字段或方法；如果没有，你需要编写一个新的方法或字段来存储接收类的对象。
 - en: Replace all references to the old field with appropriate calls to methods in
     the recipient class. If the field isn't private, take care of this in the superclass
     and subclasses.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 用接收类中的相应方法替换所有对旧字段的引用。如果字段不是私有的，请在超类和子类中处理此事。
 - en: Delete the field in the original class.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除原类中的字段。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更不乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看一下…*](/refactoring/course)'
