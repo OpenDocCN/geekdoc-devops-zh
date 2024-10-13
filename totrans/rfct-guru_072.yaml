@@ -1,119 +1,178 @@
 - en: Replace Subclass with Fields
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用字段替换子类
 - en: 原文：[https://refactoringguru.cn/replace-subclass-with-fields](https://refactoringguru.cn/replace-subclass-with-fields)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-subclass-with-fields](https://refactoringguru.cn/replace-subclass-with-fields)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have subclasses differing only in their (constant-returning) methods.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 您有子类仅在其（返回常量的）方法上有所不同。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Replace the methods with fields in the parent class and delete the subclasses.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在父类中用字段替换方法并删除子类。
 - en: Before![Replace Subclass with Fields - Before](../Images/930cf3518d32cfbe157da891e57274b8.png)After![Replace
     Subclass with Fields - After](../Images/05e0e2ebf14b5a93cdc0808d5c022055.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![用字段替换子类 - 之前](../Images/930cf3518d32cfbe157da891e57274b8.png)之后![用字段替换子类
+    - 之后](../Images/05e0e2ebf14b5a93cdc0808d5c022055.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Sometimes refactoring is just the ticket for avoiding type code.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时，重构正是避免类型代码的良方。
 - en: In one such case, a hierarchy of subclasses may be different only in the values
     returned by particular methods. These methods aren't even the result of computation,
     but are strictly set out in the methods themselves or in the fields returned by
     the methods. To simplify the class architecture, this hierarchy can be compressed
     into a single class containing one or several fields with the necessary values,
     based on the situation.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在某些情况下，子类层次结构可能仅在特定方法返回的值上有所不同。这些方法甚至不是计算的结果，而是严格在方法本身或方法返回的字段中设定的。为了简化类架构，可以将此层次结构压缩为一个包含一个或多个必要值的字段的单一类，具体情况而定。
 - en: These changes may become necessary after moving a large amount of functionality
     from a class hierarchy to another place. The current hierarchy is no longer so
     valuable and its subclasses are now just dead weight.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在将大量功能从一个类层次结构移动到另一个地方后，这些更改可能变得必要。当前的层次结构不再那么有价值，其子类现在只是累赘。
 - en: Benefits
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Simplifies system architecture. Creating subclasses is overkill if all you want
     to do is to return different values in different methods.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简化系统架构。如果您只想在不同的方法中返回不同的值，创建子类就是多此一举。
 - en: How to Refactor
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Apply [Replace Constructor with Factory Method](/replace-constructor-with-factory-method)
     to the subclasses.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对子类应用[用工厂方法替换构造函数](/replace-constructor-with-factory-method)。
 - en: Replace subclass constructor calls with superclass factory method calls.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将子类构造函数调用替换为超类工厂方法调用。
 - en: In the superclass, declare fields for storing the values of each of the subclass
     methods that return constant values.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在超类中，声明字段以存储每个返回常量值的子类方法的值。
 - en: Create a protected superclass constructor for initializing the new fields.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个受保护的超类构造函数以初始化新字段。
 - en: Create or modify the existing subclass constructors so that they call the new
     constructor of the parent class and pass the relevant values to it.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建或修改现有的子类构造函数，以使它们调用父类的新构造函数并将相关值传递给它。
 - en: Implement each constant method in the parent class so that it returns the value
     of the corresponding field. Then remove the method from the subclass.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在父类中实现每个常量方法，使其返回对应字段的值。然后从子类中删除该方法。
 - en: If the subclass constructor has additional functionality, use [Inline Method](/inline-method)
     to incorporate the constructor into the superclass factory method.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果子类构造函数具有额外的功能，使用[内联方法](/inline-method)将构造函数合并到超类工厂方法中。
 - en: Delete the subclass.
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除子类。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我想想…*](/refactoring/course)'

@@ -1,164 +1,237 @@
 - en: Replace Type Code with Class
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用类替换类型代码
 - en: 原文：[https://refactoringguru.cn/replace-type-code-with-class](https://refactoringguru.cn/replace-type-code-with-class)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-type-code-with-class](https://refactoringguru.cn/replace-type-code-with-class)
 - en: '**What''s type code?** Type code occurs when, instead of a separate data type,
     you have a set of numbers or strings that form a list of allowable values for
     some entity. Often these specific numbers and strings are given understandable
     names via constants, which is the reason for why such type code is encountered
     so much.'
+  id: totrans-2
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**什么是类型代码？** 类型代码发生在没有单独数据类型时，你有一组数字或字符串，这些值形成某个实体的允许值列表。这些特定的数字和字符串通常通过常量给出可理解的名称，这就是为什么这种类型代码如此常见的原因。'
 - en: Problem
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A class has a field that contains type code. The values of this type aren't
     used in operator conditions and don't affect the behavior of the program.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个类有一个字段包含类型代码。这个类型的值不在操作符条件中使用，也不影响程序的行为。
 - en: Solution
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a new class and use its objects instead of the type code values.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个新类，并使用它的对象来代替类型代码的值。
 - en: Before![Replace Type Code with Class - Before](../Images/f2c2339ea0a1ae755cc26fa3e34bc06a.png)After![Replace
     Type Code with Class - After](../Images/2cea81c57dd8c0ba9a3c2dfce78eda64.png)
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![用类替换类型代码 - 之前](../Images/f2c2339ea0a1ae755cc26fa3e34bc06a.png)之后![用类替换类型代码
+    - 之后](../Images/2cea81c57dd8c0ba9a3c2dfce78eda64.png)
 - en: Why Refactor
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: One of the most common reasons for type code is working with databases, when
     a database has fields in which some complex concept is coded with a number or
     string.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型代码最常见的原因之一是在与数据库工作时，当数据库中有字段编码了某个复杂概念的数字或字符串。
 - en: For example, you have the class `User` with the field `user_role`, which contains
     information about the access privileges of each user, whether administrator, editor,
     or ordinary user. So in this case, this information is coded in the field as `A`,
     `E`, and `U` respectively.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，你有一个`User`类，其字段`user_role`包含每个用户的访问权限信息，可能是管理员、编辑者或普通用户。因此，在这种情况下，这些信息在字段中分别编码为`A`、`E`和`U`。
 - en: What are the shortcomings of this approach? The field setters often don't check
     which value is sent, which can cause big problems when someone sends unintended
     or wrong values to these fields.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法的缺点是什么？字段的设置器通常不检查发送的值，这可能会在某人向这些字段发送意外或错误的值时造成大问题。
 - en: In addition, type verification is impossible for these fields. It's possible
     to send any number or string to them, which won't be type checked by your IDE
     and even allow your program to run (and crash later).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，这些字段无法进行类型验证。你可以向它们发送任何数字或字符串，这不会被你的IDE进行类型检查，甚至允许你的程序运行（然后崩溃）。
 - en: Benefits
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: We want to turn sets of primitive values—which is what coded types are—into
     full-fledged classes with all the benefits that object-oriented programming has
     to offer.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们希望将一组原始值（即编码类型的内容）转变为完整的类，从而获得面向对象编程所提供的所有好处。
 - en: By replacing type code with classes, we allow type hinting for values passed
     to methods and fields at the level of the programming language.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过用类替换类型代码，我们允许在编程语言层面上对传递给方法和字段的值进行类型提示。
 - en: For example, while the compiler previously didn't see difference between your
     numeric constant and some arbitrary number when a value is passed to a method,
     now when data that doesn't fit the indicated type class is passed, you're warned
     of the error inside your IDE.
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 例如，当传递值到方法时，编译器以前无法区分你的数字常量和某个任意数字，但现在当传递不符合指定类型类的数据时，你会在IDE中收到错误警告。
 - en: Thus we make it possible to move code to the classes of the type. If you needed
     to perform complex manipulations with type values throughout the whole program,
     now this code can "live" inside one or multiple type classes.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 因此，我们可以将代码移动到类型的类中。如果你需要在整个程序中对类型值进行复杂操作，现在这些代码可以“存在”于一个或多个类型类中。
 - en: When Not to Use
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么时候不使用
 - en: 'If the values of a coded type are used inside control flow structures (`if`,
     `switch`, etc.) and control a class behavior, you should use one of the two refactoring
     techniques for type code:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果编码类型的值在控制流结构（`if`、`switch`等）中使用，并控制类的行为，你应该使用两种类型代码重构技术之一：
 - en: '[Replace Type Code with Subclasses](/replace-type-code-with-subclasses)'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用子类替换类型代码](/replace-type-code-with-subclasses)'
 - en: '[Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy)'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用状态/策略替换类型代码](/replace-type-code-with-state-strategy)'
 - en: How to Refactor
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a new class and give it a new name that corresponds to the purpose of
     the coded type. Here we'll call it *type class*.
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个新类，并给它一个与编码类型目的相对应的新名称。我们称之为*类型类*。
 - en: Copy the field containing type code to the *type class* and make it private.
     Then create a getter for the field. A value will be set for this field only from
     the constructor.
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将包含类型代码的字段复制到*类型类*中，并将其设为私有。然后为该字段创建一个获取器。该字段的值将仅从构造函数中设置。
 - en: For each value of the coded type, create a static method in *type class*. It'll
     be creating a new *type class* object corresponding to this value of the coded
     type.
+  id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于每个编码类型的值，在*类型类*中创建一个静态方法。它将创建一个对应于此编码类型值的新*类型类*对象。
 - en: In the original class, replace the type of the coded field with *type class*.
     Create a new object of this type in the constructor as well as in the field setter.
     Change the field getter so that it calls the *type class* getter.
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在原始类中，将编码字段的类型替换为*类型类*。在构造函数和字段设置器中创建此类型的新对象。更改字段获取器，使其调用*类型类*获取器。
 - en: Replace any mentions of values of the coded type with calls of the relevant
     *type class* static methods.
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将编码类型的值的任何提及替换为相关*类型类*静态方法的调用。
 - en: Remove the coded type constants from the original class.
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从原始类中删除编码类型常量。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看看…*](/refactoring/course)'

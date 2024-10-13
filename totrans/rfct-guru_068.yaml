@@ -1,40 +1,59 @@
 - en: Encapsulate Collection
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 封装集合
 - en: 原文：[https://refactoringguru.cn/encapsulate-collection](https://refactoringguru.cn/encapsulate-collection)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/encapsulate-collection](https://refactoringguru.cn/encapsulate-collection)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A class contains a collection field and a simple getter and setter for working
     with the collection.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个类包含一个集合字段以及用于操作集合的简单getter和setter。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Make the getter-returned value read-only and create methods for adding/deleting
     elements of the collection.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 使getter返回的值为只读，并创建用于添加/删除集合元素的方法。
 - en: Before![Encapsulate Collection - Before](../Images/d61c9af4590593edec45f293fecc0885.png)After![Encapsulate
     Collection - After](../Images/72ab1dc242723ae23322fc28d823464e.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: Before![封装集合 - 之前](../Images/d61c9af4590593edec45f293fecc0885.png)After![封装集合
+    - 之后](../Images/72ab1dc242723ae23322fc28d823464e.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: A class contains a field that contains a collection of objects. This collection
     could be an array, list, set or vector. A normal getter and setter have been created
     for working with the collection.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个类包含一个字段，该字段包含一个对象集合。这个集合可以是数组、列表、集合或向量。为操作集合创建了正常的getter和setter。
 - en: But the collections should be used by a protocol that's a bit different from
     the one used by other data types. The getter method shouldn't return the collection
     object itself, since this would let clients change collection contents without
@@ -42,101 +61,145 @@
     internal structures of the object data to clients. The method for getting collection
     elements should return a value that doesn't allow changing the collection or disclose
     excessive data about its structure.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，集合应该通过一种与其他数据类型使用的协议略有不同的方式来使用。getter方法不应该返回集合对象本身，因为这会让客户端在不知情的情况下更改集合内容。此外，这会向客户端显示对象数据的内部结构过多。获取集合元素的方法应该返回一个不允许更改集合或泄露过多结构数据的值。
 - en: In addition, there shouldn't be a method that assigns a value to the collection.
     Instead, there should be operations for adding and deleting elements. Thanks to
     this, the owner object gains control over addition and deletion of collection
     elements.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，不应该有将值分配给集合的方法。相反，应该有用于添加和删除元素的操作。通过这种方式，拥有对象可以控制集合元素的添加和删除。
 - en: Such a protocol properly encapsulates a collection, which ultimately reduces
     the degree of association between the owner class and the client code.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样的协议恰当地封装了集合，从而最终减少了拥有类与客户端代码之间的关联程度。
 - en: Benefits
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: The collection field is encapsulated inside a class. When the getter is called,
     it returns a copy of the collection, which prevents accidental changing or overwriting
     of the collection elements without the knowledge of the class that contains the
     collection.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 集合字段被封装在一个类中。当调用getter时，它返回集合的副本，这防止了在包含集合的类不知情的情况下意外更改或覆盖集合元素。
 - en: If collection elements are contained inside a primitive type, such as an array,
     you create more convenient methods for working with the collection.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果集合元素包含在基本类型内，例如数组，则可以创建更方便的方法来操作集合。
 - en: If collection elements are contained inside a non-primitive container (standard
     collection class), by encapsulating the collection you can restrict access to
     unwanted standard methods of the collection (such as by restricting addition of
     new elements).
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果集合元素包含在非基本容器（标准集合类）中，通过封装集合可以限制对集合不必要的标准方法的访问（例如限制添加新元素）。
 - en: How to Refactor
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create methods for adding and deleting collection elements. They must accept
     collection elements in their parameters.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建用于添加和删除集合元素的方法。这些方法必须接受集合元素作为参数。
 - en: Assign an empty collection to the field as the initial value if this isn't done
     in the class constructor.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果在类构造函数中未完成，则将空集合分配给该字段作为初始值。
 - en: Find the calls of the collection field setter. Change the setter so that it
     uses operations for adding and deleting elements, or make these operations call
     client code.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查找集合字段setter的调用。更改setter，使其使用添加和删除元素的操作，或使这些操作调用客户端代码。
 - en: Note that setters can be used only to replace all collection elements with other
     ones. Therefore it may be advisable to change the setter name ([Rename Method](/rename-method))
     to `replace`.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，setter只能用于用其他元素替换所有集合元素。因此，建议将setter名称([重命名方法](/rename-method))更改为`replace`。
 - en: Find all calls of the collection getter after which the collection is changed.
     Change the code so that it uses your new methods for adding and deleting elements
     from the collection.
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查找所有在调用集合获取器后集合被更改的地方。将代码更改为使用您新的添加和删除元素的方法。
 - en: Change the getter so that it returns a read-only representation of the collection.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 更改获取器，使其返回集合的只读表示。
 - en: Inspect the client code that uses the collection for code that would look better
     inside of the collection class itself.
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 检查使用集合的客户端代码，找出在集合类内部看起来更好的代码。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持 HTML 视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦了阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里的所有文本需要 7 小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

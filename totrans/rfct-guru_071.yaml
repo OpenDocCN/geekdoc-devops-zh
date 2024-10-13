@@ -1,160 +1,231 @@
 - en: Replace Type Code with State/Strategy
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用状态/策略替换类型代码
 - en: 原文：[https://refactoringguru.cn/replace-type-code-with-state-strategy](https://refactoringguru.cn/replace-type-code-with-state-strategy)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-type-code-with-state-strategy](https://refactoringguru.cn/replace-type-code-with-state-strategy)
 - en: '**What''s type code?** Type code occurs when, instead of a separate data type,
     you have a set of numbers or strings that form a list of allowable values for
     some entity. Often these specific numbers and strings are given understandable
     names via constants, which is the reason for why such type code is encountered
     so much.'
+  id: totrans-2
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**什么是类型代码？** 类型代码是指，当你不是使用单独的数据类型，而是有一组数字或字符串形成某个实体的允许值列表时。通常，这些特定的数字和字符串通过常量赋予可理解的名称，这就是为什么这种类型代码如此常见的原因。'
 - en: Problem
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a coded type that affects behavior but you can't use subclasses to
     get rid of it.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有一个影响行为的编码类型，但你无法使用子类来消除它。
 - en: Solution
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Replace type code with a state object. If it's necessary to replace a field
     value with type code, another state object is "plugged in".
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 用状态对象替换类型代码。如果有必要用类型代码替换字段值，可以“插入”另一个状态对象。
 - en: Before![Replace Type Code with State-Strategy - Before](../Images/6414214585273f341380c0154622f4ec.png)After![Replace
     Type Code with State-Strategy - After](../Images/d294761863153e227234b75ca0d43964.png)
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此之前！[用状态策略替换类型代码 - 之前](../Images/6414214585273f341380c0154622f4ec.png)之后！[用状态策略替换类型代码
+    - 之后](../Images/d294761863153e227234b75ca0d43964.png)
 - en: Why Refactor
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: You have type code and it affects the behavior of a class, therefore we can't
     use [Replace Type Code with Class](/replace-type-code-with-class).
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有类型代码，它影响类的行为，因此我们不能使用[用类替换类型代码](/replace-type-code-with-class)。
 - en: Type code affects the behavior of a class but we can't create subclasses for
     the coded type due to the existing class hierarchy or other reasons. Thus means
     that we can't apply [Replace Type Code with Subclasses](/replace-type-code-with-subclasses).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型代码影响类的行为，但由于现有的类层次结构或其他原因，我们无法为编码类型创建子类。这意味着我们不能应用[用子类替换类型代码](/replace-type-code-with-subclasses)。
 - en: Benefits
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: This refactoring technique is a way out of situations when a field with a coded
     type changes its value during the object's lifetime. In this case, replacement
     of the value is made via replacement of the state object to which the original
     class refers.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这种重构技术是解决当具有编码类型的字段在对象生命周期中改变其值的情况的一种方法。在这种情况下，通过替换原始类所引用的状态对象来替换值。
 - en: If you need to add a new value of a coded type, all you need to do is to add
     a new state subclass without altering the existing code (cf. the *Open/Closed
     Principle*).
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果需要添加一个编码类型的新值，你只需添加一个新的状态子类，而无需更改现有代码（参见*开放/封闭原则*）。
 - en: Drawbacks
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: If you have a simple case of type code but you use this refactoring technique
     anyway, you will have many extra (and unneeded) classes.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你有一个简单的类型代码案例，但仍然使用这种重构技术，你将会有许多多余（且不需要）的类。
 - en: Good to Know
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好消息
 - en: 'Implementation of this refactoring technique can make use of one of two design
     patterns: **State** or **Strategy**. Implementation is the same no matter which
     pattern you choose. So which pattern should you pick in a particular situation?'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种重构技术的实现可以使用两种设计模式之一：**状态**或**策略**。无论选择哪种模式，实施方式都是一样的。那么在特定情况下你应该选择哪种模式呢？
 - en: If you're trying to split a conditional that controls the selection of algorithms,
     use Strategy.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你试图拆分控制算法选择的条件，请使用策略。
 - en: But if each value of the coded type is responsible not only for selecting an
     algorithm but for the whole condition of the class, class state, field values,
     and many other actions, State is better for the job.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 但如果编码类型的每个值不仅负责选择算法，还负责类的整体状态、字段值和许多其他操作，状态更适合这个工作。
 - en: How to Refactor
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Use [Self Encapsulate Field](/self-encapsulate-field) to create a getter for
     the field that contains type code.
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用[自我封装字段](/self-encapsulate-field)为包含类型代码的字段创建一个getter。
 - en: Create a new class and give it an understandable name that fits the purpose
     of the type code. This class will be playing the role of *state* (or *strategy*).
     In it, create an abstract coded field getter.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个新类，并赋予它一个适合类型代码目的的可理解名称。这个类将扮演*状态*（或*策略*）的角色。在其中，创建一个抽象的编码字段getter。
 - en: Create subclasses of the state class for each value of the coded type. In each
     subclass, redefine the getter of the coded field so that it returns the corresponding
     value of the coded type.
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为编码类型的每个值创建状态类的子类。在每个子类中，重定义编码字段的getter，使其返回对应的编码类型值。
 - en: In the abstract state class, create a static factory method that accepts the
     value of the coded type as a parameter. Depending on this parameter, the factory
     method will create objects of various states. For this, in its code create a large
     conditional; it'll be the only one when refactoring is complete.
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在抽象状态类中，创建一个接受编码类型值作为参数的静态工厂方法。根据该参数，工厂方法将创建各种状态的对象。为此，在其代码中创建一个大的条件；这将是重构完成时的唯一条件。
 - en: In the original class, change the type of the coded field to the state class.
     In the field's setter, call the factory state method for getting new state objects.
+  id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在原始类中，将编码字段的类型更改为状态类。在字段的setter中，调用工厂状态方法以获取新的状态对象。
 - en: Now you can start to move the fields and methods from the superclass to the
     corresponding state subclasses (using [Push Down Field](/push-down-field) and
     [Push Down Method](/push-down-method)).
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 现在你可以开始将字段和方法从超类移动到相应的状态子类中（使用 [向下推送字段](/push-down-field) 和 [向下推送方法](/push-down-method)）。
 - en: When everything moveable has been moved, use [Replace Conditional with Polymorphism](/replace-conditional-with-polymorphism)
     in order to get rid of conditionals that use type code once and for all.
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当所有可移动的对象都已被移动时，使用 [替换条件语句为多态](/replace-conditional-with-polymorphism) 来彻底摆脱使用类型代码的条件语句。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们关于重构的互动课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

@@ -1,48 +1,69 @@
 - en: Replace Type Code with Subclasses
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用子类替换类型代码
 - en: 原文：[https://refactoringguru.cn/replace-type-code-with-subclasses](https://refactoringguru.cn/replace-type-code-with-subclasses)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-type-code-with-subclasses](https://refactoringguru.cn/replace-type-code-with-subclasses)
 - en: '**What''s type code?** Type code occurs when, instead of a separate data type,
     you have a set of numbers or strings that form a list of allowable values for
     some entity. Often these specific numbers and strings are given understandable
     names via constants, which is the reason for why such type code is encountered
     so much.'
+  id: totrans-2
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**什么是类型代码？** 类型代码是指，当你有一组数字或字符串，而不是单独的数据类型时，这些数字或字符串形成某个实体的可允许值列表。通常，这些具体的数字和字符串通过常量被赋予可理解的名称，这也是为何这种类型代码如此常见的原因。'
 - en: Problem
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a coded type that directly affects program behavior (values of this
     field trigger various code in conditionals).
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有一个编码类型，它直接影响程序行为（该字段的值触发条件语句中的各种代码）。
 - en: Solution
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create subclasses for each value of the coded type. Then extract the relevant
     behaviors from the original class to these subclasses. Replace the control flow
     code with polymorphism.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 为编码类型的每个值创建子类。然后将原类中的相关行为提取到这些子类中。用多态性替换控制流代码。
 - en: Before![Replace Type Code with Subclasses - Before](../Images/1d382c4cf6a0d8ebe30c0a90e3b8de80.png)After![Replace
     Type Code with Subclasses - After](../Images/6c105053020a608a75c754ba69ab0ce8.png)
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[用子类替换类型代码 - 之前](../Images/1d382c4cf6a0d8ebe30c0a90e3b8de80.png)之后！[用子类替换类型代码
+    - 之后](../Images/6c105053020a608a75c754ba69ab0ce8.png)
 - en: Why Refactor
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: This refactoring technique is a more complicated twist on [Replace Type Code
     with Class](/replace-type-code-with-class).
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种重构技术是对[用类替换类型代码](/replace-type-code-with-class)的一种更复杂的变体。
 - en: As in the first refactoring method, you have a set of simple values that constitute
     all the allowed values for a field. Although these values are often specified
     as constants and have understandable names, their use makes your code very error-prone
@@ -51,8 +72,10 @@
     the constant `USER_TYPE_ADMIN` with the value `"ADMIN"`, the method receives the
     same string in lower case (`"admin"`), which will cause execution of something
     else that the author (you) didn't intend.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 与第一个重构方法一样，你有一组简单值，这些值构成字段的所有允许值。虽然这些值通常被指定为常量，并具有可理解的名称，但它们的使用会使你的代码非常容易出错，因为它们在本质上仍然是原始值。例如，你有一个方法接受这些值中的一个作为参数。在某个时刻，方法收到的字符串为小写形式（`"admin"`），而不是常量`USER_TYPE_ADMIN`对应的值`"ADMIN"`，这将导致执行与作者（你）原本意图不同的操作。
 - en: Here we're dealing with control flow code such as the conditionals `if`, `switch`
     and `?:`. In other words, fields with coded values (such as `$user->type === self::USER_TYPE_ADMIN`)
     are used inside the conditions of these operators. If we were to use [Replace
@@ -60,106 +83,151 @@
     constructions would be best moved to a class responsible for the data type. Ultimately,
     this would of course create a type class very similar to the original one, with
     the same problems as well.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们处理的控制流代码包括条件语句`if`、`switch`和`?:`。换句话说，具有编码值的字段（例如`$user->type === self::USER_TYPE_ADMIN`）在这些运算符的条件中被使用。如果在这里使用[用类替换类型代码](/replace-type-code-with-class)，所有这些控制流结构最好移动到一个负责数据类型的类中。最终，这当然会创建一个非常类似于原来的类型类，但同样存在原有的问题。
 - en: Benefits
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Delete the control flow code. Instead of a bulky `switch` in the original class,
     move the code to appropriate subclasses. This improves adherence to the *Single
     Responsibility Principle* and makes the program more readable in general.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 删除控制流代码。将原类中笨重的`switch`代码移动到适当的子类中。这提高了对*单一职责原则*的遵循，并使程序整体上更具可读性。
 - en: If you need to add a new value for a coded type, all you need to do is add a
     new subclass without touching the existing code (cf. the *Open/Closed Principle*).
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果需要为编码类型添加一个新值，你只需添加一个新的子类，而无需触及现有代码（参见*开闭原则*）。
 - en: By replacing type code with classes, we pave the way for type hinting for methods
     and fields at the level of the programming language. This wouldn't be possible
     using simple numeric or string values contained in a coded type.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过用类替换类型代码，我们为编程语言层面的方法和字段提供了类型提示。这在使用简单的数字或字符串值构成的编码类型时是无法实现的。
 - en: When Not to Use
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时不使用
 - en: This technique isn't applicable if you already have a class hierarchy. You can't
     create a dual hierarchy via inheritance in object-oriented programming. Still,
     you can replace type code via composition instead of inheritance. To do so, use
     [Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy).
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你已经有了类层次结构，这种技术就不适用。在面向对象编程中，你无法通过继承创建双重层次结构。不过，你可以通过组合而非继承来替换类型代码。为此，请使用
+    [用状态/策略替换类型代码](/replace-type-code-with-state-strategy)。
 - en: If the values of type code can change after an object is created, avoid this
     technique. We would have to somehow replace the class of the object itself on
     the fly, which isn't possible. Still, an alternative in this case too would be
     [Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy).
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果类型代码的值在对象创建后可以更改，避免使用此技术。我们必须以某种方式在运行时替换对象本身的类，这是不可能的。不过，在这种情况下，替代方案也是 [用状态/策略替换类型代码](/replace-type-code-with-state-strategy)。
 - en: How to Refactor
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Use [Self Encapsulate Field](/self-encapsulate-field) to create a getter for
     the field that contains type code.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 [自封装字段](/self-encapsulate-field) 为包含类型代码的字段创建一个getter。
 - en: Make the superclass constructor private. Create a static factory method with
     the same parameters as the superclass constructor. It must contain the parameter
     that will take the starting values of the coded type. Depending on this parameter,
     the factory method will create objects of various subclasses. To do so, in its
     code you must create a large conditional but, at least, it'll be the only one
     when it's truly necessary; otherwise, subclasses and polymorphism will do.
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使超类构造函数为私有。创建一个与超类构造函数具有相同参数的静态工厂方法。它必须包含一个参数，用于接收编码类型的起始值。根据这个参数，工厂方法将创建不同子类的对象。为此，在其代码中必须创建一个大型条件判断，但至少在确实必要时它是唯一的；否则，子类和多态性将会起作用。
 - en: Create a unique subclass for each value of the coded type. In it, redefine the
     getter of the coded type so that it returns the corresponding value of the coded
     type.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为编码类型的每个值创建一个唯一的子类。在其中，重定义编码类型的getter，使其返回对应的编码类型的值。
 - en: Delete the field with type code from the superclass. Make its getter abstract.
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从超类中删除带有类型代码的字段。使其getter为抽象。
 - en: Now that you have subclasses, you can start to move the fields and methods from
     the superclass to corresponding subclasses (with the help of [Push Down Field](/push-down-field)
     and [Push Down Method](/push-down-method)).
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一旦你有了子类，就可以开始将字段和方法从超类移动到相应的子类中（借助 [向下推送字段](/push-down-field) 和 [向下推送方法](/push-down-method)）。
 - en: When everything possible has been moved, use [Replace Conditional with Polymorphism](/replace-conditional-with-polymorphism)
     in order to get rid of conditions that use the type code once and for all.
+  id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当所有可能的内容都已移动后，使用 [用多态性替换条件](/replace-conditional-with-polymorphism) 来彻底摆脱一次性使用类型代码的条件。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

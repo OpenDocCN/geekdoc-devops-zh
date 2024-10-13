@@ -1,212 +1,322 @@
 - en: Replace Magic Number with Symbolic Constant
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用符号常量替换魔法数字
 - en: 原文：[https://refactoringguru.cn/replace-magic-number-with-symbolic-constant](https://refactoringguru.cn/replace-magic-number-with-symbolic-constant)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-magic-number-with-symbolic-constant](https://refactoringguru.cn/replace-magic-number-with-symbolic-constant)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Your code uses a number that has a certain meaning to it.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的代码使用了一个具有特定含义的数字。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Replace this number with a constant that has a human-readable name explaining
     the meaning of the number.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 用一个具有易读名称的常量替换这个数字，以解释该数字的含义。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: A magic number is a numeric value that's encountered in the source but has no
     obvious meaning. This "anti-pattern" makes it harder to understand the program
     and refactor the code.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 魔法数字是源代码中遇到的数值，但没有明显的含义。这个“反模式”使得理解程序和重构代码变得更加困难。
 - en: 'Yet more difficulties arise when you need to change this magic number. Find
     and replace won''t work for this: the same number may be used for different purposes
     in different places, meaning that you will have to verify every line of code that
     uses this number.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你需要更改这个魔法数字时，会出现更多困难。查找和替换无法解决这个问题：相同的数字可能在不同地方用于不同目的，这意味着你需要验证每一行使用这个数字的代码。
 - en: Benefits
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: The symbolic constant can serve as live documentation of the meaning of its
     value.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 符号常量可以作为其值含义的实时文档。
 - en: It's much easier to change the value of a constant than to search for this number
     throughout the entire codebase, without the risk of accidentally changing the
     same number used elsewhere for a different purpose.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更改常量的值比在整个代码库中搜索这个数字要容易得多，且不会意外改变用于其他目的的相同数字。
 - en: Reduce duplicate use of a number or string in the code. This is especially important
     when the value is complicated and long (such as `3.14159` or `0xCAFEBABE`).
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 减少代码中对数字或字符串的重复使用。这在值复杂且较长时尤其重要（例如`3.14159`或`0xCAFEBABE`）。
 - en: Good to Know
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 重要信息
 - en: Not all numbers are magical.
+  id: totrans-34
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 不是所有的数字都是神奇的。
 - en: 'If the purpose of a number is obvious, there''s no need to replace it. A classic
     example is:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果数字的目的很明显，就不需要替换。一个经典例子是：
 - en: '[PRE10]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Alternatives
+  id: totrans-37
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 替代方案
 - en: Sometimes a magic number can be replaced with method calls. For example, if
     you have a magic number that signifies the number of elements in a collection,
     you don't need to use it for checking the last element of the collection. Instead,
     use the standard method for getting the collection length.
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 有时可以用方法调用替换魔法数字。例如，如果你有一个表示集合中元素数量的魔法数字，你不需要在检查集合的最后一个元素时使用它。相反，使用标准方法获取集合长度。
 - en: 'Magic numbers are sometimes used as type code. Say that you have two types
     of users and you use a number field in a class to specify which is which: administrators
     are `1` and ordinary users are `2`.'
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 魔法数字有时用作类型代码。假设你有两种用户类型，并在一个类中使用数字字段来指定哪个是哪个：管理员为`1`，普通用户为`2`。
 - en: 'In this case, you should use one of the refactoring methods to avoid type code:'
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，你应该使用一种重构方法来避免类型代码：
 - en: '[Replace Type Code with Class](/replace-type-code-with-class)'
+  id: totrans-41
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用类替换类型代码](/replace-type-code-with-class)'
 - en: '[Replace Type Code with Subclasses](/replace-type-code-with-subclasses)'
+  id: totrans-42
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用子类替换类型代码](/replace-type-code-with-subclasses)'
 - en: '[Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy)'
+  id: totrans-43
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用状态/策略替换类型代码](/replace-type-code-with-state-strategy)'
 - en: How to Refactor
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Declare a constant and assign the value of the magic number to it.
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 声明一个常量并将魔法数字的值赋给它。
 - en: Find all mentions of the magic number.
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 找到所有魔法数字的提及。
 - en: For each of the numbers that you find, double-check that the magic number in
     this particular case corresponds to the purpose of the constant. If yes, replace
     the number with your constant. This is an important step, since the same number
     can mean absolutely different things (and replaced with different constants, as
     the case may be).
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于你找到的每个数字，请仔细检查在这种特定情况下的魔法数字是否与常量的目的相对应。如果是，请用你的常量替换这个数字。这是一个重要步骤，因为相同的数字可能意味着完全不同的事情（并可能用不同的常量替换）。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程，它提供了更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

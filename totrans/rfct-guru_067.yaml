@@ -1,168 +1,258 @@
 - en: Encapsulate Field
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 封装字段
 - en: 原文：[https://refactoringguru.cn/encapsulate-field](https://refactoringguru.cn/encapsulate-field)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/encapsulate-field](https://refactoringguru.cn/encapsulate-field)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a public field.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有一个公共字段。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Make the field private and create access methods for it.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将字段设置为私有，并为其创建访问方法。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Why Refactor
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: One of the pillars of object-oriented programming is *Encapsulation*, the ability
     to conceal object data. Otherwise, all objects would be public and other objects
     could get and modify the data of your object without any checks and balances!
     Data is separated from the behaviors associated with this data, modularity of
     program sections is compromised, and maintenance becomes complicated.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 面向对象编程的支柱之一是 *封装*，即隐蔽对象数据的能力。否则，所有对象都是公共的，其他对象可以在没有任何检查和制衡的情况下获取和修改你的对象的数据！数据与与此数据相关的行为分离，程序部分的模块化受到损害，维护变得复杂。
 - en: Benefits
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 益处
 - en: If the data and behavior of a component are closely interrelated and are in
     the same place in the code, it's much easier for you to maintain and develop this
     component.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果组件的数据和行为密切相关并且在代码中的同一位置，那么你维护和开发该组件会更容易。
 - en: You can also perform complicated operations related to access to object fields.
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你还可以执行与访问对象字段相关的复杂操作。
 - en: When Not to Use
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时不使用
 - en: In some cases, encapsulation is ill-advised due to performance considerations.
     These cases are rare but when they happen, this circumstance is very important.
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在某些情况下，由于性能考虑，封装是不明智的。这些情况很少见，但一旦发生，这种情况非常重要。
 - en: Say that you have a graphical editor that contains objects possessing x- and
     y-coordinates. These fields are unlikely to change in the future. What's more,
     the program involves a great many different objects in which these fields are
     present. So accessing the coordinate fields directly saves significant CPU cycles
     that would otherwise be taken up by calling access methods.
+  id: totrans-29
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 比如说，你有一个图形编辑器，其中包含具有 x 和 y 坐标的对象。这些字段未来不太可能改变。此外，程序涉及大量不同的对象，这些字段都存在。因此，直接访问坐标字段可以节省大量本来会被调用访问方法占用的
+    CPU 周期。
 - en: As an example of this unusual case, there's the [Point](http://docs.oracle.com/javase/7/docs/api/java/awt/Point.html)
     class in Java. All fields of this class are public.
+  id: totrans-30
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 作为这种特殊情况的一个例子，Java 中的 [Point](http://docs.oracle.com/javase/7/docs/api/java/awt/Point.html)
+    类的所有字段都是公共的。
 - en: How to Refactor
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a getter and setter for the field.
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为字段创建 getter 和 setter。
 - en: Find all invocations of the field. Replace receipt of the field value with the
     getter, and replace setting of new field values with the setter.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 找到字段的所有调用。用 getter 替换字段值的接收，用 setter 替换新的字段值的设置。
 - en: After all field invocations have been replaced, make the field private.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在替换所有字段调用后，将字段设置为私有。
 - en: Next Steps
+  id: totrans-35
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 下一步
 - en: '*Encapsulate Field* is only the first step in bringing data and the behaviors
     involving this data closer together. After you create simple methods for access
     fields, you should recheck the places where these methods are called. It''s quite
     possible that the code in these areas would look more appropriate in the access
     methods.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '*封装字段*只是将数据与涉及该数据的行为更紧密结合的第一步。在你为访问字段创建简单方法后，应重新检查这些方法被调用的地方。这些区域的代码很可能在访问方法中看起来更合适。'
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持 HTML 视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

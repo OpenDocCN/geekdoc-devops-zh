@@ -1,98 +1,152 @@
 - en: Simplifying Conditional Expressions
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 简化条件表达式
 - en: 原文：[https://refactoringguru.cn/refactoring/techniques/simplifying-conditional-expressions](https://refactoringguru.cn/refactoring/techniques/simplifying-conditional-expressions)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/techniques/simplifying-conditional-expressions](https://refactoringguru.cn/refactoring/techniques/simplifying-conditional-expressions)
 - en: Conditionals tend to get more and more complicated in their logic over time,
     and there are yet more techniques to combat this as well.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 条件语句的逻辑往往随着时间的推移变得越来越复杂，还有更多技术可以应对这一点。
 - en: '[Decompose Conditional](/decompose-conditional)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[拆分条件](/decompose-conditional)'
 - en: '**Problem:** You have a complex conditional (`if-then`/`else` or `switch`).'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有一个复杂的条件（`if-then`/`else` 或 `switch`）。'
 - en: '**Solution:** Decompose the complicated parts of the conditional into separate
     methods: the condition, `then` and `else`.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将条件语句中复杂的部分拆分为单独的方法：条件、`then` 和 `else`。'
 - en: '[Consolidate Conditional Expression](/consolidate-conditional-expression)'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '[合并条件表达式](/consolidate-conditional-expression)'
 - en: '**Problem:** You have multiple conditionals that lead to the same result or
     action.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有多个条件语句导致相同的结果或操作。'
 - en: '**Solution:** Consolidate all these conditionals in a single expression.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将所有这些条件合并为一个表达式。'
 - en: '[Consolidate Duplicate Conditional Fragments](/consolidate-duplicate-conditional-fragments)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[合并重复的条件片段](/consolidate-duplicate-conditional-fragments)'
 - en: '**Problem:** Identical code can be found in all branches of a conditional.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 在条件的所有分支中都可以找到相同的代码。'
 - en: '**Solution:** Move the code outside of the conditional.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将代码移出条件语句。'
 - en: '[Remove Control Flag](/remove-control-flag)'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[移除控制标志](/remove-control-flag)'
 - en: '**Problem:** You have a boolean variable that acts as a control flag for multiple
     boolean expressions.'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有一个布尔变量，它作为多个布尔表达式的控制标志。'
 - en: '**Solution:** Instead of the variable, use `break`, `continue` and `return`.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 不要使用变量，而是使用 `break`、`continue` 和 `return`。'
 - en: '[Replace Nested Conditional with Guard Clauses](/replace-nested-conditional-with-guard-clauses)'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[用守卫语句替换嵌套条件](/replace-nested-conditional-with-guard-clauses)'
 - en: '**Problem:** You have a group of nested conditionals and it''s hard to determine
     the normal flow of code execution.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有一组嵌套的条件语句，很难确定代码执行的正常流程。'
 - en: '**Solution:** Isolate all special checks and edge cases into separate clauses
     and place them before the main checks. Ideally, you should have a "flat" list
     of conditionals, one after the other.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将所有特殊检查和边界情况隔离到单独的子句中，并将它们放在主要检查之前。理想情况下，你应该有一个“扁平”的条件列表，一个接一个。'
 - en: '[Replace Conditional with Polymorphism](/replace-conditional-with-polymorphism)'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[用多态替换条件](/replace-conditional-with-polymorphism)'
 - en: '**Problem:** You have a conditional that performs various actions depending
     on object type or properties.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有一个条件语句，根据对象类型或属性执行不同的操作。'
 - en: '**Solution:** Create subclasses matching the branches of the conditional. In
     them, create a shared method and move code from the corresponding branch of the
     conditional to it. Then replace the conditional with the relevant method call.
     The result is that the proper implementation will be attained via polymorphism
     depending on the object class.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 创建与条件分支相匹配的子类。在这些子类中，创建一个共享方法，并将对应条件分支的代码移动到其中。然后用相关的方法调用替换条件语句。结果是，适当的实现将通过多态性根据对象类来获得。'
 - en: '[Introduce Null Object](/introduce-null-object)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[引入空对象](/introduce-null-object)'
 - en: '**Problem:** Since some methods return `null` instead of real objects, you
     have many checks for `null` in your code.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 由于某些方法返回 `null` 而不是实际对象，你的代码中有许多对 `null` 的检查。'
 - en: '**Solution:** Instead of `null`, return a null object that exhibits the default
     behavior.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 不要返回 `null`，而是返回一个显示默认行为的空对象。'
 - en: '[Introduce Assertion](/introduce-assertion)'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '[引入断言](/introduce-assertion)'
 - en: '**Problem:** For a portion of code to work correctly, certain conditions or
     values must be true.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 为了使一段代码正常工作，某些条件或值必须为真。'
 - en: '**Solution:** Replace these assumptions with specific assertion checks.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 用具体的断言检查替换这些假设。'
