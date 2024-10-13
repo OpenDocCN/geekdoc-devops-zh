@@ -1,111 +1,165 @@
 - en: Switch Statements
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '`switch`语句'
 - en: 原文：[https://refactoringguru.cn/smells/switch-statements](https://refactoringguru.cn/smells/switch-statements)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/switch-statements](https://refactoringguru.cn/smells/switch-statements)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆与症状
 - en: You have a complex `switch` operator or sequence of `if` statements.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 您有一个复杂的`switch`操作符或一系列`if`语句。
 - en: '![](../Images/0f91a3c80bf69b3afccfc40c21d4f48e.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0f91a3c80bf69b3afccfc40c21d4f48e.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: Relatively rare use of `switch` and `case` operators is one of the hallmarks
     of object-oriented code. Often code for a single `switch` can be scattered in
     different places in the program. When a new condition is added, you have to find
     all the `switch` code and modify it.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '`switch`和`case`操作符的相对少用是面向对象代码的一个标志。单个`switch`的代码往往会分散在程序的不同位置。当添加一个新条件时，你必须找到所有的`switch`代码并进行修改。'
 - en: As a rule of thumb, when you see `switch` you should think of polymorphism.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般来说，当你看到`switch`时，你应该考虑多态性。
 - en: Treatment
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理
 - en: To isolate `switch` and put it in the right class, you may need [Extract Method](/extract-method)
     and then [Move Method](/move-method).
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为了将`switch`隔离并放入正确的类中，您可能需要[提取方法](/extract-method)，然后[移动方法](/move-method)。
 - en: If a `switch` is based on type code, such as when the program's runtime mode
     is switched, use [Replace Type Code with Subclasses](/replace-type-code-with-subclasses)
     or [Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy).
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`switch`基于类型代码，例如当程序的运行模式被切换时，请使用[用子类替换类型代码](/replace-type-code-with-subclasses)或[用状态/策略替换类型代码](/replace-type-code-with-state-strategy)。
 - en: After specifying the inheritance structure, use [Replace Conditional with Polymorphism](/replace-conditional-with-polymorphism).
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在指定继承结构后，请使用[用多态性替换条件](/replace-conditional-with-polymorphism)。
 - en: If there aren't too many conditions in the operator and they all call same method
     with different parameters, polymorphism will be superfluous. If this case, you
     can break that method into multiple smaller methods with [Replace Parameter with
     Explicit Methods](/replace-parameter-with-explicit-methods) and change the `switch`
     accordingly.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果操作符中的条件不太多，且它们都以不同参数调用同一方法，那么多态性将是多余的。在这种情况下，您可以将该方法拆分为多个较小的方法，使用[用显式方法替换参数](/replace-parameter-with-explicit-methods)，并相应地更改`switch`。
 - en: If one of the conditional options is `null`, use [Introduce Null Object](/introduce-null-object).
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果条件选项之一为`null`，请使用[引入空对象](/introduce-null-object)。
 - en: Payoff
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Improved code organization.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 改善代码组织。
 - en: '![](../Images/01300532ddcf0f8454f8c1e4fe08f997.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/01300532ddcf0f8454f8c1e4fe08f997.png)'
 - en: When to Ignore
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时忽略
 - en: When a `switch` operator performs simple actions, there's no reason to make
     code changes.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当`switch`操作符执行简单操作时，没有必要进行代码更改。
 - en: Often `switch` operators are used by factory design patterns ([Factory Method](/design-patterns/factory-method)
     or [Abstract Factory](/design-patterns/abstract-factory)) to select a created
     class.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`switch`操作符通常由工厂设计模式（[工厂方法](/design-patterns/factory-method)或[抽象工厂](/design-patterns/abstract-factory)）使用，以选择一个创建的类。'
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看看…*](/refactoring/course)'

@@ -1,125 +1,183 @@
 - en: Primitive Obsession
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 原始迷恋
 - en: 原文：[https://refactoringguru.cn/smells/primitive-obsession](https://refactoringguru.cn/smells/primitive-obsession)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/primitive-obsession](https://refactoringguru.cn/smells/primitive-obsession)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆和症状
 - en: Use of primitives instead of small objects for simple tasks (such as currency,
     ranges, special strings for phone numbers, etc.)
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为简单任务（例如货币、范围、电话号码的特殊字符串等）使用原始类型而不是小对象。
 - en: Use of constants for coding information (such as a constant `USER_ADMIN_ROLE
     = 1` for referring to users with administrator rights.)
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用常量编码信息（例如常量`USER_ADMIN_ROLE = 1`以指代具有管理员权限的用户）。
 - en: Use of string constants as field names for use in data arrays.
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将字符串常量用作数据数组中的字段名。
 - en: '![](../Images/72ef46f8a9ec840be64ef6cba01a57c4.png)'
+  id: totrans-6
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/72ef46f8a9ec840be64ef6cba01a57c4.png)'
 - en: Reasons for the Problem
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: Like most other smells, primitive obsessions are born in moments of weakness.
     "Just a field for storing some data!" the programmer said. Creating a primitive
     field is so much easier than making a whole new class, right? And so it was done.
     Then another field was needed and added in the same way. Lo and behold, the class
     became huge and unwieldy.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 像其他大多数代码气味一样，原始迷恋是在脆弱时刻产生的。“只不过是一个存储数据的字段！”程序员说道。创建一个原始字段比创建一个全新的类要简单得多，对吧？于是就这样做了。然后又需要另一个字段，并以同样的方式添加。结果，类变得庞大而笨重。
 - en: Primitives are often used to "simulate" types. So instead of a separate data
     type, you have a set of numbers or strings that form the list of allowable values
     for some entity. Easy-to-understand names are then given to these specific numbers
     and strings via constants, which is why they're spread wide and far.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 原始数据类型常常用于“模拟”类型。因此，代替一个单独的数据类型，你拥有一组数字或字符串，形成某个实体允许值的列表。然后通过常量将这些特定数字和字符串赋予易于理解的名称，这就是它们广泛传播的原因。
 - en: Another example of poor primitive use is field simulation. The class contains
     a large array of diverse data and string constants (which are specified in the
     class) are used as array indices for getting this data.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个糟糕的原始使用示例是字段模拟。该类包含一个大型多样数据数组，且将字符串常量（在类中指定）用作获取此数据的数组索引。
 - en: Treatment
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理方法
 - en: If you have a large variety of primitive fields, it may be possible to logically
     group some of them into their own class. Even better, move the behavior associated
     with this data into the class too. For this task, try [Replace Data Value with
     Object](/replace-data-value-with-object).
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你有多种原始字段，可能可以将其中一些逻辑上分组到自己的类中。更好的是，将与这些数据相关的行为也移动到类中。为此任务，请尝试[用对象替换数据值](/replace-data-value-with-object)。
 - en: '![](../Images/3709987ed41b7a12236cde6cbcacdd45.png)'
+  id: totrans-13
   prefs:
   - PREF_IND
   type: TYPE_IMG
+  zh: '![](../Images/3709987ed41b7a12236cde6cbcacdd45.png)'
 - en: If the values of primitive fields are used in method parameters, go with [Introduce
     Parameter Object](/introduce-parameter-object) or [Preserve Whole Object](/preserve-whole-object).
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果原始字段的值用于方法参数，请使用[引入参数对象](/introduce-parameter-object)或[保留整个对象](/preserve-whole-object)。
 - en: When complicated data is coded in variables, use [Replace Type Code with Class](/replace-type-code-with-class),
     [Replace Type Code with Subclasses](/replace-type-code-with-subclasses) or [Replace
     Type Code with State/Strategy](/replace-type-code-with-state-strategy).
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当复杂数据被编码在变量中时，请使用[用类替换类型代码](/replace-type-code-with-class)、[用子类替换类型代码](/replace-type-code-with-subclasses)或[用状态/策略替换类型代码](/replace-type-code-with-state-strategy)。
 - en: If there are arrays among the variables, use [Replace Array with Object](/replace-array-with-object).
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果变量中有数组，请使用[用对象替换数组](/replace-array-with-object)。
 - en: '![](../Images/e3c1145a220aa85da05f876b303e9159.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e3c1145a220aa85da05f876b303e9159.png)'
 - en: Payoff
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Code becomes more flexible thanks to use of objects instead of primitives.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 由于使用对象而非原始类型，代码变得更加灵活。
 - en: Better understandability and organization of code. Operations on particular
     data are in the same place, instead of being scattered. No more guessing about
     the reason for all these strange constants and why they're in an array.
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更好地理解和组织代码。特定数据的操作在同一地方，而不是分散开来。再也不用猜测这些奇怪常量的原因以及它们为何在数组中。
 - en: Easier finding of duplicate code.
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更容易找到重复代码。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 试试我们的交互式重构课程。这是一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

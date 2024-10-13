@@ -1,85 +1,127 @@
 - en: Refused Bequest
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 拒绝遗产
 - en: 原文：[https://refactoringguru.cn/smells/refused-bequest](https://refactoringguru.cn/smells/refused-bequest)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/refused-bequest](https://refactoringguru.cn/smells/refused-bequest)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆与症状
 - en: If a subclass uses only some of the methods and properties inherited from its
     parents, the hierarchy is off-kilter. The unneeded methods may simply go unused
     or be redefined and give off exceptions.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果子类仅使用从父类继承的一部分方法和属性，层次结构就会失衡。未使用的方法可能被忽略或重新定义并引发异常。
 - en: '![](../Images/0b6f648517cd81edc72c4faba66d6d14.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0b6f648517cd81edc72c4faba66d6d14.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: Someone was motivated to create inheritance between classes only by the desire
     to reuse the code in a superclass. But the superclass and subclass are completely
     different.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 有人仅仅因为想重用超类中的代码而激励自己创建类之间的继承关系。但超类和子类完全不同。
 - en: '![](../Images/f4d083c81ad4214e1ab01090ca70ad8c.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f4d083c81ad4214e1ab01090ca70ad8c.png)'
 - en: Treatment
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理方法
 - en: If inheritance makes no sense and the subclass really does have nothing in common
     with the superclass, eliminate inheritance in favor of [Replace Inheritance with
     Delegation](/replace-inheritance-with-delegation).
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果继承没有意义，而子类与超类真的毫无关联，就应消除继承，转而使用[用委托替代继承](/replace-inheritance-with-delegation)。
 - en: If inheritance is appropriate, get rid of unneeded fields and methods in the
     subclass. Extract all fields and methods needed by the subclass from the parent
     class, put them in a new superclass, and set both classes to inherit from it ([Extract
     Superclass](/extract-superclass)).
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果继承是合适的，请在子类中去掉不必要的字段和方法。从父类中提取子类所需的所有字段和方法，放入新的超类，并让两个类都从它继承（[提取超类](/extract-superclass)）。
 - en: '![](../Images/331013bc7800d51fe86af851c77ff068.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/331013bc7800d51fe86af851c77ff068.png)'
 - en: Payoff
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 回报
 - en: Improves code clarity and organization. You will no longer have to wonder why
     the `Dog` class is inherited from the `Chair` class (even though they both have
     4 legs).
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 改善代码的清晰度和组织性。您将不再疑惑为什么`Dog`类继承自`Chair`类（尽管它们都有四条腿）。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读书累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，这里所有文本的阅读时间需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

@@ -1,129 +1,185 @@
 - en: Technical debt
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 技术债务
 - en: 原文：[https://refactoringguru.cn/refactoring/technical-debt](https://refactoringguru.cn/refactoring/technical-debt)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/technical-debt](https://refactoringguru.cn/refactoring/technical-debt)
 - en: Everyone does their best to write excellent code from scratch. There probably
     isn't a programmer out there who intentionally writes unclean code to the detriment
     of the project. But at what point does clean code become unclean?
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个人都尽力从头开始编写优秀的代码。可能没有程序员故意编写不干净的代码来损害项目。但在什么情况下，干净的代码变得不干净？
 - en: The metaphor of "technical debt" in regards to unclean code was originally suggested
     by Ward Cunningham.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于不干净代码的“技术债务”隐喻最初由沃德·坎宁汉姆提出。
 - en: If you get a loan from a bank, this allows you to make purchases faster. You
     pay extra for expediting the process - you don't just pay off the principal, but
     also the additional interest on the loan. Needless to say, you can even rack up
     so much interest that the amount of interest exceeds your total income, making
     full repayment impossible.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你从银行贷款，这允许你更快地进行购买。你需要额外支付加快过程的费用——你不仅要偿还本金，还要支付额外的利息。不用说，你甚至可能积累如此多的利息，以至于利息总额超过你的总收入，使得完全偿还变得不可能。
 - en: The same thing can happen with code. You can temporarily speed up without writing
     tests for new features, but this will gradually slow your progress every day until
     you eventually pay off the debt by writing tests.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样的事情也可能发生在代码中。你可以暂时加速，而不为新功能编写测试，但这将逐渐每天减缓你的进度，直到你最终通过编写测试来偿还债务。
 - en: Causes of technical debt
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 技术债务的原因
 - en: '*Business pressure*'
+  id: totrans-7
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*业务压力*'
 - en: '*Sometimes business circumstances might force you to roll out features before
     they''re completely finished. In this case, patches and kludges will appear in
     the code to hide the unfinished parts of the project.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '*有时商业环境可能迫使你在功能完全完成之前推出功能。在这种情况下，代码中将出现补丁和应急措施，以隐藏项目未完成的部分。*'
 - en: '*Lack of understanding of the consequences of technical debt*'
+  id: totrans-9
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*对技术债务后果缺乏理解*'
 - en: '*Sometimes your employer might not understand that technical debt has "interest"
     insofar as it slows down the pace of development as debt accumulates. This can
     make it too difficult to dedicate the team''s time to refactoring because management
     doesn''t see the value of it.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '*有时你的雇主可能不理解技术债务的“利息”，因为它随着债务的积累而减缓开发进度。这可能使得团队难以投入时间进行重构，因为管理层看不到其价值。*'
 - en: '*Failing to combat the strict coherence of components*'
+  id: totrans-11
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*未能抵制组件之间的严格一致性*'
 - en: '*This is when the project resembles a monolith rather than the product of individual
     modules. In this case, any changes to one part of the project will affect others.
     Team development is made more difficult because it''s difficult to isolate the
     work of individual members.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*此时，项目看起来像一个整体，而不是各个模块的产品。在这种情况下，对项目某一部分的任何更改都会影响其他部分。团队开发变得更加困难，因为很难隔离个别成员的工作。*'
 - en: '*Lack of tests*'
+  id: totrans-13
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*缺乏测试*'
 - en: '*The lack of immediate feedback encourages quick, but risky workarounds or
     kludges. In worst cases, these changes are implemented and deployed right into
     the production without any prior testing. The consequences can be catastrophic.
     For example, an innocent-looking hotfix might send a weird test email to thousands
     of customers or even worse, flush or corrupt an entire database.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '*缺乏即时反馈会鼓励快速但冒险的变通方案或应急措施。在最糟糕的情况下，这些更改会在未经任何先前测试的情况下直接实施并部署到生产环境中。后果可能是灾难性的。例如，一个看似无害的热修复可能会向数千名客户发送奇怪的测试电子邮件，甚至更糟，冲掉或损坏整个数据库。*'
 - en: '*Lack of documentation*'
+  id: totrans-15
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*缺乏文档*'
 - en: '*This slows down the introduction of new people to the project and can grind
     development to a halt if key people leave the project.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这会减缓新成员加入项目的速度，如果关键人员离开项目，可能会使开发陷入停滞。*'
 - en: '*Lack of interaction between team members*'
+  id: totrans-17
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*团队成员之间缺乏互动*'
 - en: '*If the knowledge base isn''t distributed throughout the company, people will
     end up working with an outdated understanding of processes and information about
     the project. This situation can be exacerbated when junior developers are incorrectly
     trained by their mentors.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如果知识库没有在公司内部分布，人们最终将会以过时的理解来处理项目中的流程和信息。当初级开发人员受到错误的培训时，这种情况可能会加剧。*'
 - en: '*Long-term simultaneous development in several branches*'
+  id: totrans-19
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*长期在多个分支中同时开发*'
 - en: '*This can lead to the accumulation of technical debt, which is then increased
     when changes are merged. The more changes made in isolation, the greater the total
     technical debt.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这可能导致技术债务的累积，当更改合并时，技术债务会增加。孤立进行的更改越多，累计的技术债务就越大。*'
 - en: '*Delayed refactoring*'
+  id: totrans-21
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*延迟重构*'
 - en: '*The project''s requirements are constantly changing and at some point it may
     become obvious that parts of the code are obsolete, have become cumbersome, and
     must be redesigned to meet new requirements.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '*项目的需求不断变化，某些时候，代码的部分可能会变得过时、繁琐，必须重新设计以满足新需求。*'
 - en: On the other hand, the project's programmers are writing new code every day
     that works with the obsolete parts. Therefore, the longer refactoring is delayed,
     the more dependent code will have to be reworked in the future.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，项目的程序员每天都在编写与过时部分配合的新代码。因此，重构延迟越久，未来需要重新修改的依赖代码就会越多。
 - en: '*Lack of compliance monitoring*'
+  id: totrans-24
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*缺乏合规性监控*'
 - en: '*This happens when everyone working on the project writes code as they see
     fit (i.e. the same way they wrote the last project).'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '*当项目中的每个人都按照自己的方式编写代码时（即与上一个项目相同的方式），就会发生这种情况。*'
 - en: '*Incompetence*'
+  id: totrans-26
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*无能*'
 - en: '*This is when the developer just doesn''t know how to write decent code.**********'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这发生在开发者根本不知道如何编写体面的代码时。*'

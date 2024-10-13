@@ -1,39 +1,61 @@
 - en: Object-Orientation Abusers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 面向对象的滥用者
 - en: 原文：[https://refactoringguru.cn/refactoring/smells/oo-abusers](https://refactoringguru.cn/refactoring/smells/oo-abusers)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/smells/oo-abusers](https://refactoringguru.cn/refactoring/smells/oo-abusers)
 - en: All these smells are incomplete or incorrect application of object-oriented
     programming principles.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有这些异味都是对面向对象编程原则的不完整或不正确的应用。
 - en: '[Switch Statements](/smells/switch-statements)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[开关语句](/smells/switch-statements)'
 - en: You have a complex `switch` operator or sequence of `if` statements.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有一个复杂的 `switch` 操作符或一系列 `if` 语句。
 - en: '[Temporary Field](/smells/temporary-field)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '[临时字段](/smells/temporary-field)'
 - en: Temporary fields get their values (and thus are needed by objects) only under
     certain circumstances. Outside of these circumstances, they're empty.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 临时字段仅在特定情况下获得其值（因此对象需要它们）。在这些情况下之外，它们是空的。
 - en: '[Refused Bequest](/smells/refused-bequest)'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '[拒绝遗赠](/smells/refused-bequest)'
 - en: If a subclass uses only some of the methods and properties inherited from its
     parents, the hierarchy is off-kilter. The unneeded methods may simply go unused
     or be redefined and give off exceptions.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果一个子类只使用从父类继承的一部分方法和属性，则层次结构就不正确。未使用的方法可能会被忽略或重新定义，从而引发异常。
 - en: '[Alternative Classes with Different Interfaces](/smells/alternative-classes-with-different-interfaces)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[具有不同接口的替代类](/smells/alternative-classes-with-different-interfaces)'
 - en: Two classes perform identical functions but have different method names.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个类执行相同的功能，但方法名称不同。

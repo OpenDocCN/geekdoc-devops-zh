@@ -1,90 +1,138 @@
 - en: Dead Code
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 死代码
 - en: 原文：[https://refactoringguru.cn/smells/dead-code](https://refactoringguru.cn/smells/dead-code)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/dead-code](https://refactoringguru.cn/smells/dead-code)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 迹象和症状
 - en: A variable, parameter, field, method or class is no longer used (usually because
     it's obsolete).
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个变量、参数、字段、方法或类不再被使用（通常是因为它已过时）。
 - en: '![](../Images/a76ed4d5ace9b3fde7f4075026f778f0.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a76ed4d5ace9b3fde7f4075026f778f0.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: When requirements for the software have changed or corrections have been made,
     nobody had time to clean up the old code.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 当软件需求发生变化或进行了修正时，没有人有时间清理旧代码。
 - en: Such code could also be found in complex conditionals, when one of the branches
     becomes unreachable (due to error or other circumstances).
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样的代码也可能出现在复杂条件中，当某个分支变得不可达（由于错误或其他情况）。
 - en: Treatment
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理
 - en: The quickest way to find dead code is to use a good [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment).
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 找到死代码的最快方法是使用一个好的[IDE](https://en.wikipedia.org/wiki/Integrated_development_environment)。
 - en: Delete unused code and unneeded files.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 删除未使用的代码和不需要的文件。
 - en: In the case of an unnecessary class, [Inline Class](/inline-class) or [Collapse
     Hierarchy](/collapse-hierarchy) can be applied if a subclass or superclass is
     used.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于不必要的类，如果使用了子类或超类，可以应用[内联类](/inline-class)或[折叠层次](/collapse-hierarchy)。
 - en: To remove unneeded parameters, use [Remove Parameter](/remove-parameter).
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 要删除不需要的参数，请使用[移除参数](/remove-parameter)。
 - en: '![](../Images/e18d7720362542dfe67c2d2e17b23ba3.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e18d7720362542dfe67c2d2e17b23ba3.png)'
 - en: Payoff
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Reduced code size.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 减少代码大小。
 - en: Simpler support.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更简单的支持。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦了阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

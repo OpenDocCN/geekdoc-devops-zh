@@ -1,86 +1,131 @@
 - en: Parallel Inheritance Hierarchies
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 并行继承层级
 - en: 原文：[https://refactoringguru.cn/smells/parallel-inheritance-hierarchies](https://refactoringguru.cn/smells/parallel-inheritance-hierarchies)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/parallel-inheritance-hierarchies](https://refactoringguru.cn/smells/parallel-inheritance-hierarchies)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 标志与症状
 - en: Whenever you create a subclass for a class, you find yourself needing to create
     a subclass for another class.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 每当你为一个类创建子类时，你会发现自己需要为另一个类创建子类。
 - en: '![](../Images/8bdb7cabf8458579973c0fb1294458a7.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8bdb7cabf8458579973c0fb1294458a7.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: All was well as long as the hierarchy stayed small. But with new classes being
     added, making changes has become harder and harder.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 一切都很好，只要层级保持较小。但随着新类的添加，进行更改变得越来越困难。
 - en: Treatment
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理方法
 - en: You may de-duplicate parallel class hierarchies in two steps. First, make instances
     of one hierarchy refer to instances of another hierarchy. Then, remove the hierarchy
     in the referred class, by using [Move Method](/move-method) and [Move Field](/move-field).
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以通过两个步骤来去重并行类层级。首先，让一个层级的实例引用另一个层级的实例。然后，使用 [移动方法](/move-method) 和 [移动字段](/move-field)
+    来移除被引用类中的层级。
 - en: Payoff
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Reduces code duplication.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 减少代码重复。
 - en: Can improve organization of code.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可以改善代码的组织。
 - en: '![](../Images/f21215905838224f087be9d43ecea21a.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f21215905838224f087be9d43ecea21a.png)'
 - en: When to Ignore
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时忽略
 - en: Sometimes having parallel class hierarchies is just a way to avoid even bigger
     mess with program architecture. If you find that your attempts to de-duplicate
     hierarchies produce even uglier code, just step out, revert all of your changes
     and get used to that code.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 有时，拥有并行类层级只是为了避免程序架构中更大的混乱。如果你发现去重层级的尝试产生了更丑陋的代码，那就退出，撤回你所有的更改，习惯那段代码。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更轻松的方式来学习新知识。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看看…*](/refactoring/course)'

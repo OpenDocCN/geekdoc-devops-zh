@@ -1,35 +1,53 @@
 - en: Change Preventers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 更改防止器
 - en: 原文：[https://refactoringguru.cn/refactoring/smells/change-preventers](https://refactoringguru.cn/refactoring/smells/change-preventers)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/smells/change-preventers](https://refactoringguru.cn/refactoring/smells/change-preventers)
 - en: These smells mean that if you need to change something in one place in your
     code, you have to make many changes in other places too. Program development becomes
     much more complicated and expensive as a result.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些坏味道意味着如果你需要在代码中的一个地方进行更改，你也必须在其他地方进行许多更改。因此，程序开发变得更加复杂和昂贵。
 - en: '[Divergent Change](/smells/divergent-change)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[发散变化](/smells/divergent-change)'
 - en: You find yourself having to change many unrelated methods when you make changes
     to a class. For example, when adding a new product type you have to change the
     methods for finding, displaying, and ordering products.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你对一个类进行更改时，你会发现自己不得不更改许多不相关的方法。例如，添加新产品类型时，你必须更改查找、显示和订购产品的方法。
 - en: '[Shotgun Surgery](/smells/shotgun-surgery)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '[霰弹手术](/smells/shotgun-surgery)'
 - en: Making any modifications requires that you make many small changes to many different
     classes.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 进行任何修改都要求你对许多不同的类进行许多小的更改。
 - en: '[Parallel Inheritance Hierarchies](/smells/parallel-inheritance-hierarchies)'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '[并行继承层次](/smells/parallel-inheritance-hierarchies)'
 - en: Whenever you create a subclass for a class, you find yourself needing to create
     a subclass for another class.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 每当你为一个类创建子类时，你会发现自己需要为另一个类创建子类。

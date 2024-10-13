@@ -1,69 +1,101 @@
 - en: How to refactor
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: 原文：[https://refactoringguru.cn/refactoring/how-to](https://refactoringguru.cn/refactoring/how-to)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/how-to](https://refactoringguru.cn/refactoring/how-to)
 - en: Refactoring should be done as a series of small changes, each of which makes
     the existing code slightly better while still leaving the program in working order.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 重构应作为一系列小改动进行，每次改动使现有代码稍微变得更好，同时保持程序正常运行。
 - en: '*Checklist of refactoring done *right way**'
+  id: totrans-3
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '*正确重构的清单*'
 - en: '*#### *The code should become cleaner.*'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '*#### *代码应该变得更干净。*'
 - en: '*If the code remains just as unclean after refactoring... well, I''m sorry,
     but you''ve just wasted an hour of your life. Try to figure out why this happened.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如果重构后代码依然不整洁……好吧，我很抱歉，但你刚刚浪费了一个小时的生命。试着找出原因。*'
 - en: It frequently happens when you move away from refactoring with small changes
     and mix a whole bunch of refactorings into one big change. So it's very easy to
     lose your mind, especially if you have a time limit.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你不再进行小改动的重构，而是将大量重构混合为一次大改动时，这种情况经常发生。因此，特别是在有时间限制的情况下，很容易失去理智。
 - en: But it can also happen when working with extremely sloppy code. Whatever you
     improve, the code as a whole remains a disaster.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这也可能发生在处理极其糟糕的代码时。无论你改进什么，整体代码依然是一场灾难。
 - en: In this case, it's worthwhile to think about completely rewriting parts of the
     code. But before that, you should have written tests and set aside a good chunk
     of time. Otherwise, you'll end up with the kinds of results we talked about in
     the first paragraph.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，值得考虑完全重写代码的某些部分。但在此之前，你应该编写测试并留出充足的时间。否则，你最终会得到我们在第一段中讨论的那种结果。
 - en: '*New functionality shouldn''t be created during refactoring.*'
+  id: totrans-9
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*在重构期间不应创建新功能。*'
 - en: '*Don''t mix refactoring and direct development of new features. Try to separate
     these processes at least within the confines of individual commits.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '*不要混合重构与新功能的直接开发。尽量将这两个过程分开，至少在单个提交的范围内。'
 - en: '*All existing tests must pass after refactoring.*'
+  id: totrans-11
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '*所有现有测试在重构后必须通过。*'
 - en: '*There are two cases when tests can break down after refactoring:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*重构后测试可能崩溃的两种情况是：*'
 - en: '**You made an error during refactoring.** This one is a no-brainer: go ahead
     and fix the error.'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**你在重构过程中犯了错误。** 这显而易见：去修复这个错误。'
 - en: '**Your tests were too low-level.** For example, you were testing private methods
     of classes.'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**你的测试过于底层。** 例如，你在测试类的私有方法。'
 - en: In this case, the tests are to blame. You can either refactor the tests themselves
     or write an entirely new set of higher-level tests. A great way to avoid this
     kind of a situation is to write [BDD-style](/refactoring/bdd) tests.****
+  id: totrans-15
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 在这种情况下，问题出在测试上。你可以重构测试本身，或编写一整套新的高层测试。避免这种情况的一个好方法是编写[BDD风格](/refactoring/bdd)的测试。****

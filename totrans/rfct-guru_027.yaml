@@ -1,98 +1,144 @@
 - en: Data Class
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据类
 - en: 原文：[https://refactoringguru.cn/smells/data-class](https://refactoringguru.cn/smells/data-class)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/data-class](https://refactoringguru.cn/smells/data-class)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 迹象与症状
 - en: A data class refers to a class that contains only fields and crude methods for
     accessing them (getters and setters). These are simply containers for data used
     by other classes. These classes don't contain any additional functionality and
     can't independently operate on the data that they own.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据类是指仅包含字段和访问这些字段的简单方法（获取器和设置器）的类。这些类只是其他类使用的数据容器。这些类不包含任何额外功能，无法独立操作它们所拥有的数据。
 - en: '![](../Images/07c3dcfab17957da245115c94df0830a.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/07c3dcfab17957da245115c94df0830a.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题原因
 - en: It's a normal thing when a newly created class contains only a few public fields
     (and maybe even a handful of getters/setters). But the true power of objects is
     that they can contain behavior types or operations on their data.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 当一个新创建的类仅包含少数公共字段（甚至可能只有少量的获取器/设置器）时，这是一件很正常的事情。但对象真正的强大之处在于它们可以包含对其数据的行为类型或操作。
 - en: Treatment
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理方法
 - en: If a class contains public fields, use [Encapsulate Field](/encapsulate-field)
     to hide them from direct access and require that access be performed via getters
     and setters only.
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果一个类包含公共字段，请使用[封装字段](/encapsulate-field)将其隐藏，以确保访问只能通过获取器和设置器进行。
 - en: Use [Encapsulate Collection](/encapsulate-collection) for data stored in collections
     (such as arrays).
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于存储在集合（如数组）中的数据，请使用[封装集合](/encapsulate-collection)。
 - en: Review the client code that uses the class. In it, you may find functionality
     that would be better located in the data class itself. If this is the case, use
     [Move Method](/move-method) and [Extract Method](/extract-method) to migrate this
     functionality to the data class.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 审查使用该类的客户端代码。在其中，你可能会发现更适合放在数据类本身的功能。如果是这样，使用[移动方法](/move-method)和[提取方法](/extract-method)将此功能迁移到数据类。
 - en: After the class has been filled with well thought-out methods, you may want
     to get rid of old methods for data access that give overly broad access to the
     class data. For this, [Remove Setting Method](/remove-setting-method) and [Hide
     Method](/hide-method) may be helpful.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在类中充满经过深思熟虑的方法后，你可能希望去掉那些提供过于广泛访问类数据的旧数据访问方法。为此，使用[移除设置方法](/remove-setting-method)和[隐藏方法](/hide-method)可能会有所帮助。
 - en: '![](../Images/caaf0e519c3f3c1df05e8fa0a750d28e.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/caaf0e519c3f3c1df05e8fa0a750d28e.png)'
 - en: Payoff
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Improves understanding and organization of code. Operations on particular data
     are now gathered in a single place, instead of haphazardly throughout the code.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提高代码的理解和组织。对特定数据的操作现在集中在一个地方，而不是随意散布在代码中。
 - en: Helps you to spot duplication of client code.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 帮助你发现客户端代码的重复。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

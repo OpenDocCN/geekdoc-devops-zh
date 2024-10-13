@@ -1,92 +1,140 @@
 - en: Lazy Class
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 懒惰类
 - en: 原文：[https://refactoringguru.cn/smells/lazy-class](https://refactoringguru.cn/smells/lazy-class)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/lazy-class](https://refactoringguru.cn/smells/lazy-class)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 症状与体征
 - en: Understanding and maintaining classes always costs time and money. So if a class
     doesn't do enough to earn your attention, it should be deleted.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解和维护类总是需要时间和金钱。因此，如果一个类没有足够的价值来吸引你的注意，它就应该被删除。
 - en: '![](../Images/d72bf0853173967b170dc2bce1a39ba4.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d72bf0853173967b170dc2bce1a39ba4.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: Perhaps a class was designed to be fully functional but after some of the refactoring
     it has become ridiculously small.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 也许某个类被设计得非常完整，但经过一些重构后变得异常简小。
 - en: Or perhaps it was designed to support future development work that never got
     done.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者它可能是为了支持从未完成的未来开发工作而设计的。
 - en: Treatment
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理方法
 - en: Components that are near-useless should be given the [Inline Class](/inline-class)
     treatment.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 几乎无用的组件应该进行[内联类](/inline-class)处理。
 - en: For subclasses with few functions, try [Collapse Hierarchy](/collapse-hierarchy).
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于功能较少的子类，尝试[合并层次结构](/collapse-hierarchy)。
 - en: '![](../Images/5d73de28efa26b7b7bbb88ac74a98ec3.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5d73de28efa26b7b7bbb88ac74a98ec3.png)'
 - en: Payoff
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Reduced code size.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 减少代码大小。
 - en: Easier maintenance.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更轻松的维护。
 - en: When to Ignore
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时忽略
 - en: Sometimes a *Lazy Class* is created in order to delineate intentions for future
     development, In this case, try to maintain a balance between clarity and simplicity
     in your code.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 有时，*懒惰类*被创建是为了界定未来开发的意图，在这种情况下，尽量在代码的清晰度和简洁性之间保持平衡。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读书读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

@@ -1,78 +1,116 @@
 - en: When to refactor
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 何时重构
 - en: 原文：[https://refactoringguru.cn/refactoring/when](https://refactoringguru.cn/refactoring/when)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/when](https://refactoringguru.cn/refactoring/when)
 - en: '![](../Images/44623613715424b09efc9911f6177f93.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/44623613715424b09efc9911f6177f93.png)'
 - en: Rule of Three
+  id: totrans-3
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 三次原则
 - en: When you're doing something for the first time, just get it done.
+  id: totrans-4
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当你第一次做某件事时，只需完成它。
 - en: When you're doing something similar for the second time, cringe at having to
     repeat but do the same thing anyway.
+  id: totrans-5
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当你第二次做类似的事情时，虽然感到不适，但还是要照做。
 - en: When you're doing something for the third time, start refactoring.
+  id: totrans-6
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当你第三次做某件事时，开始重构。
 - en: '![](../Images/f15b43cb02a12af5a641e9da44e5ca09.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f15b43cb02a12af5a641e9da44e5ca09.png)'
 - en: When adding a feature
+  id: totrans-8
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 当添加新功能时
 - en: Refactoring helps you understand other people's code. If you have to deal with
     someone else's dirty code, try to refactor it first. Clean code is much easier
     to grasp. You will improve it not only for yourself but also for those who use
     it after you.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重构有助于你理解他人的代码。如果需要处理别人的肮脏代码，尝试先进行重构。干净的代码更容易理解。你不仅会为自己改善它，还会为之后使用它的人提升体验。
 - en: Refactoring makes it easier to add new features. It's much easier to make changes
     in clean code.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重构使得添加新功能变得更加容易。在干净的代码中进行更改要简单得多。
 - en: '![](../Images/29f953a77055c2c87ef4e8423fa9ec7b.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/29f953a77055c2c87ef4e8423fa9ec7b.png)'
 - en: When fixing a bug
+  id: totrans-12
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 当修复错误时
 - en: 'Bugs in code behave just like those in real life: they live in the darkest,
     dirtiest places in the code. Clean your code and the errors will practically discover
     themselves.'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码中的错误就像现实生活中的错误：它们藏在代码最黑暗、最肮脏的地方。清理代码，错误几乎会自行暴露。
 - en: Managers appreciate proactive refactoring as it eliminates the need for special
     refactoring tasks later. Happy bosses make happy programmers!
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 管理者欣赏主动重构，因为这消除了之后需要进行特殊重构任务的必要性。快乐的老板会让程序员也开心！
 - en: '![](../Images/122e578dd491cde813f15b77fd2b4e24.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/122e578dd491cde813f15b77fd2b4e24.png)'
 - en: During a code review
+  id: totrans-16
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 在代码审查期间
 - en: The code review may be the last chance to tidy up the code before it becomes
     available to the public.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码审查可能是整理代码的最后机会，之后它就会公开发布。
 - en: It's best to perform such reviews in a pair with an author. This way you could
     fix simple problems quickly and gauge the time for fixing the more difficult ones.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 最好与作者配对进行此类审查。这样，你可以快速修复简单问题，并评估修复更困难问题的时间。

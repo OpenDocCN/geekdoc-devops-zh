@@ -1,105 +1,157 @@
 - en: Alternative Classes with Different Interfaces
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 拥有不同接口的替代类
 - en: 原文：[https://refactoringguru.cn/smells/alternative-classes-with-different-interfaces](https://refactoringguru.cn/smells/alternative-classes-with-different-interfaces)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/alternative-classes-with-different-interfaces](https://refactoringguru.cn/smells/alternative-classes-with-different-interfaces)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 症状与体征
 - en: Two classes perform identical functions but have different method names.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个类执行相同的功能，但方法名称不同。
 - en: '![](../Images/aa4b4e96c62a48d9a8d2cdadd7817984.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/aa4b4e96c62a48d9a8d2cdadd7817984.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: The programmer who created one of the classes probably didn't know that a functionally
     equivalent class already existed.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建其中一个类的程序员可能并不知道已经存在一个功能等效的类。
 - en: Treatment
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 治疗
 - en: 'Try to put the interface of classes in terms of a common denominator:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试用一个共同的分母来描述类的接口：
 - en: '[Rename Method](/rename-method)s to make them identical in all alternative
     classes.'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[重命名方法](/rename-method)s，使它们在所有替代类中保持一致。'
 - en: '[Move Method](/move-method), [Add Parameter](/add-parameter) and [Parameterize
     Method](/parameterize-method) to make the signature and implementation of methods
     the same.'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[移动方法](/move-method)、[添加参数](/add-parameter)和[参数化方法](/parameterize-method)，使方法的签名和实现保持一致。'
 - en: If only part of the functionality of the classes is duplicated, try using [Extract
     Superclass](/extract-superclass). In this case, the existing classes will become
     subclasses.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果类的功能只有部分重复，尝试使用[提取超类](/extract-superclass)。在这种情况下，现有类将成为子类。
 - en: After you have determined which treatment method to use and implemented it,
     you may be able to delete one of the classes.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在你确定使用哪种治疗方法并实施后，你可能能够删除其中一个类。
 - en: Payoff
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: You get rid of unnecessary duplicated code, making the resulting code less bulky.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你消除了不必要的重复代码，使得结果代码更加精简。
 - en: Code becomes more readable and understandable (you no longer have to guess the
     reason for creation of a second class performing the exact same functions as the
     first one).
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 代码变得更加可读和易懂（你不再需要猜测创建第二个类的原因，而它执行与第一个类完全相同的功能）。
 - en: '![](../Images/82a2d20e8cb101e85d90221c3744b5d5.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/82a2d20e8cb101e85d90221c3744b5d5.png)'
 - en: When to Ignore
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时忽略
 - en: Sometimes merging classes is impossible or so difficult as to be pointless.
     One example is when the alternative classes are in different libraries that each
     have their own version of the class.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 有时合并类是不可能的，或者困难到毫无意义。例如，当替代类在不同的库中，每个库都有自己的类版本时。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读得累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看看…*](/refactoring/course)'

@@ -1,157 +1,227 @@
 - en: Duplicate Code
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 重复代码
 - en: 原文：[https://refactoringguru.cn/smells/duplicate-code](https://refactoringguru.cn/smells/duplicate-code)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/duplicate-code](https://refactoringguru.cn/smells/duplicate-code)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 迹象和症状
 - en: Two code fragments look almost identical.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 两段代码片段看起来几乎相同。
 - en: '![](../Images/d1118881809506374244fba663398101.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d1118881809506374244fba663398101.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: Duplication usually occurs when multiple programmers are working on different
     parts of the same program at the same time. Since they're working on different
     tasks, they may be unaware their colleague has already written similar code that
     could be repurposed for their own needs.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 重复代码通常发生在多个程序员同时在同一个程序的不同部分工作时。由于他们在处理不同的任务，他们可能不知道同事已经编写了可以满足自己需求的类似代码。
 - en: There's also more subtle duplication, when specific parts of code look different
     but actually perform the same job. This kind of duplication can be hard to find
     and fix.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有更微妙的重复，当代码的特定部分看起来不同但实际上执行相同的工作。这种重复可能难以发现和修复。
 - en: Sometimes duplication is purposeful. When rushing to meet deadlines and the
     existing code is "almost right" for the job, novice programmers may not be able
     to resist the temptation of copying and pasting the relevant code. And in some
     cases, the programmer is simply too lazy to de-clutter.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时重复是故意的。当急于赶工期而现有代码“差不多合适”时，初级程序员可能会忍不住复制粘贴相关代码。在某些情况下，程序员只是懒得整理代码。
 - en: Treatment
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理方法
 - en: 'If the same code is found in two or more methods in the same class: use [Extract
     Method](/extract-method) and place calls for the new method in both places.'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果在同一类中的两个或多个方法中发现相同代码：请使用[提取方法](/extract-method)，并在两个地方调用新方法。
 - en: '![](../Images/41e8f26836f89d1d5a02c176628e4a2b.png)'
+  id: totrans-11
   prefs:
   - PREF_IND
   type: TYPE_IMG
+  zh: '![](../Images/41e8f26836f89d1d5a02c176628e4a2b.png)'
 - en: 'If the same code is found in two subclasses of the same level:'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果在同一层次的两个子类中发现相同代码：
 - en: Use [Extract Method](/extract-method) for both classes, followed by [Pull Up
     Field](/pull-up-field) for the fields used in the method that you're pulling up.
+  id: totrans-13
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于两个类都使用[提取方法](/extract-method)，然后对在方法中使用的字段使用[提升字段](/pull-up-field)。
 - en: If the duplicate code is inside a constructor, use [Pull Up Constructor Body](/pull-up-constructor-body).
+  id: totrans-14
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果重复代码位于构造函数内部，请使用[提升构造函数主体](/pull-up-constructor-body)。
 - en: If the duplicate code is similar but not completely identical, use [Form Template
     Method](/form-template-method).
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果重复代码相似但并不完全相同，请使用[表单模板方法](/form-template-method)。
 - en: If two methods do the same thing but use different algorithms, select the best
     algorithm and apply [Substitute Algorithm](/substitute-algorithm).
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果两个方法执行相同的操作但使用不同的算法，请选择最佳算法并应用[替换算法](/substitute-algorithm)。
 - en: 'If duplicate code is found in two different classes:'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果在两个不同的类中发现重复代码：
 - en: If the classes aren't part of a hierarchy, use [Extract Superclass](/extract-superclass)
     in order to create a single superclass for these classes that maintains all the
     previous functionality.
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果类不属于一个层次结构，请使用[提取超类](/extract-superclass)创建一个单一的超类，以维护这些类的所有先前功能。
 - en: If it's difficult or impossible to create a superclass, use [Extract Class](/extract-class)
     in one class and use the new component in the other.
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果创建超类困难或不可能，请在一个类中使用[提取类](/extract-class)，并在另一个类中使用新组件。
 - en: If a large number of conditional expressions are present and perform the same
     code (differing only in their conditions), merge these operators into a single
     condition using [Consolidate Conditional Expression](/consolidate-conditional-expression)
     and use [Extract Method](/extract-method) to place the condition in a separate
     method with an easy-to-understand name.
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果存在大量条件表达式并且执行相同的代码（仅在条件上有所不同），请使用[合并条件表达式](/consolidate-conditional-expression)将这些操作合并为一个条件，并使用[提取方法](/extract-method)将条件放入一个易于理解的单独方法中。
 - en: 'If the same code is performed in all branches of a conditional expression:
     place the identical code outside of the condition tree by using [Consolidate Duplicate
     Conditional Fragments](/consolidate-duplicate-conditional-fragments).'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果在条件表达式的所有分支中执行相同的代码：请使用[合并重复条件片段](/consolidate-duplicate-conditional-fragments)将相同的代码放置在条件树外。
 - en: Payoff
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Merging duplicate code simplifies the structure of your code and makes it shorter.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 合并重复代码简化了代码结构并使其更短。
 - en: Simplification + shortness = code that's easier to simplify and cheaper to support.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简化 + 短小 = 更易于简化和更便宜的代码支持。
 - en: '![](../Images/441d52b1f9190dcdac9eac15479dea79.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/441d52b1f9190dcdac9eac15479dea79.png)'
 - en: When to Ignore
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时忽略
 - en: In very rare cases, merging two identical fragments of code can make the code
     less intuitive and obvious.
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在非常少见的情况下，合并两个相同的代码片段可能会使代码变得不够直观和明显。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 不难理解，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。这是一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

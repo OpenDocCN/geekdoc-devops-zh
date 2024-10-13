@@ -1,53 +1,83 @@
 - en: Dispensables
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 可有可无的元素
 - en: 原文：[https://refactoringguru.cn/refactoring/smells/dispensables](https://refactoringguru.cn/refactoring/smells/dispensables)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/smells/dispensables](https://refactoringguru.cn/refactoring/smells/dispensables)
 - en: A dispensable is something pointless and unneeded whose absence would make the
     code cleaner, more efficient and easier to understand.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 可有可无的元素是指那些毫无意义和不必要的东西，其缺失将使代码更简洁、更高效、更易理解。
 - en: '[Comments](/smells/comments)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](/smells/comments)'
 - en: A method is filled with explanatory comments.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个方法充满了解释性注释。
 - en: '[Duplicate Code](/smells/duplicate-code)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '[重复代码](/smells/duplicate-code)'
 - en: Two code fragments look almost identical.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 两个代码片段看起来几乎一模一样。
 - en: '[Lazy Class](/smells/lazy-class)'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '[懒惰类](/smells/lazy-class)'
 - en: Understanding and maintaining classes always costs time and money. So if a class
     doesn't do enough to earn your attention, it should be deleted.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解和维护类总是需要时间和金钱。因此，如果一个类没有足够的价值来吸引你的注意，它应该被删除。
 - en: '[Data Class](/smells/data-class)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[数据类](/smells/data-class)'
 - en: A data class refers to a class that contains only fields and crude methods for
     accessing them (getters and setters). These are simply containers for data used
     by other classes. These classes don't contain any additional functionality and
     can't independently operate on the data that they own.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据类是指仅包含字段和用于访问这些字段的简单方法（getter 和 setter）的类。这些类只是其他类使用的数据容器，不包含任何额外的功能，无法独立对其拥有的数据进行操作。
 - en: '[Dead Code](/smells/dead-code)'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[死代码](/smells/dead-code)'
 - en: A variable, parameter, field, method or class is no longer used (usually because
     it's obsolete).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个变量、参数、字段、方法或类不再被使用（通常是因为它已经过时）。
 - en: '[Speculative Generality](/smells/speculative-generality)'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '[推测性通用性](/smells/speculative-generality)'
 - en: There's an unused class, method, field or parameter.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 存在未使用的类、方法、字段或参数。

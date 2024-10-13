@@ -1,86 +1,130 @@
 - en: Temporary Field
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 临时字段
 - en: 原文：[https://refactoringguru.cn/smells/temporary-field](https://refactoringguru.cn/smells/temporary-field)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/temporary-field](https://refactoringguru.cn/smells/temporary-field)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆和症状
 - en: Temporary fields get their values (and thus are needed by objects) only under
     certain circumstances. Outside of these circumstances, they're empty.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 临时字段的值（因此被对象所需）仅在特定情况下存在。在这些情况下之外，它们是空的。
 - en: '![](../Images/ebbc72fcfdd7d52352de6f66adc8a062.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ebbc72fcfdd7d52352de6f66adc8a062.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: Oftentimes, temporary fields are created for use in an algorithm that requires
     a large amount of inputs. So instead of creating a large number of parameters
     in the method, the programmer decides to create fields for this data in the class.
     These fields are used only in the algorithm and go unused the rest of the time.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，临时字段是为了在需要大量输入的算法中使用而创建的。因此，程序员决定在类中为这些数据创建字段，而不是在方法中创建大量参数。这些字段仅在算法中使用，其余时间未被使用。
 - en: This kind of code is tough to understand. You expect to see data in object fields
     but for some reason they're almost always empty.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种代码很难理解。您期望在对象字段中看到数据，但由于某种原因，它们几乎总是空的。
 - en: '![](../Images/70fb89ddf3c711e6c8f4d74d0c29c084.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/70fb89ddf3c711e6c8f4d74d0c29c084.png)'
 - en: Treatment
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理
 - en: Temporary fields and all code operating on them can be put in a separate class
     via [Extract Class](/extract-class). In other words, you're creating a method
     object, achieving the same result as if you would perform [Replace Method with
     Method Object](/replace-method-with-method-object).
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 临时字段及其操作的所有代码可以通过[提取类](/extract-class)放入一个单独的类中。换句话说，您正在创建一个方法对象，达到与执行[用方法对象替换方法](/replace-method-with-method-object)相同的效果。
 - en: '[Introduce Null Object](/introduce-null-object) and integrate it in place of
     the conditional code which was used to check the temporary field values for existence.'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[引入空对象](/introduce-null-object)并将其整合进替代用于检查临时字段值是否存在的条件代码中。'
 - en: '![](../Images/010f4121883240788cc9bc21cbb3d7ee.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/010f4121883240788cc9bc21cbb3d7ee.png)'
 - en: Payoff
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Better code clarity and organization.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更好的代码清晰度和组织性。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

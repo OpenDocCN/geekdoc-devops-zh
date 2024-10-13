@@ -1,7 +1,11 @@
 - en: Code Smells
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 代码异味
 - en: 原文：[https://refactoringguru.cn/refactoring/smells](https://refactoringguru.cn/refactoring/smells)
+  id: totrans-1
   prefs: []
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/smells](https://refactoringguru.cn/refactoring/smells)

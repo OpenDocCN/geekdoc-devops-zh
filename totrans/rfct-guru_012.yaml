@@ -1,30 +1,44 @@
 - en: Long Parameter List
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 长参数列表
 - en: 原文：[https://refactoringguru.cn/smells/long-parameter-list](https://refactoringguru.cn/smells/long-parameter-list)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/long-parameter-list](https://refactoringguru.cn/smells/long-parameter-list)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆与症状
 - en: More than three or four parameters for a method.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法的参数超过三到四个。
 - en: '![](../Images/bdb16c81e84680bf5b5f68860ae9d70d.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bdb16c81e84680bf5b5f68860ae9d70d.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: A long list of parameters might happen after several types of algorithms are
     merged in a single method. A long list may have been created to control which
     algorithm will be run and how.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在将几种类型的算法合并到一个方法中后，可能会出现长参数列表。长列表可能是为了控制将运行哪个算法以及如何运行而创建的。
 - en: Long parameter lists may also be the byproduct of efforts to make classes more
     independent of each other. For example, the code for creating specific objects
     needed in a method was moved from the method to the code for calling the method,
@@ -32,79 +46,117 @@
     class no longer knows about the relationships between objects, and dependency
     has decreased. But if several of these objects are created, each of them will
     require its own parameter, which means a longer parameter list.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 长参数列表也可能是为了使类之间更独立而产生的副产品。例如，创建方法所需特定对象的代码已从方法中移动到调用该方法的代码中，但创建的对象作为参数传递给方法。因此，原始类不再了解对象之间的关系，依赖性减少。但如果创建多个这样的对象，每个对象都将需要自己的参数，这就意味着更长的参数列表。
 - en: It's hard to understand such lists, which become contradictory and hard to use
     as they grow longer. Instead of a long list of parameters, a method can use the
     data of its own object. If the current object doesn't contain all necessary data,
     another object (which will get the necessary data) can be passed as a method parameter.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着列表的增长，这样的列表很难理解，变得矛盾且难以使用。方法可以使用其自身对象的数据，而不是长长的参数列表。如果当前对象不包含所有必要数据，可以将另一个对象（将获取必要数据的对象）作为方法参数传递。
 - en: Treatment
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理
 - en: Check what values are passed to parameters. If some of the arguments are just
     results of method calls of another object, use [Replace Parameter with Method
     Call](/replace-parameter-with-method-call). This object can be placed in the field
     of its own class or passed as a method parameter.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 检查传递给参数的值。如果某些参数只是另一个对象的方法调用的结果，使用[用方法调用替换参数](/replace-parameter-with-method-call)。该对象可以放在其自身类的字段中，或作为方法参数传递。
 - en: Instead of passing a group of data received from another object as parameters,
     pass the object itself to the method, by using [Preserve Whole Object](/preserve-whole-object).
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与其将来自另一个对象的一组数据作为参数传递，不如将对象本身传递给方法，使用[保留整个对象](/preserve-whole-object)。
 - en: But if these parameters are coming from different sources, you can pass them
     as a single parameter object via [Introduce Parameter Object](/introduce-parameter-object).
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 但如果这些参数来自不同的来源，可以通过[引入参数对象](/introduce-parameter-object)将它们作为一个单一参数对象传递。
 - en: '![](../Images/00c402154dfcee5b9ae76a961b244beb.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/00c402154dfcee5b9ae76a961b244beb.png)'
 - en: Payoff
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 回报
 - en: More readable, shorter code.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更可读、更简洁的代码。
 - en: Refactoring may reveal previously unnoticed duplicate code.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重构可能会揭示先前未注意到的重复代码。
 - en: When to Ignore
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时忽略
 - en: Don't get rid of parameters if doing so would cause unwanted dependency between
     classes.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果这样做会导致类之间的不必要依赖，请不要去掉参数。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 毫不奇怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更不乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

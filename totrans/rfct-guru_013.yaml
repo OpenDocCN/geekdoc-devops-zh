@@ -1,110 +1,164 @@
 - en: Data Clumps
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据簇
 - en: 原文：[https://refactoringguru.cn/smells/data-clumps](https://refactoringguru.cn/smells/data-clumps)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/data-clumps](https://refactoringguru.cn/smells/data-clumps)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆和症状
 - en: Sometimes different parts of the code contain identical groups of variables
     (such as parameters for connecting to a database). These clumps should be turned
     into their own classes.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时代码的不同部分包含相同的变量组（例如连接到数据库的参数）。这些簇应该转换为它们自己的类。
 - en: '![](../Images/541b261be789a54e050745d017aca2e6.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/541b261be789a54e050745d017aca2e6.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题原因
 - en: Often these data groups are due to poor program structure or "copypasta programming”.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些数据组通常是由于程序结构不良或“复制粘贴编程”造成的。
 - en: If you want to make sure whether or not some data is a data clump, just delete
     one of the data values and see whether the other values still make sense. If this
     isn't the case, this is a good sign that this group of variables should be combined
     into an object.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想确认某些数据是否是数据簇，只需删除其中一个数据值，看看其他值是否仍然有意义。如果不是，这表明这组变量应该合并为一个对象。
 - en: Treatment
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理
 - en: If repeating data comprises the fields of a class, use [Extract Class](/extract-class)
     to move the fields to their own class.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果重复的数据构成类的字段，请使用[提取类](/extract-class)将字段移动到它们自己的类中。
 - en: If the same data clumps are passed in the parameters of methods, use [Introduce
     Parameter Object](/introduce-parameter-object) to set them off as a class.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果相同的数据簇作为方法参数传递，请使用[引入参数对象](/introduce-parameter-object)将它们设定为一个类。
 - en: If some of the data is passed to other methods, think about passing the entire
     data object to the method instead of just individual fields. [Preserve Whole Object](/preserve-whole-object)
     will help with this.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果一些数据被传递给其他方法，考虑将整个数据对象传递给方法，而不仅仅是单个字段。[保持整个对象](/preserve-whole-object)将对此有所帮助。
 - en: Look at the code used by these fields. It may be a good idea to move this code
     to a data class.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 查看这些字段使用的代码。将这段代码移动到数据类中可能是个好主意。
 - en: '![](../Images/1d9be22d7f5886dccf71962d24879d48.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1d9be22d7f5886dccf71962d24879d48.png)'
 - en: Payoff
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Improves understanding and organization of code. Operations on particular data
     are now gathered in a single place, instead of haphazardly throughout the code.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 改善了代码的理解和组织。对特定数据的操作现在集中在一个地方，而不是在代码中随意分散。
 - en: Reduces code size.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 减少代码大小。
 - en: '![](../Images/b60ecfe494109565427af75ca2f31d20.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b60ecfe494109565427af75ca2f31d20.png)'
 - en: When to Ignore
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时忽略
 - en: Passing an entire object in the parameters of a method, instead of passing just
     its values (primitive types), may create an undesirable dependency between the
     two classes.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在方法的参数中传递整个对象，而不是仅传递其值（基本类型），可能会在两个类之间创建不必要的依赖关系。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。这提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

@@ -1,124 +1,182 @@
 - en: Long Method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 长方法
 - en: 原文：[https://refactoringguru.cn/smells/long-method](https://refactoringguru.cn/smells/long-method)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/long-method](https://refactoringguru.cn/smells/long-method)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 症状和征兆
 - en: A method contains too many lines of code. Generally, any method longer than
     ten lines should make you start asking questions.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法包含的代码行数过多。一般来说，任何超过十行的方法都应该引发你的疑问。
 - en: '![](../Images/327047b314b2a85724c738383e3d6f66.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/327047b314b2a85724c738383e3d6f66.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题原因
 - en: Like the Hotel California, something is always being added to a method but nothing
     is ever taken out. Since it's easier to write code than to read it, this "smell"
     remains unnoticed until the method turns into an ugly, oversized beast.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 就像加州旅馆一样，方法总是不断添加内容，但从未删除任何东西。由于编写代码比阅读它更容易，这种“味道”在方法变成丑陋的过大怪物之前往往不会被注意到。
 - en: 'Mentally, it''s often harder to create a new method than to add to an existing
     one: "But it''s just two lines, there''s no use in creating a whole method just
     for that..." Which means that another line is added and then yet another, giving
     birth to a tangle of spaghetti code.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在心理上，创建一个新方法通常比向现有方法添加内容更难：“但这只是两行，没必要为此创建一个完整的方法……”这意味着又添加了一行，然后又一行，最终产生了纠缠的意大利面代码。
 - en: Treatment
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理
 - en: As a rule of thumb, if you feel the need to comment on something inside a method,
     you should take this code and put it in a new method. Even a single line can and
     should be split off into a separate method, if it requires explanations. And if
     the method has a descriptive name, nobody will need to look at the code to see
     what it does.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般经验法则是，如果你觉得需要对方法内部的某些内容进行注释，应该将这段代码提取到一个新方法中。即使是一行代码，如果需要解释，也可以并且应该被拆分为一个单独的方法。如果这个方法有一个描述性的名称，没人需要查看代码来了解它的功能。
 - en: '![](../Images/f5b674bc074542f28730233de71d5182.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f5b674bc074542f28730233de71d5182.png)'
 - en: To reduce the length of a method body, use [Extract Method](/extract-method).
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为了减少方法体的长度，使用[提取方法](/extract-method)。
 - en: If local variables and parameters interfere with extracting a method, use [Replace
     Temp with Query](/replace-temp-with-query), [Introduce Parameter Object](/introduce-parameter-object)
     or [Preserve Whole Object](/preserve-whole-object).
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果局部变量和参数干扰了提取方法，可以使用[用查询替换临时变量](/replace-temp-with-query)、[引入参数对象](/introduce-parameter-object)或[保留整体对象](/preserve-whole-object)。
 - en: If none of the previous recipes help, try moving the entire method to a separate
     object via [Replace Method with Method Object](/replace-method-with-method-object).
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果之前的方法都没有帮助，尝试通过[用方法对象替换方法](/replace-method-with-method-object)将整个方法移动到一个单独的对象。
 - en: Conditional operators and loops are a good clue that code can be moved to a
     separate method. For conditionals, use [Decompose Conditional](/decompose-conditional).
     If loops are in the way, try [Extract Method](/extract-method).
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 条件运算符和循环是代码可以移动到单独方法的良好线索。对于条件，使用[分解条件](/decompose-conditional)。如果循环妨碍了代码，尝试[提取方法](/extract-method)。
 - en: Payoff
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 回报
 - en: Among all types of object-oriented code, classes with short methods live longest.
     The longer a method or function is, the harder it becomes to understand and maintain
     it.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在所有类型的面向对象代码中，方法简短的类最持久。方法或函数越长，理解和维护的难度就越大。
 - en: In addition, long methods offer the perfect hiding place for unwanted duplicate
     code.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 此外，长方法为不必要的重复代码提供了完美的隐藏空间。
 - en: '![](../Images/8519663b669d4ad0afd734e85b668b7e.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8519663b669d4ad0afd734e85b668b7e.png)'
 - en: Performance
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能
 - en: Does an increase in the number of methods hurt performance, as many people claim?
     In almost all cases the impact is so negligible that it's not even worth worrying
     about.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 增加方法数量会影响性能吗？正如许多人所声称的那样？在几乎所有情况下，影响微乎其微，甚至不值得担忧。
 - en: Plus, now that you have clear and understandable code, you're more likely to
     find truly effective methods for restructuring code and getting real performance
     gains if the need ever arises.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，既然你有清晰易懂的代码，如果有必要，你更有可能找到真正有效的方法来重构代码并获得实际的性能提升。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦了阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 试试我们的交互式重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

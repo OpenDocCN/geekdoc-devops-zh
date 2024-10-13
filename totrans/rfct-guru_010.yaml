@@ -1,105 +1,157 @@
 - en: Large Class
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 大型类
 - en: 原文：[https://refactoringguru.cn/smells/large-class](https://refactoringguru.cn/smells/large-class)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/large-class](https://refactoringguru.cn/smells/large-class)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆与症状
 - en: A class contains many fields/methods/lines of code.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个类包含许多字段/方法/代码行。
 - en: '![](../Images/e24321a2cdcffc7070cf5f92c3dc4206.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e24321a2cdcffc7070cf5f92c3dc4206.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题原因
 - en: Classes usually start small. But over time, they get bloated as the program
     grows.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 类通常开始时很小，但随着程序的增长，它们会变得臃肿。
 - en: As is the case with long methods as well, programmers usually find it mentally
     less taxing to place a new feature in an existing class than to create a new class
     for the feature.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 就像长方法一样，程序员通常发现将新功能放入现有类的心理负担较轻，而不是为该功能创建新类。
 - en: '![](../Images/c672e4dfde4bcbc1810a191ecf568037.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c672e4dfde4bcbc1810a191ecf568037.png)'
 - en: Treatment
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理方案
 - en: 'When a class is wearing too many (functional) hats, think about splitting it
     up:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 当一个类承担太多（功能）角色时，考虑将其拆分：
 - en: '[Extract Class](/extract-class) helps if part of the behavior of the large
     class can be spun off into a separate component.'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提取类](/extract-class)有助于当大型类的一部分行为可以分离为独立组件时。'
 - en: '[Extract Subclass](/extract-subclass) helps if part of the behavior of the
     large class can be implemented in different ways or is used in rare cases.'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提取子类](/extract-subclass)有助于当大型类的一部分行为可以用不同方式实现或在少数情况下使用时。'
 - en: '[Extract Interface](/extract-interface) helps if it''s necessary to have a
     list of the operations and behaviors that the client can use.'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提取接口](/extract-interface)有助于在需要列出客户端可以使用的操作和行为时。'
 - en: If a large class is responsible for the graphical interface, you may try to
     move some of its data and behavior to a separate domain object. In doing so, it
     may be necessary to store copies of some data in two places and keep the data
     consistent. [Duplicate Observed Data](/duplicate-observed-data) offers a way to
     do this.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果大型类负责图形界面，您可以尝试将其部分数据和行为移动到一个独立的领域对象中。在此过程中，可能需要在两个地方存储一些数据的副本，并保持数据的一致性。[重复观察数据](/duplicate-observed-data)提供了一种解决方法。
 - en: '![](../Images/c5884391409a94a6ab02fc64bb424d0f.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c5884391409a94a6ab02fc64bb424d0f.png)'
 - en: Payoff
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Refactoring of these classes spares developers from needing to remember a large
     number of attributes for a class.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对这些类的重构让开发人员不必记住类的大量属性。
 - en: In many cases, splitting large classes into parts avoids duplication of code
     and functionality.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在许多情况下，将大型类拆分成多个部分可以避免代码和功能的重复。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪阅读我们这里所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

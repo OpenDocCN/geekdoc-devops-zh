@@ -1,94 +1,143 @@
 - en: Shotgun Surgery
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 散弹手术
 - en: 原文：[https://refactoringguru.cn/smells/shotgun-surgery](https://refactoringguru.cn/smells/shotgun-surgery)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/shotgun-surgery](https://refactoringguru.cn/smells/shotgun-surgery)
 - en: '*Shotgun Surgery* resembles [Divergent Change](/smells/divergent-change) but
     is actually the opposite smell. *Divergent Change* is when many changes are made
     to a single class. *Shotgun Surgery* refers to when a single change is made to
     multiple classes simultaneously.'
+  id: totrans-2
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*散弹手术*与[Divergent Change](/smells/divergent-change)相似，但实际上是相反的臭味。*Divergent
+    Change*是指对单个类进行许多更改。*散弹手术*则是指对多个类同时进行单一更改。'
 - en: Signs and Symptoms
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆与症状
 - en: Making any modifications requires that you make many small changes to many different
     classes.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 进行任何修改都需要你对许多不同的类进行许多小更改。
 - en: '![](../Images/76597095dd95d260d99e19667f101329.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/76597095dd95d260d99e19667f101329.png)'
 - en: Reasons for the Problem
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题原因
 - en: A single responsibility has been split up among a large number of classes. This
     can happen after overzealous application of [Divergent Change](/smells/divergent-change).
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 单一责任被分割到大量类中。这可能发生在对[Divergent Change](/smells/divergent-change)的过度应用之后。
 - en: '![](../Images/7be4a998db3cca78b590a00a84006e5c.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7be4a998db3cca78b590a00a84006e5c.png)'
 - en: Treatment
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理方法
 - en: Use [Move Method](/move-method) and [Move Field](/move-field) to move existing
     class behaviors into a single class. If there's no class appropriate for this,
     create a new one.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用[移动方法](/move-method)和[移动字段](/move-field)将现有类行为移动到单一类中。如果没有适合的类，请创建一个新的。
 - en: If moving code to the same class leaves the original classes almost empty, try
     to get rid of these now-redundant classes via [Inline Class](/inline-class).
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果将代码移动到同一类使原来的类几乎为空，请尝试通过[内联类](/inline-class)消除这些现在多余的类。
 - en: '![](../Images/84dde9e26aca8d0cef799e07d896c239.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/84dde9e26aca8d0cef799e07d896c239.png)'
 - en: Payoff
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Better organization.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更好的组织。
 - en: Less code duplication.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更少的代码重复。
 - en: Easier maintenance.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更容易维护。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读得累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程，它提供了更少乏味的学习新内容的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看…*](/refactoring/course)'

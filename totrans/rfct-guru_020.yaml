@@ -1,90 +1,136 @@
 - en: Divergent Change
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 分歧变更
 - en: 原文：[https://refactoringguru.cn/smells/divergent-change](https://refactoringguru.cn/smells/divergent-change)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/divergent-change](https://refactoringguru.cn/smells/divergent-change)
 - en: '*Divergent Change* resembles [Shotgun Surgery](/smells/shotgun-surgery) but
     is actually the opposite smell. *Divergent Change* is when many changes are made
     to a single class. *Shotgun Surgery* refers to when a single change is made to
     multiple classes simultaneously.'
+  id: totrans-2
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*分歧变更*类似于[霰弹手术](/smells/shotgun-surgery)，但实际上是相反的异味。*分歧变更*是指对单个类进行许多更改。*霰弹手术*指的是对多个类同时进行单个更改。'
 - en: Signs and Symptoms
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆与症状
 - en: You find yourself having to change many unrelated methods when you make changes
     to a class. For example, when adding a new product type you have to change the
     methods for finding, displaying, and ordering products.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你修改一个类时，发现需要改变许多无关的方法。例如，添加新产品类型时，你需要更改查找、显示和订购产品的方法。
 - en: '![](../Images/ac5e3b7afd9d99a3cd75a047a2d769aa.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ac5e3b7afd9d99a3cd75a047a2d769aa.png)'
 - en: Reasons for the Problem
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题原因
 - en: Often these divergent modifications are due to poor program structure or "copypasta
     programming”.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些分歧修改通常是由于糟糕的程序结构或“复制粘贴编程”造成的。
 - en: Treatment
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 治疗
 - en: Split up the behavior of the class via [Extract Class](/extract-class).
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过[提取类](/extract-class)拆分类的行为。
 - en: If different classes have the same behavior, you may want to combine the classes
     through inheritance ([Extract Superclass](/extract-superclass) and [Extract Subclass](/extract-subclass)).
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果不同的类有相同的行为，您可能希望通过继承来合并这些类（[提取超类](/extract-superclass)和[提取子类](/extract-subclass)）。
 - en: '![](../Images/8b03318d17adbf7240d9a522ee220cbc.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8b03318d17adbf7240d9a522ee220cbc.png)'
 - en: Payoff
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Improves code organization.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 改善代码组织。
 - en: Reduces code duplication.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 减少代码重复。
 - en: Simplifies support.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简化支持。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'
