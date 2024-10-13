@@ -1,94 +1,142 @@
 - en: Inappropriate Intimacy
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 不适当的亲密关系
 - en: 原文：[https://refactoringguru.cn/smells/inappropriate-intimacy](https://refactoringguru.cn/smells/inappropriate-intimacy)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/inappropriate-intimacy](https://refactoringguru.cn/smells/inappropriate-intimacy)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆和症状
 - en: One class uses the internal fields and methods of another class.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个类使用另一个类的内部字段和方法。
 - en: '![](../Images/16eddfc1c8135201c21c72a1c6bce683.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/16eddfc1c8135201c21c72a1c6bce683.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: Keep a close eye on classes that spend too much time together. Good classes
     should know as little about each other as possible. Such classes are easier to
     maintain and reuse.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 密切关注那些在一起花费过多时间的类。好的类应该尽可能少地了解彼此。这种类更容易维护和重用。
 - en: Treatment
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理
 - en: The simplest solution is to use [Move Method](/move-method) and [Move Field](/move-field)
     to move parts of one class to the class in which those parts are used. But this
     works only if the first class truly doesn't need these parts.
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最简单的解决方案是使用[移动方法](/move-method)和[移动字段](/move-field)，将一个类的部分移动到使用这些部分的类中。但只有在第一个类确实不需要这些部分时，这种方法才有效。
 - en: '![](../Images/cbee88c4a2865b6623415a586cca1d45.png)'
+  id: totrans-9
   prefs:
   - PREF_IND
   type: TYPE_IMG
+  zh: '![](../Images/cbee88c4a2865b6623415a586cca1d45.png)'
 - en: Another solution is to use [Extract Class](/extract-class) and [Hide Delegate](/hide-delegate)
     on the class to make the code relations "official".
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 另一种解决方案是对该类使用[提取类](/extract-class)和[隐藏委托](/hide-delegate)，以使代码关系“正式”。
 - en: If the classes are mutually interdependent, you should use [Change Bidirectional
     Association to Unidirectional](/change-bidirectional-association-to-unidirectional).
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果类之间是相互依赖的，您应该使用[将双向关联更改为单向](/change-bidirectional-association-to-unidirectional)。
 - en: If this "intimacy" is between a subclass and the superclass, consider [Replace
     Delegation with Inheritance](/replace-delegation-with-inheritance).
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果这种“亲密”关系存在于子类和父类之间，请考虑[用继承替代委托](/replace-delegation-with-inheritance)。
 - en: '![](../Images/06a084c62cccc55b8e588aa4fbb35eed.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/06a084c62cccc55b8e588aa4fbb35eed.png)'
 - en: Payoff
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 回报
 - en: Improves code organization.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 改进代码组织。
 - en: Simplifies support and code reuse.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简化支持和代码重用。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

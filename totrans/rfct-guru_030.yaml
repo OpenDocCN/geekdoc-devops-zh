@@ -1,37 +1,59 @@
 - en: Couplers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 耦合器
 - en: 原文：[https://refactoringguru.cn/refactoring/smells/couplers](https://refactoringguru.cn/refactoring/smells/couplers)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/smells/couplers](https://refactoringguru.cn/refactoring/smells/couplers)
 - en: All the smells in this group contribute to excessive coupling between classes
     or show what happens if coupling is replaced by excessive delegation.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个组中的所有气味都导致类之间的过度耦合，或者展示了如果耦合被过度委托所替代会发生什么。
 - en: '[Feature Envy](/smells/feature-envy)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[特性嫉妒](https://refactoringguru.cn/refactoring/smells/feature-envy)'
 - en: A method accesses the data of another object more than its own data.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个方法访问另一个对象的数据多于它自己数据的访问。
 - en: '[Inappropriate Intimacy](/smells/inappropriate-intimacy)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '[不当亲密](https://refactoringguru.cn/refactoring/smells/inappropriate-intimacy)'
 - en: One class uses the internal fields and methods of another class.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个类使用另一个类的内部字段和方法。
 - en: '[Message Chains](/smells/message-chains)'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '[消息链](https://refactoringguru.cn/refactoring/smells/message-chains)'
 - en: In code you see a series of calls resembling `$a->b()->c()->d()`
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在代码中，你会看到一系列类似于`$a->b()->c()->d()`的调用。
 - en: '[Middle Man](/smells/middle-man)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[中介者](https://refactoringguru.cn/refactoring/smells/middle-man)'
 - en: If a class performs only one action, delegating work to another class, why does
     it exist at all?
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果一个类只执行一个操作，将工作委托给另一个类，那么它存在的意义是什么？

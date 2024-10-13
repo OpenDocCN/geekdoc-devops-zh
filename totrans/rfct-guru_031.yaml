@@ -1,104 +1,156 @@
 - en: Feature Envy
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 特征嫉妒
 - en: 原文：[https://refactoringguru.cn/smells/feature-envy](https://refactoringguru.cn/smells/feature-envy)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/feature-envy](https://refactoringguru.cn/smells/feature-envy)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆和症状
 - en: A method accesses the data of another object more than its own data.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个方法访问其他对象的数据多于其自身的数据。
 - en: '![](../Images/87d286f1ec233b36dd207476329160ef.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/87d286f1ec233b36dd207476329160ef.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: This smell may occur after fields are moved to a data class. If this is the
     case, you may want to move the operations on data to this class as well.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种异味可能在字段移动到数据类后出现。如果是这种情况，您可能还想将对数据的操作移到此类中。
 - en: Treatment
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理方法
 - en: As a basic rule, if things change at the same time, you should keep them in
     the same place. Usually data and functions that use this data are changed together
     (although exceptions are possible).
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 基本规则是，如果事物同时变化，应该将它们放在同一个地方。通常使用这些数据的函数与数据一起被修改（尽管可能有例外）。
 - en: If a method clearly should be moved to another place, use [Move Method](/move-method).
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果一个方法显然应该移动到另一个地方，使用[移动方法](/move-method)。
 - en: If only part of a method accesses the data of another object, use [Extract Method](/extract-method)
     to move the part in question.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果只有方法的一部分访问另一个对象的数据，使用[提取方法](/extract-method)将相关部分移走。
 - en: If a method uses functions from several other classes, first determine which
     class contains most of the data used. Then place the method in this class along
     with the other data. Alternatively, use [Extract Method](/extract-method) to split
     the method into several parts that can be placed in different places in different
     classes.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果一个方法使用来自多个其他类的函数，首先确定哪个类包含大部分使用的数据。然后将该方法放入此类中，连同其他数据。或者，使用[提取方法](/extract-method)将该方法拆分成可以放置在不同类中的几个部分。
 - en: '![](../Images/ce8c2259c2ce5eb1f7188a12648322a9.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ce8c2259c2ce5eb1f7188a12648322a9.png)'
 - en: Payoff
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 回报
 - en: Less code duplication (if the data handling code is put in a central place).
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更少的代码重复（如果数据处理代码放在一个中心位置）。
 - en: Better code organization (methods for handling data are next to the actual data).
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更好的代码组织（处理数据的方法与实际数据相邻）。
 - en: '![](../Images/85606fc9f7a9d66f8d0e9cfe3e622e78.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/85606fc9f7a9d66f8d0e9cfe3e622e78.png)'
 - en: When to Ignore
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时忽略
 - en: Sometimes behavior is purposefully kept separate from the class that holds the
     data. The usual advantage of this is the ability to dynamically change the behavior
     (see [Strategy](/design-patterns/strategy), [Visitor](/design-patterns/visitor)
     and other patterns).
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 有时行为被故意与持有数据的类分开。通常的好处是能够动态改变行为（参见[策略](/design-patterns/strategy)、[访问者](/design-patterns/visitor)及其他模式）。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

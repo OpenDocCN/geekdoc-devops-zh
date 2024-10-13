@@ -1,19 +1,29 @@
 - en: Other Smells
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 其他气味
 - en: 原文：[https://refactoringguru.cn/refactoring/smells/other](https://refactoringguru.cn/refactoring/smells/other)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/smells/other](https://refactoringguru.cn/refactoring/smells/other)
 - en: Below are the smells which don't fall into any broad category.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是一些不属于任何广泛类别的气味。
 - en: '[Incomplete Library Class](/smells/incomplete-library-class)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[不完整的库类](/smells/incomplete-library-class)'
 - en: Sooner or later, [libraries](https://en.wikipedia.org/wiki/Library_(computing))
     stop meeting user needs. The only solution to the problem—changing the library—is
     often impossible since the library is read-only.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 迟早，[库](https://en.wikipedia.org/wiki/Library_(computing))将无法满足用户需求。解决这个问题的唯一方法——更改库——通常是不可能的，因为库是只读的。

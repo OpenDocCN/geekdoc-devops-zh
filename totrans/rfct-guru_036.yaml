@@ -1,84 +1,128 @@
 - en: Incomplete Library Class
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 不完整的类库
 - en: 原文：[https://refactoringguru.cn/smells/incomplete-library-class](https://refactoringguru.cn/smells/incomplete-library-class)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/incomplete-library-class](https://refactoringguru.cn/smells/incomplete-library-class)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆和症状
 - en: Sooner or later, [libraries](https://en.wikipedia.org/wiki/Library_(computing))
     stop meeting user needs. The only solution to the problem—changing the library—is
     often impossible since the library is read-only.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[图书馆](https://en.wikipedia.org/wiki/Library_(computing))迟早会停止满足用户需求。解决这个问题的唯一方案——更改图书馆——往往是不可能的，因为图书馆是只读的。'
 - en: '![](../Images/3b8ee9f3114d6e2d9c10786df57b511c.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3b8ee9f3114d6e2d9c10786df57b511c.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题原因
 - en: The author of the library hasn't provided the features you need or has refused
     to implement them.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 图书馆的作者没有提供您需要的功能，或者拒绝实施这些功能。
 - en: Treatment
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理方法
 - en: To introduce a few methods to a library class, use [Introduce Foreign Method](/introduce-foreign-method).
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 要向库类引入一些方法，请使用[引入外部方法](/introduce-foreign-method)。
 - en: For big changes in a class library, use [Introduce Local Extension](/introduce-local-extension).
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于类库中的重大更改，请使用[引入本地扩展](/introduce-local-extension)。
 - en: Payoff
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Reduces code duplication (instead of creating your own library from scratch,
     you can still piggy-back off an existing one).
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 减少代码重复（与其从头创建自己的库，不如依赖现有库）。
 - en: '![](../Images/60943c416d0180b62787e86496d576ab.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/60943c416d0180b62787e86496d576ab.png)'
 - en: When to Ignore
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时忽略
 - en: Extending a library can generate additional work if the changes to the library
     involve changes in code.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 扩展一个库可能会产生额外的工作，如果对库的更改涉及代码更改。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

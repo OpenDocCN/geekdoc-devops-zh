@@ -1,106 +1,160 @@
 - en: Speculative Generality
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 投机通用性
 - en: 原文：[https://refactoringguru.cn/smells/speculative-generality](https://refactoringguru.cn/smells/speculative-generality)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/speculative-generality](https://refactoringguru.cn/smells/speculative-generality)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 征兆和症状
 - en: There's an unused class, method, field or parameter.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一个未使用的类、方法、字段或参数。
 - en: '![](../Images/8dab7e5a639c4daf69229cc50a45dbf7.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8dab7e5a639c4daf69229cc50a45dbf7.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题的原因
 - en: Sometimes code is created "just in case" to support anticipated future features
     that never get implemented. As a result, code becomes hard to understand and support.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时代码是“以防万一”创建的，以支持预期未来将实现的功能。但实际上，这些功能并未实现，导致代码变得难以理解和维护。
 - en: Treatment
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理
 - en: For removing unused abstract classes, try [Collapse Hierarchy](/collapse-hierarchy).
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 要移除未使用的抽象类，请尝试[折叠层次结构](/collapse-hierarchy)。
 - en: Unnecessary delegation of functionality to another class can be eliminated via
     [Inline Class](/inline-class).
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不必要的功能委托给另一个类可以通过[内联类](/inline-class)来消除。
 - en: Unused methods? Use [Inline Method](/inline-method) to get rid of them.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 未使用的方法？使用[内联方法](/inline-method)来消除它们。
 - en: Methods with unused parameters should be given a look with the help of [Remove
     Parameter](/remove-parameter).
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 带有未使用参数的方法应通过[移除参数](/remove-parameter)进行检查。
 - en: Unused fields can be simply deleted.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 未使用的字段可以直接删除。
 - en: '![](../Images/8f2e820cb2e246af74100c7ac85dec72.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8f2e820cb2e246af74100c7ac85dec72.png)'
 - en: Payoff
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Slimmer code.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更精简的代码。
 - en: Easier support.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更易于支持。
 - en: When to Ignore
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时忽略
 - en: If you're working on a framework, it's eminently reasonable to create functionality
     not used in the framework itself, as long as the functionality is needed by the
     frameworks's users.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果您正在开发框架，创建在框架本身中未使用的功能是完全合理的，只要该功能是框架用户所需的。
 - en: Before deleting elements, make sure that they aren't used in unit tests. This
     happens if tests need a way to get certain internal information from a class or
     perform special testing-related actions.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在删除元素之前，请确保它们未在单元测试中使用。这种情况发生在测试需要某种方式从类中获取特定内部信息或执行特殊测试相关操作时。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读得疲惫了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

@@ -1,90 +1,138 @@
 - en: Middle Man
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 中介
 - en: 原文：[https://refactoringguru.cn/smells/middle-man](https://refactoringguru.cn/smells/middle-man)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/smells/middle-man](https://refactoringguru.cn/smells/middle-man)
 - en: Signs and Symptoms
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 迹象和症状
 - en: If a class performs only one action, delegating work to another class, why does
     it exist at all?
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果一个类仅执行一个操作，将工作委派给另一个类，那么它存在的意义是什么？
 - en: '![](../Images/10c52abdb49ddd95dfb73e53130ba991.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/10c52abdb49ddd95dfb73e53130ba991.png)'
 - en: Reasons for the Problem
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题原因
 - en: This smell can be the result of overzealous elimination of [Message Chains](/smells/message-chains).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种气味可能是过度消除[消息链](/smells/message-chains)的结果。
 - en: In other cases, it can be the result of the useful work of a class being gradually
     moved to other classes. The class remains as an empty shell that doesn't do anything
     other than delegate.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在其他情况下，这可能是由于一个类的有用工作逐渐转移到其他类而导致的。这个类就像一个空壳，除了委派外什么也不做。
 - en: Treatment
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理
 - en: If most of a method's classes delegate to another class, [Remove Middle Man](/remove-middle-man)
     is in order.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果大多数方法的类都委派给另一个类，那么就应该[移除中介](/remove-middle-man)。
 - en: Payoff
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收益
 - en: Less bulky code.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 代码更简洁。
 - en: '![](../Images/4054a8e74184d7250656eaaaf78864c3.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4054a8e74184d7250656eaaaf78864c3.png)'
 - en: When to Ignore
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时忽略
 - en: 'Don''t delete middle man that have been created for a reason:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 不要删除出于某种原因创建的中介：
 - en: A middle man may have been added to avoid interclass dependencies.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可能添加了中介以避免类之间的依赖关系。
 - en: Some design patterns create middle man on purpose (such as [Proxy](/design-patterns/proxy)
     or [Decorator](/design-patterns/decorator)).
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一些设计模式故意创建中介（例如 [代理](/design-patterns/proxy) 或 [装饰器](/design-patterns/decorator)）。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看一下…*](/refactoring/course)'
