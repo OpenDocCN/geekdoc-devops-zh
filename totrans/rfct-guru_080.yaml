@@ -1,161 +1,249 @@
 - en: Introduce Null Object
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 引入空对象
 - en: 原文：[https://refactoringguru.cn/introduce-null-object](https://refactoringguru.cn/introduce-null-object)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/introduce-null-object](https://refactoringguru.cn/introduce-null-object)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Since some methods return `null` instead of real objects, you have many checks
     for `null` in your code.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于一些方法返回`null`而不是实际对象，您的代码中有许多对`null`的检查。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Instead of `null`, return a null object that exhibits the default behavior.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回空对象而不是`null`，使其表现出默认行为。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: Dozens of checks for `null` make your code longer and uglier.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 对`null`的多次检查使您的代码变得更长且更丑。
 - en: Drawbacks
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: The price of getting rid of conditionals is creating yet another new class.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 摆脱条件语句的代价是创建另一个新类。
 - en: How to Refactor
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: From the class in question, create a subclass that will perform the role of
     null object.
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从相关类创建一个子类，作为空对象的角色。
 - en: In both classes, create the method `isNull()`, which will return `true` for
     a null object and `false` for a real class.
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在两个类中创建方法`isNull()`，该方法对空对象返回`true`，对实际类返回`false`。
 - en: Find all places where the code may return `null` instead of a real object. Change
     the code so that it returns a null object.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 找到所有可能返回`null`而不是实际对象的地方。更改代码以返回一个空对象。
 - en: Find all places where the variables of the real class are compared with `null`.
     Replace these checks with a call for `isNull()`.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 找到所有将实际类的变量与`null`进行比较的地方。用对`isNull()`的调用替换这些检查。
 - en: If methods of the original class are run in these conditionals when a value
     doesn't equal `null`, redefine these methods in the null class and insert the
     code from the `else` part of the condition there. Then you can delete the entire
     conditional and differing behavior will be implemented via polymorphism.
+  id: totrans-35
   prefs:
   - PREF_OL
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果原始类的方法在值不等于`null`的条件下运行，请在空类中重新定义这些方法，并将`else`部分的代码插入其中。然后可以删除整个条件，差异化的行为将通过多态性实现。
 - en: If things aren't so simple and the methods can't be redefined, see if you can
     simply extract the operators that were supposed to be performed in the case of
     a `null` value to new methods of the null object. Call these methods instead of
     the old code in `else` as the operations by default.
+  id: totrans-36
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果事情并不简单且方法无法重新定义，请看看是否可以将原本应该在`null`值情况下执行的操作提取到空对象的新方法中。将这些方法替换为`else`中的旧代码作为默认操作。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读腻了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

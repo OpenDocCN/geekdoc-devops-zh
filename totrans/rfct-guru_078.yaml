@@ -1,151 +1,235 @@
 - en: Replace Nested Conditional with Guard Clauses
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用保护子句替换嵌套条件
 - en: 原文：[https://refactoringguru.cn/replace-nested-conditional-with-guard-clauses](https://refactoringguru.cn/replace-nested-conditional-with-guard-clauses)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-nested-conditional-with-guard-clauses](https://refactoringguru.cn/replace-nested-conditional-with-guard-clauses)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a group of nested conditionals and it's hard to determine the normal
     flow of code execution.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 您有一组嵌套条件，难以确定代码执行的正常流程。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Isolate all special checks and edge cases into separate clauses and place them
     before the main checks. Ideally, you should have a "flat" list of conditionals,
     one after the other.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将所有特殊检查和边界情况隔离到单独的子句中，并将它们放在主要检查之前。理想情况下，您应该有一个“扁平”的条件列表，一个接一个。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: 'Spotting the "conditional from hell" is fairly easy. The indentations of each
     level of nestedness form an arrow, pointing to the right in the direction of pain
     and woe:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 识别“地狱条件”相对简单。每个嵌套层级的缩进形成一支箭头，指向痛苦与困惑的方向：
 - en: '[PRE10]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: It's difficult to figure out what each conditional does and how, since the "normal"
     flow of code execution isn't immediately obvious. These conditionals indicate
     helter-skelter evolution, with each condition added as a stopgap measure without
     any thought paid to optimizing the overall structure.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 很难弄清楚每个条件的作用和如何运作，因为代码执行的“正常”流程并不明显。这些条件表明了混乱的演变，每个条件都是作为权宜之计添加的，而没有考虑到优化整体结构。
 - en: To simplify the situation, isolate the special cases into separate conditions
     that immediately end execution and return a null value if the guard clauses are
     true. In effect, your mission here is to make the structure flat.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 为简化情况，将特殊情况隔离到单独的条件中，如果保护子句为真，则立即结束执行并返回一个空值。实际上，您在这里的任务是使结构变得扁平。
 - en: How to Refactor
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Try to rid the code of side effects—[Separate Query from Modifier](/separate-query-from-modifier)
     may be helpful for the purpose. This solution will be necessary for the reshuffling
     described below.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试消除代码中的副作用——[将查询与修改分离](/separate-query-from-modifier)可能对这个目的有帮助。这个解决方案对于下面描述的重组是必要的。
 - en: Isolate all guard clauses that lead to calling an exception or immediate return
     of a value from the method. Place these conditions at the beginning of the method.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将所有导致调用异常或立即返回值的保护子句隔离出来。将这些条件放在方法的开头。
 - en: After rearrangement is complete and all tests are successfully completed, see
     whether you can use [Consolidate Conditional Expression](/consolidate-conditional-expression)
     for guard clauses that lead to the same exceptions or returned values.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在重排完成并且所有测试成功后，查看是否可以使用[合并条件表达式](/consolidate-conditional-expression)来处理导致相同异常或返回值的保护子句。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读这里所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么繁琐的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

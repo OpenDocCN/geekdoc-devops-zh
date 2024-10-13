@@ -1,208 +1,316 @@
 - en: Replace Conditional with Polymorphism
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用多态性替换条件
 - en: 原文：[https://refactoringguru.cn/replace-conditional-with-polymorphism](https://refactoringguru.cn/replace-conditional-with-polymorphism)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-conditional-with-polymorphism](https://refactoringguru.cn/replace-conditional-with-polymorphism)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a conditional that performs various actions depending on object type
     or properties.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 您有一个根据对象类型或属性执行各种操作的条件。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create subclasses matching the branches of the conditional. In them, create
     a shared method and move code from the corresponding branch of the conditional
     to it. Then replace the conditional with the relevant method call. The result
     is that the proper implementation will be attained via polymorphism depending
     on the object class.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建与条件分支匹配的子类。在这些子类中，创建一个共享方法，并将相应条件分支的代码移到其中。然后用相关方法调用替换条件。最终通过多态性将获得正确的实现，具体取决于对象类。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: 'This refactoring technique can help if your code contains operators performing
     various tasks that vary based on:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您的代码包含根据以下内容执行各种任务的操作符，这种重构技术将有所帮助：
 - en: Class of the object or interface that it implements
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对象的类或它实现的接口
 - en: Value of an object's field
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对象字段的值
 - en: Result of calling one of an object's methods
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 调用对象方法之一的结果
 - en: If a new object property or type appears, you will need to search for and add
     code in all similar conditionals. Thus the benefit of this technique is multiplied
     if there are multiple conditionals scattered throughout all of an object's methods.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果出现新的对象属性或类型，您需要在所有类似条件中搜索并添加代码。因此，如果对象的所有方法中散布着多个条件，这种技术的好处将成倍增加。
 - en: Benefits
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: 'This technique adheres to the *Tell-Don''t-Ask* principle: instead of asking
     an object about its state and then performing actions based on this, it''s much
     easier to simply tell the object what it needs to do and let it decide for itself
     how to do that.'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这种技术遵循*告知-不询问*原则：与其询问对象的状态并根据此执行操作，不如简单地告诉对象它需要做什么，让它自己决定如何执行。
 - en: Removes duplicate code. You get rid of many almost identical conditionals.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 消除重复代码。您摆脱了许多几乎相同的条件。
 - en: If you need to add a new execution variant, all you need to do is add a new
     subclass without touching the existing code (*Open/Closed Principle*).
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果需要添加新的执行变体，只需添加一个新子类，而无需修改现有代码（*开放/封闭原则*）。
 - en: How to Refactor
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Preparing to Refactor
+  id: totrans-37
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 准备重构
 - en: 'For this refactoring technique, you should have a ready hierarchy of classes
     that will contain alternative behaviors. If you don''t have a hierarchy like this,
     create one. Other techniques will help to make this happen:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这种重构技术，您应该有一个准备好的类层级，包含替代行为。如果没有这样的层级，请创建一个。其他技术将帮助实现这一目标：
 - en: '[Replace Type Code with Subclasses](/replace-type-code-with-subclasses). Subclasses
     will be created for all values of a particular object property. This approach
     is simple but less flexible since you can''t create subclasses for the other properties
     of the object.'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用子类替换类型代码](/replace-type-code-with-subclasses)。将为特定对象属性的所有值创建子类。这种方法简单但灵活性较差，因为您无法为对象的其他属性创建子类。'
 - en: '[Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy).
     A class will be dedicated for a particular object property and subclasses will
     be created from it for each value of the property. The current class will contain
     references to the objects of this type and delegate execution to them.'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用状态/策略替换类型代码](/replace-type-code-with-state-strategy)。将为特定对象属性专门创建一个类，并为该属性的每个值从中创建子类。当前类将包含对这种类型对象的引用，并将执行委托给它们。'
 - en: The following steps assume that you have already created the hierarchy.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下步骤假设您已经创建了层级结构。
 - en: Refactoring Steps
+  id: totrans-42
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 重构步骤
 - en: If the conditional is in a method that performs other actions as well, perform
     [Extract Method](/extract-method).
+  id: totrans-43
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果条件在执行其他操作的方法中，请执行[提取方法](/extract-method)。
 - en: For each hierarchy subclass, redefine the method that contains the conditional
     and copy the code of the corresponding conditional branch to that location.
+  id: totrans-44
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于每个层级子类，重定义包含条件的方法，并将相应条件分支的代码复制到该位置。
 - en: Delete this branch from the conditional.
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从条件中删除此分支。
 - en: Repeat replacement until the conditional is empty. Then delete the conditional
     and declare the method abstract.
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 重复替换直到条件为空。然后删除条件并将方法声明为抽象。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持 HTML 视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 毫无疑问，阅读我们这里的所有文本需要 7 小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看…*](/refactoring/course)'

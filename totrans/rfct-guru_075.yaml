@@ -1,162 +1,252 @@
 - en: Consolidate Conditional Expression
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 整合条件表达式
 - en: 原文：[https://refactoringguru.cn/consolidate-conditional-expression](https://refactoringguru.cn/consolidate-conditional-expression)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/consolidate-conditional-expression](https://refactoringguru.cn/consolidate-conditional-expression)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have multiple conditionals that lead to the same result or action.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有多个条件导致相同的结果或动作。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Consolidate all these conditionals in a single expression.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将所有这些条件整合到一个表达式中。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Your code contains many alternating operators that perform identical actions.
     It isn't clear why the operators are split up.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的代码包含许多交替的操作符，执行相同的操作。操作符分开的原因并不明确。
 - en: The main purpose of consolidation is to extract the conditional to a separate
     method for greater clarity.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 整合的主要目的是将条件提取到一个单独的方法中，以获得更大的清晰度。
 - en: Benefits
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Eliminates duplicate control flow code. Combining multiple conditionals that
     have the same "destination" helps to show that you're doing only one complicated
     check leading to one action.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 消除了重复的控制流代码。结合多个具有相同“目的地”的条件，有助于表明你只在进行一个复杂的检查，导致一个动作。
 - en: By consolidating all operators, you can now isolate this complex expression
     in a new method with a name that explains the conditional's purpose.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过整合所有操作符，你现在可以用一种新的方法将这个复杂表达式隔离开来，其名称解释了条件的目的。
 - en: How to Refactor
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Before refactoring, make sure that the conditionals don't have any "side effects"
     or otherwise modify something, instead of simply returning values. Side effects
     may be hiding in the code executed inside the operator itself, such as when something
     is added to a variable based on the results of a conditional.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在重构之前，确保条件没有任何“副作用”或以其他方式修改某些内容，而只是返回值。副作用可能隐藏在操作符本身内部执行的代码中，例如，当根据条件的结果向变量添加内容时。
 - en: 'Consolidate the conditionals in a single expression by using `and` and `or`.
     As a general rule when consolidating:'
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过使用`and`和`or`将条件整合到一个表达式中。整合时的一般规则是：
 - en: Nested conditionals are joined using `and`.
+  id: totrans-35
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 嵌套条件使用`and`连接。
 - en: Consecutive conditionals are joined with `or`.
+  id: totrans-36
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 连续条件使用`or`连接。
 - en: Perform [Extract Method](/extract-method) on the operator conditions and give
     the method a name that reflects the expression's purpose.
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对操作符条件执行[提取方法](/extract-method)，并给方法命名以反映表达式的目的。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看看…*](/refactoring/course)'

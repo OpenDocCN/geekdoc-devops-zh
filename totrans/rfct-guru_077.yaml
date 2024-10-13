@@ -1,101 +1,151 @@
 - en: Remove Control Flag
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 移除控制标志
 - en: 原文：[https://refactoringguru.cn/remove-control-flag](https://refactoringguru.cn/remove-control-flag)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/remove-control-flag](https://refactoringguru.cn/remove-control-flag)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a boolean variable that acts as a control flag for multiple boolean
     expressions.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有一个布尔变量作为多个布尔表达式的控制标志。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Instead of the variable, use `break`, `continue` and `return`.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 不要使用变量，使用`break`、`continue`和`return`。
 - en: Why Refactor
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: Control flags date back to the days of yore, when "proper" programmers always
     had one entry point for their functions (the function declaration line) and one
     exit point (at the very end of the function).
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 控制标志可以追溯到古老的编程时代，那时“合格”的程序员总是为他们的函数设置一个入口点（函数声明行）和一个出口点（在函数的最后）。
 - en: 'In modern programming languages this style tic is obsolete, since we have special
     operators for modifying the control flow in loops and other complex constructions:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在现代编程语言中，这种风格的编程已过时，因为我们有特殊的操作符来修改循环和其他复杂结构中的控制流：
 - en: '`break`: stops loop'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`break`：停止循环。'
 - en: '`continue`: stops execution of the current loop branch and goes to check the
     loop conditions in the next iteration'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`continue`：停止当前循环分支的执行，并在下一个迭代中检查循环条件。'
 - en: '`return`: stops execution of the entire function and returns its result if
     given in the operator'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`return`：停止整个函数的执行并返回其结果（如果在操作符中给出）。'
 - en: Benefits
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Control flag code is often much more ponderous than code written with control
     flow operators.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 控制标志代码通常比使用控制流操作符编写的代码要繁琐得多。
 - en: How to Refactor
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Find the value assignment to the control flag that causes the exit from the
     loop or current iteration.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 找到导致退出循环或当前迭代的控制标志的值赋值。
 - en: Replace it with `break`, if this is an exit from a loop; `continue`, if this
     is an exit from an iteration, or `return`, if you need to return this value from
     the function.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果这是退出循环，则用`break`替换；如果这是退出迭代，则用`continue`替换；如果需要从函数返回此值，则用`return`替换。
 - en: Remove the remaining code and checks associated with the control flag.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除与控制标志相关的剩余代码和检查。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么繁琐的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'
