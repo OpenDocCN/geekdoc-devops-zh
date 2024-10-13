@@ -1,171 +1,263 @@
 - en: Extract Method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提取方法
 - en: 原文：[https://refactoringguru.cn/extract-method](https://refactoringguru.cn/extract-method)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/extract-method](https://refactoringguru.cn/extract-method)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a code fragment that can be grouped together.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有一个可以组合在一起的代码片段。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Move this code to a separate new method (or function) and replace the old code
     with a call to the method.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将这段代码移动到一个单独的新方法（或函数）中，并用对该方法的调用替换旧代码。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: The more lines found in a method, the harder it's to figure out what the method
     does. This is the main reason for this refactoring.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法中的行数越多，越难以弄清楚该方法的功能。这是进行这种重构的主要原因。
 - en: Besides eliminating rough edges in your code, extracting methods is also a step
     in many other refactoring approaches.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了消除代码中的粗糙边缘，提取方法也是许多其他重构方法中的一步。
 - en: Benefits
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: 'More readable code! Be sure to give the new method a name that describes the
     method''s purpose: `createOrder()`, `renderCustomerInfo()`, etc.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更可读的代码！务必给新方法一个描述其目的的名称：`createOrder()`、`renderCustomerInfo()`等。
 - en: Less code duplication. Often the code that's found in a method can be reused
     in other places in your program. So you can replace duplicates with calls to your
     new method.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 更少的代码重复。通常，方法中的代码可以在程序的其他地方重复使用。因此，你可以用对新方法的调用替换重复代码。
 - en: Isolates independent parts of code, meaning that errors are less likely (such
     as if the wrong variable is modified).
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 隔离代码的独立部分，这意味着出错的可能性较小（例如，如果错误地修改了变量）。
 - en: How to Refactor
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a new method and name it in a way that makes its purpose self-evident.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个新方法，并以使其目的显而易见的方式命名。
 - en: Copy the relevant code fragment to your new method. Delete the fragment from
     its old location and put a call for the new method there instead.
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将相关的代码片段复制到你的新方法中。从旧位置删除该片段，并在其中放置对新方法的调用。
 - en: Find all variables used in this code fragment. If they're declared inside the
     fragment and not used outside of it, simply leave them unchanged—they'll become
     local variables for the new method.
+  id: totrans-36
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 找到这个代码片段中使用的所有变量。如果它们在片段内部声明并且不在外部使用，则可以保持不变——它们将成为新方法的局部变量。
 - en: If the variables are declared prior to the code that you're extracting, you
     will need to pass these variables to the parameters of your new method in order
     to use the values previously contained in them. Sometimes it's easier to get rid
     of these variables by resorting to [Replace Temp with Query](/replace-temp-with-query).
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果变量是在你要提取的代码之前声明的，你需要将这些变量传递给新方法的参数，以便使用它们之前包含的值。有时通过使用[用查询替换临时变量](/replace-temp-with-query)来去掉这些变量更为简单。
 - en: If you see that a local variable changes in your extracted code in some way,
     this may mean that this changed value will be needed later in your main method.
     Double-check! And if this is indeed the case, return the value of this variable
     to the main method to keep everything functioning.
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你看到在提取的代码中局部变量以某种方式发生了变化，这可能意味着这个变化的值在你的主方法中之后会被需要。请仔细检查！如果确实如此，将这个变量的值返回给主方法以保持一切正常。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读腻了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看看…*](/refactoring/course)'

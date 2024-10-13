@@ -1,155 +1,241 @@
 - en: Remove Assignments to Parameters
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 移除对参数的赋值
 - en: 原文：[https://refactoringguru.cn/remove-assignments-to-parameters](https://refactoringguru.cn/remove-assignments-to-parameters)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/remove-assignments-to-parameters](https://refactoringguru.cn/remove-assignments-to-parameters)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Some value is assigned to a parameter inside method's body.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些值在方法体内被赋给参数。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Use a local variable instead of a parameter.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用局部变量代替参数。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: The reasons for this refactoring are the same as for [Split Temporary Variable](/split-temporary-variable),
     but in this case we're dealing with a parameter, not a local variable.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个重构的原因与[拆分临时变量](/split-temporary-variable)相同，但在这种情况下我们处理的是参数，而不是局部变量。
 - en: First, if a parameter is passed via reference, then after the parameter value
     is changed inside the method, this value is passed to the argument that requested
     calling this method. Very often, this occurs accidentally and leads to unfortunate
     effects. Even if parameters are usually passed by value (and not by reference)
     in your programming language, this coding quirk may alienate those who are unaccustomed
     to it.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，如果参数通过引用传递，那么在方法内部更改参数值后，该值会传递给请求调用此方法的参数。这个过程往往是偶然发生的，导致不幸的后果。即使在你的编程语言中通常是通过值（而不是通过引用）传递参数，这种编码怪癖可能会让不习惯的人感到困惑。
 - en: Second, multiple assignments of different values to a single parameter make
     it difficult for you to know what data should be contained in the parameter at
     any particular point in time. The problem worsens if your parameter and its contents
     are documented but the actual value is capable of differing from what's expected
     inside the method.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 其次，将不同值多次赋给单一参数，使你很难知道在任何特定时间点参数中应该包含什么数据。如果参数及其内容有文档记录，但实际值可能与方法内部的预期不同，问题会更加严重。
 - en: Benefits
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Each element of the program should be responsible for only one thing. This makes
     code maintenance much easier going forward, since you can safely replace code
     without any side effects.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 程序的每个元素应只负责一件事。这使得今后的代码维护变得更加容易，因为你可以安全地替换代码而不会产生副作用。
 - en: This refactoring helps to extract [repetitive code to separate methods](/extract-method).
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这个重构有助于将[重复代码提取到单独的方法](/extract-method)。
 - en: How to Refactor
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a local variable and assign the initial value of your parameter.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个局部变量并赋予参数的初始值。
 - en: In all method code that follows this line, replace the parameter with your new
     local variable.
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在此行之后的所有方法代码中，将参数替换为新的局部变量。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，这里所有文本的阅读需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看……*](/refactoring/course)'

@@ -1,159 +1,245 @@
 - en: Split Temporary Variable
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 拆分临时变量
 - en: 原文：[https://refactoringguru.cn/split-temporary-variable](https://refactoringguru.cn/split-temporary-variable)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/split-temporary-variable](https://refactoringguru.cn/split-temporary-variable)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a local variable that's used to store various intermediate values inside
     a method (except for cycle variables).
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有一个局部变量，用于在方法内部存储各种中间值（除了循环变量）。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Use different variables for different values. Each variable should be responsible
     for only one particular thing.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于不同的值，使用不同的变量。每个变量应只负责一件特定的事情。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: If you're skimping on the number of variables inside a function and reusing
     them for various unrelated purposes, you're sure to encounter problems as soon
     as you need to make changes to the code containing the variables. You will have
     to recheck each case of variable use to make sure that the correct values are
     used.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你在一个函数内部减少变量的数量，并将它们用于各种无关的目的，当你需要更改包含变量的代码时，你一定会遇到问题。你必须重新检查每个变量使用的案例，以确保使用了正确的值。
 - en: Benefits
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Each component of the program code should be responsible for one and one thing
     only. This makes it much easier to maintain the code, since you can easily replace
     any particular thing without fear of unintended effects.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 程序代码的每个组件应仅负责一件事。这使得维护代码变得更加容易，因为你可以轻松替换任何特定的部分，而不必担心意外效果。
 - en: 'Code becomes more readable. If a variable was created long ago in a rush, it
     probably has a name that doesn''t explain anything: `k`, `a2`, `value`, etc. But
     you can fix this situation by naming the new variables in an understandable, self-explanatory
     way. Such names might resemble `customerTaxValue`, `cityUnemploymentRate`, `clientSalutationString`
     and the like.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 代码变得更加易读。如果一个变量在很久以前匆忙创建，它可能有一个没有任何说明的名称：`k`、`a2`、`value`等。但你可以通过为新变量命名一个易于理解、自解释的名称来解决这个问题。这些名称可能类似于`customerTaxValue`、`cityUnemploymentRate`、`clientSalutationString`等。
 - en: This refactoring technique is useful if you anticipate using [Extract Method](/extract-method)
     later.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你预计将来会使用[提取方法](/extract-method)，那么这种重构技术是很有用的。
 - en: How to Refactor
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Find the first place in the code where the variable is given a value. Here you
     should rename the variable with a name that corresponds to the value being assigned.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 找到代码中变量被赋值的第一个地方。在这里，你应该用一个与所赋值对应的名称重命名变量。
 - en: Use the new name instead of the old one in places where this value of the variable
     is used.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在使用该变量值的地方使用新名称替代旧名称。
 - en: Repeat as needed for places where the variable is assigned a different value.
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在变量被赋不同值的地方根据需要重复操作。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

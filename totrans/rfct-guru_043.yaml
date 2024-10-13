@@ -1,176 +1,270 @@
 - en: Replace Temp with Query
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用查询替换临时变量
 - en: 原文：[https://refactoringguru.cn/replace-temp-with-query](https://refactoringguru.cn/replace-temp-with-query)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-temp-with-query](https://refactoringguru.cn/replace-temp-with-query)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You place the result of an expression in a local variable for later use in your
     code.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你将表达式的结果放入一个局部变量，以便在代码中后续使用。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Move the entire expression to a separate method and return the result from it.
     Query the method instead of using a variable. Incorporate the new method in other
     methods, if necessary.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将整个表达式移动到一个单独的方法中并返回结果。从方法中查询，而不是使用变量。如有必要，将新方法融入其他方法中。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: This refactoring can lay the groundwork for applying [Extract Method](/extract-method)
     for a portion of a very long method.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种重构可以为将[提取方法](/extract-method)应用于一个非常长的方法的一部分奠定基础。
 - en: The same expression may sometimes be found in other methods as well, which is
     one reason to consider creating a common method.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样的表达式有时也可能在其他方法中出现，这也是考虑创建公共方法的一个原因。
 - en: Benefits
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Code readability. It's much easier to understand the purpose of the method `getTax()`
     than the line `orderPrice() * 0.2`.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 代码可读性。理解方法`getTax()`的目的比理解`orderPrice() * 0.2`这行代码要容易得多。
 - en: Slimmer code via deduplication, if the line being replaced is used in multiple
     methods.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过去重实现更精简的代码，尤其是在被替换的行在多个方法中使用时。
 - en: Good to Know
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解一下
 - en: Performance
+  id: totrans-33
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 性能
 - en: 'This refactoring may prompt the question of whether this approach is liable
     to cause a performance hit. The honest answer is: yes, it is, since the resulting
     code may be burdened by querying a new method. But with today''s fast CPUs and
     excellent compilers, the burden will almost always be minimal. By contrast, readable
     code and the ability to reuse this method in other places in program code—thanks
     to this refactoring approach—are very noticeable benefits.'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种重构可能会引发这样一个问题：这种方法是否可能导致性能下降。诚实的回答是：是的，因为结果代码可能因查询新方法而受到影响。但在今天快速的CPU和优秀的编译器面前，这种负担几乎总是微不足道的。相比之下，可读代码和在程序代码的其他地方重用该方法的能力——得益于这种重构方法——是非常显著的好处。
 - en: Nonetheless, if your temp variable is used to cache the result of a truly time-consuming
     expression, you may want to stop this refactoring after extracting the expression
     to a new method.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，如果你的临时变量用于缓存一个真正耗时的表达式的结果，你可能想在将表达式提取到新方法后停止重构。
 - en: How to Refactor
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Make sure that a value is assigned to the variable once and only once within
     the method. If not, use [Split Temporary Variable](/split-temporary-variable)
     to ensure that the variable will be used only to store the result of your expression.
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 确保在方法中变量只被赋值一次。如果不是，请使用[拆分临时变量](/split-temporary-variable)以确保该变量仅用于存储表达式的结果。
 - en: Use [Extract Method](/extract-method) to place the expression of interest in
     a new method. Make sure that this method only returns a value and doesn't change
     the state of the object. If the method affects the visible state of the object,
     use [Separate Query from Modifier](/separate-query-from-modifier).
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用[提取方法](/extract-method)将感兴趣的表达式放入一个新方法中。确保该方法只返回一个值，并且不改变对象的状态。如果该方法影响对象的可见状态，请使用[将查询与修改分开](/separate-query-from-modifier)。
 - en: Replace the variable with a query to your new method.
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 用对新方法的查询替换变量。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 不足为奇，阅读我们这里所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更不乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们来看看…*](/refactoring/course)'
