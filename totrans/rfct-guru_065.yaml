@@ -1,129 +1,190 @@
 - en: Change Bidirectional Association to Unidirectional
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 将双向关联转换为单向关联
 - en: 原文：[https://refactoringguru.cn/change-bidirectional-association-to-unidirectional](https://refactoringguru.cn/change-bidirectional-association-to-unidirectional)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/change-bidirectional-association-to-unidirectional](https://refactoringguru.cn/change-bidirectional-association-to-unidirectional)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a bidirectional association between classes, but one of the classes
     doesn't use the other's features.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你在类之间有双向关联，但其中一个类不使用另一个的特性。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Remove the unused association.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 删除未使用的关联。
 - en: Before![Change Bidirectional Association to Unidirectional - Before](../Images/798cc372424c2131fa86cfbcb618d86c.png)After![Change
     Bidirectional Association to Unidirectional - After](../Images/0e008dd4ff7cbff40b3af99c0b584c66.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![将双向关联转换为单向关联 - 之前](../Images/798cc372424c2131fa86cfbcb618d86c.png)之后![将双向关联转换为单向关联
+    - 之后](../Images/0e008dd4ff7cbff40b3af99c0b584c66.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: A bidirectional association is generally harder to maintain than a unidirectional
     one, requiring additional code for properly creating and deleting the relevant
     objects. This makes the program more complicated.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 双向关联通常比单向关联更难维护，需要额外的代码来正确创建和删除相关对象。这使得程序变得更加复杂。
 - en: In addition, an improperly implemented bidirectional association can cause problems
     for garbage collection (in turn leading to memory bloat by unused objects).
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，实施不当的双向关联可能会导致垃圾收集问题（反过来会导致未使用对象的内存膨胀）。
 - en: 'Example: the garbage collector removes objects from memory that are no longer
     referenced by other objects. Let''s say that an object pair `User`-`Order` was
     created, used, and then abandoned. But these objects won''t be cleared from memory
     since they still refer to each other. That said, this problem is becoming less
     important thanks to advances in programming languages, which now automatically
     identify unused object references and remove them from memory.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例：垃圾收集器从内存中移除不再被其他对象引用的对象。假设创建了一对对象`User`-`Order`，使用后被遗弃。但这些对象不会从内存中清除，因为它们仍然互相引用。也就是说，随着编程语言的进步，这个问题变得不那么重要，现在语言会自动识别未使用的对象引用并将其从内存中移除。
 - en: There's also the problem of interdependency between classes. In a bidirectional
     association, the two classes must know about each other, meaning that they can't
     be used separately. If many of these associations are present, different parts
     of the program become too dependent on each other and any changes in one component
     may affect the other components.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有类之间的相互依赖问题。在双向关联中，两个类必须互相了解，这意味着它们不能单独使用。如果存在许多这样的关联，程序的不同部分变得过于相互依赖，任何一个组件的变化可能会影响其他组件。
 - en: Benefits
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Simplifies the class that doesn't need the relationship. Less code equals less
     code maintenance.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简化不需要该关系的类。更少的代码意味着更少的代码维护。
 - en: Reduces dependency between classes. Independent classes are easier to maintain
     since any changes to a class affect only that class.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 减少类之间的依赖。独立的类更容易维护，因为对一个类的任何更改只影响该类。
 - en: How to Refactor
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: 'Make sure that one of the following is true for your classes:'
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 确保以下条件之一对你的类成立：
 - en: No association is used.
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不使用任何关联。
 - en: There's another way to get the associated object, such through a database query.
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 还有另一种获取关联对象的方法，例如通过数据库查询。
 - en: The associated object can be passed as an argument to the methods that use it.
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 相关对象可以作为参数传递给使用它的方法。
 - en: Depending on your situation, use of a field that contains an association with
     another object should be replaced by a parameter or method call for getting the
     object in a different way.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 根据你的情况，包含与另一个对象关联的字段应该被替换为参数或方法调用，以不同的方式获取该对象。
 - en: Delete the code that assigns the associated object to the field.
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除将关联对象分配给字段的代码。
 - en: Delete the now-unused field.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除现在未使用的字段。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦了阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，这里所有文本的阅读时间达到7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。这提供了一种不那么枯燥的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

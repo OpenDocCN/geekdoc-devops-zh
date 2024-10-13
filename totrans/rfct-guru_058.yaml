@@ -1,160 +1,244 @@
 - en: Self Encapsulate Field
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 自我封装字段
 - en: 原文：[https://refactoringguru.cn/self-encapsulate-field](https://refactoringguru.cn/self-encapsulate-field)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/self-encapsulate-field](https://refactoringguru.cn/self-encapsulate-field)
 - en: 'Self-encapsulation is distinct from ordinary [Encapsulate Field](/encapsulate-field):
     the refactoring technique given here is performed on a private field.'
+  id: totrans-2
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 自我封装与普通的[封装字段](/encapsulate-field)不同：这里给出的重构技术是在私有字段上执行的。
 - en: Problem
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You use direct access to private fields inside a class.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 你在类内部直接访问私有字段。
 - en: Solution
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a getter and setter for the field, and use only them for accessing the
     field.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个字段的getter和setter，并仅使用它们来访问该字段。
 - en: Before
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Why Refactor
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Sometimes directly accessing a private field inside a class just isn't flexible
     enough. You want to be able to initiate a field value when the first query is
     made or perform certain operations on new values of the field when they're assigned,
     or maybe do all this in various ways in subclasses.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时直接在类内部访问私有字段根本不够灵活。你希望能够在首次查询时初始化字段值，或者在字段的新值分配时对其执行某些操作，或者在子类中以各种方式做到这一点。
 - en: Benefits
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 优势
 - en: '*Indirect access to fields* is when a field is acted on via access methods
     (getters and setters). This approach is much more flexible than *direct access
     to fields*.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*间接访问字段*是通过访问方法（getter和setter）对字段进行操作。这种方法比*直接访问字段*灵活得多。'
 - en: First, you can perform complex operations when data in the field is set or received.
     *Lazy initialization* and *validation of field values* are easily implemented
     inside field getters and setters.
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 首先，当字段中的数据被设置或接收时，你可以执行复杂的操作。*惰性初始化*和*字段值验证*可以很容易地在字段的getter和setter中实现。
 - en: Second and more crucially, you can redefine getters and setters in subclasses.
+  id: totrans-28
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第二，更重要的是，你可以在子类中重新定义getter和setter。
 - en: You have the option of not implementing a setter for a field at all. The field
     value will be specified only in the constructor, thus making the field unchangeable
     throughout the entire object lifespan.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以选择不为字段实现setter。字段值将仅在构造函数中指定，从而使字段在整个对象生命周期内不可更改。
 - en: Drawbacks
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: When *direct access to fields* is used, code looks simpler and more presentable,
     although flexibility is diminished.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当使用*直接访问字段*时，代码看起来更简单且更具表现力，尽管灵活性降低。
 - en: How to Refactor
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a getter (and optional setter) for the field. They should be either `protected`
     or `public`.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为该字段创建一个getter（和可选的setter）。它们应为`protected`或`public`。
 - en: Find all direct invocations of the field and replace them with getter and setter
     calls.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 查找所有对字段的直接调用，并将它们替换为getter和setter调用。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读腻了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

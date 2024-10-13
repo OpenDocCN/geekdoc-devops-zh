@@ -1,128 +1,189 @@
 - en: Replace Data Value with Object
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用对象替换数据值
 - en: 原文：[https://refactoringguru.cn/replace-data-value-with-object](https://refactoringguru.cn/replace-data-value-with-object)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-data-value-with-object](https://refactoringguru.cn/replace-data-value-with-object)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A class (or group of classes) contains a data field. The field has its own behavior
     and associated data.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个类（或一组类）包含一个数据字段。该字段有自己的行为和相关数据。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a new class, place the old field and its behavior in the class, and store
     the object of the class in the original class.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个新类，将旧字段及其行为放入该类中，并在原始类中存储该类的对象。
 - en: Before![Replace Data Value with Object - Before](../Images/e07e5a9791a58403b53f576bd3d78a04.png)After![Replace
     Data Value with Object - After](../Images/6287a1840499dabf38411a66a0eee24b.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![用对象替换数据值 - 之前](../Images/e07e5a9791a58403b53f576bd3d78a04.png)之后![用对象替换数据值
+    - 之后](../Images/6287a1840499dabf38411a66a0eee24b.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: This refactoring is basically a special case of [Extract Class](/extract-class).
     What makes it different is the cause of the refactoring.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种重构基本上是[提取类](/extract-class)的一个特例。不同之处在于重构的原因。
 - en: In [Extract Class](/extract-class), we have a single class that's responsible
     for different things and we want to split up its responsibilities.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[提取类](/extract-class)中，我们有一个负责不同事务的单一类，我们希望将其责任拆分开来。
 - en: With replacement of a data value with an object, we have a primitive field (number,
     string, etc.) that's no longer so simple due to growth of the program and now
     has associated data and behaviors. On the one hand, there's nothing scary about
     these fields in and of themselves. However, this fields-and-behaviors family can
     be present in several classes simultaneously, creating duplicate code.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 用对象替换数据值时，我们有一个原始字段（数字、字符串等），由于程序的发展，这些字段不再简单，现在有了相关的数据和行为。一方面，这些字段本身并不可怕。然而，这些字段和行为的组合可能在多个类中同时存在，造成重复代码。
 - en: Therefore, for all this we create a new class and move both the field and the
     related data and behaviors to it.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，为此我们创建一个新类，并将字段及相关的数据和行为转移到该类中。
 - en: Benefits
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Improves relatedness inside classes. Data and the relevant behaviors are inside
     a single class.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 改善类内部的关联性。数据和相关行为都在一个类内。
 - en: How to Refactor
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Before you begin with refactoring, see if there are direct references to the
     field from within the class. If so, use [Self Encapsulate Field](/self-encapsulate-field)
     in order to hide it in the original class.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始重构之前，查看是否有直接引用该字段的地方。如果有，请使用[自我封装字段](/self-encapsulate-field)将其隐藏在原始类中。
 - en: Create a new class and copy your field and relevant getter to it. In addition,
     create a constructor that accepts the simple value of the field. This class won't
     have a setter since each new field value that's sent to the original class will
     create a new value object.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个新类，并将字段及相关的getter复制到该类中。此外，创建一个接受字段简单值的构造函数。该类不会有setter，因为每次发送给原始类的新字段值都会创建一个新的值对象。
 - en: In the original class, change the field type to the new class.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在原始类中，将字段类型更改为新类。
 - en: In the getter in the original class, invoke the getter of the associated object.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在原始类的getter中，调用关联对象的getter。
 - en: In the setter, create a new value object. You may need to also create a new
     object in the constructor if initial values had been set there for the field previously.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在setter中，创建一个新的值对象。如果之前在构造函数中为字段设置了初始值，可能还需要在构造函数中创建一个新对象。
 - en: Next Steps
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 下一步
 - en: After applying this refactoring technique, it's wise to apply [Change Value
     to Reference](/change-value-to-reference) on the field that contains the object.
     This allows storing a reference to a single object that corresponds to a value
     instead of storing dozens of objects for one and the same value.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 应用这种重构技术后，明智的做法是在包含对象的字段上应用[将值更改为引用](/change-value-to-reference)。这允许存储一个与值对应的单一对象的引用，而不是为同一个值存储多个对象。
 - en: Most often this approach is needed when you want to have one object be responsible
     for one real-world object (such as users, orders, documents and so forth). At
     the same time, this approach won't be useful for objects such as dates, money,
     ranges, etc.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，当你希望一个对象负责一个现实世界的对象（如用户、订单、文档等）时，需要采用这种方法。同时，这种方法对日期、金钱、范围等对象并不实用。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，我们这里的所有文本阅读需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*我们来看看…*](/refactoring/course)'

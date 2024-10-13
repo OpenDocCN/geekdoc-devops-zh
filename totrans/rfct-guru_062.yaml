@@ -1,169 +1,261 @@
 - en: Replace Array with Object
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用对象替换数组
 - en: 原文：[https://refactoringguru.cn/replace-array-with-object](https://refactoringguru.cn/replace-array-with-object)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/replace-array-with-object](https://refactoringguru.cn/replace-array-with-object)
 - en: This refactoring technique is a special case of [Replace Data Value with Object](/replace-data-value-with-object).
+  id: totrans-2
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这种重构技术是[用对象替换数据值](/replace-data-value-with-object)的特殊情况。
 - en: Problem
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have an array that contains various types of data.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有一个包含各种数据类型的数组。
 - en: Solution
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Replace the array with an object that will have separate fields for each element.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 用一个将为每个元素拥有单独字段的对象替换数组。
 - en: Before
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Arrays are an excellent tool for storing data and collections of a single type.
     But if you use an array like post office boxes, storing the username in box 1
     and the user's address in box 14, you will someday be very unhappy that you did.
     This approach leads to catastrophic failures when somebody puts something in the
     wrong "box" and also requires your time for figuring out which data is stored
     where.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 数组是存储数据和单一类型集合的绝佳工具。但如果你像使用邮政箱一样使用数组，把用户名存储在箱子1中，把用户地址存储在箱子14中，总有一天你会对此感到非常不满。这种方法会导致灾难性的失败，当有人把东西放入错误的“箱子”时，还需要花时间弄清楚哪个数据存储在哪里。
 - en: Benefits
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: In the resulting class, you can place all associated behaviors that had been
     previously stored in the main class or elsewhere.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在结果类中，你可以放置之前存储在主类或其他地方的所有相关行为。
 - en: The fields of a class are much easier to document than the elements of an array.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个类的字段比数组的元素更容易文档化。
 - en: How to Refactor
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create the new class that will contain the data from the array. Place the array
     itself in the class as a public field.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个新类来包含数组中的数据。将数组本身作为公共字段放入类中。
 - en: Create a field for storing the object of this class in the original class. Don't
     forget to also create the object itself in the place where you initiated the data
     array.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在原始类中创建一个字段来存储该类的对象。不要忘记在你初始化数据数组的地方也创建该对象。
 - en: In the new class, create access methods one by one for each of the array elements.
     Give them self-explanatory names that indicate what they do. At the same time,
     replace each use of an array element in the main code with the corresponding access
     method.
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在新类中，为每个数组元素逐一创建访问方法。给它们起自解释的名称，表明它们的功能。同时，将主代码中对数组元素的每次使用替换为相应的访问方法。
 - en: When access methods have been created for all elements, make the array private.
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当所有元素的访问方法都创建完成后，使数组变为私有。
 - en: For each element of the array, create a private field in the class and then
     change the access methods so that they use this field instead of the array.
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于数组的每个元素，在类中创建一个私有字段，然后更改访问方法以便使用这个字段而不是数组。
 - en: When all data has been moved, delete the array.
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当所有数据被移动后，删除数组。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦了阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪阅读这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

@@ -1,113 +1,168 @@
 - en: Change Unidirectional Association to Bidirectional
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 将单向关联更改为双向
 - en: 原文：[https://refactoringguru.cn/change-unidirectional-association-to-bidirectional](https://refactoringguru.cn/change-unidirectional-association-to-bidirectional)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/change-unidirectional-association-to-bidirectional](https://refactoringguru.cn/change-unidirectional-association-to-bidirectional)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have two classes that each need to use the features of the other, but the
     association between them is only unidirectional.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有两个类需要使用对方的特性，但它们之间的关联仅是单向的。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Add the missing association to the class that needs it.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将缺失的关联添加到需要它的类中。
 - en: Before![Change Unidirectional Association to Bidirectional - Before](../Images/6e69410d2c835f4e8f519d3f76483180.png)After![Change
     Unidirectional Association to Bidirectional - After](../Images/6e7ed019a16535771af065641470eec8.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[将单向关联更改为双向 - 之前](../Images/6e69410d2c835f4e8f519d3f76483180.png)之后！[将单向关联更改为双向
+    - 之后](../Images/6e7ed019a16535771af065641470eec8.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: Originally the classes had a unidirectional association. But with time, client
     code needed access to both sides of the association.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 最初这些类有单向关联。但随着时间的推移，客户端代码需要访问关联的两侧。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: If a class needs a reverse association, you can simply calculate it. But if
     these calculations are complex, it's better to keep the reverse association.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果一个类需要反向关联，你可以简单地计算它。但如果这些计算很复杂，最好保留反向关联。
 - en: Drawbacks
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: Bidirectional associations are much harder to implement and maintain than unidirectional
     ones.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 双向关联比单向关联更难实现和维护。
 - en: Bidirectional associations make classes interdependent. With a unidirectional
     association, one of them can be used independently of the other.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 双向关联使类相互依赖。使用单向关联时，其中一个可以独立于另一个使用。
 - en: How to Refactor
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Add a field for holding the reverse association.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 添加一个用于保存反向关联的字段。
 - en: Decide which class will be "dominant". This class will contain the methods that
     create or update the association as elements are added or changed, establishing
     the association in its class and calling the utility methods for establishing
     the association in the associated object.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 决定哪个类将是“主导”。这个类将包含创建或更新关联的方法，随着元素的添加或更改，建立类中的关联，并调用建立关联的工具方法。
 - en: Create a utility method for establishing the association in the "non-dominant"
     class. The method should use what it's given in parameters to complete the field.
     Give the method an obvious name so that it isn't used later for any other purposes.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为“非主导”类创建一个建立关联的工具方法。该方法应使用参数中给定的内容来完成字段。给该方法一个明显的名称，以便之后不会用于其他目的。
 - en: If old methods for controlling the unidirectional association were in the "dominant"
     class, complement them with calls to utility methods from the associated object.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果控制单向关联的旧方法在“主导”类中，请用来自关联对象的工具方法补充这些方法。
 - en: If the old methods for controlling the association were in the "non-dominant"
     class, create the methods in the "dominant" class, call them, and delegate execution
     to them.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果控制关联的旧方法在“非主导”类中，请在“主导”类中创建这些方法，调用它们并将执行委托给它们。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读腻了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

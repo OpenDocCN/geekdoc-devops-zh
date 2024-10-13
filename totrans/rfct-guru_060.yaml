@@ -1,118 +1,175 @@
 - en: Change Value to Reference
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 将值更改为引用
 - en: 原文：[https://refactoringguru.cn/change-value-to-reference](https://refactoringguru.cn/change-value-to-reference)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/change-value-to-reference](https://refactoringguru.cn/change-value-to-reference)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: So you have many identical instances of a single class that you need to replace
     with a single object.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以你有很多相同实例的单一类，需要用一个对象来替换。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Convert the identical objects to a single reference object.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将相同的对象转换为一个单一的引用对象。
 - en: Before![Change Value to Reference - Before](../Images/babb47ba3a04f231bd232dea19333dfb.png)After![Change
     Value to Reference - After](../Images/4a912d8cc3dfe96d547f269e9dad3bff.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前！[将值更改为引用 - 之前](../Images/babb47ba3a04f231bd232dea19333dfb.png)之后！[将值更改为引用
+    - 之后](../Images/4a912d8cc3dfe96d547f269e9dad3bff.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: In many systems, objects can be classified as either values or references.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在许多系统中，对象可以被分类为值或引用。
 - en: '**References**: when one real-world object corresponds to only one object in
     the program. References are usually user/order/product/etc. objects.'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**引用**：当一个现实世界的对象只对应程序中的一个对象时。引用通常是用户/订单/产品等对象。'
 - en: '**Values**: one real-world object corresponds to multiple objects in the program.
     These objects could be dates, phone numbers, addresses, colors, and the like.'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**值**：一个现实世界的对象对应程序中的多个对象。这些对象可以是日期、电话号码、地址、颜色等。'
 - en: The selection of reference vs. value isn't always clear-cut. Sometimes there's
     a simple value with a small amount of unchanging data. Then it becomes necessary
     to add changeable data and pass these changes every time the object is accessed.
     In this case it becomes necessary to convert it to a reference.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 引用与值的选择并不总是明确的。有时有一个简单的值，包含少量不变的数据。然后就需要添加可变数据，并在每次访问对象时传递这些更改。在这种情况下，就需要将其转换为引用。
 - en: Benefits
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: An object contains all the most current information about a particular entity.
     If the object is changed in one part of the program, these changes are accessible
     from the other parts of the program that make use of the object.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个对象包含有关特定实体的所有最新信息。如果程序中的一个部分更改了该对象，这些更改可以从使用该对象的程序的其他部分访问。
 - en: Drawbacks
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: References are much harder to implement.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 引用的实现要复杂得多。
 - en: How to Refactor
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Use [Replace Constructor with Factory Method](/replace-constructor-with-factory-method)
     on the class from which the references are to be generated.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在生成引用的类上使用[用工厂方法替换构造函数](/replace-constructor-with-factory-method)。
 - en: Determine which object will be responsible for providing access to references.
     Instead of creating a new object, when you need one you now need to get it from
     a storage object or static dictionary field.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 确定哪个对象将负责提供对引用的访问。你不再需要创建一个新对象，而是需要从存储对象或静态字典字段中获取它。
 - en: Determine whether references will be created in advance or dynamically as necessary.
     If objects are created in advance, make sure to load them before use.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 确定引用是提前创建还是根据需要动态创建。如果对象是提前创建的，请确保在使用之前加载它们。
 - en: Change the factory method so that it returns a reference. If objects are created
     in advance, decide how to handle errors when a non-existent object is requested.
     You may also need to use [Rename Method](/rename-method) to inform that the method
     returns only existing objects.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 更改工厂方法，使其返回一个引用。如果对象是提前创建的，请决定在请求不存在的对象时如何处理错误。你可能还需要使用[重命名方法](/rename-method)来通知该方法仅返回现有对象。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

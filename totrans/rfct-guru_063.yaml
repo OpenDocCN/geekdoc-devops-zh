@@ -1,154 +1,221 @@
 - en: Duplicate Observed Data
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 重复观察到的数据
 - en: 原文：[https://refactoringguru.cn/duplicate-observed-data](https://refactoringguru.cn/duplicate-observed-data)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/duplicate-observed-data](https://refactoringguru.cn/duplicate-observed-data)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: Is domain data stored in classes responsible for the GUI?
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 域数据是否存储在负责GUI的类中？
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Then it's a good idea to separate the data into separate classes, ensuring connection
     and synchronization between the domain class and the GUI.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，将数据分离到不同的类中是个好主意，以确保域类和GUI之间的连接和同步。
 - en: Before![Duplicate Observed Data - Before](../Images/d474b659b984c093e310fcc415160b12.png)After![Duplicate
     Observed Data - After](../Images/e4d42f7bc1219ac9900b28e6908ee2eb.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 前！[重复观察到的数据 - 前](../Images/d474b659b984c093e310fcc415160b12.png)后！[重复观察到的数据
+    - 后](../Images/e4d42f7bc1219ac9900b28e6908ee2eb.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: You want to have multiple interface views for the same data (for example, you
     have both a desktop app and a mobile app). If you fail to separate the GUI from
     the domain, you will have a very hard time avoiding code duplication and a large
     number of mistakes.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 你想要为相同的数据提供多个接口视图（例如，你同时有桌面应用和移动应用）。如果未能将GUI与域分离，你将很难避免代码重复和大量错误。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: You split responsibility between business logic classes and presentation classes
     (cf. the *Single Responsibility Principle*), which makes your program more readable
     and understandable.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你将责任分配给业务逻辑类和表示类（参见*单一职责原则*），这使你的程序更具可读性和可理解性。
 - en: If you need to add a new interface view, create new presentation classes; you
     don't need to touch the code of the business logic (cf. the *Open/Closed Principle*).
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果需要添加新的接口视图，创建新的表示类；你不需要触碰业务逻辑的代码（参见*开闭原则*）。
 - en: Now different people can work on the business logic and the user interfaces.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现在不同的人可以同时处理业务逻辑和用户界面。
 - en: When Not to Use
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时不使用
 - en: This refactoring technique, which in its classic form is performed using the
     [Observer](/design-patterns/observer) template, isn't applicable for web apps,
     where all classes are recreated between queries to the web server.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这种重构技术在其经典形式中使用[观察者](/design-patterns/observer)模板进行，但不适用于网页应用程序，因为所有类在对网页服务器的查询之间都会被重建。
 - en: All the same, the general principle of extracting business logic into separate
     classes can be justified for web apps as well. But this will be implemented using
     different refactoring techniques depending on how your system is designed.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尽管如此，将业务逻辑提取到单独类中的一般原则对于网页应用也是合理的。但这将根据你的系统设计采用不同的重构技术来实现。
 - en: How to Refactor
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Hide direct access to domain data in the *GUI class*. For this, it's best to
     use [Self Encapsulate Field](/self-encapsulate-field). So you create the getters
     and setters for this data.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在*GUI类*中隐藏对域数据的直接访问。为此，最好使用[自我封装字段](/self-encapsulate-field)。因此，你需要为这些数据创建获取器和设置器。
 - en: In handlers for *GUI class* events, use setters to set new field values. This
     will let you pass these values to the associated *domain object*.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在*GUI类*事件的处理程序中，使用设置器来设置新字段值。这将使你能够将这些值传递给相关的*域对象*。
 - en: Create a domain class and copy necessary fields from the *GUI class* to it.
     Create getters and seters for all these fields.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个域类，并将*GUI类*中的必要字段复制到其中。为所有这些字段创建获取器和设置器。
 - en: 'Create an Observer pattern for these two classes:'
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为这两个类创建一个观察者模式：
 - en: In the *domain class*, create an array for storing observer objects (*GUI objects*),
     as well as methods for registering, deleting and notifying them.
+  id: totrans-21
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在*域类*中，创建一个用于存储观察者对象（*GUI对象*）的数组，以及注册、删除和通知它们的方法。
 - en: In the *GUI class*, create a field for storing references to the *domain class*
     as well as the `update()` method, which will be reacting to changes in the object
     and update the values of fields in the *GUI class*. Note that value updates should
     be established directly in the method, in order to avoid recursion.
+  id: totrans-22
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在*GUI类*中，创建一个用于存储对*域类*的引用的字段，以及`update()`方法，该方法将响应对象的变化并更新*GUI类*中的字段值。请注意，值的更新应直接在方法中进行，以避免递归。
 - en: In the *GUI class* constructor, create an instance of *domain class* and save
     it in the field you have created. Register the *GUI object* as an observer in
     the *domain object*.
+  id: totrans-23
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在*GUI类*构造函数中，创建一个*域类*的实例并将其保存在你创建的字段中。将*GUI对象*注册为*域对象*的观察者。
 - en: In the setters for *domain class* fields, call the method for notifying the
     observer (in other words, method for updating in the *GUI class*), in order to
     pass the new values to the GUI.
+  id: totrans-24
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在*领域类*字段的setter中，调用通知观察者的方法（换句话说，在*GUI类*中的更新方法），以便将新值传递给GUI。
 - en: Change the setters of the *GUI class* fields so that they set new values in
     the domain object directly. Watch out to make sure that values aren't set through
     a *domain class* setter—otherwise infinite recursion will result.
+  id: totrans-25
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修改*GUI类*字段的setter，以便它们直接在领域对象中设置新值。注意确保值不是通过*领域类*的setter设置的——否则将导致无限递归。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

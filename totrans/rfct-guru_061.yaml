@@ -1,119 +1,178 @@
 - en: Change Reference to Value
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 将引用更改为值
 - en: 原文：[https://refactoringguru.cn/change-reference-to-value](https://refactoringguru.cn/change-reference-to-value)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/change-reference-to-value](https://refactoringguru.cn/change-reference-to-value)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: You have a reference object that's too small and infrequently changed to justify
     managing its life cycle.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有一个引用对象，它太小且不常更改，以至于无法合理管理其生命周期。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Turn it into a value object.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将其转化为值对象。
 - en: Before![Change Reference to Value - Before](../Images/e7906b084feeb396f2cd25ed48d33cb9.png)After![Change
     Reference to Value - After](../Images/5911d31e184e3a40c69041add44067fc.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![将引用更改为值 - 之前](../Images/e7906b084feeb396f2cd25ed48d33cb9.png)之后![将引用更改为值
+    - 之后](../Images/5911d31e184e3a40c69041add44067fc.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: 'Inspiration to switch from a reference to a value may come from the inconvenience
     of working with the reference. References require management on your part:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 从引用切换到值的灵感可能来源于使用引用时的不便。引用需要你进行管理：
 - en: They always require requesting the necessary object from storage.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它们总是需要请求存储中的必要对象。
 - en: References in memory may be inconvenient to work with.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 内存中的引用可能不方便使用。
 - en: Working with references is particularly difficult, compared to values, on distributed
     and parallel systems.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与值相比，在分布式和并行系统中处理引用特别困难。
 - en: Values are especially useful if you would rather have unchangeable objects than
     objects whose state may change during their lifetime.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你更希望有不可更改的对象，而不是其状态可能在其生命周期内发生变化的对象，值尤其有用。
 - en: Benefits
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: One important property of objects is that they should be unchangeable. The same
     result should be received for each query that returns an object value. If this
     is true, no problems arise if there are many objects representing the same thing.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对象的一个重要属性是它们应该是不可更改的。对于返回对象值的每个查询，应获得相同的结果。如果这一点成立，那么即使有多个对象表示相同的事物，也不会出现问题。
 - en: Values are much easier to implement.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 值的实现要简单得多。
 - en: Drawbacks
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: If a value is changeable, make sure if any object changes that the values in
     all the other objects representing the same entity are updated. This is so burdensome
     that it's easier to create a reference for this purpose.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果一个值是可更改的，请确保如果任何对象发生变化，所有表示同一实体的其他对象中的值也会更新。这是如此繁琐，以至于为此目的创建一个引用更为简单。
 - en: How to Refactor
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Make the object unchangeable. The object shouldn't have any setters or other
     methods that change its state and data ([Remove Setting Method](/remove-setting-method)
     may help here). The only place where data should be assigned to the fields of
     a value object is a constructor.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使对象不可更改。对象不应该有任何设置器或其他改变其状态和数据的方法（[移除设置方法](/remove-setting-method)在这里可能会有帮助）。数据赋值给值对象字段的唯一地方是构造函数。
 - en: Create a comparison method to be able to compare two values.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个比较方法，以便能够比较两个值。
 - en: Check whether you can delete the factory method and make the object constructor
     public.
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 检查你是否可以删除工厂方法并将对象构造函数设为公共。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'
