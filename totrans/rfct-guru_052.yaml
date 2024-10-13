@@ -1,94 +1,140 @@
 - en: Inline Class
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 内联类
 - en: 原文：[https://refactoringguru.cn/inline-class](https://refactoringguru.cn/inline-class)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/inline-class](https://refactoringguru.cn/inline-class)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A class does almost nothing and isn't responsible for anything, and no additional
     responsibilities are planned for it.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个类几乎没有做任何事情，也没有负责任何事情，且没有计划额外的职责。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Move all features from the class to another one.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将所有特性从一个类移动到另一个类。
 - en: Before![Inline Class - Before](../Images/4695a712409087882747ed595c25ab2b.png)After![Inline
     Class - After](../Images/177c42679c4e44ffaa27aafeea1037d2.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![内联类 - 之前](../Images/4695a712409087882747ed595c25ab2b.png)之后![内联类 - 之后](../Images/177c42679c4e44ffaa27aafeea1037d2.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: Often this technique is needed after the features of one class are "transplanted"
     to other classes, leaving that class with little to do.
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通常在一个类的特性被“移植”到其他类后，这种技术是必要的，这样原来的类几乎无事可做。
 - en: Benefits
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Eliminating needless classes frees up operating memory on the computer—and bandwidth
     in your head.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 消除不必要的类可以释放计算机的操作内存——以及你头脑中的带宽。
 - en: How to Refactor
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: In the recipient class, create the public fields and methods present in the
     donor class. Methods should refer to the equivalent methods of the donor class.
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在接收类中，创建捐赠类中存在的公共字段和方法。方法应引用捐赠类的等效方法。
 - en: Replace all references to the donor class with references to the fields and
     methods of the recipient class.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将所有对捐赠类的引用替换为对接收类的字段和方法的引用。
 - en: Now test the program and make sure that no errors have been added. If tests
     show that everything is working A-OK, start using [Move Method](/move-method)
     and [Move Field](/move-field) to completely transplant all functionality to the
     recipient class from the original one. Continue doing so until the original class
     is completely empty.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 现在测试程序，确保没有添加错误。如果测试显示一切正常，开始使用[移动方法](/move-method)和[移动字段](/move-field)将所有功能完全移植到接收类。继续进行，直到原始类完全为空。
 - en: Delete the original class.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除原始类。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读得累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读这里的所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

@@ -1,173 +1,271 @@
 - en: Organizing Data
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 组织数据
 - en: 原文：[https://refactoringguru.cn/refactoring/techniques/organizing-data](https://refactoringguru.cn/refactoring/techniques/organizing-data)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/refactoring/techniques/organizing-data](https://refactoringguru.cn/refactoring/techniques/organizing-data)
 - en: These refactoring techniques help with data handling, replacing primitives with
     rich class functionality.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些重构技术有助于数据处理，用丰富的类功能替换原始类型。
 - en: Another important result is untangling of class associations, which makes classes
     more portable and reusable.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个重要结果是理顺类之间的关联，使类更加可移植和可重用。
 - en: '[Self Encapsulate Field](/self-encapsulate-field)'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '[自我封装字段](/self-encapsulate-field)'
 - en: '**Problem:** You use direct access to private fields inside a class.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你直接访问类内部的私有字段。'
 - en: '**Solution:** Create a getter and setter for the field, and use only them for
     accessing the field.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 为字段创建一个 getter 和 setter，仅通过它们访问字段。'
 - en: '[Replace Data Value with Object](/replace-data-value-with-object)'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '[用对象替换数据值](/replace-data-value-with-object)'
 - en: '**Problem:** A class (or group of classes) contains a data field. The field
     has its own behavior and associated data.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个类（或一组类）包含一个数据字段。该字段具有自己的行为和相关数据。'
 - en: '**Solution:** Create a new class, place the old field and its behavior in the
     class, and store the object of the class in the original class.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 创建一个新类，将旧字段及其行为放入该类中，并在原始类中存储该类的对象。'
 - en: '[Change Value to Reference](/change-value-to-reference)'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '[将值更改为引用](/change-value-to-reference)'
 - en: '**Problem:** So you have many identical instances of a single class that you
     need to replace with a single object.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 所以你有许多相同实例的单一类，需要用一个对象替换它们。'
 - en: '**Solution:** Convert the identical objects to a single reference object.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将相同的对象转换为单个引用对象。'
 - en: '[Change Reference to Value](/change-reference-to-value)'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '[将引用更改为值](/change-reference-to-value)'
 - en: '**Problem:** You have a reference object that''s too small and infrequently
     changed to justify managing its life cycle.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有一个引用对象，它太小且不常改变，以至于不值得管理其生命周期。'
 - en: '**Solution:** Turn it into a value object.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将其转换为值对象。'
 - en: '[Replace Array with Object](/replace-array-with-object)'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[用对象替换数组](/replace-array-with-object)'
 - en: '**Problem:** You have an array that contains various types of data.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有一个包含各种类型数据的数组。'
 - en: '**Solution:** Replace the array with an object that will have separate fields
     for each element.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 用一个对象替换数组，该对象将为每个元素具有单独的字段。'
 - en: '[Duplicate Observed Data](/duplicate-observed-data)'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[重复观察数据](/duplicate-observed-data)'
 - en: '**Problem:** Is domain data stored in classes responsible for the GUI?'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 域数据是否存储在负责 GUI 的类中？'
 - en: '**Solution:** Then it''s a good idea to separate the data into separate classes,
     ensuring connection and synchronization between the domain class and the GUI.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将数据分离到不同的类中，确保领域类与 GUI 之间的连接和同步是个好主意。'
 - en: '[Change Unidirectional Association to Bidirectional](/change-unidirectional-association-to-bidirectional)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[将单向关联更改为双向](/change-unidirectional-association-to-bidirectional)'
 - en: '**Problem:** You have two classes that each need to use the features of the
     other, but the association between them is only unidirectional.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有两个类，它们各自需要使用对方的功能，但它们之间的关联仅是单向的。'
 - en: '**Solution:** Add the missing association to the class that needs it.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将缺失的关联添加到需要它的类中。'
 - en: '[Change Bidirectional Association to Unidirectional](/change-bidirectional-association-to-unidirectional)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[将双向关联更改为单向](/change-bidirectional-association-to-unidirectional)'
 - en: '**Problem:** You have a bidirectional association between classes, but one
     of the classes doesn''t use the other''s features.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有两个类之间的双向关联，但其中一个类并不使用另一个的功能。'
 - en: '**Solution:** Remove the unused association.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 删除未使用的关联。'
 - en: '[Replace Magic Number with Symbolic Constant](/replace-magic-number-with-symbolic-constant)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[用符号常量替换魔法数字](/replace-magic-number-with-symbolic-constant)'
 - en: '**Problem:** Your code uses a number that has a certain meaning to it.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你的代码使用一个有特定含义的数字。'
 - en: '**Solution:** Replace this number with a constant that has a human-readable
     name explaining the meaning of the number.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 用一个具有可读名称的常量替换这个数字，以解释数字的含义。'
 - en: '[Encapsulate Field](/encapsulate-field)'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '[封装字段](/encapsulate-field)'
 - en: '**Problem:** You have a public field.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有一个公共字段。'
 - en: '**Solution:** Make the field private and create access methods for it.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 将字段设为私有并为其创建访问方法。'
 - en: '[Encapsulate Collection](/encapsulate-collection)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '[封装集合](/encapsulate-collection)'
 - en: '**Problem:** A class contains a collection field and a simple getter and setter
     for working with the collection.'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个类包含一个集合字段，并有简单的getter和setter用于操作该集合。'
 - en: '**Solution:** Make the getter-returned value read-only and create methods for
     adding/deleting elements of the collection.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 使getter返回的值为只读，并创建用于添加/删除集合元素的方法。'
 - en: '[Replace Type Code with Class](/replace-type-code-with-class)'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[用类替换类型代码](/replace-type-code-with-class)'
 - en: '**Problem:** A class has a field that contains type code. The values of this
     type aren''t used in operator conditions and don''t affect the behavior of the
     program.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 一个类有一个包含类型代码的字段。此类型的值未在操作条件中使用，并且不会影响程序的行为。'
 - en: '**Solution:** Create a new class and use its objects instead of the type code
     values.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 创建一个新类，使用其对象代替类型代码值。'
 - en: '[Replace Type Code with Subclasses](/replace-type-code-with-subclasses)'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '[用子类替换类型代码](/replace-type-code-with-subclasses)'
 - en: '**Problem:** You have a coded type that directly affects program behavior (values
     of this field trigger various code in conditionals).'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有一个编码类型直接影响程序行为（此字段的值在条件中触发各种代码）。'
 - en: '**Solution:** Create subclasses for each value of the coded type. Then extract
     the relevant behaviors from the original class to these subclasses. Replace the
     control flow code with polymorphism.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 为编码类型的每个值创建子类。然后将相关行为从原始类提取到这些子类中。用多态替换控制流代码。'
 - en: '[Replace Type Code with State/Strategy](/replace-type-code-with-state-strategy)'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '[用状态/策略替换类型代码](/replace-type-code-with-state-strategy)'
 - en: '**Problem:** You have a coded type that affects behavior but you can''t use
     subclasses to get rid of it.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有一个编码类型影响行为，但你无法使用子类来摆脱它。'
 - en: '**Solution:** Replace type code with a state object. If it''s necessary to
     replace a field value with type code, another state object is "plugged in".'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 用状态对象替换类型代码。如果需要用类型代码替换字段值，则“插入”另一个状态对象。'
 - en: '[Replace Subclass with Fields](/replace-subclass-with-fields)'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[用字段替换子类](/replace-subclass-with-fields)'
 - en: '**Problem:** You have subclasses differing only in their (constant-returning)
     methods.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**问题：** 你有子类仅在其（常量返回）方法上有所不同。'
 - en: '**Solution:** Replace the methods with fields in the parent class and delete
     the subclasses.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案：** 用父类中的字段替换方法，并删除子类。'

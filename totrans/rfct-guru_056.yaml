@@ -1,127 +1,183 @@
 - en: Introduce Local Extension
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 引入本地扩展
 - en: 原文：[https://refactoringguru.cn/introduce-local-extension](https://refactoringguru.cn/introduce-local-extension)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/introduce-local-extension](https://refactoringguru.cn/introduce-local-extension)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A utility class doesn't contain some methods that you need. But you can't add
     these methods to the class.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个工具类不包含你需要的一些方法。但你无法将这些方法添加到类中。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a new class containing the methods and make it either the child or wrapper
     of the utility class.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个包含方法的新类，并使其成为工具类的子类或包装类。
 - en: Before![Introduce Local Extension - Before](../Images/5174e7d68cffb107712c086094635e3f.png)After![Introduce
     Local Extension - After](../Images/58ac66e2c1e86cdf9d6eb9ff334742ef.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 前![引入本地扩展 - 前](../Images/5174e7d68cffb107712c086094635e3f.png)后![引入本地扩展 - 后](../Images/58ac66e2c1e86cdf9d6eb9ff334742ef.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: 'The class that you''re using doesn''t have the methods that you need. What''s
     worse, you can''t add these methods (because the classes are in a third-party
     library, for example). There are two ways out:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 你正在使用的类没有你需要的方法。更糟糕的是，你无法添加这些方法（例如，因为这些类在第三方库中）。有两种解决方案：
 - en: Create a **subclass** from the relevant class, containing the methods and inheriting
     everything else from the parent class. This way is easier but is sometimes blocked
     by the utility class itself (due to `final`).
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从相关类创建一个**子类**，包含方法并从父类继承其他一切。这样更简单，但有时会受到工具类本身的阻碍（由于`final`）。
 - en: Create a **wrapper** class that contains all the new methods and elsewhere will
     delegate to the related object from the utility class. This method is more work
     since you need not only code to maintain the relationship between the wrapper
     and utility object, but also a large number of simple delegating methods in order
     to emulate the public interface of the utility class.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个**包装类**，包含所有新方法，并在其他地方委托给工具类的相关对象。此方法工作量较大，因为你不仅需要代码来维护包装器与工具对象之间的关系，还需要大量简单的委托方法，以模拟工具类的公共接口。
 - en: Benefits
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: By moving additional methods to a separate extension class (wrapper or subclass),
     you avoid gumming up client classes with code that doesn't fit. Program components
     are more coherent and are more reusable.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过将附加方法移到单独的扩展类（包装类或子类）中，可以避免使客户端类充满不合适的代码。程序组件更加连贯，也更易于重用。
 - en: How to Refactor
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: 'Create a new extension class:'
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个新的扩展类：
 - en: 'Option A: Make it a child of the utility class.'
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 选项A：使其成为工具类的子类。
 - en: 'Option B: If you have decided to make a wrapper, create a field in it for storing
     the utility class object to which delegation will be made. When using this option,
     you will need to also create methods that repeat the public methods of the utility
     class and contain simple delegation to the methods of the utility object.'
+  id: totrans-16
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 选项B：如果你决定创建一个包装器，请在其中创建一个字段以存储将进行委托的工具类对象。使用此选项时，你还需要创建重复工具类公共方法的简单委托方法。
 - en: Create a constructor that uses the parameters of the constructor of the utility
     class.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个构造函数，使用工具类构造函数的参数。
 - en: Also create an alternative "converting" constructor that takes only the object
     of the original class in its parameters. This will help to substitute the extension
     for the objects of the original class.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 还可以创建一个替代的“转换”构造函数，仅将原始类的对象作为参数。这将帮助将扩展替代原始类的对象。
 - en: Create new extended methods in the class. Move foreign methods from other classes
     to this class or else delete the foreign methods if their functionality is already
     present in the extension.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在类中创建新的扩展方法。将其他类的外部方法移动到此类中，或者如果其功能已在扩展中存在，则删除外部方法。
 - en: Replace use of the utility class with the new extension class in places where
     its functionality is needed.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在需要其功能的地方，用新的扩展类替换对工具类的使用。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

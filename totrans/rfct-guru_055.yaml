@@ -1,176 +1,268 @@
 - en: Introduce Foreign Method
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 引入外部方法
 - en: 原文：[https://refactoringguru.cn/introduce-foreign-method](https://refactoringguru.cn/introduce-foreign-method)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/introduce-foreign-method](https://refactoringguru.cn/introduce-foreign-method)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A utility class doesn't contain the method that you need and you can't add the
     method to the class.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 实用类不包含你需要的方法，你不能将方法添加到该类中。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Add the method to a client class and pass an object of the utility class to
     it as an argument.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将方法添加到客户端类中，并将实用类的对象作为参数传递给它。
 - en: Before
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Before
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: After
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE5]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Before
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE6]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE7]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前
 - en: '[PRE8]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: After
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后
 - en: '[PRE9]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Why Refactor
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: You have code that uses the data and methods of a certain class. You realize
     that the code will look and work much better inside a new method in the class.
     But you can't add the method to the class because, for example, the class is located
     in a third-party library.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 你有代码使用某个类的数据和方法。你意识到代码在该类的新方法中看起来和工作得会更好。但你无法将方法添加到类中，因为，例如，该类位于第三方库中。
 - en: This refactoring has a big payoff when the code that you want to move to the
     method is repeated several times in different places in your program.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你想将代码移到方法中时，如果代码在程序的不同地方重复多次，这种重构会带来很大的回报。
 - en: Since you're passing an object of the utility class to the parameters of the
     new method, you have access to all of its fields. Inside the method, you can do
     practically everything that you want, as if the method were part of the utility
     class.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于你将实用类的对象传递给新方法的参数，你可以访问其所有字段。在方法内部，你可以做几乎所有你想做的事情，就像该方法是实用类的一部分一样。
 - en: Benefits
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 好处
 - en: Removes code duplication. If your code is repeated in several places, you can
     replace these code fragments with a method call. This is better than duplication
     even considering that the foreign method is located in a suboptimal place.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 消除代码重复。如果你的代码在多个地方重复，可以用方法调用替换这些代码片段。即使考虑到外部方法位于次优位置，这种做法也优于重复。
 - en: Drawbacks
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: The reasons for having the method of a utility class in a client class won't
     always be clear to the person maintaining the code after you. If the method can
     be used in other classes, you could benefit by creating a wrapper for the utility
     class and placing the method there. This is also beneficial when there are several
     such utility methods. [Introduce Local Extension](/introduce-local-extension)
     can help with this.
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在客户端类中有实用类的方法并不总是对维护代码的人来说是清晰的。如果该方法可以在其他类中使用，你可以通过为实用类创建一个包装器并将方法放在那里来获益。当有多个这样的实用方法时，这也会很有帮助。[引入本地扩展](/introduce-local-extension)可以帮助解决这个问题。
 - en: How to Refactor
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a new method in the client class.
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在客户端类中创建一个新方法。
 - en: In this method, create a parameter to which the object of the utility class
     will be passed. If this object can be obtained from the client class, you don't
     have to create such a parameter.
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在此方法中创建一个参数，以传递实用类的对象。如果可以从客户端类中获得该对象，则不必创建这样的参数。
 - en: Extract the relevant code fragments to this method and replace them with method
     calls.
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将相关代码片段提取到此方法中，并用方法调用替换它们。
 - en: Be sure to leave the *Foreign method* tag in the comments for the method along
     with the advice to place this method in a utility class if such becomes possible
     later. This will make it easier to understand why this method is located in this
     particular class for those who'll be maintaining the software in the future.
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一定要在方法的注释中保留*外部方法*标签，并建议如果将来可能的话，将该方法放入实用类中。这将使未来维护软件的人更容易理解该方法为何位于此特定类中。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'

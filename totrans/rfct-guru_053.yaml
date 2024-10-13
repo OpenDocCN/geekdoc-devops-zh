@@ -1,111 +1,166 @@
 - en: Hide Delegate
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 隐藏委托
 - en: 原文：[https://refactoringguru.cn/hide-delegate](https://refactoringguru.cn/hide-delegate)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/hide-delegate](https://refactoringguru.cn/hide-delegate)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: The client gets object B from a field or method of object А. Then the client
     calls a method of object B.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 客户端从对象A的字段或方法中获取对象B。然后客户端调用对象B的方法。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Create a new method in class A that delegates the call to object B. Now the
     client doesn't know about, or depend on, class B.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在类A中创建一个新方法，将调用委托给对象B。现在客户端对类B并不了解，也不依赖于类B。
 - en: Before![Hide Delegate - Before](../Images/0e3d0cfd7c90197dc21759d9324a7931.png)After![Hide
     Delegate - After](../Images/604f24e39e5d58b3b5bdcff7872367ea.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在![Hide Delegate - Before](../Images/0e3d0cfd7c90197dc21759d9324a7931.png)之前！在![Hide
+    Delegate - After](../Images/604f24e39e5d58b3b5bdcff7872367ea.png)之后！
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么重构
 - en: 'To start with, let''s look at terminology:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们看看术语：
 - en: '*Server* is the object to which the client has direct access.'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*服务器*是客户端可以直接访问的对象。'
 - en: '*Delegate* is the end object that contains the functionality needed by the
     client.'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*委托*是包含客户端所需功能的最终对象。'
 - en: A call chain appears when a client requests an object from another object, then
     the second object requests another one, and so on. These sequences of calls involve
     the client in navigation along the class structure. Any changes in these interrelationships
     will require changes on the client side.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 当客户端从另一个对象请求一个对象时，就会出现调用链，然后第二个对象请求另一个对象，以此类推。这些调用序列使客户端参与到类结构的导航中。这些相互关系的任何变化都需要在客户端进行相应的更改。
 - en: Benefits
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 优势
 - en: Hides delegation from the client. The less that the client code needs to know
     about the details of relationships between objects, the easier it's to make changes
     to your program.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将委托隐藏于客户端。客户端代码越少需要了解对象之间关系的细节，对程序的修改就越容易。
 - en: Drawbacks
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 缺点
 - en: If you need to create an excessive number of delegating methods, *server-class*
     risks becoming an unneeded go-between, leading to an excess of [Middle Man](/smells/middle-man).
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你需要创建过多的委托方法，*服务器类*有可能成为一个不必要的中介，导致过多的[中介者](/smells/middle-man)。
 - en: How to Refactor
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: For each method of the *delegate-class* called by the client, create a method
     in the *server-class* that delegates the call to the *delegate-class*.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为每个被客户端调用的*委托类*方法，在*服务器类*中创建一个方法，将调用委托给*委托类*。
 - en: Change the client code so that it calls the methods of the *server-class*.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 更改客户端代码，使其调用*服务器类*的方法。
 - en: If your changes free the client from needing the *delegate-class*, you can remove
     the access method to the *delegate-class* from the *server-class* (the method
     that was originally used to get the *delegate-class*).
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你的更改使客户端不再需要*委托类*，你可以从*服务器类*中移除对*委托类*的访问方法（最初用于获取*委托类*的方法）。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 厌倦阅读了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 难怪，阅读我们这里所有的文本需要7小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的交互式重构课程。它提供了一种更轻松的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看…*](/refactoring/course)'

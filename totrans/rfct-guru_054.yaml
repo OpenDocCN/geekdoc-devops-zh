@@ -1,94 +1,142 @@
 - en: Remove Middle Man
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 去掉中介
 - en: 原文：[https://refactoringguru.cn/remove-middle-man](https://refactoringguru.cn/remove-middle-man)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://refactoringguru.cn/remove-middle-man](https://refactoringguru.cn/remove-middle-man)
 - en: Problem
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: A class has too many methods that simply delegate to other objects.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个类有太多方法只是简单地委托给其他对象。
 - en: Solution
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决方案
 - en: Delete these methods and force the client to call the end methods directly.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 删除这些方法，并强迫客户端直接调用最终方法。
 - en: Before![Remove Middle Man - Before](../Images/3e9a7d2185aa5e62c84dac385b0124f0.png)After![Remove
     Middle Man - After](../Images/57a675cde319ef14aa00ccf9a9c57bfd.png)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前![去掉中介 - 之前](../Images/3e9a7d2185aa5e62c84dac385b0124f0.png)之后![去掉中介 - 之后](../Images/57a675cde319ef14aa00ccf9a9c57bfd.png)
 - en: Why Refactor
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么要重构
 - en: 'To describe this technique, we''ll use the terms from [Hide Delegate](/hide-delegate),
     which are:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了描述这个技术，我们将使用[隐藏委托](/hide-delegate)中的术语：
 - en: '*Server* is the object to which the client has direct access.'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*服务器*是客户端可以直接访问的对象。'
 - en: '*Delegate* is the end object that contains the functionality needed by the
     client.'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*委托*是包含客户端所需功能的最终对象。'
 - en: 'There are two types of problems:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 有两种类型的问题：
 - en: The *server-class* doesn't do anything itself and simply creates needless complexity.
     In this case, give thought to whether this class is needed at all.
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*服务器类*本身不执行任何操作，仅仅增加了不必要的复杂性。在这种情况下，考虑一下这个类是否真的需要。'
 - en: Every time a new feature is added to the *delegate*, you need to create a delegating
     method for it in the *server-class*. If a lot of changes are made, this will be
     rather tiresome.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 每当向*委托*添加新功能时，您需要在*服务器类*中为其创建一个委托方法。如果进行了大量更改，这将相当繁琐。
 - en: How to Refactor
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何重构
 - en: Create a getter for accessing the *delegate-class* object from the *server-class*
     object.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个获取*委托类*对象的getter，以便从*服务器类*对象访问。
 - en: Replace calls to delegating methods in the *server-class* with direct calls
     for methods in the *delegate-class*.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在*服务器类*中用对*委托类*方法的直接调用替换对委托方法的调用。
 - en: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[</images/refactoring/banners/tired-of-reading-banner-1x.mp4?id=7fa8f9682afda143c2a491c6ab1c1e56>'
 - en: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: </images/refactoring/banners/tired-of-reading-banner.png?id=1721d160ff9c84cbf8912f5d282e2bb4>
 - en: Your browser does not support HTML video.](/refactoring/course)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 您的浏览器不支持HTML视频。](/refactoring/course)
 - en: Tired of reading?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 读累了吗？
 - en: No wonder, it takes 7 hours to read all of the text we have here.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 不奇怪，阅读我们这里的所有文本需要7个小时。
 - en: Try our interactive course on refactoring. It offers a less tedious approach
     to learning new stuff.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试我们的互动重构课程。它提供了一种不那么乏味的学习新知识的方法。
 - en: '[*Let''s see…*](/refactoring/course)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[*让我们看看……*](/refactoring/course)'
