@@ -4,6 +4,7 @@
 +   [EffectiveEngineer 博客中文翻译](docs/effectiveengineer-blog/README.md)
 +   [Firewinds 博客中文翻译](docs/firewinds-blog/README.md)
 +   [GitKraken 博客中文翻译](docs/gitkraken-blog/README.md)
++   [Moesif 博客中文翻译](docs/moesif-blog/README.md)
 +   [Octopus 博客中文翻译](docs/octopus-blog/README.md)
 +   [重构大师](docs/rfct-guru/README.md)
 +   [TestDriven.io 博客中文翻译](docs/testdrivenio-blog/README.md)
