@@ -8,6 +8,7 @@
 +   [FreeRADIUS 新手入门](docs/frds-new-intro/README.md)
 +   [GitHub 秘籍](docs/gh-cb/README.md)
 +   [Github 漫游指南](docs/gh-manyou/README.md)
++   [自底向上的 Git 指南](docs/git-btmup/README.md)
 +   [Git 社区之书](docs/git-comm-bk/README.md)
 +   [GitKraken 博客中文翻译](docs/gitkraken-blog/README.md)
 +   [GitHub 权威指南（Got Github）](docs/got-gh/README.md)
