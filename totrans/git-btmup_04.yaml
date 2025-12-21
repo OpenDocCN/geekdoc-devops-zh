@@ -1,30 +1,43 @@
 - en: Introducing the blob
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍 blob
 - en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/2-introducing-the-blob.html](http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/2-introducing-the-blob.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/2-introducing-the-blob.html](http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/2-introducing-the-blob.html)
 - en: 'Now that the basic picture has been painted, let’s get into some practical
     examples. I’m going to start by creating a sample Git repository, and showing
     how Git works from the bottom up in that repository. Feel free to follow along
     as you read:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在基本的情况已经描绘出来了，让我们来探讨一些实际例子。我将从一个示例 Git 仓库开始创建，并展示 Git 在该仓库中是如何从底层工作的。在阅读时，请随意跟随：
 - en: '[PRE0]'
+  id: totrans-3
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Here I’ve created a new filesystem directory named “sample” which contains
     a file whose contents are prosaically predictable. I haven’t even created a repository
     yet, but already I can start using some of Git’s commands to understand what it’s
     going to do. First of all, I’d like to know which hash id Git is going to store
     my greeting text under:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我创建了一个名为“sample”的新文件系统目录，其中包含一个内容平淡无奇的文件。我甚至还没有创建仓库，但已经可以开始使用一些 Git 命令来理解它将要做什么。首先，我想知道
+    Git 将会把我问候文本存储在哪个哈希 ID 下：
 - en: '[PRE1]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'If you run this command on your system, you’ll get the same hash id. Even though
     we’re creating two different repositories (possibly a world apart, even) our greeting
     blob in those two repositories will have the same hash id. I could even pull commits
@@ -33,28 +46,41 @@
     is to initialize a new repository and commit the file into it. I’m going to do
     this all in one step right now, but then come back and do it again in stages so
     you can see what’s going on underneath:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你在这个系统上运行这个命令，你会得到相同的哈希 ID。尽管我们创建了两个不同的仓库（可能相隔甚远，甚至）但这两个仓库中的问候 blob 将会有相同的哈希
+    ID。我甚至可以从你的仓库中提取提交到我的仓库中，Git 会意识到我们正在跟踪相同的内容——而且我也会这样做！所以它只会存储一个副本！非常酷。下一步是初始化一个新的仓库并将文件提交进去。我现在将一次性完成这个步骤，然后回来分阶段做，这样你可以看到下面发生了什么：
 - en: '[PRE2]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'At this point our blob should be in the system exactly as we expected, using
     the hash id determined above. As a convenience, Git requires only as many digits
     of the hash id as are necessary to uniquely identify it within the repository.
     Usually just six or seven digits is enough:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个阶段，我们的 blob 应该已经按照我们预期的样子存在于系统中，使用了上面确定的哈希 ID。为了方便起见，Git 只需要哈希 ID 的必要位数来在仓库中唯一标识它。通常只需要六位或七位数字就足够了：
 - en: '[PRE3]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: There it is! I haven’t even looked at which commit holds it, or what tree it’s
     in, but based solely on the contents I was able to assume it’s there, and there
     it is. It will always have this same identifier, no matter how long the repository
     lives or where the file within it is stored. These particular contents are now
     verifiably preserved, forever.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 就在这里！我甚至还没有查看哪个提交包含它，或者它在哪个树中，但仅凭内容，我就能假设它在那里，而且它就在那里。无论仓库存在多久，或者文件存储在哪里，它都会始终有这个相同的标识符。这些特定的内容现在已经被验证性地永久保存了。
 - en: In this way, a Git blob represents the fundamental data unit in Git. Really,
     the whole system is about blob management.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 以这种方式，Git blob 代表了 Git 中的基本数据单元。实际上，整个系统都是关于 blob 管理的。

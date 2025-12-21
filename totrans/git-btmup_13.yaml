@@ -1,29 +1,40 @@
 - en: Taking the index further
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 深入索引
 - en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/2-The-Index/2-taking-the-index-further.html](http://jwiegley.github.io/git-from-the-bottom-up/2-The-Index/2-taking-the-index-further.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/2-The-Index/2-taking-the-index-further.html](http://jwiegley.github.io/git-from-the-bottom-up/2-The-Index/2-taking-the-index-further.html)
 - en: Let’s see, the index… With it you can pre-stage a set of changes, thus iteratively
     building up a patch before committing it to the repository. Now, where have I
     heard that concept before…
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看索引……有了它，你可以在提交到仓库之前预先分阶段一组更改，从而迭代地构建一个补丁。现在，我在哪里听说过这个概念……
 - en: If you’re thinking “Quilt!”, you’re exactly right. In fact, the index is little
     different from Quilt, it just adds the restriction of allowing only one patch
     to be constructed at a time.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想到“Quilt!”，那你就完全正确了。实际上，索引与 Quilt 几乎没有区别，它只是增加了每次只能构建一个补丁的限制。
 - en: But what if, instead of two sets of changes within `foo.c`, I had four? With
     plain Git, I’d have to tease each one out, commit it, and then tease out the next.
     This is made much easier using the index, but what if I wanted to test those changes
     in various combinations with each other before checking them in? That is, if I
     labelled the patches A, B, C and D, what if I wanted to test A + B, then A + C,
     then A + D, etc., before deciding if any of the changes were truly complete?
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 但如果，不是在 `foo.c` 中的两组更改，而是有四组呢？使用纯 Git，我必须逐一提取它们，提交，然后提取下一个。使用索引可以使这变得容易得多，但如果我们想在检查它们之前以各种组合测试这些更改，那会怎样？也就是说，如果我为补丁标记了
+    A、B、C 和 D，那么在决定任何更改是否真正完整之前，我想测试 A + B，然后是 A + C，然后是 A + D 等，会怎样？
 - en: 'There is no mechanism in Git itself that allows you to mix and match parallel
     sets of changes on the fly. Sure, multiple branches can let you do parallel development,
     and the index lets you stage multiple changes into a series of commits, but you
@@ -32,39 +43,60 @@
     concert before finally committing them. What you’d need to do something like this
     is an index which allows for greater depth than one commit at a time. This is
     exactly what Stacked Git provides.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: Git 本身没有机制允许你即时混合和匹配并行集的更改。当然，多个分支可以让你进行并行开发，索引可以让你将多个更改分阶段放入一系列提交中，但你不能同时进行：在分阶段一系列补丁的同时，选择性地启用和禁用其中一些，以在最终提交之前验证补丁的一致性。你需要一个可以一次处理多个提交的索引，这正是
+    Stacked Git 提供的。
 - en: 'Here’s how I’d commit two different patches into my working tree using plain
     Git:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是如何使用纯 Git 将两个不同的补丁提交到我的工作树中的示例：
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'This works great, but I can’t selectively disable the first commit in order
     to test the second one alone. To do that, I’d have to do the following:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这效果很好，但我不能选择性地禁用第一个提交以单独测试第二个。为了做到这一点，我必须做以下操作：
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Surely there has to be a better way! With `stg` I can queue up both patches
     and then re-apply them in whatever order I like, for independent or combined testing,
     etc. Here’s how I’d queue the same two patches from the previous example, using
     `stg`:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，肯定有更好的方法！使用 `stg`，我可以排队等待多个补丁，然后按我喜欢的顺序重新应用它们，用于独立或组合测试等。以下是我如何使用 `stg` 排队之前示例中的相同两个补丁的示例：
 - en: '[PRE2]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Now if I want to selectively disable the first patch to test only the second,
     it’s very straightforward:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我如果想选择性地禁用第一个补丁以仅测试第二个，那就非常直接：
 - en: '[PRE3]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: This is definitely easier than creating temporary branches and using `cherry-pick`
     to apply specific commit ids, followed by deleting the temporary branch.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这肯定比创建临时分支并使用 `cherry-pick` 应用特定的提交 ID，然后删除临时分支要简单得多。

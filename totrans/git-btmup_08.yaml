@@ -1,154 +1,213 @@
 - en: A commit by any other name…
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 以任何其他名称的提交……
 - en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/6-a-commit-by-any-other-name.html](http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/6-a-commit-by-any-other-name.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/6-a-commit-by-any-other-name.html](http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/6-a-commit-by-any-other-name.html)
 - en: Understanding commits is the key to grokking Git. You’ll know you have reached
     the Zen plateau of branching wisdom when your mind contains only commit topologies,
     leaving behind the confusion of branches, tags, local and remote repositories,
     etc. Hopefully such understanding will not require lopping off your arm — although
     I can appreciate if you’ve considered it by now.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解提交是掌握Git的关键。当你心中只有提交拓扑，而将分支、标签、本地和远程仓库等的混乱抛在脑后时，你就知道你已经达到了分支智慧的禅宗境界。希望这种理解不需要砍掉你的手臂——尽管我现在可以理解你为什么考虑过这一点。
 - en: 'If commits are the key, how you name commits is the doorway to mastery. There
     are many, many ways to name commits, ranges of commits, and even some of the objects
     held by commits, which are accepted by most of the Git commands. Here’s a summary
     of some of the more basic usages:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果提交是关键，那么提交的命名就是掌握的门户。有许多命名提交、提交范围以及提交持有的某些对象的方法，这些方法被Git的大多数命令所接受。以下是一些更基本用法的总结：
 - en: '**branchname** — As has been said before, the name of any branch is simply
     an alias for the most recent commit on that “branch”. This is the same as using
     the word HEAD whenever that branch is checked out.'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**branchname** — 如前所述，任何分支的名称只是该“分支”上最新提交的别名。这和在检出该分支时使用单词HEAD是相同的。'
 - en: '**tagname** — A tag-name alias is identical to a branch alias in terms of naming
     a commit. The major difference between the two is that tag aliases never change,
     whereas branch aliases change each time a new commit is checked in to that branch.'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**tagname** — 标签名别名在命名提交方面与分支别名相同。两者之间的主要区别是，标签别名永远不会改变，而分支别名每次将新提交检入该分支时都会改变。'
 - en: '**HEAD** — The currently checked out commit is always called HEAD. If you check
     out a specific commit — instead of a branch name — then HEAD refers to that commit
     only and not to any branch. Note that this case is somewhat special, and is called
     “using a detached HEAD” (I’m sure there’s a joke to be told here…).'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**HEAD** — 当前检出的提交始终被称为HEAD。如果你检出特定的提交——而不是分支名称——那么HEAD仅指该提交，而不是任何分支。请注意，这种情况有些特殊，被称为“使用分离的HEAD”（我确信这里可以讲一个笑话……）。'
 - en: '**c82a22c39cbc32…** — A commit may always be referenced using its full, 40-character
     SHA1 hash id. Usually this happens during cut-and-pasting, since there are typically
     other, more convenient ways to refer to the same commit.'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**c82a22c39cbc32…** — 提交可以使用其完整的40字符SHA1哈希ID进行引用。通常这发生在复制粘贴时，因为通常有其他更方便的方式来引用相同的提交。'
 - en: '**c82a22c** — You only need use as many digits of a hash id as are needed for
     a unique reference within the repository. Most of the time, six or seven digits
     is enough.'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**c82a22c** — 你只需要使用足够多的哈希ID数字，以便在仓库内进行唯一引用。大多数情况下，六位或七位数字就足够了。'
 - en: '**name^** — The parent of any commit is referenced using the caret symbol.
     If a commit has more than one parent, the first is used.'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**name^** — 任何提交的父提交都使用上箭头符号引用。如果一个提交有多个父提交，则使用第一个。'
 - en: '**name^^** — Carets may be applied successively. This alias refers to “the
     parent of the parent” of the given commit name.'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**name^^** — 可以连续应用箭头。此别名指的是给定提交名称的“父父”提交。'
 - en: '**name^2** — If a commit has multiple parents (such as a merge commit), you
     can refer to the *nth* parent using `name^n`.'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**name^2** — 如果一个提交有多个父提交（例如合并提交），你可以使用`name^n`来引用第*n*个父提交。'
 - en: '**name~10** — A commit’s *nth* generation ancestor may be referenced using
     a tilde (~) followed by the ordinal number. This type of usage is common with
     `rebase -i`, for example, to mean “show me a bunch of recent commits”. This is
     the same as name^^^^^^^^^^.'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**name~10** — 可以使用波浪号(~)后跟序数来引用提交的第*n*代祖先。这种用法在`rebase -i`等操作中很常见，例如，表示“显示一些最近的提交”。这等同于name^^^^^^^^^^。'
 - en: '**name:path** — To reference a certain file within a commit’s content tree,
     specify that file’s name after a colon. This is helpful with show, or to show
     the difference between two versions of a committed file:'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**name:path** — 要引用提交内容树中的某个特定文件，请在冒号后指定该文件的名称。这对于显示或显示提交文件的两个版本之间的差异很有帮助：'
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**name^{tree}** — You can reference just the tree held by a commit, rather
     than the commit itself.'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**name^{tree}** — 你可以仅引用提交持有的树，而不是提交本身。'
 - en: '**name1..name2** — This and the following aliases indicate *commit ranges*,
     which are supremely useful with commands like log for seeing what’s happened during
     a particular span of time. The syntax to the left refers to all the commits reachable
     from **name2** back to, but not including, **name1**. If either **name1** or **name2**
     is omitted, HEAD is used in its place.'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**name1..name2** — 这些别名表示 *提交范围*，这对于使用如 log 等命令查看特定时间段内发生的事情非常有用。左侧的语法指的是从
+    **name2** 追溯到，但不包括 **name1** 的所有可到达的提交。如果省略 **name1** 或 **name2**，则使用 HEAD 替代。'
 - en: '**name1…name2** — A “triple-dot” range is quite different from the two-dot
     version above. For commands like log, it refers to all the commits referenced
     by **name1** or **name2**, but not by both. The result is then a list of all the
     unique commits in both branches. For commands like `diff`, the range expressed
     is between **name2** and the common ancestor of **name1** and **name2**. This
     differs from the `log` case in that changes introduced by **name1** are not shown.'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**name1…name2** — “三个点”范围与上面的两个点版本有很大不同。对于 log 等命令，它指的是由 **name1** 或 **name2**
+    引用的所有提交，但不由两者同时引用。结果是两个分支中所有唯一提交的列表。对于 `diff` 等命令，所表示的范围是在 **name2** 和 **name1**
+    和 **name2** 的共同祖先之间。这与 `log` 的情况不同，因为 **name1** 引入的更改不会显示。'
 - en: '**master..** — This usage is equivalent to “`master..HEAD`”. I’m adding it
     here, even though it’s been implied above, because I use this kind of alias constantly
     when reviewing changes made to the current branch.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**master..** — 这种用法等同于“`master..HEAD`”。我将其添加在这里，即使它在上文已经暗示，因为我经常在审查对当前分支所做的更改时使用这种类型的别名。'
 - en: '**..master** — This, too, is especially useful after you’ve done a `fetch`
     and you want to see what changes have occurred since your last `rebase` or `merge`.'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**..master** — 这在您执行了 `fetch` 操作并想查看自上次 `rebase` 或 `merge` 以来发生了什么更改时特别有用。'
 - en: '**–since=“2 weeks ago”** — Refers to all commits since a certain date.'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**–since=“2 weeks ago”** — 指的是自某个日期以来的所有提交。'
 - en: '**–until=”1 week ago”** — Refers to all commits before a certain date.'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**–until=”1 week ago”** — 指的是所有在某个日期之前的提交。'
 - en: '**–grep=pattern** — Refers to all commits whose commit message matches the
     regular expression pattern.'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**–grep=pattern** — 指的是所有提交信息匹配正则表达式模式的提交。'
 - en: '**–committer=pattern** — Refers to all commits whose committer matches the
     pattern.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**–committer=pattern** — 指的是所有提交者匹配该模式的提交。'
 - en: '**–author=pattern** — Refers to all commits whose author matches the pattern.
     The author of a commit is the one who created the changes it represents. For local
     development this is always the same as the committer, but when patches are being
     sent by e-mail, the author and the committer usually differ.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**–author=pattern** — 指的是所有作者匹配该模式的提交。提交的作者是指创建它所代表更改的人。对于本地开发，这始终与提交者相同，但当通过电子邮件发送补丁时，作者和提交者通常不同。'
 - en: '**–no-merges** — Refers to all commits in the range that have only one parent
     — that is, it ignores all merge commits.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**–no-merges** — 指的是范围内只有一个父提交的所有提交 — 即它忽略了所有合并提交。'
 - en: 'Most of these options can be mixed-and-matched. Here is an example which shows
     the following log entries: changes made to the current branch (branched from master),
     by myself, within the last month, which contain the text “foo”:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数这些选项可以混合使用。以下是一个示例，它显示了以下日志条目：对当前分支（从 master 分支创建）所做的更改，由我自己在过去的一个月内完成，包含文本“foo”：
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'

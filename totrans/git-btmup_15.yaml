@@ -1,20 +1,30 @@
 - en: To reset, or not to reset
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 重置与否
 - en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/1-to-reset-or-not-to-reset.html](http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/1-to-reset-or-not-to-reset.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/1-to-reset-or-not-to-reset.html](http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/1-to-reset-or-not-to-reset.html)
 - en: One of the more difficult commands to master in Git is `reset`, which seems
     to bite people more often than other commands. Which is understandable, giving
     that it has the potential to change both your working tree and your current HEAD
     reference. So I thought a quick review of this command would be useful.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Git 中，`reset` 是一个较难掌握的命令，它似乎比其他命令更容易让人陷入困境。这是可以理解的，因为它有可能改变你的工作树和当前的 HEAD
+    引用。因此，我认为快速回顾这个命令会很有用。
 - en: Basically, `reset` is a reference editor, an index editor, and a working tree
     editor. This is partly what makes it so confusing, because it’s capable of doing
     so many jobs. Let’s examine the difference between these three modes, and how
     they fit into the Git commit model.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 基本上，`reset` 是一个参考编辑器、索引编辑器和工作树编辑器。这部分的复杂性在于它能够执行许多任务。让我们来分析一下这三种模式之间的区别，以及它们如何融入
+    Git 提交模型。

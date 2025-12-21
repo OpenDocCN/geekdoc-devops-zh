@@ -1,16 +1,22 @@
 - en: 'Repository: Directory content tracking'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 仓库：目录内容跟踪
 - en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/1-directory-content-tracking.html](http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/1-directory-content-tracking.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/1-directory-content-tracking.html](http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/1-directory-content-tracking.html)
 - en: 'As mentioned above, what Git does is quite rudimentary: it maintains snapshots
     of a directory’s contents. Much of its internal design can be understood in terms
     of this basic task.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所述，Git 所做的是相当基础的：它维护着目录内容的快照。其内部设计的大部分都可以通过这个基本任务来理解。
 - en: 'The design of a Git repository in many ways mirrors the structure of a UNIX
     filesystem: A *filesystem* begins with a root directory, which typically consists
     of other directories, most of which have leaf nodes, or *files*, that contain
@@ -20,8 +26,12 @@
     contents of its related file. And while you may have many directory entries pointing
     to a particular i-node (i.e., hard-links), it’s the i-node which “owns” the contents
     stored on your filesystem.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: Git 仓库的设计在许多方面反映了 UNIX 文件系统的结构：一个 *文件系统* 从根目录开始，通常包含其他目录，其中大多数有叶节点，或 *文件*，它们包含数据。关于这些文件内容的元数据既存储在目录中（名称），也存储在引用这些文件内容的
+    i-nodes 中（大小、类型、权限等）。每个 *i-node* 都有一个唯一数字来标识其相关文件的内容。虽然你可能有很多目录条目指向特定的 i-node（即硬链接），但
+    i-node 才是“拥有”存储在文件系统上的内容的。
 - en: 'Internally, Git shares a strikingly similar structure, albeit with one or two
     key differences. First, it represents your file’s contents in *blobs*, which are
     also leaf nodes in something awfully close to a directory, called a *tree*. Just
@@ -34,8 +44,13 @@
     If multiple trees reference the same blob, this is just like hard-linking: the
     blob will not disappear from your repository as long as there is at least one
     link remaining to it.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在内部，Git 具有非常相似的结构，尽管有一两个关键的区别。首先，它通过 *blob* 来表示你的文件内容，这些 *blob* 也在一个称为 *tree*
+    的类似目录的结构中作为叶节点。正如 i-node 是通过系统分配的唯一数字来唯一标识一样，blob 是通过计算其大小和内容的 SHA1 哈希 id 来命名的。从所有目的和意图来看，这只是一个任意的数字，就像
+    i-node 一样，但它有两个额外的属性：首先，它验证 blob 的内容永远不会改变；其次，相同的内 容总是由相同的 blob 来表示，无论它出现在哪里：提交之间、仓库之间——甚至整个互联网上。如果多个
+    tree 引用了同一个 blob，这就像硬链接一样：只要至少还有一个链接指向它，blob 就不会从你的仓库中消失。
 - en: The difference between a Git blob and a filesystem’s file is that a blob stores
     no metadata about its content. All such information is kept in the tree that holds
     the blob. One tree may know those contents as a file named “foo” that was created
@@ -48,5 +63,9 @@
     design was needed. And as it turns out, this design allows for much more compact
     storage, since all objects having identical content can be shared, no matter where
     they are.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: Git blob 与文件系统的文件之间的区别在于，blob 不存储关于其内容的元数据。所有此类信息都保存在包含 blob 的 tree 中。一个 tree
+    可能知道这些内容是一个名为“foo”的文件，该文件于 2004 年 8 月创建，而另一个 tree 可能知道相同的内容是一个名为“bar”的文件，该文件是在五年后创建的。在一个正常的文件系统中，具有相同内容但具有如此不同元数据的两个文件始终会被表示为两个独立的文件。为什么会有这种区别？主要原因是文件系统是为了支持可更改的文件而设计的，而
+    Git 则不是。Git 仓库中数据不可变的事实使得所有这一切都成为可能，因此需要不同的设计。结果证明，这种设计允许更紧凑的存储，因为所有具有相同内容的对象都可以共享，无论它们在哪里。

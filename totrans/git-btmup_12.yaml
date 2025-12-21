@@ -1,11 +1,15 @@
 - en: 'The Index: Meet the middle man'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 索引：中间人
 - en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/2-The-Index/1-meet-the-middle-man.html](http://jwiegley.github.io/git-from-the-bottom-up/2-The-Index/1-meet-the-middle-man.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/2-The-Index/1-meet-the-middle-man.html](http://jwiegley.github.io/git-from-the-bottom-up/2-The-Index/1-meet-the-middle-man.html)
 - en: 'Between your data files, which are stored on the filesystem, and your Git blobs,
     which are stored in the repository, there stands a somewhat strange entity: the
     Git index. Part of what makes this beast hard to understand is that it’s got a
@@ -15,17 +19,23 @@
     — but until then, they are only referenced by the index. That means that if you
     unregister a change from the index with reset, you’ll end up with an orphaned
     blob that will get deleted at some point at the future.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在你的数据文件（存储在文件系统中）和你的Git blob（存储在仓库中）之间，存在一个有些奇怪的实体：Git索引。使这个怪物难以理解的部分是它有一个相当不幸的名字。它是一个索引，因为它指的是你通过运行add创建的新树和blob的集合。这些新对象将很快被绑定到一个新的树中，以便提交到你的仓库——但在那时，它们只通过索引来引用。这意味着，如果你使用reset从索引中注销一个更改，你最终会得到一个孤儿blob，它将在未来的某个时候被删除。
 - en: 'The index is really just a staging area for your next commit, and there’s a
     good reason why it exists: it supports a model of development that may be foreign
     to users of CVS or Subversion, but which is all too familiar to Darcs users: the
     ability to build up your next commit in stages.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 索引实际上只是你下一个提交的暂存区域，它存在的一个很好的原因是：它支持一种可能对CVS或Subversion用户来说比较陌生的开发模型，但对Darcs用户来说却非常熟悉：能够在阶段性地构建你的下一个提交。
 - en: '![The Index](../Images/2208f25a44379754275f4643579b68a4.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![索引](../Images/2208f25a44379754275f4643579b68a4.png)'
 - en: 'First, let me say that there is a way to ignore the index almost entirely:
     by passing the `-a` flag to commit. Look at the way Subversion works, for example.
     When you type `svn status`, what you’ll see is a list of actions to be applied
@@ -35,41 +45,60 @@
     your next commit those changes will be saved. If an unknown file has a question
     mark next to it, it will be ignored; but a new file which has been added with
     `svn add` will get added to the repository.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我说，有一种方法可以几乎完全忽略索引：通过在commit时传递`-a`标志。看看Subversion是如何工作的，例如。当你输入`svn status`时，你会看到一个列表，列出了在下次调用`svn
+    commit`时将对你的仓库应用的操作。从某种意义上说，这个“下一步行动列表”是一种非正式的索引，它通过比较你的工作树状态和HEAD状态来确定。如果`foo.c`文件已被更改，在下次提交时，这些更改将被保存。如果未知文件旁边有一个问号，它将被忽略；但使用`svn
+    add`添加的新文件将被添加到仓库中。
 - en: 'This is no different from what happens if you use `commit -a`: new, unknown
     files are ignored, but new files which have been added with add are added to the
     repository, as are any changes to existing files. This interaction is nearly identical
     with the Subversion way of doing things.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这与使用`commit -a`时发生的情况没有不同：新文件被忽略，但使用add添加的新文件将被添加到仓库中，以及任何现有文件的更改。这种交互几乎与Subversion的方式相同。
 - en: The real difference is that in the Subversion case, your “list of next actions”
     is always determined by looking at the current working tree. In Git, the “list
     of next actions” *is* the contents of the index, which represents what will become
     the next state of HEAD, and that you can manipulate directly before executing
     `commit`. This gives you an extra layer of control over what’s going to happen,
     by allowing you to stage those changes in advance.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 真正的区别在于，在Subversion的情况下，你的“下一步行动列表”总是通过查看当前工作树来确定的。在Git中，“下一步行动列表”**就是**索引的内容，它代表了将成为HEAD下一个状态的内容，你可以在执行`commit`之前直接操作它。这为你提供了一个额外的控制层，允许你提前将这些更改暂存起来。
 - en: 'If this isn’t clear yet, consider the following example: you have a trusty
     source file, `foo.c`, and you’ve made two sets of unrelated changes to it. What
     you’d like to do is to tease apart these changes into two different commits, each
     with its own description. Here’s how you’d do this in Subversion:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果这还不清楚，请考虑以下示例：你有一个可靠的源文件`foo.c`，你对它进行了两组无关的更改。你想要做的是将这些更改分开成两个不同的提交，每个提交都有自己的描述。以下是你在Subversion中这样做的方式：
 - en: '[PRE0]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Sounds like fun? Now repeat that many times over for a complex, dynamic set
     of changes. Here’s the Git version, making use of the index:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 听起来很有趣？现在将这个操作重复多次，以处理一组复杂且动态的变更。这里是使用索引的 Git 版本：
 - en: '[PRE1]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: What’s more, it gets even easier! If you like Emacs, the superlative tool `gitsum.el`,
     by Christian Neukirchan, puts a beautiful face on this potentially tedious process.
     I recently used it to tease apart 11 separate commits from a set of conflated
     changes. Thank you, Christian!
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 更重要的是，这会变得更加简单！如果你喜欢 Emacs，Christian Neukirchan 开发的超级工具 `gitsum.el`，为这个可能令人厌烦的过程增添了一抹美丽的色彩。我最近用它来区分一组混合变更中的
+    11 个单独的提交。谢谢，Christian！

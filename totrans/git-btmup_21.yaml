@@ -1,40 +1,60 @@
 - en: Further reading
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 进一步阅读
 - en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/6-Further-Reading.html](http://jwiegley.github.io/git-from-the-bottom-up/6-Further-Reading.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/6-Further-Reading.html](http://jwiegley.github.io/git-from-the-bottom-up/6-Further-Reading.html)
 - en: 'If your interest to learn Git more has been piqued, please check out the following
     articles:'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你对学习Git的兴趣被激发，请查看以下文章：
 - en: 'A tour of Git: the basics - [http://cworth.org/hgbook-git/tour/](http://cworth.org/hgbook-git/tour/)'
+  id: totrans-3
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Git之旅：基础 - [http://cworth.org/hgbook-git/tour/](http://cworth.org/hgbook-git/tour/)
 - en: Manage source code using Git - [http://www.ibm.com/developerworks/linux/library/l-git/](http://www.ibm.com/developerworks/linux/library/l-git/)
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用Git管理源代码 - [http://www.ibm.com/developerworks/linux/library/l-git/](http://www.ibm.com/developerworks/linux/library/l-git/)
 - en: A tutorial introduction to git - [http://git-scm.com/docs/gittutorial](http://git-scm.com/docs/gittutorial)
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: git教程入门 - [http://git-scm.com/docs/gittutorial](http://git-scm.com/docs/gittutorial)
 - en: GitFaq — GitWiki - [https://git.wiki.kernel.org/index.php/GitFaq](https://git.wiki.kernel.org/index.php/GitFaq)
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: GitFaq — GitWiki - [https://git.wiki.kernel.org/index.php/GitFaq](https://git.wiki.kernel.org/index.php/GitFaq)
 - en: A git core tutorial for developers - [http://www.kernel.org/pub/software/scm/git/docs/gitcore-tutorial.html](https://www.kernel.org/pub/software/scm/git/docs/gitcore-tutorial.html)
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 开发者Git核心教程 - [http://www.kernel.org/pub/software/scm/git/docs/gitcore-tutorial.html](https://www.kernel.org/pub/software/scm/git/docs/gitcore-tutorial.html)
 - en: git for the confused - [http://www.gelato.unsw.edu.au/archives/git/0512/13748.html](http://www.gelato.unsw.edu.au/archives/git/0512/13748.html)
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: git for the confused - [http://www.gelato.unsw.edu.au/archives/git/0512/13748.html](http://www.gelato.unsw.edu.au/archives/git/0512/13748.html)
 - en: The thing About Git - [http://tomayko.com/writings/the-thing-about-git](http://tomayko.com/writings/the-thing-about-git)
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 关于Git的要点 - [http://tomayko.com/writings/the-thing-about-git](http://tomayko.com/writings/the-thing-about-git)

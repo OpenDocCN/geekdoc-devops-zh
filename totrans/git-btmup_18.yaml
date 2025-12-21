@@ -1,83 +1,122 @@
 - en: Doing a hard reset
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 进行硬重置
 - en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/4-doing-a-hard-reset.html](http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/4-doing-a-hard-reset.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/4-doing-a-hard-reset.html](http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/4-doing-a-hard-reset.html)
 - en: 'A hard reset (the `--hard` option) has the potential of being very dangerous,
     as it’s able to do two different things at once: First, if you do a hard reset
     against your current HEAD, it will erase all changes in your working tree, so
     that your current files match the contents of HEAD.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 硬重置（`--hard` 选项）可能非常危险，因为它能够同时做两件事：首先，如果你对你的当前 HEAD 进行硬重置，它将擦除工作树中的所有更改，使得你的当前文件与
+    HEAD 的内容相匹配。
 - en: There is also another command, `checkout`, which operates just like `reset --hard`
     if the index is empty. Otherwise, it forces your working tree to match the index.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，还有一个名为 `checkout` 的命令，如果索引为空，则其操作方式与 `reset --hard` 相同。否则，它会强制你的工作树与索引匹配。
 - en: 'Now, if you do a hard reset against an earlier commit, it’s the same as first
     doing a soft reset and then using reset `--hard` to reset your working tree. Thus,
     the following commands are equivalent:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，如果你对较早的提交进行硬重置，这相当于先进行软重置，然后使用 `reset --hard` 来重置你的工作树。因此，以下命令是等效的：
 - en: '[PRE0]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'As you can see, doing a hard reset can be very destructive. Fortunately, there
     is a safer way to achieve the same effect, using the Git stash (see the next section):'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，进行硬重置可能会非常破坏性。幸运的是，有一个更安全的方法可以达到相同的效果，那就是使用 Git stash（见下一节）：
 - en: '[PRE1]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'This approach has two distinct advantages if you’re not sure whether you really
     want to modify the current branch just now:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你不确定你是否真的想现在修改当前分支，这种方法有两个明显的优点：
 - en: It saves your work in the stash, which you can come back to at any time. Note
     that the stash is not branch specific, so you could potentially stash the state
     of your tree while on one branch, and later apply the differences to another.
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它将你的工作保存到 stash 中，你可以在任何时候返回。请注意，stash 不是分支特定的，所以你可以在一个分支上保存树的状态，然后稍后将其应用到另一个分支上。
 - en: It reverts your working tree back to a past state, but on a new branch, so if
     you decide to commit your changes against the past state, you won’t have altered
     your original branch.
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它将你的工作树回滚到过去的状态，但是在一个新的分支上，所以如果你决定在过去的状态下提交你的更改，你不会改变你的原始分支。
 - en: 'If you do make changes to `new-branch` and then decide you want it to become
     your new master branch, run the following commands:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你修改了 `new-branch` 并决定希望它成为你的新主分支，请运行以下命令：
 - en: '[PRE2]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The moral of this story is: although you can do major surgery on your current
     branch using `reset --soft` and `reset --hard` (which changes the working tree
     too), why would you want to? Git makes working with branches so easy and cheap,
     it’s almost always worth it to do your destructive modifications on a branch,
     and then move that branch over to take the place of your old master. It has an
     almost Sith-like appeal to it…'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个故事的意义是：虽然你可以使用 `reset --soft` 和 `reset --hard`（这也会更改工作树）对你的当前分支进行重大手术，但你为什么要这样做呢？Git
+    使得处理分支变得如此简单和便宜，几乎总是值得你在分支上进行破坏性修改，然后将该分支移动到取代旧主分支的位置。它有一种几乎像西斯一样的吸引力……
 - en: 'And what if you do accidentally run `reset --hard`, losing not only your current
     changes but also removing commits from your master branch? Well, unless you’ve
     gotten into the habit of using stash to take snapshots (see next section), there’s
     nothing you can do to recover your lost working tree. But you can restore your
     branch to its previous state by again using `reset --hard` with the reflog (this
     will also be explained in the next section):'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你意外地运行了 `reset --hard`，不仅丢失了当前更改，还从主分支中移除了提交？嗯，除非你已经养成了使用 stash 来保存快照的习惯（见下一节），否则你无法恢复丢失的工作树。但你可以通过再次使用带有
+    reflog 的 `reset --hard` 来恢复你的分支到之前的状态（这将在下一节中解释）：
 - en: '[PRE3]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'To be on the safe side, never use `reset --hard` without first running `stash`.
     It will save you many white hairs later on. If you did run stash, you can now
     use it to recover your working tree changes as well:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了安全起见，永远不要在没有先运行 `stash` 的情况下使用 `reset --hard`。这将在以后为你节省许多白发。如果你已经运行了 stash，现在你可以使用它来恢复你的工作树更改：
 - en: '[PRE4]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'

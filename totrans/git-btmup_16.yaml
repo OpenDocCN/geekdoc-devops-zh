@@ -1,17 +1,25 @@
 - en: Doing a mixed reset
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 进行混合重置
 - en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/2-doing-a-mixed-reset.html](http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/2-doing-a-mixed-reset.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/2-doing-a-mixed-reset.html](http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/2-doing-a-mixed-reset.html)
 - en: If you use the `--mixed` option (or no option at all, as this is the default),
     reset will revert parts of your index along with your HEAD reference to match
     the given commit. The main difference from `--soft` is that `--soft` only changes
     the meaning of HEAD and doesn’t touch the index.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你使用`--mixed`选项（或者根本不使用任何选项，因为这是默认设置），重置将使你的索引部分以及HEAD引用回滚以匹配给定的提交。与`--soft`选项的主要区别是`--soft`只改变HEAD的含义，而不触及索引。
 - en: '[PRE0]'
+  id: totrans-3
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'

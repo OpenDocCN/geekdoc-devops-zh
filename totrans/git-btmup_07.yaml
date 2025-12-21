@@ -1,11 +1,15 @@
 - en: The beauty of commits
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提交之美
 - en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/5-the-beauty-of-commits.html](http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/5-the-beauty-of-commits.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/5-the-beauty-of-commits.html](http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/5-the-beauty-of-commits.html)
 - en: 'Some version control systems make “branches” into magical things, often distinguishing
     them from the “main line” or “trunk”, while others discuss the concept as though
     it were very different from commits. But in Git there are no branches as separate
@@ -13,45 +17,64 @@
     or more parents, and those commits can have parents, this is what allows a single
     commit to be treated like a branch: because it knows the whole history that led
     up to it.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些版本控制系统将“分支”变成了神奇的东西，通常将它们与“主线”或“主干”区分开来，而其他系统则像讨论一个与提交非常不同的概念一样讨论这个概念。但在Git中，没有作为独立实体的分支：只有blob、tree和提交。由于一个提交可以有一个或多个父提交，而这些提交也可以有父提交，这就是为什么单个提交可以像分支一样被对待：因为它知道通向它的整个历史。
 - en: 'You can examine all the top-level, referenced commits at any time using the
     `branch` command:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用 `branch` 命令在任何时候检查所有顶级、引用的提交：
 - en: '[PRE0]'
+  id: totrans-4
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Say it with me: A branch is nothing more than a named reference to a commit.
     In this way, branches and tags are identical, with the sole exception that tags
     can have their own descriptions, just like the commits they reference. Branches
     are just names, but tags are descriptive, well, “tags”.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟我一起说：分支不过是一个指向提交的命名引用。这样，分支和标签是相同的，唯一的区别是标签可以有它们自己的描述，就像它们引用的提交一样。分支只是名字，但标签是描述性的，嗯，就是“标签”。
 - en: 'But the fact is, we don’t really need to use aliases at all. For example, if
     I wanted to, I could reference everything in the repository using only the hash
     ids of its commits. Here’s me being straight up loco and resetting the head of
     my working tree to a particular commit:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 但事实上，我们根本不需要使用别名。例如，如果我想的话，我可以用提交的哈希ID来引用仓库中的所有内容。这里是我直接疯狂地重置我的工作树到特定的提交：
 - en: '[PRE1]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The –hard option says to erase all changes currently in my working tree, whether
     they’ve been registered for a checkin or not (more will be said about this command
     later). A safer way to do the same thing is by using `checkout`:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '`-hard` 选项表示要擦除我工作树中当前的所有更改，无论它们是否已注册为提交（关于这个命令的更多内容将在后面讨论）。一个更安全的方法是使用 `checkout`：'
 - en: '[PRE2]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The difference here is that changed files in my working tree are preserved.
     If I pass the `-f` option to `checkout`, it acts the same in this case to `reset
     --hard`, except that checkout only ever changes the working tree, whereas `reset
     --hard` changes the current branch’s HEAD to reference the specified version of
     the tree.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的区别在于，我工作树中的更改文件被保留。如果我向 `checkout` 传递 `-f` 选项，在这种情况下它和 `reset --hard` 的行为相同，除了
+    `checkout` 只会更改工作树，而 `reset --hard` 会将当前分支的 HEAD 更改为引用指定的树版本。
 - en: 'Another joy of the commit-based system is that you can rephrase even the most
     complicated version control terminology using a single vocabulary. For example,
     if a commit has multiple parents, it’s a “merge commit” — since it merged multiple
@@ -60,11 +83,17 @@
     Git: to it, the world is simply a collection of commit objects, each of which
     holds a tree that references other trees and blobs, which store your data. Anything
     more complicated than this is simply a device of nomenclature.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于提交的系统另一个优点是，你可以使用单一词汇重新表述甚至最复杂的版本控制术语。例如，如果一个提交有多个父提交，它就是一个“合并提交”——因为它将多个提交合并成了一个。或者，如果一个提交有多个子提交，它代表了“分支”的祖先等。但事实上，Git对这些事物并没有区别：对于Git来说，世界只是一个提交对象的集合，每个提交都包含一个树，该树引用其他树和blob，这些blob存储了你的数据。比这更复杂的东西只是命名学的一个工具。
 - en: 'Here is a picture of how all these pieces fit together:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是所有这些部分如何组合在一起的图片：
 - en: '![Commits](../Images/992be8b8282addae521bd6fc2739d51a.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![提交](../Images/992be8b8282addae521bd6fc2739d51a.png)'

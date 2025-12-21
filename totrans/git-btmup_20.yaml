@@ -1,11 +1,15 @@
 - en: Conclusion
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/5-Conclusion.html](http://jwiegley.github.io/git-from-the-bottom-up/5-Conclusion.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/5-Conclusion.html](http://jwiegley.github.io/git-from-the-bottom-up/5-Conclusion.html)
 - en: Over the years I’ve used many version control systems, and many backup schemes.
     They all have facilities for retrieving the past contents of a file. Most of them
     have ways to show how a file has differed over time. Many permit you to go back
@@ -14,8 +18,10 @@
     allowing you to collect your thoughts however you feel best to present your ideas
     to the public. Git lets you do all these things, and with relative ease — once
     you understand its fundamentals.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些年来，我使用过许多版本控制系统和备份方案。它们都提供了检索文件过去内容的功能。大多数都有显示文件随时间变化的方式。许多允许你回到过去，开始一条不同的推理线，然后稍后把这些新想法带回到现在。然而，更少的有精细控制这个过程的能力，让你能够以你认为最好的方式收集你的想法，向公众展示你的观点。Git让你能够做所有这些事情，而且相对容易——一旦你理解了它的基础。
 - en: It’s not the only system with this kind of power, nor does it always employ
     the best interface to its concepts. What it does have, however, is a solid base
     to work from. In the future, I imagine many new methods will be devised to take
@@ -24,5 +30,7 @@
     a slow refinement of what I’ve seen before. Git gives me the opposite impression,
     however. I feel we’ve only begun to see the potential its deceptively simple design
     promises.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 它不是唯一拥有这种能力的系统，也不是总是使用最好的界面来展示其概念。然而，它确实有一个坚实的基础来工作。在未来，我想会有许多新方法被发明出来，以利用Git允许的灵活性。大多数其他系统都让我相信它们已经达到了概念上的顶峰——从现在开始，所有其他的东西都将是之前所见的缓慢改进。然而，Git给我的是相反的印象。我感觉我们只是刚刚开始看到它那看似简单的设计所承诺的潜力。
