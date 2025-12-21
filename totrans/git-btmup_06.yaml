@@ -1,0 +1,113 @@
+- en: How trees are made
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/4-how-trees-are-made.html](http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/4-how-trees-are-made.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Every commit holds a single tree, but how are trees made? We know that blobs
+    are created by stuffing the contents of your files into blobs — and that trees
+    own blobs — but we haven’t yet seen how the tree that holds the blob is made,
+    or how that tree gets linked to its parent commit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s start with a new sample repository again, but this time by doing things
+    manually, so you can get a feeling for exactly what’s happening under the hood:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It all starts when you first add a file to the index. For now, let’s just say
+    that the index is what you use to initially create blobs out of files. When I
+    added the file `greeting`, a change occurred in my repository. I can’t see this
+    change as a commit yet, but here is one way I can tell what happened:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: What’s this? I haven’t committed anything to the repository yet, but already
+    an object has come into being. It has the same hash id I started this whole business
+    with, so I know it represents the contents of my `greeting` file. I could use
+    `cat-file -t` at this point on the hash id, and I’d see that it was a blob. It
+    is, in fact, the same blob I got the first time I created this sample repository.
+    The same file will always result in the same blob (just in case I haven’t stressed
+    that enough).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This blob isn’t referenced by a tree yet, nor are there any commits. At the
+    moment it is only referenced from a file named `.git/index`, which references
+    the blobs and trees that make up the current index. So now let’s make a tree in
+    the repo for our blob to hang off of:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This number should look familiar as well: a tree containing the same blobs
+    (and sub-trees) will always have the same hash id. I don’t have a commit object
+    yet, but now there is a tree object in that repository which holds the blob. The
+    purpose of the low-level `write-tree` command is to take whatever the contents
+    of the index are and tuck them into a new tree for the purpose of creating a commit.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I can manually make a new commit object by using this tree directly, which
+    is just what the `commit-tree` command does:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The raw `commit-tree` command takes a tree’s hash id and makes a commit object
+    to hold it. If I had wanted the commit to have a parent, I would have had to specify
+    the parent commit’s hash id explicitly using the `-p` option. Also, note here
+    that the hash id differs from what will appear on your system: This is because
+    my commit object refers to both my name, and the date at which I created the commit,
+    and these two details will always be different from yours.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Our work is not done yet, though, since I haven’t registered the commit as
+    the new head of a branch:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This command tells Git that the branch name “master” should now refer to our
+    recent commit. Another, much safer way to do this is by using the command `update-ref`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After creating `master`, we must associate our working tree with it. Normally
+    this happens for you whenever you check out a branch:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: This command associates HEAD symbolically with the master branch. This is significant
+    because any future commits from the working tree will now automatically update
+    the value of `refs/heads/master`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It’s hard to believe it’s this simple, but yes, I can now use log to view my
+    newly minted commit:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A side note: if I hadn’t set `refs/heads/master` to point to the new commit,
+    it would have been considered “unreachable”, since nothing currently refers to
+    it nor is it the parent of a reachable commit. When this is the case, the commit
+    object will at some point be removed from the repository, along with its tree
+    and all its blobs. (This happens automatically by a command called `gc`, which
+    you rarely need to use manually). By linking the commit to a name within `refs/heads`,
+    as we did above, it becomes a reachable commit, which ensures that it’s kept around
+    from now on.'
+  prefs: []
+  type: TYPE_NORMAL

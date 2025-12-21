@@ -1,0 +1,17 @@
+- en: Doing a mixed reset
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/2-doing-a-mixed-reset.html](http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/2-doing-a-mixed-reset.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: If you use the `--mixed` option (or no option at all, as this is the default),
+    reset will revert parts of your index along with your HEAD reference to match
+    the given commit. The main difference from `--soft` is that `--soft` only changes
+    the meaning of HEAD and doesn’t touch the index.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE

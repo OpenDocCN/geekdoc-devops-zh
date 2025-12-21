@@ -1,0 +1,83 @@
+- en: Doing a hard reset
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/4-doing-a-hard-reset.html](http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/4-doing-a-hard-reset.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'A hard reset (the `--hard` option) has the potential of being very dangerous,
+    as it’s able to do two different things at once: First, if you do a hard reset
+    against your current HEAD, it will erase all changes in your working tree, so
+    that your current files match the contents of HEAD.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is also another command, `checkout`, which operates just like `reset --hard`
+    if the index is empty. Otherwise, it forces your working tree to match the index.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, if you do a hard reset against an earlier commit, it’s the same as first
+    doing a soft reset and then using reset `--hard` to reset your working tree. Thus,
+    the following commands are equivalent:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As you can see, doing a hard reset can be very destructive. Fortunately, there
+    is a safer way to achieve the same effect, using the Git stash (see the next section):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This approach has two distinct advantages if you’re not sure whether you really
+    want to modify the current branch just now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It saves your work in the stash, which you can come back to at any time. Note
+    that the stash is not branch specific, so you could potentially stash the state
+    of your tree while on one branch, and later apply the differences to another.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It reverts your working tree back to a past state, but on a new branch, so if
+    you decide to commit your changes against the past state, you won’t have altered
+    your original branch.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'If you do make changes to `new-branch` and then decide you want it to become
+    your new master branch, run the following commands:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The moral of this story is: although you can do major surgery on your current
+    branch using `reset --soft` and `reset --hard` (which changes the working tree
+    too), why would you want to? Git makes working with branches so easy and cheap,
+    it’s almost always worth it to do your destructive modifications on a branch,
+    and then move that branch over to take the place of your old master. It has an
+    almost Sith-like appeal to it…'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And what if you do accidentally run `reset --hard`, losing not only your current
+    changes but also removing commits from your master branch? Well, unless you’ve
+    gotten into the habit of using stash to take snapshots (see next section), there’s
+    nothing you can do to recover your lost working tree. But you can restore your
+    branch to its previous state by again using `reset --hard` with the reflog (this
+    will also be explained in the next section):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To be on the safe side, never use `reset --hard` without first running `stash`.
+    It will save you many white hairs later on. If you did run stash, you can now
+    use it to recover your working tree changes as well:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE

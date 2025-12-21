@@ -1,0 +1,40 @@
+- en: Doing a soft reset
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/3-doing-a-soft-reset.html](http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/3-doing-a-soft-reset.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'If you use the `--soft` option to `reset`, this is the same as simply changing
+    your HEAD reference to a different commit. Your working tree changes are left
+    untouched. This means the following two commands are equivalent:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: In both cases, your working tree now sits on top of an older HEAD, so you should
+    see more changes if you run `status`. It’s not that your files have been changed,
+    simply that they are now being compared against an older version. It can give
+    you a chance to create a new commit in place of the old one. In fact, if the commit
+    you want to change is the most recent one checked in, you can use `commit --amend`
+    to add your latest changes to the last commit as if you’d done them together.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But please note: if you have downstream consumers, and they’ve done work on
+    top of your previous head — the one you threw away — changing HEAD like this will
+    force a merge to happen automatically after their next pull. Below is what your
+    tree would look like after a soft reset and a new commit:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Soft Reset Commit](../Images/e0b7a5585b43fae3dcc3210ae4bcf821.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And here’s what your consumer’s HEAD would look like after they pulled again,
+    with colors to show how the various commits match up:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Soft Reset Pull](../Images/3555c82a5ec02914760163e8a78ae14c.png)'
+  prefs: []
+  type: TYPE_IMG

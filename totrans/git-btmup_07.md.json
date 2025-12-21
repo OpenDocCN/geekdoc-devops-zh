@@ -1,0 +1,1 @@
+["```sh\n$ git branch -v\n* master 5f1bc85 Initial commit\n\n```", "```sh\n$ git reset --hard 5f1bc85\n\n```", "```sh\n$ git checkout 5f1bc85\n\n```"]

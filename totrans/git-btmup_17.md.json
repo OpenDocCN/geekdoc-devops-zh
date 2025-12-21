@@ -1,0 +1,1 @@
+["```sh\n$ git reset --soft HEAD^     # backup HEAD to its parent,\n                             # effectively ignoring the last commit\n$ git update-ref HEAD HEAD^  # does the same thing, albeit manually\n\n```"]

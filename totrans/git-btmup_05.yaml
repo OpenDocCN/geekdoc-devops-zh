@@ -1,0 +1,69 @@
+- en: Blobs are stored in trees
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/3-blobs-are-stored-in-trees.html](http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/3-blobs-are-stored-in-trees.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The contents of your files are stored in blobs, but those blobs are pretty featureless.
+    They have no name, no structure — they’re just “blobs”, after all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order for Git to represent the structure and naming of your files, it attaches
+    blobs as leaf nodes within a tree. Now, I can’t discover which tree(s) a blob
+    lives in just by looking at it, since it may have many, many owners. But I know
+    it must live somewhere within the tree held by the commit I just made:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'There it is! This first commit added my greeting file to the repository. This
+    commit contains one Git tree, which has a single leaf: the greeting content’s
+    blob.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Although I can look at the tree containing my blob by passing HEAD to `ls-tree`,
+    I haven’t yet seen the underlying tree object referenced by that commit. Here
+    are a few other commands to highlight that difference and thus discover my tree:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first command decodes the HEAD alias into the commit it references, the
+    second verifies its type, while the third command shows the hash id of the tree
+    held by that commit, as well as the other information stored in the commit object.
+    The hash id for the commit is unique to my repository — because it includes my
+    name and the date when I made the commit — but the hash id for the tree should
+    be common between your example and mine, containing as it does the same blob under
+    the same name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s verify that this is indeed the same tree object:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'There you have it: my repository contains a single commit, which references
+    a tree that holds a blob — the blob containing the contents I want to record.
+    There’s one more command I can run to verify that this is indeed the case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'From this output I see that the whole of my repo contains three objects, each
+    of whose hash id has appeared in the preceding examples. Let’s take one last look
+    at the types of these objects, just to satisfy curiosity:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: I could have used the show command at this point to view the concise contents
+    of each of these objects, but I’ll leave that as an exercise to the reader.
+  prefs: []
+  type: TYPE_NORMAL
