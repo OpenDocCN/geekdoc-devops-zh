@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Doing a hard reset</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Doing a hard reset</h1>
+<blockquote>原文：<a href="http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/4-doing-a-hard-reset.html">http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/4-doing-a-hard-reset.html</a></blockquote>
+            
+
+<p>A hard reset (the <code>--hard</code> option) has the potential of being very dangerous, as it’s able to do two different things at once: First, if you do a hard reset against your current HEAD, it will erase all changes in your working tree, so that your current files match the contents of HEAD.</p>
+
+<p>There is also another command, <code>checkout</code>, which operates just like <code>reset --hard</code> if the index is empty. Otherwise, it forces your working tree to match the index.</p>
+
+<p>Now, if you do a hard reset against an earlier commit, it’s the same as first doing a soft reset and then using reset <code>--hard</code> to reset your working tree. Thus, the following commands are equivalent:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git reset --hard HEAD~3  <span class="c"># Go back in time, throwing away changes</span>
+<span class="gp">$ </span>git reset --soft HEAD~3  <span class="c"># Set HEAD to point to an earlier commit</span>
+<span class="gp">$ </span>git reset --hard  <span class="c"># Wipe out differences in the working tree</span>
+</pre>
+
+<p>As you can see, doing a hard reset can be very destructive. Fortunately, there is a safer way to achieve the same effect, using the Git stash (see the next section):</p>
+<pre class="highlight shell"><span class="gp">$ </span>git stash
+<span class="gp">$ </span>git checkout -b new-branch HEAD~3   <span class="c"># head back in time!</span>
+</pre>
+
+<p>This approach has two distinct advantages if you’re not sure whether you really want to modify the current branch just now:</p>
+
+<ol>
+<li>It saves your work in the stash, which you can come back to at any time. Note that the stash is not branch specific, so you could potentially stash the state of your tree while on one branch, and later apply the differences to another.</li>
+<li>It reverts your working tree back to a past state, but on a new branch, so if you decide to commit your changes against the past state, you won’t have altered your original branch.</li>
+</ol>
+
+<p>If you do make changes to <code>new-branch</code> and then decide you want it to become your new master branch, run the following commands:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git branch -D master  <span class="c"># goodbye old master (still in reflog)</span>
+<span class="gp">$ </span>git branch -m new-branch master  <span class="c"># the new-branch is now my master</span>
+</pre>
+
+<p>The moral of this story is: although you can do major surgery on your current branch using <code>reset --soft</code> and <code>reset --hard</code> (which changes the working tree too), why would you want to? Git makes working with branches so easy and cheap, it’s almost always worth it to do your destructive modifications on a branch, and then move that branch over to take the place of your old master. It has an almost Sith-like appeal to it…</p>
+
+<p>And what if you do accidentally run <code>reset --hard</code>, losing not only your current changes but also removing commits from your master branch? Well, unless you’ve gotten into the habit of using stash to take snapshots (see next section), there’s nothing you can do to recover your lost working tree. But you can restore your branch to its previous state by again using <code>reset --hard</code> with the reflog (this will also be explained in the next section):</p>
+<pre class="highlight shell"><span class="gp">$ </span>git reset --hard HEAD@<span class="o">{</span>1<span class="o">}</span>   <span class="c"># restore from reflog before the change</span>
+</pre>
+
+<p>To be on the safe side, never use <code>reset --hard</code> without first running <code>stash</code>. It will save you many white hairs later on. If you did run stash, you can now use it to recover your working tree changes as well:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git stash  <span class="c"># because it's always a good thing to do</span>
+<span class="gp">$ </span>git reset --hard HEAD~3  <span class="c"># go back in time</span>
+<span class="gp">$ </span>git reset --hard HEAD@<span class="o">{</span>1<span class="o">}</span>  <span class="c"># oops, that was a mistake, undo it!</span>
+<span class="gp">$ </span>git stash apply  <span class="c"># and bring back my working tree changes</span>
+</pre>
+
+              
+</body>
+</html>

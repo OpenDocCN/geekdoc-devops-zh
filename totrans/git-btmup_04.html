@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Introducing the blob</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Introducing the blob</h1>
+<blockquote>原文：<a href="http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/2-introducing-the-blob.html">http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/2-introducing-the-blob.html</a></blockquote>
+            
+
+<p>Now that the basic picture has been painted, let’s get into some practical examples. I’m going to start by creating a sample Git repository, and showing how Git works from the bottom up in that repository. Feel free to follow along as you read:</p>
+<pre class="highlight shell"><span class="gp">$ </span>mkdir sample; <span class="nb">cd </span>sample
+<span class="gp">$ </span><span class="nb">echo</span> <span class="s1">'Hello, world!'</span> &gt; greeting
+</pre>
+
+<p>Here I’ve created a new filesystem directory named “sample” which contains a file whose contents are prosaically predictable. I haven’t even created a repository yet, but already I can start using some of Git’s commands to understand what it’s going to do. First of all, I’d like to know which hash id Git is going to store my greeting text under:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git <span class="nb">hash</span>-object greeting
+af5626b4a114abcb82d63db7c8082c3c4756e51b
+</pre>
+
+<p>If you run this command on your system, you’ll get the same hash id. Even though we’re creating two different repositories (possibly a world apart, even) our greeting blob in those two repositories will have the same hash id. I could even pull commits from your repository into mine, and Git would realize that we’re tracking the same content — and so would only store one copy of it! Pretty cool.
+The next step is to initialize a new repository and commit the file into it. I’m going to do this all in one step right now, but then come back and do it again in stages so you can see what’s going on underneath:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git init
+<span class="gp">$ </span>git add greeting
+<span class="gp">$ </span>git commit -m <span class="s2">"Added my greeting"</span>
+</pre>
+
+<p>At this point our blob should be in the system exactly as we expected, using the hash id determined above. As a convenience, Git requires only as many digits of the hash id as are necessary to uniquely identify it within the repository. Usually just six or seven digits is enough:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git cat-file -t af5626b
+blob
+<span class="gp">$ </span>git cat-file blob af5626b
+Hello, world!
+</pre>
+
+<p>There it is! I haven’t even looked at which commit holds it, or what tree it’s in, but based solely on the contents I was able to assume it’s there, and there it is. It will always have this same identifier, no matter how long the repository lives or where the file within it is stored. These particular contents are now verifiably preserved, forever.</p>
+
+<p>In this way, a Git blob represents the fundamental data unit in Git. Really, the whole system is about blob management.</p>
+
+              
+</body>
+</html>

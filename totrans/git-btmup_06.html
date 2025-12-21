@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>How trees are made</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>How trees are made</h1>
+<blockquote>原文：<a href="http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/4-how-trees-are-made.html">http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/4-how-trees-are-made.html</a></blockquote>
+            
+
+<p>Every commit holds a single tree, but how are trees made? We know that blobs are created by stuffing the contents of your files into blobs — and that trees own blobs — but we haven’t yet seen how the tree that holds the blob is made, or how that tree gets linked to its parent commit.</p>
+
+<p>Let’s start with a new sample repository again, but this time by doing things manually, so you can get a feeling for exactly what’s happening under the hood:</p>
+<pre class="highlight shell"><span class="gp">$ </span>rm -fr greeting .git
+<span class="gp">$ </span><span class="nb">echo</span> <span class="s1">'Hello, world!'</span> &gt; greeting
+<span class="gp">$ </span>git init
+<span class="gp">$ </span>git add greeting
+</pre>
+
+<p>It all starts when you first add a file to the index. For now, let’s just say that the index is what you use to initially create blobs out of files. When I added the file <code>greeting</code>, a change occurred in my repository. I can’t see this change as a commit yet, but here is one way I can tell what happened:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git log <span class="c"># this will fail, there are no commits!</span>
+fatal: bad default revision <span class="s1">'HEAD'</span>
+<span class="gp">$ </span>git ls-files --stage <span class="c"># list blob referenced by the index</span>
+100644 af5626b4a114abcb82d63db7c8082c3c4756e51b 0 greeting
+</pre>
+
+<p>What’s this? I haven’t committed anything to the repository yet, but already an object has come into being. It has the same hash id I started this whole business with, so I know it represents the contents of my <code>greeting</code> file. I could use <code>cat-file -t</code> at this point on the hash id, and I’d see that it was a blob. It is, in fact, the same blob I got the first time I created this sample repository. The same file will always result in the same blob (just in case I haven’t stressed that enough).</p>
+
+<p>This blob isn’t referenced by a tree yet, nor are there any commits. At the moment it is only referenced from a file named <code>.git/index</code>, which references the blobs and trees that make up the current index. So now let’s make a tree in the repo for our blob to hang off of:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git write-tree <span class="c"># record the contents of the index in a tree</span>
+0563f77d884e4f79ce95117e2d686d7d6e282887
+</pre>
+
+<p>This number should look familiar as well: a tree containing the same blobs (and sub-trees) will always have the same hash id. I don’t have a commit object yet, but now there is a tree object in that repository which holds the blob. The purpose of the low-level <code>write-tree</code> command is to take whatever the contents of the index are and tuck them into a new tree for the purpose of creating a commit.</p>
+
+<p>I can manually make a new commit object by using this tree directly, which is just what the <code>commit-tree</code> command does:</p>
+<pre class="highlight shell"><span class="gp">$ </span><span class="nb">echo</span> <span class="s2">"Initial commit"</span> | git commit-tree 0563f77
+5f1bc85745dcccce6121494fdd37658cb4ad441f
+</pre>
+
+<p>The raw <code>commit-tree</code> command takes a tree’s hash id and makes a commit object to hold it. If I had wanted the commit to have a parent, I would have had to specify the parent commit’s hash id explicitly using the <code>-p</code> option. Also, note here that the hash id differs from what will appear on your system: This is because my commit object refers to both my name, and the date at which I created the commit, and these two details will always be different from yours.</p>
+
+<p>Our work is not done yet, though, since I haven’t registered the commit as the new head of a branch:</p>
+<pre class="highlight shell"><span class="gp">$ </span><span class="nb">echo </span>5f1bc85745dcccce6121494fdd37658cb4ad441f &gt; .git/refs/heads/master
+</pre>
+
+<p>This command tells Git that the branch name “master” should now refer to our recent commit. Another, much safer way to do this is by using the command <code>update-ref</code>:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git update-ref refs/heads/master 5f1bc857
+</pre>
+
+<p>After creating <code>master</code>, we must associate our working tree with it. Normally this happens for you whenever you check out a branch:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git symbolic-ref HEAD refs/heads/master
+</pre>
+
+<p>This command associates HEAD symbolically with the master branch. This is significant because any future commits from the working tree will now automatically update the value of <code>refs/heads/master</code>.</p>
+
+<p>It’s hard to believe it’s this simple, but yes, I can now use log to view my newly minted commit:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git log
+commit 5f1bc85745dcccce6121494fdd37658cb4ad441f
+Author: John Wiegley &lt;johnw@newartisans.com&gt;
+Date:   Mon Apr 14 11:14:58 2008 -0400
+        Initial commit
+</pre>
+
+<p>A side note: if I hadn’t set <code>refs/heads/master</code> to point to the new commit, it would have been considered “unreachable”, since nothing currently refers to it nor is it the parent of a reachable commit. When this is the case, the commit object will at some point be removed from the repository, along with its tree and all its blobs. (This happens automatically by a command called <code>gc</code>, which you rarely need to use manually). By linking the commit to a name within <code>refs/heads</code>, as we did above, it becomes a reachable commit, which ensures that it’s kept around from now on.</p>
+
+              
+</body>
+</html>

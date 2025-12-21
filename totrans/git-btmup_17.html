@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Doing a soft reset</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Doing a soft reset</h1>
+<blockquote>原文：<a href="http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/3-doing-a-soft-reset.html">http://jwiegley.github.io/git-from-the-bottom-up/3-Reset/3-doing-a-soft-reset.html</a></blockquote>
+            
+
+<p>If you use the <code>--soft</code> option to <code>reset</code>, this is the same as simply changing your HEAD reference to a different commit. Your working tree changes are left untouched. This means the following two commands are equivalent:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git reset --soft HEAD^     <span class="c"># backup HEAD to its parent,</span>
+                             <span class="c"># effectively ignoring the last commit</span>
+<span class="gp">$ </span>git update-ref HEAD HEAD^  <span class="c"># does the same thing, albeit manually</span>
+</pre>
+
+<p>In both cases, your working tree now sits on top of an older HEAD, so you should see more changes if you run <code>status</code>. It’s not that your files have been changed, simply that they are now being compared against an older version. It can give you a chance to create a new commit in place of the old one. In fact, if the commit you want to change is the most recent one checked in, you can use <code>commit --amend</code> to add your latest changes to the last commit as if you’d done them together.</p>
+
+<p>But please note: if you have downstream consumers, and they’ve done work on top of your previous head — the one you threw away — changing HEAD like this will force a merge to happen automatically after their next pull. Below is what your tree would look like after a soft reset and a new commit:</p>
+
+<p><img alt="Soft Reset Commit" src="../Images/e0b7a5585b43fae3dcc3210ae4bcf821.png" data-original-src="http://jwiegley.github.io/git-from-the-bottom-up/images/soft-reset-commit.png"/></p>
+
+<p>And here’s what your consumer’s HEAD would look like after they pulled again, with colors to show how the various commits match up:</p>
+
+<p><img alt="Soft Reset Pull" src="../Images/3555c82a5ec02914760163e8a78ae14c.png" data-original-src="http://jwiegley.github.io/git-from-the-bottom-up/images/soft-reset-pull.png"/></p>
+
+              
+</body>
+</html>

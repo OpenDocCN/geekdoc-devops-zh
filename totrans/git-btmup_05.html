@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Blobs are stored in trees</title>
+<link href="../Styles/Style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Blobs are stored in trees</h1>
+<blockquote>原文：<a href="http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/3-blobs-are-stored-in-trees.html">http://jwiegley.github.io/git-from-the-bottom-up/1-Repository/3-blobs-are-stored-in-trees.html</a></blockquote>
+            
+
+<p>The contents of your files are stored in blobs, but those blobs are pretty featureless. They have no name, no structure — they’re just “blobs”, after all.</p>
+
+<p>In order for Git to represent the structure and naming of your files, it attaches blobs as leaf nodes within a tree. Now, I can’t discover which tree(s) a blob lives in just by looking at it, since it may have many, many owners. But I know it must live somewhere within the tree held by the commit I just made:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git ls-tree HEAD
+100644 blob af5626b4a114abcb82d63db7c8082c3c4756e51b greeting
+</pre>
+
+<p>There it is! This first commit added my greeting file to the repository. This commit contains one Git tree, which has a single leaf: the greeting content’s blob.</p>
+
+<p>Although I can look at the tree containing my blob by passing HEAD to <code>ls-tree</code>, I haven’t yet seen the underlying tree object referenced by that commit. Here are a few other commands to highlight that difference and thus discover my tree:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git rev-parse HEAD
+588483b99a46342501d99e3f10630cfc1219ea32 <span class="c"># different on your system</span>
+
+<span class="gp">$ </span>git cat-file -t HEAD
+commit
+
+<span class="gp">$ </span>git cat-file commit HEAD
+tree 0563f77d884e4f79ce95117e2d686d7d6e282887
+author John Wiegley &lt;johnw@newartisans.com&gt; 1209512110 -0400
+committer John Wiegley &lt;johnw@newartisans.com&gt; 1209512110 -0400
+Added my greeting
+</pre>
+
+<p>The first command decodes the HEAD alias into the commit it references, the second verifies its type, while the third command shows the hash id of the tree held by that commit, as well as the other information stored in the commit object. The hash id for the commit is unique to my repository — because it includes my name and the date when I made the commit — but the hash id for the tree should be common between your example and mine, containing as it does the same blob under the same name.</p>
+
+<p>Let’s verify that this is indeed the same tree object:</p>
+<pre class="highlight shell"><span class="gp">$ </span>git ls-tree 0563f77
+100644 blob af5626b4a114abcb82d63db7c8082c3c4756e51b greeting
+</pre>
+
+<p>There you have it: my repository contains a single commit, which references a tree that holds a blob — the blob containing the contents I want to record. There’s one more command I can run to verify that this is indeed the case:</p>
+<pre class="highlight shell"><span class="gp">$ </span>find .git/objects -type f | sort
+.git/objects/05/63f77d884e4f79ce95117e2d686d7d6e282887
+.git/objects/58/8483b99a46342501d99e3f10630cfc1219ea32
+.git/objects/af/5626b4a114abcb82d63db7c8082c3c4756e51b
+</pre>
+
+<p>From this output I see that the whole of my repo contains three objects, each of whose hash id has appeared in the preceding examples. Let’s take one last look at the types of these objects, just to satisfy curiosity:</p>
+<pre class="highlight shell">   <span class="nv">$ </span>git cat-file -t 588483b99a46342501d99e3f10630cfc1219ea32
+   commit
+   <span class="nv">$ </span>git cat-file -t 0563f77d884e4f79ce95117e2d686d7d6e282887
+   tree
+   <span class="nv">$ </span>git cat-file -t af5626b4a114abcb82d63db7c8082c3c4756e51b
+   blob
+</pre>
+
+<p>I could have used the show command at this point to view the concise contents of each of these objects, but I’ll leave that as an exercise to the reader.</p>
+
+              
+</body>
+</html>
