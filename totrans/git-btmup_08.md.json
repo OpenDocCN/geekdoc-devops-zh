@@ -1,1 +1,0 @@
-["```sh\n  $ git diff HEAD^1:Makefile HEAD^2:Makefile\n\n```", "```sh\n$ git log --grep='foo' --author='johnw' --since=\"1 month ago\" master..\n\n```"]

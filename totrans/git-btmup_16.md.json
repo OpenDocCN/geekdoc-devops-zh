@@ -1,1 +1,0 @@
-["```sh\n$ git add foo.c  # add changes to the index as a new blob\n$ git reset HEAD  # delete any changes staged in the index\n$ git add foo.c  # made a mistake, add it back\n\n```"]
