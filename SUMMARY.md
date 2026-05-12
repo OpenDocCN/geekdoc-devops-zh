@@ -27,3 +27,4 @@
 +   [重构大师](docs/rfct-guru/README.md)
 +   [Selenium Webdriver 简易教程](docs/sele-webdvr-tut/README.md)
 +   [TestDriven.io 博客中文翻译](docs/testdrivenio-blog/README.md)
++   [使用 Docker 和 Kubenetes 的 CICD（Semaphore）](docs/使用_Docker_和_Kubenetes_的_CICD（Semaphore）/README.md)
